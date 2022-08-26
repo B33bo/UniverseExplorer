@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a0790426aac8254c8983c62f4c341f9, type: 3}
+  m_Name: Grass
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 0}
+  - {fileID: 3041290244316146864, guid: 296ae8435cc32ee4593047e164edb756, type: 3}
+  - {fileID: 762939440388359616, guid: 8bf1da2ca59d3dd4aaf5a48c9072298c, type: 3}
+  weights:
+  - 200
+  - 10
+  - 10
+  MaxHeight: 2
+  groundColor: {r: 0.14509805, g: 0.5764706, b: 0, a: 1}
+  colorGround: 1
+  groundPrefab: {fileID: 798321062924296456, guid: f0399e73e93f4e74d93706fc6e9ee8ae, type: 3}
+  adjacentBiomes:
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: ffdbe282524f4124a92d0239d3c74392, type: 2}
+  - {fileID: 11400000, guid: f68157927e254eb4c9abf70421c31efc, type: 2}
+  biomeWeights:
+  - 1
+  - 1
+  - 1

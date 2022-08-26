@@ -1,0 +1,18 @@
+airplanes in the sky
+improve ice planet
+very rocky planets use raycasting and rock piles
+profile picture
+save planet to storage
+biomes
+galaxy background uses chunks and mathf.perlinNoise
+improve water planet
+improve deserts (add pyramids)
+improve snow continents
+forests
+nebulae / supernovae
+satellites
+tropical islands on ocean
+space junk
+crystal planet
+ores
+animals
