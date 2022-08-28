@@ -198,8 +198,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1013829010}
-  - component: {fileID: 1013829011}
   - component: {fileID: 1013829012}
+  - component: {fileID: 1013829011}
   m_Layer: 0
   m_Name: ObjectSpawner
   m_TagString: Untagged
@@ -230,18 +230,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1013829009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062771052a99be14b91afda95f31e782, type: 3}
+  m_Script: {fileID: 11500000, guid: f783e8bbcb9b38243a771f87236cb589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CellSize: 2
-  UseRadius: 0
-  MinRadius: 0
-  MaxRadius: 0
-  objects:
-  - {fileID: 0}
-  weights:
-  - 0
-  RenderAll: 1
+  registerSceneLoad: 1
+  objects: []
+  weights: []
 --- !u!114 &1013829012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +257,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -58.695244
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470337199409101, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470337199409101, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5211530809855356289, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -349,6 +360,10 @@ PrefabInstance:
     - target: {fileID: 5211530809855356298, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652319149906486534, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}

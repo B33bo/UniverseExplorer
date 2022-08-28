@@ -24,3 +24,7 @@ MonoBehaviour:
   groundColor: {r: 0.8235294, g: 0.90588236, b: 0.9254902, a: 1}
   colorGround: 1
   groundPrefab: {fileID: 798321062924296456, guid: f0399e73e93f4e74d93706fc6e9ee8ae, type: 3}
+  adjacentBiomes:
+  - {fileID: 11400000}
+  biomeWeights:
+  - 1

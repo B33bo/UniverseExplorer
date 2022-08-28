@@ -194,6 +194,26 @@ namespace Universe
             return mesh;
         }
 
+        public static Vector2 Size(Vector3[] mesh)
+        {
+            Vector2 bottomLeft = Vector2.zero, topRight = Vector2.zero;
+
+            for (int i = 0; i < mesh.Length; i++)
+            {
+                if (mesh[i].x < bottomLeft.x)
+                    bottomLeft.x = mesh[i].x;
+                else if (mesh[i].x > topRight.x)
+                    topRight.x = mesh[i].x;
+
+                if (mesh[i].y > topRight.y)
+                    topRight.y = mesh[i].y;
+                else if (mesh[i].y < bottomLeft.y)
+                    bottomLeft.y = mesh[i].y;
+            }
+
+            return topRight - bottomLeft;
+        }
+
         public static Vector2[] ToVector2(this Vector3[] v)
         {
             Vector2[] result = new Vector2[v.Length];

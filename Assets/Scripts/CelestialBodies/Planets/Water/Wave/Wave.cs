@@ -4,8 +4,6 @@ namespace Universe
 {
     public class Wave : TerrainObject
     {
-        private float offset;
-
         private void Start()
         {
             scale = 2;

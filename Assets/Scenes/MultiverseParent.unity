@@ -187,6 +187,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -58.695244
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470337199409101, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470337199409101, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5211530809855356289, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -275,6 +291,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8652319149906486534, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
 --- !u!1 &920732957
@@ -352,7 +372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1777802825}
-  - component: {fileID: 1777802827}
+  - component: {fileID: 1777802826}
   m_Layer: 0
   m_Name: ObjectSpawner
   m_TagString: Untagged
@@ -374,7 +394,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1777802827
+--- !u!114 &1777802826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,18 +403,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1777802824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062771052a99be14b91afda95f31e782, type: 3}
+  m_Script: {fileID: 11500000, guid: f783e8bbcb9b38243a771f87236cb589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellSize: 0
-  UseRadius: 0
-  MinRadius: 0
-  MaxRadius: 0
-  objects:
-  - {fileID: 0}
-  weights:
-  - 0
-  RenderAll: 0
+  CellSize: 2
+  registerSceneLoad: 1
+  objects: []
+  weights: []
 --- !u!1001 &4506332355208568298
 PrefabInstance:
   m_ObjectHideFlags: 0

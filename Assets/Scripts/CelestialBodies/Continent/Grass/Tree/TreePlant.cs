@@ -19,7 +19,7 @@ namespace Universe.CelestialBodies.Biomes.Grass
             30, //pink
             1,  //rainbow
         };
-        public const float colorWeightTotal = 306;
+        private const float colorWeightTotal = 306;
 
         public TreeColor color;
 
@@ -28,7 +28,7 @@ namespace Universe.CelestialBodies.Biomes.Grass
             Position = pos;
 
             var selectedColorWeight = RandomNum.GetFloat(colorWeightTotal, RandomNumberGenerator);
-            color = (TreeColor)Btools.numerics.Randomizer.GetIndexFromWeight(colorWeights, selectedColorWeight);
+            color = (TreeColor)RandomNum.GetIndexFromWeight(colorWeights, selectedColorWeight);
 
             Name = "Tree";
 

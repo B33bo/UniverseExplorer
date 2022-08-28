@@ -1,9 +1,8 @@
-airplanes in the sky
 improve ice planet
 very rocky planets use raycasting and rock piles
 profile picture
 save planet to storage
-biomes
+airplanes in the sky
 galaxy background uses chunks and mathf.perlinNoise
 improve water planet
 improve deserts (add pyramids)
@@ -14,5 +13,13 @@ satellites
 tropical islands on ocean
 space junk
 crystal planet
-ores
-animals
+
+BIG UPDATES::
+-chemical composition
+-ores
+-animals
+-weather
+-agriculture
+-caves
+-clouds and sky
+-random sky events (airplane, shooting star, etc)

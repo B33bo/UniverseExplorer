@@ -109,10 +109,27 @@ namespace Universe
 
             List<Vector2> value = new List<Vector2>();
 
+            float previousX = float.NaN;
             for (float x = topLeft.x; x < bottomRight.x; x += CellSize)
             {
+                if (x == previousX)
+                {
+                    Debug.LogError("Out of valid world generation");
+                    break;
+                }
+
+                previousX = x;
+                float previousY = float.NaN;
+
                 for (float y = bottomRight.y; y < topLeft.y; y += CellSize)
                 {
+                    if (y == previousY)
+                    {
+                        Debug.LogError("Out of valid world generation");
+                        break;
+                    }
+
+                    previousY = y;
                     value.Add(new Vector2(x, y));
                 }
             }
@@ -148,7 +165,7 @@ namespace Universe
             int seed = BodyManager.GetSeed();
             int positionSeed = (int)pos.x + (int)Mathf.Pow(pos.y, 3) + seed;
             float rndNum = RandomNum.GetFloat(weightSum, new System.Random(positionSeed));
-            int randomIndex = Btools.numerics.Randomizer.GetIndexFromWeight(weights, rndNum);
+            int randomIndex = RandomNum.GetIndexFromWeight(weights, rndNum);
 
             return randomIndex;
         }

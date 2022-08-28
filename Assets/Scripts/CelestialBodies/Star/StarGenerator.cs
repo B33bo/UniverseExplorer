@@ -119,8 +119,19 @@ namespace Universe
 
         private IEnumerable<float> GetPositions(float xMin, float xMax)
         {
+            float previousX = float.NaN;
             for (float x = xMin; x < xMax; x += QuadrantSize)
+            {
+                //for extremely high positions (>8388532)
+                if (previousX == x)
+                {
+                    Debug.LogError("you are out of range of valid terrain generation");
+                    yield break;
+                }
+
                 yield return x;
+                previousX = x;
+            }
         }
 
         private float GetY(float x)
@@ -135,6 +146,12 @@ namespace Universe
 
             float left = Mathf.Floor(x / 10) * 10;
             float right = Mathf.Ceil(x / 10) * 10;
+
+            if (left == right || left == x || right == x)
+            {
+                Debug.LogError("Ground cannot find correct Y level, defaulting to 0");
+                return 0;
+            }
 
             float t = (x - left) / (right - left);
 

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEditor;
-using Btools.numerics;
 using Btools.utils;
 
 namespace Btools.Components

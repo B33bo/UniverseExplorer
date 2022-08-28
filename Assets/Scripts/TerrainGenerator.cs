@@ -98,8 +98,6 @@ namespace Universe
 
         private Color GetCameraColor()
         {
-            Vector2 position = CameraControl.Instance.transform.position;
-
             if (dayNightSystem is null)
                 return SkyDayColor;
 
@@ -133,7 +131,7 @@ namespace Universe
                     continue;
                 }
             }
-
+            
             foreach (float pos in positions)
             {
                 if (loadedPositions.ContainsKey(pos))
@@ -171,8 +169,10 @@ namespace Universe
             return newObject;
         }
 
-        private float GetY(float x, float maxBlockHeight)
+        private float GetY(float x, float maxBlockHeight, int iterations = 0)
         {
+            if (iterations > 1000)
+                throw new System.Exception("too many iterations");
             if (x % 10 == 0)
             {
                 var rnd = new System.Random(new System.Random((int)(x * 300)).Next() + seed + seedOffset);
@@ -184,55 +184,77 @@ namespace Universe
             float left = Mathf.Floor(x / 10) * 10;
             float right = Mathf.Ceil(x / 10) * 10;
 
+            if (left == x || right == x || left == right)
+            {
+                Debug.LogError("Ground cannot find correct Y level, defaulting to 0");
+                return 0;
+            }
+
             float t = (x - left) / (right - left);
 
-            return Mathf.Lerp(GetY(left, maxBlockHeight), GetY(right, maxBlockHeight), t);
+            return Mathf.Lerp(GetY(left, maxBlockHeight, iterations), GetY(right, maxBlockHeight, iterations), t);
         }
 
         private IEnumerable<float> GetPositions(float xMin, float xMax)
         {
+            float previousX = float.NaN;
             for (float x = xMin; x < xMax; x += QuadrantSize)
+            {
+                //for extremely high positions (>8388532)
+                if (previousX == x)
+                {
+                    Debug.LogError("you are out of range of valid terrain generation");
+                    yield break;
+                }
+
                 yield return x;
+                previousX = x;
+            }
         }
 
-        public Biome BiomeAtPosition(float xPos)
+        public Biome BiomeAtPosition(float xPos, int depth = 0)
         {
             xPos = Mathf.Floor(xPos / BiomeSize) * BiomeSize;
             if (cachedBiomes.TryGetValue((int)xPos, out Biome value))
                 return value;
 
-            System.Random rnd = new System.Random(seed * (int)xPos);
+            if (depth > 1000)
+                throw new System.Exception("Depth exceeded 10_000");
+
+            System.Random rnd = new System.Random((int)xPos * seed + 123421345);
 
             float[] biomeWeights = new float[] { 1 };
             Biome[] biomes = new Biome[] { defaultBiome };
 
-            if (Mathf.Approximately(xPos, 0))
-            {
-                biomeWeights = new float[] { 1 };
-                biomes = new Biome[] { defaultBiome };
-            }
+            Debug.Log($"Generated new biome, x = {(int)xPos}");
 
-            if (xPos > 0)
+            if (!((int)xPos % 5000 == 0 || xPos == xPos + 1))
             {
-                Biome prevBiome = BiomeAtPosition(xPos - BiomeSize);
-                if (prevBiome)
+                if (Mathf.Approximately(xPos, 0))
                 {
-                    biomeWeights = prevBiome.biomeWeights;
-                    biomes = prevBiome.adjacentBiomes;
+                    biomeWeights = new float[] { 1 };
+                    biomes = new Biome[] { defaultBiome };
+                }
+
+                if (xPos > 0)
+                {
+                    Debug.Log("finding left of " + xPos);
+                    Biome previous = BiomeAtPosition(xPos - BiomeSize, depth + 1);
+                    biomeWeights = previous.biomeWeights;
+                    biomes = previous.adjacentBiomes;
+                }
+
+                if (xPos < 0)
+                {
+                    Debug.Log("finding right of " + xPos);
+                    Biome next = BiomeAtPosition(xPos + BiomeSize, depth + 1);
+                    biomeWeights = next.biomeWeights;
+                    biomes = next.adjacentBiomes;
                 }
             }
 
-            if (xPos < 0)
-            {
-                Biome prevBiome = BiomeAtPosition(xPos + BiomeSize);
-                if (prevBiome)
-                {
-                    biomeWeights = prevBiome.biomeWeights;
-                    biomes = prevBiome.adjacentBiomes;
-                }
-            }
-
-            Biome b = biomes[RandomNum.GetIndexFromWeights(biomeWeights, rnd)];
+            int index = RandomNum.GetIndexFromWeights(biomeWeights, rnd, out float randomValue);
+            Biome b = biomes[index];
             cachedBiomes.Add((int)xPos, b);
             return b;
         }
@@ -242,7 +264,14 @@ namespace Universe
             System.Random randFromPos = new System.Random(((int)(position.x * position.x) * (int)Mathf.Sign(position.x) + seed) * 4);
             if (biome.objects.Length == 0)
                 return null;
-            return biome.objects[RandomNum.GetIndexFromWeights(biome.weights, randFromPos)];
+
+#if UNITY_EDITOR
+            if (biome.weights.Length != biome.objects.Length || biome.objects.Length == 0)
+                Debug.LogError("UH OH");
+#endif
+
+            int index = RandomNum.GetIndexFromWeights(biome.weights, randFromPos);
+            return biome.objects[index];
         }
     }
 }

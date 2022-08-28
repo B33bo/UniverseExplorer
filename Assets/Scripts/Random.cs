@@ -76,9 +76,34 @@ namespace Universe
             float total = 0;
             for (int i = 0; i < weights.Length; i++)
                 total += weights[i];
+
             float current = GetFloat(total, random);
-            int index = Btools.numerics.Randomizer.GetIndexFromWeight(weights, current);
+            int index = GetIndexFromWeight(weights, current);
             return index;
+        }
+
+        public static int GetIndexFromWeights(float[] weights, Random random, out float value)
+        {
+            float total = 0;
+            for (int i = 0; i < weights.Length; i++)
+                total += weights[i];
+            value = GetFloat(total, random);
+            int index = GetIndexFromWeight(weights, value);
+            return index;
+        }
+
+        public static int GetIndexFromWeight(float[] weights, float number)
+        {
+            float sum = 0;
+            for (int i = 0; i < weights.Length; i++)
+            {
+                float next = sum + weights[i];
+                if (next > number)
+                    return i;
+                sum = next;
+            }
+
+            return weights.Length;
         }
 
         public static bool GetBool(Random random) =>

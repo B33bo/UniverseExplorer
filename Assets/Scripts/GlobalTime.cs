@@ -4,7 +4,7 @@ namespace Universe
 {
     public static class GlobalTime
     {
-        public const long TimeOfReset = 7 * TimeSpan.TicksPerDay; //1 week
+        public const long TimeOfReset = TimeSpan.TicksPerDay; //1 week
 
         private static float? _TimeOfInit;
         public static float TimeOfInit

@@ -177,7 +177,35 @@ namespace Btools.DevConsole
                 () => float.Epsilon
                 )},
 
-#region Integer Limits
+            #region Integer Limits
+
+            {"floatmax", new DevConsoleVariable(
+                "floatmax",
+                $"float maximum value ({float.MaxValue})",
+                typeof(float),
+                () => float.MaxValue
+                ) },
+
+            {"floatmin", new DevConsoleVariable(
+                "floatmin",
+                $"float minimum value ({float.MinValue})",
+                typeof(float),
+                () => float.MinValue
+                ) },
+
+            {"doublemax", new DevConsoleVariable(
+                "doublemax",
+                $"double maximum value ({double.MaxValue})",
+                typeof(double),
+                () => double.MaxValue
+                ) },
+
+            {"doublemin", new DevConsoleVariable(
+                "doublemin",
+                $"double minimum value ({double.MinValue})",
+                typeof(double),
+                () => double.MinValue
+                ) },
 
             {"int8max", new DevConsoleVariable(
                 "int8max",

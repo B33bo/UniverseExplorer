@@ -17,6 +17,9 @@ namespace Universe
         private void Start()
         {
             CameraControl.Instance.OnPositionUpdate += ResetCells;
+
+            BodyManager.InvokeSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            BodyManager.ReloadCommands();
         }
 
         private void ResetCells(Rect cameraRect)
@@ -58,8 +61,15 @@ namespace Universe
 
             float min = rect.yMin - sizeOfJet * 8;
 
+            float previousY = float.NaN;
             for (float y = start; y > min; y -= sizeOfJet)
             {
+                if (y == previousY)
+                {
+                    Debug.LogError("Out of world generation!");
+                    break;
+                }
+                previousY = y;
                 value.Add(Mathf.Round(y * 10) / 10);
             }
 

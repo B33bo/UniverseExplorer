@@ -15,7 +15,7 @@ MonoBehaviour:
   objects:
   - {fileID: 0}
   weights:
-  - 0
+  - 1
   MaxHeight: 2
   groundColor: {r: 0.14509805, g: 0.5764706, b: 0, a: 1}
   colorGround: 1
@@ -25,6 +25,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: af9459dd241330945918f5cb79d6a9c0, type: 2}
   - {fileID: 11400000, guid: f68157927e254eb4c9abf70421c31efc, type: 2}
   biomeWeights:
-  - 1
-  - 1
-  - 1
+  - 100
+  - 200
+  - 200

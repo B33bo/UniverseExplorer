@@ -20,7 +20,7 @@ namespace Universe.CelestialBodies
             1, //Red
             0.1f, // Rainbow
         };
-        const double sumOfWeightChart = 161.1;
+        const float sumOfWeightChart = 161.1f;
 
         public int Flares;
         public Color color;
@@ -34,10 +34,10 @@ namespace Universe.CelestialBodies
             Flares = Mathf.CeilToInt((float)Width / FlareSize);
             Mass = 0;
 
-            double randomWeight = RandomNum.Get(0, sumOfWeightChart, RandomNumberGenerator);
+            float randomWeight = RandomNum.GetFloat(0, sumOfWeightChart, RandomNumberGenerator);
 
             //fine because the weights correspond to the index of the enum (green = 0)
-            color = (Color)Btools.numerics.Randomizer.GetIndexFromWeight(WeightChart, (float)randomWeight);
+            color = (Color)RandomNum.GetIndexFromWeight(WeightChart, randomWeight);
         }
 
         public enum Color

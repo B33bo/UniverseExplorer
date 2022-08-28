@@ -16,6 +16,7 @@ namespace Universe
 
         private static IReadOnlyDictionary<DistanceUnit, double> ConversionToKM = new Dictionary<DistanceUnit, double>()
         {
+            {DistanceUnit.None, 0 },
             {DistanceUnit.PlanckLength, 1.6e-38 },
             {DistanceUnit.HydrogenAtom, 2.50e-14 },
             {DistanceUnit.NanoMetres, 1e-12},
@@ -28,6 +29,9 @@ namespace Universe
 
         public static DistanceUnit ReasonableFormat(double km)
         {
+            km = Math.Abs(km);
+            if (km < double.Epsilon)
+                return DistanceUnit.None;
             var DistanceValues = Enum.GetValues(typeof(DistanceUnit));
 
             for (int i = DistanceValues.Length - 1; i >= 0; i--)
@@ -43,6 +47,7 @@ namespace Universe
         {
             return unit switch
             {
+                DistanceUnit.None => "",
                 DistanceUnit.PlanckLength => "Planck Lengths",
                 DistanceUnit.HydrogenAtom => "Hydrogen Atoms",
                 DistanceUnit.NanoMetres => "nm",
@@ -57,11 +62,21 @@ namespace Universe
 
         public static string ToCleanString(this double d)
         {
+            if (d < 0)
+                return "-" + ToCleanString(Math.Abs(d));
+
+            if (d == 0)
+                return "0";
+
             if (d < 5)
                 return d.ToString(NumberFormat);
 
             if (d > 1e15)
                 return d.ToString();
+
+            if (double.IsNaN(d))
+                return "NaN";
+
             return AddCommas((d - d % 1).ToString(NumberFormat));
         }
 
@@ -92,6 +107,7 @@ namespace Universe
 
     public enum DistanceUnit
     {
+        None,
         PlanckLength,
         HydrogenAtom,
         NanoMetres,

@@ -21,6 +21,8 @@ namespace Universe
 
         private void Awake()
         {
+            if (celestialBody is null)
+                celestialBody = new CelestialBodies.UnknownItem();
             Instance = this;
             extraInfoTextComponent.text = string.Format(FormattedString,
                 celestialBody.Name,

@@ -17,10 +17,12 @@ MonoBehaviour:
   MaxHeight: 2
   groundColor: {r: 0.01375042, g: 0.47825286, b: 0.9716981, a: 1}
   colorGround: 1
-  groundPrefab: {fileID: 798321062924296456, guid: f0399e73e93f4e74d93706fc6e9ee8ae, type: 3}
+  groundPrefab: {fileID: 798321062924296456, guid: 4a56aac6a5599464c84b04a545ef6e79, type: 3}
   adjacentBiomes:
   - {fileID: 11400000}
+  - {fileID: 11400000, guid: af9459dd241330945918f5cb79d6a9c0, type: 2}
   - {fileID: 11400000, guid: f68157927e254eb4c9abf70421c31efc, type: 2}
   biomeWeights:
-  - 1
-  - 1
+  - 100
+  - 100
+  - 200

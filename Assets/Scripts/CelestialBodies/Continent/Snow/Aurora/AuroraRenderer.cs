@@ -6,12 +6,12 @@ namespace Universe
 {
     public class AuroraRenderer : CelestialBodyRenderer
     {
-        private static readonly (float H, float S, float V)[] colorsOfAurora = new (float H, float S, float V)[]
+        private static readonly ColorHSV[] colorsOfAurora = new ColorHSV[]
         {
-            (136 / 360f, 1, 1), //Green
-            (310 / 360f, .81f, 1), //Pink
-            (221 / 360f, 1, 1), //Blue
-            (0, .93f, 1), //Red
+            new ColorHSV(136 / 360f, 1, 1), //Green
+            new ColorHSV(310 / 360f, .81f, 1), //Pink
+            new ColorHSV(221 / 360f, 1, 1), //Blue
+            new ColorHSV(0, .93f, 1), //Red
         };
 
         [SerializeField]
@@ -61,10 +61,10 @@ namespace Universe
                     continue;
                 }
 
-                var (H, S, V) = colorsOfAurora[(int)aurora.color];
-                H += Mathf.Sin(time + (i * Mathf.Deg2Rad)) / 20f;
-                Color myColor = Color.HSVToRGB(H, S, V);
-                flares[i].color = myColor;
+                var color = colorsOfAurora[(int)aurora.color];
+                color.h += Mathf.Sin(time + (i * Mathf.Deg2Rad)) / 20f;
+                //color.h = Mathf.Sin(time + (i * Mathf.Deg2Rad)) / 20f;
+                flares[i].color = color;
             }
         }
     }

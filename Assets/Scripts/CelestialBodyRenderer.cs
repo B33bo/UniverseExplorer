@@ -15,10 +15,12 @@ namespace Universe
 
         private void Update()
         {
-#if UNITY_EDITOR
             if (Target is null)
+            {
                 Debug.LogError("Target is null on object " + name);
-#endif
+                Target = new CelestialBodies.UnknownItem();
+            }
+
             transform.localPosition = Target.Position;
             name = Target.Name;
             OnUpdate();
