@@ -1,5 +1,6 @@
 @echo off
 echo %cd%
+git status
 SET /p "message=enter a commit message: "
 echo "%message%"
 git add *
