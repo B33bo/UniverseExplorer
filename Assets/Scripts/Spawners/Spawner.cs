@@ -62,7 +62,10 @@ namespace Universe
 
                 var cellsInPosition = PositionsByObjects[pos];
                 for (int i = 0; i < cellsInPosition.Length; i++)
+                {
+                    Debug.Log($"Destroying {cellsInPosition[i].name}");
                     Destroy(cellsInPosition[i]);
+                }
                 PositionsByObjects.Remove(pos);
             }
 
@@ -85,6 +88,7 @@ namespace Universe
             if (target is null)
                 return System.Array.Empty<GameObject>();
 
+            Debug.Log($"Spawning {target.name} at {position}");
             CelestialBodyRenderer newObject = Instantiate(target, position, Quaternion.identity);
             newObject.Spawn(position, null);
 

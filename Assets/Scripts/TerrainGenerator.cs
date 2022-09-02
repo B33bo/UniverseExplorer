@@ -45,9 +45,10 @@ namespace Universe
             Instance = this;
             if (BodyManager.Parent is RockyPlanet rockyPlanet)
             {
-                OverrideRockColor = Color.HSVToRGB(rockyPlanet.RockColor.H, rockyPlanet.RockColor.S, rockyPlanet.RockColor.V);
-                SkyDayColor = Color.HSVToRGB(rockyPlanet.RockColor.H, rockyPlanet.RockColor.S - .1f, rockyPlanet.RockColor.V - .2f);
-                SkyNightColor = Color.HSVToRGB(rockyPlanet.RockColor.H, rockyPlanet.RockColor.S - .1f, rockyPlanet.RockColor.V - .5f);
+                OverrideRockColor = rockyPlanet.RockColor;
+
+                SkyDayColor = new ColorHSV(rockyPlanet.RockColor.h, rockyPlanet.RockColor.s - .1f, rockyPlanet.RockColor.v - .2f);
+                SkyNightColor = new ColorHSV(rockyPlanet.RockColor.h, rockyPlanet.RockColor.s - .1f, rockyPlanet.RockColor.v - .5f);
             }
             else if (BodyManager.Parent is Star star)
             {
@@ -76,6 +77,30 @@ namespace Universe
 
             ReloadBlocks(CameraControl.Instance.CameraBounds);
             CameraControl.Instance.OnPositionUpdate += CameraUpdate;
+
+            Btools.DevConsole.DevCommands.Register("findbiome", "finds the biome you specify", FindBiome, "biome");
+        }
+
+        private string FindBiome(string[] args)
+        {
+            float currentPos = CameraControl.Instance.Position.x;
+
+            int maxAttempts = 5000;
+
+            if (args.Length > 2)
+                maxAttempts = int.Parse(args[2]);
+
+            int attempts = 0;
+            while (++attempts < maxAttempts)
+            {
+                if (BiomeAtPosition(currentPos).name.ToLower() == args[1].ToLower())
+                    return currentPos.ToString();
+                if (BiomeAtPosition(-currentPos).name.ToLower() == args[1].ToLower())
+                    return (-currentPos).ToString();
+                currentPos += BiomeSize;
+            }
+
+            return $"could not find biome {args[1]}";
         }
 
         private void OnDestroy()
@@ -149,6 +174,9 @@ namespace Universe
 
             if (biome.colorGround)
                 newBlock.color = biome.groundColor;
+
+            if (BodyManager.Parent is RockyPlanet rockyPlanet)
+                newBlock.color = rockyPlanet.RockColor;
 
             if (newBlock.drawMode == SpriteDrawMode.Simple)
                 newBlock.transform.localScale = new Vector3(newBlock.transform.localScale.x, position.y * 2);
@@ -226,8 +254,6 @@ namespace Universe
             float[] biomeWeights = new float[] { 1 };
             Biome[] biomes = new Biome[] { defaultBiome };
 
-            Debug.Log($"Generated new biome, x = {(int)xPos}");
-
             if (!((int)xPos % 5000 == 0 || xPos == xPos + 1))
             {
                 if (Mathf.Approximately(xPos, 0))
@@ -255,7 +281,12 @@ namespace Universe
 
             int index = RandomNum.GetIndexFromWeights(biomeWeights, rnd, out float randomValue);
             Biome b = biomes[index];
+
+            if (cachedBiomes.Count >= 200)
+                cachedBiomes.Clear();
+
             cachedBiomes.Add((int)xPos, b);
+            Debug.Log($"Generated new biome {b.name}, x = {(int)xPos}");
             return b;
         }
 

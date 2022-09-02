@@ -68,4 +68,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Planets/Water/Sand/SandGround.unity
     guid: ce4132925f90dd4439f708d25f7276d8
+  - enabled: 1
+    path: Assets/Scripts/CelestialBodies/ChemicalComposition/ChemicalComposition.unity
+    guid: 9b1e8fa0995ea05498d7e20bc032d5b4
+  - enabled: 1
+    path: Assets/Scripts/CelestialBodies/ChemicalComposition/Ion/Ion.unity
+    guid: 693ae01394c8d1b4c83cc4fd1b7b463c
+  - enabled: 1
+    path: Assets/Scripts/CelestialBodies/ChemicalComposition/Ion/Neutron/Neutron.unity
+    guid: 289077ea5a6e159499fea9a34e2c890a
+  - enabled: 1
+    path: Assets/Scripts/CelestialBodies/ChemicalComposition/Ion/Proton/Proton.unity
+    guid: a54aeea65bfada64baa26177284e6514
   m_configObjects: {}

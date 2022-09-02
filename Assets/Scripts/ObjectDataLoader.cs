@@ -68,6 +68,9 @@ namespace Universe
         {
             BodyManager.TravelTo(celestialBody.TravelTarget);
             BodyManager.Parent = celestialBody;
+
+            if (!(celestialBody.composition.weights is null))
+            CelestialBodies.Atomic.ChemicalCompositionSpawner.Composition = celestialBody.composition;
         }
     }
 }

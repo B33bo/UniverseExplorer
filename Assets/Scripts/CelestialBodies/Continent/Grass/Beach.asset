@@ -22,7 +22,5 @@ MonoBehaviour:
   groundPrefab: {fileID: 798321062924296456, guid: f0399e73e93f4e74d93706fc6e9ee8ae, type: 3}
   adjacentBiomes:
   - {fileID: 11400000, guid: 7e0fd8ca834f29c48b86e0c1a6ae2bb3, type: 2}
-  - {fileID: 11400000, guid: af9459dd241330945918f5cb79d6a9c0, type: 2}
   biomeWeights:
-  - 150
   - 150

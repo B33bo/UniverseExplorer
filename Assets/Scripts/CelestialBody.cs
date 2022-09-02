@@ -25,6 +25,8 @@ namespace Universe
 
         public int Seed;
 
+        public ChemicalComposition composition;
+
         public int GetSeed()
         {
             if (BodyManager.Parent is null)

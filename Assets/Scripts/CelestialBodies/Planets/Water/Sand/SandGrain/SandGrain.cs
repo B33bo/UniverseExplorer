@@ -7,34 +7,41 @@ namespace Universe.CelestialBodies.Planets.Water
     {
         public override string TypeString => "Sand Grain";
 
-        public override string TravelTarget => string.Empty;
+        public override string TravelTarget => "ChemicalComposition";
 
         public override bool Circular => false;
 
         public Mesh mesh;
+        public Color color;
 
         public static float[] ColorWeightChars = new float[]
         {
-            50, //yellow
-            20, //white
+            71, //yellow
+            10, //white
             10, //orange
-            5,  //red
             5,  //black
-            5,  //green
-            4,  //cyan
+            1,  //red
+            1,  //green
+            1,  //cyan
             1,  //random color
         };
+        private const float SumOfWeightCharts = 100;
 
         public override void Create(Vector2 pos)
         {
             Position = pos;
             Name = "Sand Grain";
             mesh = GetMesh();
-
+            
             Vector2 size = ShapeMaker.Size(mesh.vertices);
             Width = size.x * Measurement.mm;
             Height = size.y * Measurement.mm;
-            Mass = 0.0647989 * Measurement.g;
+            Mass = 0.0647989 * Measurement.g * ((size.x + size.y) / 2);
+
+            color = (Color)RandomNum.GetIndexFromWeight(ColorWeightChars, 
+                RandomNum.GetFloat(0, SumOfWeightCharts, RandomNumberGenerator));
+
+            composition = new ChemicalComposition(ChemicalComposition.BondingType.Covalent, new Chemical(100, "SiO2"));
         }
 
         private Mesh GetMesh()
@@ -55,6 +62,12 @@ namespace Universe.CelestialBodies.Planets.Water
             Black,
             Green,
             Cyan,
+            Random,
+        }
+
+        public override string GetBonusTypes()
+        {
+            return $"Color - {color}";
         }
     }
 }

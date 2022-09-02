@@ -17,7 +17,7 @@ namespace Universe
 
             CameraControl.Instance.OnPositionUpdate += TerrainObjectReload;
             TerrainObjectReload(CameraControl.Instance.CameraBounds);
-            Spawn(transform.position, null);
+            Spawn(transform.position, (int)(transform.position.x * 2));
         }
 
         //override base.Update

@@ -1,25 +1,24 @@
+Silicon atom electrons 4 per row
+debug logs
 improve ice planet
-very rocky planets use raycasting and rock piles
-profile picture
 save planet to storage
-airplanes in the sky
 galaxy background uses chunks and mathf.perlinNoise
 improve water planet
 improve deserts (add pyramids)
 improve snow continents
-forests
 nebulae / supernovae
 satellites
 tropical islands on ocean
 space junk
 crystal planet
+very rocky planets use raycasting and rock piles
 
 BIG UPDATES::
 -chemical composition
 -ores
--animals
 -weather
+-clouds and sky
+-animals
 -agriculture
 -caves
--clouds and sky
 -random sky events (airplane, shooting star, etc)

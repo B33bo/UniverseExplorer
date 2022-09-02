@@ -17,18 +17,17 @@ namespace Universe.CelestialBodies.Planets
         {
             transform.localScale = GetFairSize((float)Target.Width, RockyPlanet.MinScale, RockyPlanet.MaxScale) * Vector2.one;
 
-            (float H, float S, float V) rockCol = (Target as RockyPlanet).RockColor;
+            ColorHSV rockCol = (Target as RockyPlanet).RockColor;
 
-            spriteRenderer.color = Color.HSVToRGB(rockCol.H, rockCol.S, rockCol.V);
+            spriteRenderer.color = rockCol;
             for (int i = 0; i < rocks.Length; i++)
             {
                 rocks[i].transform.localScale = RandomNum.GetVector(.25f, .75f, Target.RandomNumberGenerator);
                 rocks[i].transform.localPosition = RandomNum.GetVector(-.25f, .25f, Target.RandomNumberGenerator);
 
-                float v = rockCol.V + RandomNum.GetFloat(.5f, Target.RandomNumberGenerator);
+                float v = rockCol.v + RandomNum.GetFloat(.5f, Target.RandomNumberGenerator);
                 v = Mathf.Clamp(v, 0, 1);
-                Color c = Color.HSVToRGB(rockCol.H, rockCol.S, v);
-                rocks[i].color = c;
+                rocks[i].color = new ColorHSV(rockCol.h, rockCol.s, v);
             }
         }
     }

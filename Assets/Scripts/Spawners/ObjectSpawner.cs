@@ -40,7 +40,10 @@ namespace Universe
                 }
 
                 for (int i = 0; i < cellsInPosition.Length; i++)
+                {
+                    Debug.Log($"Destroying {cellsInPosition[i].name}");
                     Destroy(cellsInPosition[i]);
+                }
                 PositionsByObjects.Remove(pos);
             }
 

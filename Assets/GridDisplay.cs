@@ -4,15 +4,21 @@ namespace Universe
 {
     public class GridDisplay : MonoBehaviour
     {
+        private SpriteRenderer sp;
+
         public bool Enabled
         {
             get => gameObject.activeSelf;
             set => gameObject.SetActive(value);
         }
 
-        private SpriteRenderer sp;
-
         private void Awake()
+        {
+            Enabled = false;
+            sp = GetComponent<SpriteRenderer>();
+        }
+
+        public void EnableDevCommand()
         {
             Btools.DevConsole.DevCommands.Register("grid", "enable/disable the grid background", x =>
             {
@@ -26,9 +32,6 @@ namespace Universe
             Btools.DevConsole.DevCommands.RegisterVar(new Btools.DevConsole.DevConsoleVariable("grid_enabled", "is the grid enabled", typeof(bool),
                 () => Enabled,
                 x => Enabled = bool.Parse(x)));
-
-            sp = GetComponent<SpriteRenderer>();
-            Enabled = false;
         }
 
         private void Update()

@@ -19,6 +19,9 @@ namespace Universe
         public static int Get(int min, int max, Random random) =>
             random.Next(min, max);
 
+        //doesn't actually need to do anything, referencing the random will make it initialize
+        public static void Init(Random random) { random.Next(); }
+
         public static double Get(double min, double max, Random random)
         {
             double randomDouble = random.NextDouble();

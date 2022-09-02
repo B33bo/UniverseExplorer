@@ -15,8 +15,11 @@ namespace Universe
         public delegate void Loaded(string Scene);
         public static event Loaded OnSceneLoad;
 
-        public static void InvokeSceneLoad(string Scene) =>
+        public static void InvokeSceneLoad(string Scene)
+        {
+            Debug.Log($"Loaded Scene {Scene}");
             OnSceneLoad?.Invoke(Scene);
+        }
 
         public static CelestialBody[] GetPath => BodiesVisited.ToArray();
 
@@ -73,6 +76,7 @@ namespace Universe
 
         public static void TravelTo(string position)
         {
+            Debug.Log($"Loading {position}");
             BodiesVisited.Push(Parent);
             ScenesVisited.Push(UnityEngine.SceneManagement.SceneManager.GetSceneAt(0).name);
             UnityEngine.SceneManagement.SceneManager.LoadScene(position);

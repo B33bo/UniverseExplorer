@@ -13,7 +13,7 @@ namespace Universe.CelestialBodies.Planets
 
         public override string PlanetTargetScene => "RockyPlanet";
 
-        public (float H, float S, float V) RockColor;
+        public ColorHSV RockColor;
 
         public override void Create(Vector2 pos)
         {
@@ -22,7 +22,7 @@ namespace Universe.CelestialBodies.Planets
             Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
             Name = GenerateName();
 
-            RockColor = (13 / 360f, RandomNum.GetFloat(1, RandomNumberGenerator), .5f);
+            RockColor = new ColorHSV(13 / 360f, RandomNum.GetFloat(1, RandomNumberGenerator), .5f);
         }
     }
 }

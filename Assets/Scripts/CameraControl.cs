@@ -50,6 +50,9 @@ namespace Universe
 
         public float Speed = 5;
 
+        [SerializeField]
+        private GridDisplay grid;
+
         private TextMeshProUGUI PositionText;
         private float CamScale = 5;
         public event CameraPositionUpdate OnPositionUpdate;
@@ -75,6 +78,8 @@ namespace Universe
                 isLoading++;
                 Timed.RunAfterFrames(() => isLoading--, 1);
             };
+
+            grid.EnableDevCommand();
         }
 
         private string PositionCommand(string[] parameters)
@@ -116,8 +121,9 @@ namespace Universe
 
             if (Input.GetMouseButtonDown(1))
             {
-                var cameraMoveRenderer = Instantiate(cameraMoverRendererPrefab);
-                cameraMoveRenderer.Spawn(MyCamera.ScreenToWorldPoint(Input.mousePosition), null);
+                Vector2 position = MyCamera.ScreenToWorldPoint(Input.mousePosition);
+                var cameraMoveRenderer = Instantiate(cameraMoverRendererPrefab, position, Quaternion.identity);
+                cameraMoveRenderer.Spawn(position, null);
                 Focus(cameraMoveRenderer);
             }
         }

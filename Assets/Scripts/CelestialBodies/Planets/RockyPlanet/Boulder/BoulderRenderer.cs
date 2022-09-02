@@ -21,13 +21,17 @@ namespace Universe
 
             if (FindObjectOfType<TerrainGenerator>())
             {
-                var color = TerrainGenerator.Instance.BiomeAtPosition(Target.Position.x).groundColor;
-                Color.RGBToHSV(color, out float H, out float S, out float V);
+                Color color;
+                if (BodyManager.Parent is RockyPlanet rockyPlanet)
+                    color = rockyPlanet.RockColor;
+                else
+                     color = TerrainGenerator.Instance.BiomeAtPosition(Target.Position.x).groundColor;
 
-                S += RandomNum.GetFloat(-.1f, .1f, Target.RandomNumberGenerator);
-                V += RandomNum.GetFloat(-.1f, .1f, Target.RandomNumberGenerator);
+                ColorHSV colorHSV = color;
+                colorHSV.s += RandomNum.GetFloat(-.1f, .1f, Target.RandomNumberGenerator);
+                colorHSV.v += RandomNum.GetFloat(-.1f, .1f, Target.RandomNumberGenerator);
 
-                b.color = Color.HSVToRGB(H, S, V);
+                b.color = colorHSV;
                 meshFilter.GetComponent<MeshRenderer>().material.color = b.color;
             }
 
