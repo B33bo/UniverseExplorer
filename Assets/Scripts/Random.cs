@@ -146,5 +146,29 @@ namespace Universe
             var humanNames = UnityEngine.Resources.Load<UnityEngine.TextAsset>("HumanNames").text.Split('\n');
             return humanNames[random.Next(0, humanNames.Length)].Trim();
         }
+
+        public static string GetWord(int syllables, Random random)
+        {
+            string consonants = "qwrtypsdfghjklzxcvbnm";
+            string vowels = "aeiou";
+            string word = "";
+
+            if (random.Next(0, consonants.Length + vowels.Length) > consonants.Length)
+                word += vowels[random.Next(vowels.Length)];
+            else
+                word += consonants[random.Next(consonants.Length)];
+
+            for (int i = 0; i < syllables; i++)
+            {
+                word += vowels[random.Next(vowels.Length)];
+
+                if (random.Next(0, 2) == 1)
+                    word += vowels[random.Next(vowels.Length)];
+
+                word += consonants[random.Next(consonants.Length)];
+            }
+
+            return word;
+        }
     }
 }

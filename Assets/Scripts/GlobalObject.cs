@@ -5,18 +5,27 @@ namespace Universe
 {
     public class GlobalObject : MonoBehaviour
     {
-        private static readonly List<string> objectsSpawned = new List<string>();
+        public static Dictionary<string, GameObject> GlobalObjects = new Dictionary<string, GameObject>();
+
+        public string ID;
+
+        public string[] Replace;
 
         private void Awake()
         {
-            if (objectsSpawned.Contains(name))
+            if (GlobalObjects.ContainsKey(ID))
             {
                 Destroy(gameObject);
                 return;
             }
 
             DontDestroyOnLoad(this);
-            objectsSpawned.Add(name);
+            GlobalObjects.Add(ID, gameObject);
+
+            for (int i = 0; i < Replace.Length; i++)
+            {
+                GlobalObjects.Remove(Replace[i]);
+            }
         }
     }
 }
