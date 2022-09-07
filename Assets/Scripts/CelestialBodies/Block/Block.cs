@@ -16,12 +16,20 @@ namespace Universe
             {
                 Position = pos,
                 Width = BlockScale.x * Measurement.M,
-                Height = BlockScale.y * Measurement.M
+                Height = BlockScale.y * Measurement.M,
+                Name = BlockName,
             };
 
             if (seed.HasValue)
                 Target.SetSeed(seed.Value);
             Target.Create(pos);
+
+            if (cameraLerpTarget is null)
+            {
+                cameraLerpTarget = transform;
+                cameraLerpSize = 1;
+                cameraLerpMultiplyBySize = true;
+            }
         }
 
         public abstract void BlockCreate(Vector2 pos);

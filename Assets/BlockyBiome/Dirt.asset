@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3870eeefebde941823440c9ac235aa, type: 3}
+  m_Name: Dirt
+  m_EditorClassIdentifier: 
+  Y: 0
+  Error: 3
+  block: {fileID: 1586395983028074231, guid: cc73b6a2062bf1c4e999ee45b72c4e7a, type: 3}
+  renderTop: 1
+  top: {fileID: 1228620289089607232, guid: b2d3d2ef786982544a422fa7839af6ea, type: 3}

@@ -53,22 +53,13 @@ namespace Universe
         public virtual void ReloadCells(Rect cameraRect)
         {
             var cellsOnScreen = CellsOnScreen(cameraRect);
-            var positions = PositionsByObjects.Keys.ToArray();
 
-            foreach (var pos in positions)
-            {
-                if (cellsOnScreen.Contains(pos))
-                    continue;
+            RemoveOldCells(cellsOnScreen);
+            GenerateNewCells(cellsOnScreen);
+        }
 
-                var cellsInPosition = PositionsByObjects[pos];
-                for (int i = 0; i < cellsInPosition.Length; i++)
-                {
-                    Debug.Log($"Destroying {cellsInPosition[i].name}");
-                    Destroy(cellsInPosition[i]);
-                }
-                PositionsByObjects.Remove(pos);
-            }
-
+        public virtual void GenerateNewCells(List<Vector2> cellsOnScreen)
+        {
             for (int i = 0; i < cellsOnScreen.Count; i++)
             {
                 if (PositionsByObjects.ContainsKey(cellsOnScreen[i]))
@@ -78,12 +69,33 @@ namespace Universe
             }
         }
 
+        public virtual void RemoveOldCells(List<Vector2> cellsOnScreen)
+        {
+            var positions = PositionsByObjects.Keys.ToArray();
+            foreach (var pos in positions)
+            {
+                if (cellsOnScreen.Contains(pos))
+                    continue;
+
+                var cellsInPosition = PositionsByObjects[pos];
+                for (int i = 0; i < cellsInPosition.Length; i++)
+                {
+                    Destroy(cellsInPosition[i]);
+                }
+                PositionsByObjects.Remove(pos);
+            }
+        }
+
         public virtual GameObject[] SpawnAt(Vector2 position)
         {
             if (objects.Length == 0)
                 return null;
 
-            var target = objects[GetSeededIndex(position, weights)];
+            int seed = BodyManager.GetSeed();
+            int positionSeed = (int)position.x + (int)Mathf.Pow(position.y, 3) + seed;
+            var rand = new System.Random(positionSeed);
+
+            var target = objects[GetSeededIndex(position, weights, rand)];
 
             if (target is null)
                 return System.Array.Empty<GameObject>();
@@ -94,11 +106,21 @@ namespace Universe
 
             float CellSizeRadius = CellSize / 2;
             newObject.Target.Position += (Vector3)RandomNum.GetVector(-CellSizeRadius, CellSizeRadius,
-                                                                      newObject.Target.RandomNumberGenerator);
+                                                                      rand);
 
             var spawnedObjects = new GameObject[] { newObject.gameObject };
             PositionsByObjects.Add(position, spawnedObjects);
             return spawnedObjects;
+        }
+
+        public virtual CelestialBodyRenderer SpawnAt(CelestialBodyRenderer prefab, Vector2 position)
+        {
+            if (prefab is null)
+                return null;
+            CelestialBodyRenderer newObject = Instantiate(prefab, position, Quaternion.identity);
+            newObject.Spawn(position, null);
+            PositionsByObjects.Add(position, new GameObject[] { newObject.gameObject });
+            return newObject;
         }
 
         public virtual List<Vector2> CellsOnScreen(Rect cameraBounds)
@@ -160,15 +182,13 @@ namespace Universe
             return value;
         }
 
-        public int GetSeededIndex(Vector2 pos, float[] weights)
+        public int GetSeededIndex(Vector2 pos, float[] weights, System.Random rand)
         {
             float weightSum = 0;
             for (int i = 0; i < weights.Length; i++)
                 weightSum += weights[i];
 
-            int seed = BodyManager.GetSeed();
-            int positionSeed = (int)pos.x + (int)Mathf.Pow(pos.y, 3) + seed;
-            float rndNum = RandomNum.GetFloat(weightSum, new System.Random(positionSeed));
+            float rndNum = RandomNum.GetFloat(weightSum, rand);
             int randomIndex = RandomNum.GetIndexFromWeight(weights, rndNum);
 
             return randomIndex;

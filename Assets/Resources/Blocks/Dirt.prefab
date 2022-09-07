@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3600235364410501787}
   - component: {fileID: 3600235364410501786}
-  - component: {fileID: 1228620289089607232}
+  - component: {fileID: 1586395983028074231}
   m_Layer: 0
-  m_Name: Grass
+  m_Name: Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5299400320964040512, guid: 1b84b78aa3e801547ae02fcb864228c3, type: 3}
+  m_Sprite: {fileID: 2289616372777055746, guid: 1b84b78aa3e801547ae02fcb864228c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1228620289089607232
+--- !u!114 &1586395983028074231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3600235364410501781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e05ea744f3c1f114586c83b02fd7bf37, type: 3}
+  m_Script: {fileID: 11500000, guid: 993e63c47401c344caf6a3eb3bb5e2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CameraFocus: 1
