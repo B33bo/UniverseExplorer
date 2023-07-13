@@ -15,7 +15,7 @@ namespace Universe
         public delegate void Loaded(string Scene);
         public static event Loaded OnSceneLoad;
 
-        public static void InvokeSceneLoad(string Scene)
+        public static void RegisterSceneLoad(string Scene)
         {
             Debug.Log($"Loaded Scene {Scene}");
             OnSceneLoad?.Invoke(Scene);

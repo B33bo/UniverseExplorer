@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &21707392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ Transform:
   - {fileID: 1880979311}
   - {fileID: 347970177}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &266855452
 PrefabInstance:
@@ -179,9 +179,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2209103242785961648, guid: bed16f6a44eea9c4aa000c2acf56871f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6213174632281832648, guid: bed16f6a44eea9c4aa000c2acf56871f, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6213174632281832648, guid: bed16f6a44eea9c4aa000c2acf56871f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -297,8 +301,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -364102573
+  m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: df8d71e34a4f566418424315e607ba44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -320,7 +324,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7761144363036868458, guid: 5535237f67dccff4f94d87a4a331db3a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7761144363036868458, guid: 5535237f67dccff4f94d87a4a331db3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -368,6 +372,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5535237f67dccff4f94d87a4a331db3a, type: 3}
+--- !u!1 &777874870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 777874871}
+  - component: {fileID: 777874872}
+  m_Layer: 0
+  m_Name: GalaxyCloudSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &777874871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777874870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &777874872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777874870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062771052a99be14b91afda95f31e782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CellSize: 10
+  registerSceneLoad: 0
+  objects:
+  - {fileID: 5622314387096936146, guid: b6b0cad00906d6948b1b0db8641af192, type: 3}
+  weights:
+  - 1
+  randomOffset: 0
+  extraPadding: 5
+  detectStars: 0
 --- !u!1001 &1107087254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -381,7 +437,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -58.695244
+      value: -58.695232
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1925470337199409101, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchorMax.x
@@ -405,7 +473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5211530809855356298, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5211530809855356298, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchorMax.x
@@ -528,16 +596,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062771052a99be14b91afda95f31e782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellSize: 5
+  CellSize: 30
   registerSceneLoad: 1
   objects:
   - {fileID: 460268241262161378, guid: 24ce7429ed099324e8da64e226e1f07c, type: 3}
   - {fileID: 0}
   - {fileID: 222219182022447500, guid: 8f983c5938cac51439f144bd42dd86bd, type: 3}
+  - {fileID: 7068847404417978725, guid: 4b710024500061b42b556b2320775ae9, type: 3}
   weights:
   - 100
   - 1000
   - 500
+  - 100
+  randomOffset: 1
+  extraPadding: 3
   detectStars: 1
 --- !u!1 &1880979310
 GameObject:
@@ -607,8 +679,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -364102573
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: df8d71e34a4f566418424315e607ba44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

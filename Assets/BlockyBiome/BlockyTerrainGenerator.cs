@@ -65,6 +65,7 @@ namespace Universe
             return (int)Mathf.Lerp(GetY(left), GetY(right), t);
         }
 
+        private readonly Dictionary<float, float> xPosByYpos = new Dictionary<float, float>();
         public override void GenerateNewCells(List<Vector2> cellsOnScreen)
         {
             float y = float.NaN;
@@ -75,7 +76,15 @@ namespace Universe
                 if (PositionsByObjects.ContainsKey(cellsOnScreen[i]))
                     continue;
 
-                float yTop = GetY(cellsOnScreen[i].x);
+                if (xPosByYpos.Count > 300)
+                    xPosByYpos.Clear();
+
+                float yTop;
+                if (!xPosByYpos.ContainsKey(cellsOnScreen[i].x))
+                    xPosByYpos[cellsOnScreen[i].x] = GetY(cellsOnScreen[i].x);
+
+                yTop = xPosByYpos[cellsOnScreen[i].x];
+
                 if (cellsOnScreen[i].y > yTop)
                     continue;
 
@@ -130,12 +139,10 @@ namespace Universe
 
         public void SpawnAt(BlockLayer blockLayer, Vector2 position, float yTop)
         {
-            if (blockLayer.renderTop)
-            Debug.Log($"{yTop} {position.y} {blockLayer.renderTop && position.y == yTop}");
             if (blockLayer.renderTop && position.y == yTop)
-                SpawnAt(blockLayer.top, position);
+                base.SpawnAt(blockLayer.top, position, null);
             else
-                SpawnAt(blockLayer.block, position);
+                base.SpawnAt(blockLayer.block, position, null);
         }
     }
 }

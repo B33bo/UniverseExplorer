@@ -9,6 +9,7 @@ namespace Universe
         {
             var tumbleWeed = new TumbleWeed();
             Target = tumbleWeed;
+            pos.y++;
 
             if (seed.HasValue)
                 Target.SetSeed(seed.Value);
@@ -16,7 +17,7 @@ namespace Universe
             Target.Create(pos);
 
             transform.rotation = Quaternion.Euler(0, 0, (float)tumbleWeed.rotation);
-            transform.localScale = Vector3.one * ((float)tumbleWeed.Radius / (float)Measurement.M);
+            Scale = Vector3.one * ((float)tumbleWeed.Radius / (float)Measurement.M);
         }
     }
 }

@@ -23,8 +23,6 @@ MonoBehaviour:
   adjacentBiomes:
   - {fileID: 11400000}
   - {fileID: 11400000, guid: af9459dd241330945918f5cb79d6a9c0, type: 2}
-  - {fileID: 11400000, guid: f68157927e254eb4c9abf70421c31efc, type: 2}
   biomeWeights:
   - 100
-  - 200
   - 200

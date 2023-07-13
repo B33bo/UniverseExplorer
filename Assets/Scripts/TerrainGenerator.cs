@@ -62,7 +62,7 @@ namespace Universe
             if (doEssentialFunctions)
             {
                 BodyManager.ReloadCommands();
-                BodyManager.InvokeSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+                BodyManager.RegisterSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             }
 
             if (BodyManager.Parent is null)
@@ -164,7 +164,7 @@ namespace Universe
 
                 Biome biome = BiomeAtPosition(pos);
                 float Ypos = GetY(pos, biome.MaxHeight);
-                loadedPositions.Add(pos, (SpawnBlockAt(new Vector2(pos, Ypos), biome), SpawnObjectAt(new Vector2(pos, Ypos * 2), biome)));
+                loadedPositions.Add(pos, (SpawnBlockAt(new Vector2(pos, Ypos), biome), SpawnObjectAt(new Vector2(pos, Ypos), biome)));
             }
         }
 
@@ -247,7 +247,7 @@ namespace Universe
                 return value;
 
             if (depth > 1000)
-                throw new System.Exception("Depth exceeded 10_000");
+                throw new System.Exception("Depth exceeded 1000");
 
             System.Random rnd = new System.Random((int)xPos * seed + 123421345);
 

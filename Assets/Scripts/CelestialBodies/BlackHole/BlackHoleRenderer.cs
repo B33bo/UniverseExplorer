@@ -21,6 +21,9 @@ namespace Universe.CelestialBodies
         [SerializeField]
         private bool Supermassive = false;
 
+        [SerializeField]
+        private Transform discParticle;
+
         public override void Spawn(Vector2 pos, int? seed)
         {
             if (Supermassive)
@@ -31,7 +34,8 @@ namespace Universe.CelestialBodies
                     Target.SetSeed(seed.Value);
 
                 Target.Create(pos);
-                transform.localScale = GetFairSize((float)Target.Width, (float)SupermassiveBlackHole.MinScale, (float)SupermassiveBlackHole.MaxScale) * 5 * Vector2.one;
+                Scale = GetFairSize((float)Target.Radius, (float)SupermassiveBlackHole.MinScale, (float)SupermassiveBlackHole.MaxScale) * 5 * Vector2.one;
+                Debug.Log(Scale);
             }
             else
             {
@@ -41,10 +45,13 @@ namespace Universe.CelestialBodies
                     Target.SetSeed(seed.Value);
 
                 Target.Create(pos);
-                transform.localScale = GetFairSize((float)Target.Width, (float)BlackHole.MinScale, (float)BlackHole.MaxScale) * Vector2.one;
+                Scale = GetFairSize((float)Target.Width, (float)BlackHole.MinScale, (float)BlackHole.MaxScale) * Vector2.one;
             }
 
+            discParticle.transform.localScale *= Scale;
+
             transform.rotation = Quaternion.Euler(0, 0, RandomNum.GetFloat(-45f, 45f, Target.RandomNumberGenerator));
+            transform.localScale = Scale * Vector2.one;
             Orbitspeed = RandomNum.GetFloat(.5f, 3, Target.RandomNumberGenerator);
             Clockwise = RandomNum.GetBool(Target.RandomNumberGenerator);
 

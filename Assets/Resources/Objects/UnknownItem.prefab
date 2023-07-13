@@ -47,3 +47,4 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 1942547804048407281}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 0
+  lerpScale: 1

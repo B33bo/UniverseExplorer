@@ -70,6 +70,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 7840742483335555484}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 0
+  scaleLerp: 0
   meshRenderer: {fileID: 7840742483335555483}
   polygonCollider: {fileID: 4073476683000033402}
   groundColor: {fileID: 2100000, guid: 9256c0ac87e6cf546a81af564e0f7484, type: 2}

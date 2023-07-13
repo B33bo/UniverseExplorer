@@ -259,7 +259,6 @@ GameObject:
   - component: {fileID: 117376946365310827}
   - component: {fileID: 7822441380192489156}
   - component: {fileID: -2446877391588590282}
-  - component: {fileID: -3277247045892942919}
   - component: {fileID: 6935502819247406828}
   m_Layer: 0
   m_Name: RockyPlanet
@@ -352,7 +351,9 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 117376946365310826}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  orbiter: {fileID: -3277247045892942919}
+  scaleLerp: 1
+  IsDestroyed: 0
+  orbiter: {fileID: 0}
   rocks:
   - {fileID: 117376945566501447}
   - {fileID: 117376945619317761}
@@ -424,19 +425,6 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
---- !u!114 &-3277247045892942919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117376946365310836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce4f9bba28b4484a9031f36ac582454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfRotation: {x: 0, y: 0}
 --- !u!210 &6935502819247406828
 SortingGroup:
   m_ObjectHideFlags: 0

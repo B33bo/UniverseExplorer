@@ -4,7 +4,7 @@ namespace Universe
 {
     public static class Extensions
     {
-        private static (int hue, string name)[] Colors = new (int, string)[]
+        private static readonly (int hue, string name)[] Colors = new (int, string)[]
         {
             (0, "Red"),
             (30, "Orange"),
@@ -18,7 +18,7 @@ namespace Universe
             (330, "Red"),
         };
 
-        private static (int value, string name)[] Grayscale = new (int, string)[]
+        private static readonly (int value, string name)[] Grayscale = new (int, string)[]
         {
             (0, "Black"),
             (75, "Light Gray"),
@@ -44,7 +44,7 @@ namespace Universe
         {
             int below = 0, above = 0;
 
-            for (int i = 0; i < Colors.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
                 if (values[i].Item1 < value)
                     continue;
@@ -54,10 +54,26 @@ namespace Universe
                 break;
             }
 
+            if (below < 0)
+                return values[above].Item2;
+
             int belowDiff = value - values[below].Item1;
             int aboveDiff = values[above].Item1 - value;
 
             return belowDiff > aboveDiff ? values[below].Item2 : values[above].Item2;
+        }
+
+        public static int HashPos(this Vector2 vector, int seed)
+        {
+            int hash = -2128831035;
+            // Suitable nullity checks etc, of course :)
+            hash = (hash * 16777619) ^ vector.x.GetHashCode();
+            hash = (hash * 16777619) ^ vector.y.GetHashCode();
+            hash = (hash * 16777619) ^ seed.GetHashCode();
+
+            if (vector.y < 0)
+                hash = int.MaxValue - hash;
+            return hash;
         }
     }
 }

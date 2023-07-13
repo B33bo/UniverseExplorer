@@ -18,7 +18,7 @@ namespace Universe
         {
             CameraControl.Instance.OnPositionUpdate += ResetCells;
 
-            BodyManager.InvokeSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            BodyManager.RegisterSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             BodyManager.ReloadCommands();
         }
 

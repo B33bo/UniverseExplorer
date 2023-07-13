@@ -13,6 +13,9 @@ namespace Universe
         private float impossibleDistance, hotDistance, goldilocksDistance;
 
         [SerializeField]
+        private StarRenderer sunRenderer;
+
+        [SerializeField]
         private CelestialBodyRenderer[] hot, goldilocks, cold;
 
         private float diameter;
@@ -23,13 +26,14 @@ namespace Universe
             yield return new WaitForFrames(1);
 
             BodyManager.ReloadCommands();
-            BodyManager.InvokeSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            BodyManager.RegisterSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
             seed = BodyManager.GetSeed();
             rnd = new System.Random(seed);
 
             diameter = RandomNum.GetFloat(20, 60, rnd);
 
+            impossibleDistance = sunRenderer.transform.localScale.x;
             hotDistance *= diameter;
             goldilocksDistance *= diameter;
 

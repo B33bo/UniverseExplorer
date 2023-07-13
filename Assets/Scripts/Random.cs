@@ -16,6 +16,9 @@ namespace Universe
             }
         }
 
+        public static int Get(Random random) =>
+            random.Next();
+
         public static int Get(int min, int max, Random random) =>
             random.Next(min, max);
 
@@ -25,12 +28,7 @@ namespace Universe
         public static double Get(double min, double max, Random random)
         {
             double randomDouble = random.NextDouble();
-            double diff = max - min;
-
-            double newRndNum = randomDouble;
-            newRndNum *= diff;
-            newRndNum += min;
-            return newRndNum;
+            return (max - min) * randomDouble + min;
         }
 
         public static float GetFloat(float max, Random random) =>
@@ -169,6 +167,26 @@ namespace Universe
             }
 
             return word;
+        }
+
+        public static double GetInfiniteDouble(double changeChance, Random random)
+        {
+            int direction = random.NextDouble() > .5 ? 1 : -1;
+            double current = 0;
+            do
+            {
+                current += random.NextDouble();
+            } while (random.NextDouble() >= changeChance);
+
+            return current * direction;
+        }
+
+        public static double CurveAt(double x, double coefficient, double pwrBase)
+        {
+            // bm^x
+            // coefficient * base ^ x
+
+            return coefficient * Math.Pow(pwrBase, x);
         }
     }
 }

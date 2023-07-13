@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Universe.CelestialBodies.Planets;
 
 namespace Universe
@@ -19,50 +19,46 @@ namespace Universe
                 starsLoaded = new List<Star>();
         }
 
-        public override void ReloadCells(Rect cameraRect)
+        public override void RemoveOldCells(List<Vector2> cellsOnScreen)
         {
-            var cellsOnScreen = CellsOnScreen(cameraRect);
             var positions = PositionsByObjects.Keys.ToArray();
-
             foreach (var pos in positions)
             {
                 if (cellsOnScreen.Contains(pos))
                     continue;
 
                 var cellsInPosition = PositionsByObjects[pos];
-
-                if (detectStars)
-                {
-                    if (cellsInPosition[0].TryGetComponent(out StarRenderer starRenderer))
-                    {
-                        starsLoaded.Remove(starRenderer.Target as Star);
-                    }
-                }
-
                 for (int i = 0; i < cellsInPosition.Length; i++)
                 {
-                    Debug.Log($"Destroying {cellsInPosition[i].name}");
+                    if (detectStars)
+                    {
+                        if (cellsInPosition[0].TryGetComponent(out StarRenderer starRenderer))
+                            starsLoaded.Remove(starRenderer.Target as Star);
+                    }
+
                     Destroy(cellsInPosition[i]);
                 }
                 PositionsByObjects.Remove(pos);
             }
+        }
 
-            for (int i = 0; i < cellsOnScreen.Count; i++)
-            {
-                if (PositionsByObjects.ContainsKey(cellsOnScreen[i]))
-                    continue;
+        public override CelestialBodyRenderer SpawnAt(CelestialBodyRenderer prefab, Vector2 position, int? seed)
+        {
+            var result = base.SpawnAt(prefab, position, seed);
+            if (detectStars && result.TryGetComponent(out StarRenderer starRenderer))
+                starsLoaded.Add(starRenderer.Target as Star);
+            return result;
+        }
 
-                var spawned = SpawnAt(cellsOnScreen[i]);
+        public override GameObject[] SpawnAt(Vector2 position)
+        {
+            var result = base.SpawnAt(position);
+            if (result.Length == 0)
+                return result;
 
-                if (spawned.Length == 0)
-                    continue;
-
-                if (detectStars)
-                {
-                    if (spawned[0].TryGetComponent(out StarRenderer starRenderer))
-                        starsLoaded.Add(starRenderer.Target as Star);
-                }
-            }
+            if (detectStars && result[0].TryGetComponent(out StarRenderer starRenderer))
+                starsLoaded.Add(starRenderer.Target as Star);
+            return result;
         }
     }
 }

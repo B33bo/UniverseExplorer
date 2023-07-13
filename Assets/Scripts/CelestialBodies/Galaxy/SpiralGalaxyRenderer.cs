@@ -22,7 +22,7 @@ namespace Universe.CelestialBodies
 
             var scale = GetFairSize((float)Target.Height, (float)SpiralGalaxy.MinWidth, (float)SpiralGalaxy.MaxWidth);
 
-            transform.localScale = scale * Vector2.one;
+            Scale = scale * Vector2.one;
             particleSystem.transform.localScale = scale / 10f * Vector2.one;
             particleSystem.randomSeed = unchecked((uint)Target.Seed);
 
@@ -63,6 +63,11 @@ namespace Universe.CelestialBodies
             yield return new WaitForSeconds(.2f);
             yield return new WaitForEndOfFrame();
             x.simulationSpeed = 1;
+        }
+
+        public override void OnUpdate()
+        {
+            particleSystem.transform.localScale = transform.localScale / 10;
         }
     }
 }

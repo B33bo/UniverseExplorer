@@ -99,4 +99,5 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 0}
   cameraLerpSize: 0
   cameraLerpMultiplyBySize: 0
+  scaleLerp: 0
   offset: 0

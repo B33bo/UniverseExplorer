@@ -37,7 +37,7 @@ namespace Universe
                 moons[i].planet = planet;
             }
 
-            planet.moons = moons;
+            //planet.moons = moons;
         }
     }
 }

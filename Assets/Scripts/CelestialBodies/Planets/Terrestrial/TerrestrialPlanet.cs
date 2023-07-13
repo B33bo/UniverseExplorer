@@ -11,10 +11,11 @@ namespace Universe.CelestialBodies.Planets
         public override string TypeString => "Terrestrial Planet";
 
         public override string PlanetTargetScene => "WaterPlanet";
+        public override string TravelTarget => BodyManager.Parent is Planet ? PlanetTargetScene : "PlanetOrbiter";
 
         public override bool Circular => true;
 
-        public override string ObjectFilePos => "Objects/TerrestrialPlanet";
+        public override string ObjectFilePos => "Objects/Planet/TerrestrialPlanet";
         public Continent[] continents;
 
         public override void Create(Vector2 pos)

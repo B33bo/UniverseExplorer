@@ -36,10 +36,11 @@ namespace Universe
             ReloadBranch(branch.parent, maxYpos * 2);
         }
 
-            public override void Spawn(Vector2 pos, int? seed)
+        public override void Spawn(Vector2 pos, int? seed)
         {
             TreePlant tree = new TreePlant();
             Target = tree;
+            pos.y++;
 
             if (seed.HasValue)
                 tree.SetSeed(seed.Value);

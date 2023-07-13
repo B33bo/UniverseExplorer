@@ -3,13 +3,15 @@ using Universe.CelestialBodies.Planets;
 using Universe.CelestialBodies;
 using System.Collections;
 using Universe.CelestialBodies.Biomes;
+using UnityEngine.XR;
 
 namespace Universe
 {
     public class DayNightSystem : MonoBehaviour
     {
         public float Time;
-        private Planet p;
+        private Planet planet;
+
         [SerializeField]
         private Transform day, night;
 
@@ -34,6 +36,8 @@ namespace Universe
         [SerializeField]
         private BlackHoleAccretionDiskRenderer blackHoleAccretionDiskPrefab;
 
+        private StarSpeck[] starSpecks;
+
         private TerrainGenerator terrainGenerator;
 
         private IEnumerator Start()
@@ -49,10 +53,10 @@ namespace Universe
             }
             else if (BodyManager.Parent is Moon moon)
             {
-                p = moon.planet;
+                planet = moon.planet;
 
-                System.Random rand = p.RandomNumberGenerator;
-                var newPlanet = Instantiate(Resources.Load<CelestialBodyRenderer>(p.ObjectFilePos), day);
+                System.Random rand = planet.RandomNumberGenerator;
+                var newPlanet = Instantiate(Resources.Load<CelestialBodyRenderer>(planet.ObjectFilePos), day);
                 newPlanet.Spawn(new Vector2(RandomNum.GetFloat(-10, 10, rand), RandomNum.GetFloat(-10, 10, rand)), moon.planet.Seed);
                 newPlanet.CameraFocus = false;
 
@@ -79,15 +83,15 @@ namespace Universe
                     sortingGroups[i].sortingLayerName = "Sky";
             }
             else if (BodyManager.Parent is Continent c)
-                p = c.planet;
+                planet = c.planet;
             else
-                p = BodyManager.Parent as Planet;
+                planet = BodyManager.Parent as Planet;
 
-            if (p is null)
+            if (planet is null)
             {
-                p = new ErrorPlanet();
-                p.SetSeed(0);
-                p.Create(Vector2.zero);
+                planet = new ErrorPlanet();
+                planet.SetSeed(0);
+                planet.Create(Vector2.zero);
             }
 
             LoadDay();
@@ -96,9 +100,9 @@ namespace Universe
 
         private void LoadBlackHoleMoon()
         {
-            p = new ErrorPlanet
+            planet = new ErrorPlanet
             {
-                moons = new Moon[0]
+                moons = new MoonRenderer[0]
             };
             LoadNight();
 
@@ -126,93 +130,96 @@ namespace Universe
 
         private void LoadDay()
         {
-            if (p.sun is null)
+            if (planet.sun is null)
             {
-                p.sun = new Star();
-                p.sun.SetSeed(0);
+                planet.sun = new Star();
+                planet.sun.SetSeed(0);
             }
 
             var newSun = Instantiate(starRenderer, day);
-            newSun.Spawn(Vector2.zero, p.sun.Seed);
+            newSun.Spawn(Vector2.zero, planet.sun.Seed);
 
             var spriterenderer = newSun.GetComponent<SpriteRenderer>();
             spriterenderer.sortingLayerName = "Sky";
-            spriterenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+            spriterenderer.maskInteraction = SpriteMaskInteraction.None;
 
             newSun.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingLayerName = "Sky";
-            newSun.ClearSunlines();
             newSun.CameraFocus = false;
 
             var children = newSun.GetComponentsInChildren<SpriteRenderer>();
             foreach (var child in children)
             {
                 child.sortingLayerName = "Sky";
-                child.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+                child.maskInteraction = SpriteMaskInteraction.None;
             }
         }
 
         private void LoadNight()
         {
-            if (p.moons is null)
-            {
-                p.moons = new Moon[0];
-            }
+            planet.moons ??= new MoonRenderer[0];
 
-            for (int i = 0; i < p.moons.Length; i++)
+            for (int i = 0; i < planet.moons.Length; i++)
             {
                 if (BodyManager.Parent is Moon moon)
                 {
-                    if (p.moons[i] == moon)
+                    if (planet.moons[i].Target == moon)
                         continue;
                 }
                 var newMoon = Instantiate(moonRenderer, night);
-                System.Random rand = new System.Random(p.moons[i].Seed + i);
-                newMoon.Spawn(new Vector2(RandomNum.GetFloat(-10, 10, rand), RandomNum.GetFloat(-10, 10, rand)), p.moons[i].Seed);
+                System.Random rand = new System.Random(planet.moons[i].Target.Seed + i);
+                newMoon.Spawn(new Vector2(RandomNum.GetFloat(-10, 10, rand), RandomNum.GetFloat(-10, 10, rand)), planet.moons[i].Target.Seed);
                 newMoon.CameraFocus = false;
-                (newMoon.Target as Moon).planet = p;
+                (newMoon.Target as Moon).planet = planet;
 
                 var spriteRenderer = newMoon.GetComponent<SpriteRenderer>();
                 spriteRenderer.sortingLayerName = "Sky";
-                spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+                spriteRenderer.maskInteraction = SpriteMaskInteraction.None;
 
                 var children = newMoon.GetComponentsInChildren<SpriteRenderer>();
                 foreach (var child in children)
                     child.sortingLayerName = "Sky";
             }
 
-            for (int i = 0; i < ObjectSpawner.starsLoaded.Count; i++)
-            {
-                if (ObjectSpawner.starsLoaded[i] == p.sun)
-                    return;
+            const int starCount = 200;
+            starSpecks = new StarSpeck[starCount];
 
-                System.Random rand = new System.Random(ObjectSpawner.starsLoaded[i].Seed + i);
-                var pos = new Vector2(RandomNum.GetFloat(-30, 30, rand), RandomNum.GetFloat(-10, 10, rand));
-                var newSpeck = Instantiate(starSpeck, night);
-                newSpeck.isOriginal = true;
-                newSpeck.Spawn(pos, ObjectSpawner.starsLoaded[i].Seed);
-            }
-
-            for (int i = ObjectSpawner.starsLoaded.Count; i < 100; i++)
+            for (int i = 0; i < starCount; i++)
             {
-                System.Random rand = new System.Random(p.Seed + i);
-                var pos = new Vector2(RandomNum.GetFloat(-30, 30, rand), RandomNum.GetFloat(-30, 10, rand));
+                Vector2 pos;
                 var newSpeck = Instantiate(starSpeck, night);
 
-                var newStar = new Star();
-                newStar.Create(pos);
-                newStar.Name = $"({newStar.Name})";
-                newSpeck.Target = newStar;
+                if (i < ObjectSpawner.starsLoaded.Count && ObjectSpawner.starsLoaded[i] != planet.sun)
+                {
+                    int seed = ObjectSpawner.starsLoaded[i].Seed;
+                    var rand = new System.Random(seed);
+                    pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 0, rand));
+                    newSpeck.isOriginal = true;
+                    newSpeck.Spawn(pos, ObjectSpawner.starsLoaded[i].Seed);
+                }
+                else
+                {
+                    int seed = planet.Seed + i;
+                    System.Random rand = new System.Random(seed + i);
+                    pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 50, rand));
 
-                newSpeck.Init(newStar);
+                    var newStar = new Star();
+                    newStar.Create(pos);
+                    newStar.Name = $"({newStar.Name})";
+                    newSpeck.Target = newStar;
+
+                    newSpeck.Init(newStar);
+                }
+                starSpecks[i] = newSpeck;
             }
         }
 
         private void Update()
         {
             transform.localScale = CameraControl.Instance.MyCamera.orthographicSize / 20 * Vector2.one;
-            transform.position = (Vector2)CameraControl.Instance.transform.position;
+            transform.position = new Vector2(CameraControl.Instance.Position.x,
+                Mathf.Max(CameraControl.Instance.CameraBounds.yMin, 2));
 
-            Time = (GlobalTime.Time % 360) / 180; //0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
+            Time = GlobalTime.Time % 360 / 180; //0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
             rotator.transform.rotation = Quaternion.Euler(0, 0, GlobalTime.Time);
 
             float time = Time % 1;
@@ -223,7 +230,17 @@ namespace Universe
             else
                 alpha = time * 2;
 
-            sunrise.color = new Color(1, 1, 1, alpha);
+            sunrise.color = new Color(1, 1, 1, alpha * .7f);
+
+            if (starSpecks is null)
+                return;
+            for (int i = 0; i < starSpecks.Length; i++)
+            {
+                if (Time > 1f)
+                    starSpecks[i].SetAlpha(.5f - (Time - 1f));
+                else
+                    starSpecks[i].SetAlpha(Time);
+            }
         }
     }
 }

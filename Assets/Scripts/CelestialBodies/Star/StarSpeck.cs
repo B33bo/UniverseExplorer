@@ -14,6 +14,9 @@ namespace Universe
         [SerializeField]
         private Transform canvas;
 
+        [SerializeField]
+        private SpriteRenderer spriteRenderer;
+
         public bool isOriginal;
 
         public override void Spawn(Vector2 pos, int? seed)
@@ -33,8 +36,7 @@ namespace Universe
             if (isOriginal)
             {
                 canvas.gameObject.SetActive(Input.GetKey(KeyCode.LeftShift) && isOriginal);
-                canvas.transform.rotation = Quaternion.identity;
-                canvas.transform.position = transform.position;
+                canvas.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
             }
         }
 
@@ -48,6 +50,12 @@ namespace Universe
                 starText.text = star.Name;
             else
                 Destroy(canvas.gameObject);
+        }
+
+        public void SetAlpha(float value)
+        {
+            var color = spriteRenderer.color;
+            spriteRenderer.color = new Color(color.r, color.g, color.b, value);
         }
     }
 }

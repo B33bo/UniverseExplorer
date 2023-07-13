@@ -262,7 +262,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -58.695244
+      value: -58.69525
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1925470337199409101, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchorMax.x
@@ -400,7 +412,7 @@ MonoBehaviour:
   ColorSky: 1
   SkyDayColor: {r: 0.454902, g: 0.82745105, b: 0.83921576, a: 1}
   SkyNightColor: {r: 0.18845674, g: 0.27549177, b: 0.3301887, a: 1}
-  dayNightSystem: {fileID: 0}
+  dayNightSystem: {fileID: 461604792}
   doEssentialFunctions: 1
   defaultBiome: {fileID: 11400000, guid: e4a4fffd4c8d528458eb99bf39d4deac, type: 2}
 --- !u!4 &427308978
@@ -417,6 +429,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &461604792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+  m_PrefabInstance: {fileID: 1776341070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457c53faded0a0d41aafbd1252a63cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &989191454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -540,6 +563,10 @@ PrefabInstance:
     - target: {fileID: 2459771645717361286, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771646791216106, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}

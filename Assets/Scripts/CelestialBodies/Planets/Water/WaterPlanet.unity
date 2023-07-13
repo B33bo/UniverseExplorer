@@ -435,7 +435,7 @@ MonoBehaviour:
   YOffset: -20
   seedOffset: 0
   ColorSky: 1
-  SkyDayColor: {r: 0, g: 0, b: 0, a: 0}
+  SkyDayColor: {r: 0.21026166, g: 0.599272, b: 0.7075472, a: 0}
   SkyNightColor: {r: 0, g: 0, b: 0, a: 0}
   dayNightSystem: {fileID: 1730984801}
   doEssentialFunctions: 1
@@ -648,6 +648,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 1392368989}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
   positive: 1
   create: 1
 --- !u!212 &1392368988
@@ -841,6 +842,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 510307758396621724}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
   positive: 0
   create: 1
 --- !u!1 &510307758396621726

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Universe.CelestialBodies.Planets.Rocky;
 
@@ -8,9 +9,9 @@ namespace Universe
         [SerializeField]
         private BoulderRenderer prefab;
 
-        public void Start()
+        public IEnumerator Start()
         {
-            //CameraControl.Instance.MyCamera.backgroundColor = ;
+            yield return new WaitForFrames(2);
             if (!(BodyManager.Parent is RockPile rockPile))
             {
                 rockPile = new RockPile();
@@ -32,7 +33,7 @@ namespace Universe
                 totalColor[2] += c[2];
             }
 
-            BodyManager.InvokeSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            BodyManager.RegisterSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             BodyManager.ReloadCommands();
 
             Color averageColor = new Color(totalColor[0] / rockPile.Rocks, totalColor[1] / rockPile.Rocks, totalColor[2] / rockPile.Rocks);

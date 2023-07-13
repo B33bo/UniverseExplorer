@@ -9,7 +9,7 @@ namespace Universe.CelestialBodies
         private void Start()
         {
             if (BodyManager.Parent is null)
-                Spawn(Vector2.zero, 0);
+                Spawn(Vector2.zero, 1);
         }
 
         public override void Spawn(Vector2 pos, int? Seed)

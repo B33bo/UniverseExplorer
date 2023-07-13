@@ -330,6 +330,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 8738482878273871469}
   cameraLerpSize: 3
   cameraLerpMultiplyBySize: 0
+  scaleLerp: 0
   meshFilters:
   - {fileID: 6274852282102357351}
   - {fileID: 6274852282201267560}

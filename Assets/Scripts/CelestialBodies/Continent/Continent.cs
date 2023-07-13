@@ -35,9 +35,10 @@ namespace Universe.CelestialBodies.Biomes
 
         private void GenerateMesh()
         {
-            Mesh continentMesh = ShapeMaker.GetRegularShape(10, 1);
+            const float sideScale = .1f;
+            Mesh continentMesh = ShapeMaker.GetRegularShape(10, sideScale);
 
-            continentMesh = ShapeMaker.RandomizeMesh(continentMesh, .5f, RandomNumberGenerator);
+            continentMesh = ShapeMaker.RandomizeMesh(continentMesh, .5f * sideScale, RandomNumberGenerator);
             continentMesh.name = "Continent";
 
             Vector2 min = Vector3.zero, max = Vector3.zero;

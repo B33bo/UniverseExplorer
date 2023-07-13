@@ -1,4 +1,3 @@
-Silicon atom electrons 4 per row
 debug logs
 improve ice planet
 save planet to storage
@@ -14,7 +13,6 @@ crystal planet
 very rocky planets use raycasting and rock piles
 
 BIG UPDATES::
--chemical composition
 -ores
 -weather
 -clouds and sky

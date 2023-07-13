@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Universe.CelestialBodies
 {
-    public class GalaxyCloudSpawner : MonoBehaviour
+    public class GalaxyCloudManager : MonoBehaviour
     {
         [SerializeField]
         private SpriteRenderer Outer, Inner;
@@ -47,7 +47,13 @@ namespace Universe.CelestialBodies
             Vector2 cameraPos = CameraControl.Instance.Position;
             transform.position = cameraPos;
 
-            transform.localScale = CameraControl.Instance.CameraBounds.width * Vector2.one;
+            var camBounds = CameraControl.Instance.CameraBounds;
+            float scale = camBounds.width;
+
+            if (camBounds.width < camBounds.height)
+                scale = camBounds.height;
+
+            transform.localScale = scale * Vector2.one;
         }
     }
 }

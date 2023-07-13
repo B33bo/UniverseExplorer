@@ -154,10 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   YOffset: 0
   seedOffset: 0
-  ColorSky: 0
-  SkyDayColor: {r: 0, g: 0, b: 0, a: 0}
-  SkyNightColor: {r: 0, g: 0, b: 0, a: 0}
-  dayNightSystem: {fileID: 0}
+  ColorSky: 1
+  SkyDayColor: {r: 0.10746708, g: 0.19496489, b: 0.3301887, a: 1}
+  SkyNightColor: {r: 0.0018421048, g: 0.0025789463, b: 0.0139999995, a: 0}
+  dayNightSystem: {fileID: 884049303}
   doEssentialFunctions: 1
   defaultBiome: {fileID: 11400000, guid: 2d07f34ce0f9e3b4f9c537a87d8c001e, type: 2}
 --- !u!4 &319097032
@@ -243,6 +243,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5535237f67dccff4f94d87a4a331db3a, type: 3}
+--- !u!114 &884049303 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+  m_PrefabInstance: {fileID: 1434688205}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457c53faded0a0d41aafbd1252a63cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1434688205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5195,7 +5206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -58.69525
+      value: -58.695244
       objectReference: {fileID: 0}
     - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchorMax.x

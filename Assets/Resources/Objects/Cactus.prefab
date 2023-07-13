@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 504427289
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7873444928579934181, guid: 6d4e2950c4b7b9e4fa02bdfa6dd0dc6c, type: 3}
   m_Color: {r: 0.13453738, g: 0.7169812, b: 0, a: 1}
@@ -150,8 +150,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 504427289
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4438351552130452648, guid: 6d4e2950c4b7b9e4fa02bdfa6dd0dc6c, type: 3}
   m_Color: {r: 0.13453738, g: 0.7169812, b: 0, a: 1}
@@ -232,8 +232,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 504427289
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7873444928579934181, guid: 6d4e2950c4b7b9e4fa02bdfa6dd0dc6c, type: 3}
   m_Color: {r: 0.13453738, g: 0.7169812, b: 0, a: 1}
@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374477399542410548}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.71, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 374477398382754788}
@@ -297,6 +297,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 374477399542410549}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 0
   leftarm: {fileID: 374477398382754788}
   rightarm: {fileID: 374477398893623714}
 --- !u!61 &7405212810339368156

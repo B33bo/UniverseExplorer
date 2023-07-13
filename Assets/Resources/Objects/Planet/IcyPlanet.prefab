@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7944783083674845317}
   - component: {fileID: 7944783083674845320}
   - component: {fileID: 7944783083674845321}
-  - component: {fileID: -3179404942623342979}
   - component: {fileID: 1907168462664987756}
   m_Layer: 0
   m_Name: IcyPlanet
@@ -156,7 +155,9 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 7944783083674845319}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  orbiter: {fileID: -3179404942623342979}
+  scaleLerp: 1
+  IsDestroyed: 0
+  orbiter: {fileID: 0}
   icePanels:
   - {fileID: 7944783084329882738}
   - {fileID: 7944783084140657470}
@@ -177,19 +178,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-3179404942623342979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7944783083674845316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce4f9bba28b4484a9031f36ac582454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfRotation: {x: 0, y: 0}
 --- !u!210 &1907168462664987756
 SortingGroup:
   m_ObjectHideFlags: 0

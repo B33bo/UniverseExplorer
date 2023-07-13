@@ -7,6 +7,7 @@ namespace Universe
 {
     public abstract class Spawner : MonoBehaviour
     {
+        public const int MaxCells = 5000;
         public float CellSize = 2;
 
         public bool registerSceneLoad = true;
@@ -18,12 +19,18 @@ namespace Universe
 
         private bool subscribedToOnPositionUpdate = false;
 
+        [SerializeField]
+        private bool randomOffset = true;
+
+        [SerializeField]
+        private float extraPadding = 3;
+
         private IEnumerator Start()
         {
             yield return new WaitForEndOfFrame();
             if (registerSceneLoad)
             {
-                BodyManager.InvokeSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+                BodyManager.RegisterSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
                 BodyManager.ReloadCommands();
             }
 
@@ -50,8 +57,13 @@ namespace Universe
             Destroyed();
         }
 
+        private Vector2 positionOfLastReload = new Vector2(200, 200);
         public virtual void ReloadCells(Rect cameraRect)
         {
+            float camSize = cameraRect.width / 4;
+            if ((cameraRect.position - positionOfLastReload).sqrMagnitude < camSize * camSize)
+                return;
+            positionOfLastReload = cameraRect.position;
             var cellsOnScreen = CellsOnScreen(cameraRect);
 
             RemoveOldCells(cellsOnScreen);
@@ -60,6 +72,8 @@ namespace Universe
 
         public virtual void GenerateNewCells(List<Vector2> cellsOnScreen)
         {
+            if (cellsOnScreen.Count > MaxCells)
+                return;
             for (int i = 0; i < cellsOnScreen.Count; i++)
             {
                 if (PositionsByObjects.ContainsKey(cellsOnScreen[i]))
@@ -92,43 +106,43 @@ namespace Universe
                 return null;
 
             int seed = BodyManager.GetSeed();
-            int positionSeed = (int)position.x + (int)Mathf.Pow(position.y, 3) + seed;
+            int positionSeed = position.HashPos(seed);
+
             var rand = new System.Random(positionSeed);
 
-            var target = objects[GetSeededIndex(position, weights, rand)];
+            var target = objects[GetSeededIndex(weights, rand)];
 
             if (target is null)
                 return System.Array.Empty<GameObject>();
 
             Debug.Log($"Spawning {target.name} at {position}");
             CelestialBodyRenderer newObject = Instantiate(target, position, Quaternion.identity);
-            newObject.Spawn(position, null);
+            newObject.Spawn(position, positionSeed);
 
             float CellSizeRadius = CellSize / 2;
-            newObject.Target.Position += (Vector3)RandomNum.GetVector(-CellSizeRadius, CellSizeRadius,
-                                                                      rand);
+
+            if (randomOffset)
+                newObject.Target.Position += (Vector3)RandomNum.GetVector(-CellSizeRadius, CellSizeRadius, rand);
 
             var spawnedObjects = new GameObject[] { newObject.gameObject };
             PositionsByObjects.Add(position, spawnedObjects);
             return spawnedObjects;
         }
 
-        public virtual CelestialBodyRenderer SpawnAt(CelestialBodyRenderer prefab, Vector2 position)
+        public virtual CelestialBodyRenderer SpawnAt(CelestialBodyRenderer prefab, Vector2 position, int? seed)
         {
             if (prefab is null)
                 return null;
             CelestialBodyRenderer newObject = Instantiate(prefab, position, Quaternion.identity);
-            newObject.Spawn(position, null);
+            newObject.Spawn(position, seed);
             PositionsByObjects.Add(position, new GameObject[] { newObject.gameObject });
             return newObject;
         }
 
         public virtual List<Vector2> CellsOnScreen(Rect cameraBounds)
         {
-            const float cellSizeMultiplier = 3;
-
-            Vector2 topLeft = new Vector2(cameraBounds.xMin - CellSize * cellSizeMultiplier, cameraBounds.yMax + CellSize * cellSizeMultiplier);
-            Vector2 bottomRight = new Vector2(cameraBounds.xMax + CellSize * cellSizeMultiplier, cameraBounds.yMin - CellSize * cellSizeMultiplier);
+            Vector2 topLeft = new Vector2(cameraBounds.xMin - CellSize * extraPadding, cameraBounds.yMax + CellSize * extraPadding);
+            Vector2 bottomRight = new Vector2(cameraBounds.xMax + CellSize * extraPadding, cameraBounds.yMin - CellSize * extraPadding);
 
             topLeft.x -= topLeft.x % CellSize;
             bottomRight.y -= bottomRight.y % CellSize;
@@ -182,7 +196,7 @@ namespace Universe
             return value;
         }
 
-        public int GetSeededIndex(Vector2 pos, float[] weights, System.Random rand)
+        public int GetSeededIndex(float[] weights, System.Random rand)
         {
             float weightSum = 0;
             for (int i = 0; i < weights.Length; i++)

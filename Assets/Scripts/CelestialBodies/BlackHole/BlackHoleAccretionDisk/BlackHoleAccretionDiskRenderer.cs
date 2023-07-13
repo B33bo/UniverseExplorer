@@ -9,6 +9,9 @@ namespace Universe.CelestialBodies
         [SerializeField]
         private BlackHoleRenderer blackHoleRenderer;
 
+        [SerializeField]
+        private Collider2D collision;
+
         private IEnumerator Start()
         {
             yield return new WaitForFrames(4);
@@ -39,7 +42,7 @@ namespace Universe.CelestialBodies
         //overrides base.Update
         private void Update()
         {
-
+            collision.enabled = CameraControl.Instance.MyCamera.orthographicSize < 25;
         }
     }
 }

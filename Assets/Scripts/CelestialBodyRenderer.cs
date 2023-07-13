@@ -10,11 +10,26 @@ namespace Universe
         public bool CameraFocus = true;
 
         public Transform cameraLerpTarget;
-        public float cameraLerpSize;
-        public bool cameraLerpMultiplyBySize;
+        public float cameraLerpSize = 1;
+        public bool cameraLerpMultiplyBySize = true;
+        public bool scaleLerp = true;
+        public bool IsDestroyed;
+
+        public Vector2 Scale { get; set; }
+
+        private void Awake()
+        {
+            Scale = transform.localScale;
+
+            if (scaleLerp)
+                transform.localScale = Vector3.zero;
+        }
 
         private void Update()
         {
+            if (cameraLerpTarget == null)
+                cameraLerpTarget = transform;
+
             if (Target is null)
             {
                 Debug.LogError("Target is null on object " + name);
@@ -22,6 +37,11 @@ namespace Universe
             }
 
             transform.localPosition = Target.Position;
+            if (scaleLerp)
+                transform.localScale = Vector2.Lerp(transform.localScale, Scale, Time.deltaTime * 3);
+            //else
+             //   transform.localScale = Scale;
+
             name = Target.Name;
             OnUpdate();
         }
@@ -48,10 +68,23 @@ namespace Universe
             return (float)((Size - minSize) / SizeDifference) + 1;
         }
 
-        public virtual void Destroyed() { }
+        public static float GetFairSizeCurve(double size, double coefficient, double pwrBase)
+        {
+            // 2 should be twice as much as one
+            double one = RandomNum.CurveAt(1, coefficient, pwrBase);
+            double two = RandomNum.CurveAt(2, coefficient, pwrBase);
+
+            // one * 2 * m = two
+            // one * 2 * m / 2 = 1
+            double justify = two / one / 2;
+            return (float)(justify * size);
+        }
+
+        protected virtual void Destroyed() { }
 
         private void OnDestroy()
         {
+            IsDestroyed = true;
             Destroyed();
             cameraLerpTarget = null;
         }

@@ -57,10 +57,11 @@ namespace Universe
 
         public void CameraZoom(float amount)
         {
-            float size = CameraControl.Instance.MyCamera.orthographicSize;
+            CameraControl.Instance.Zoom(amount);
+            /*float size = CameraControl.Instance.MyCamera.orthographicSize;
             size += amount;
             size = Mathf.Max(0.1f, size);
-            CameraControl.Instance.MyCamera.orthographicSize = size;
+            CameraControl.Instance.MyCamera.orthographicSize = size;*/
         }
     }
 }

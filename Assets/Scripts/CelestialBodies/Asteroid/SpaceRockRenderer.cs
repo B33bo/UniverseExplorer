@@ -8,11 +8,6 @@ namespace Universe
         [SerializeField]
         private MeshFilter meshFilter;
 
-        private void Awake()
-        {
-            Spawn(Vector2.zero, 0);
-        }
-
         public override void Spawn(Vector2 pos, int? seed)
         {
             Target = new SpaceRock();
@@ -27,9 +22,8 @@ namespace Universe
 
             meshFilter.mesh = ShapeMaker.NormalizeMesh(ShapeMaker.RandomizeMesh(
                 ShapeMaker.GetRegularShape(
-                    RandomNum.Get(3, 30, Target.RandomNumberGenerator)
-                , .5f),
-                1, Target.RandomNumberGenerator), out Vector3 bottomLeft, out Vector3 topRight);
+                    RandomNum.Get(3, 30, Target.RandomNumberGenerator), .5f), 1, Target.RandomNumberGenerator)
+                , out Vector3 bottomLeft, out Vector3 topRight);
 
             GetComponent<PolygonCollider2D>().points = meshFilter.mesh.vertices.ToVector2();
 

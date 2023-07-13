@@ -15,7 +15,7 @@ namespace Universe
                 Target.SetSeed(seed.Value);
             Target.Create(pos);
 
-            transform.localScale = GetFairSize((float)Target.Radius, 1000, 3000) * Vector2.one;
+            Scale = GetFairSize((float)Target.Radius, 1000, 3000) * Vector2.one;
 
             crater.localPosition = new Vector3(
                 (float)Target.RandomNumberGenerator.NextDouble(),
@@ -29,10 +29,9 @@ namespace Universe
             crater.GetComponent<SpriteRenderer>().sortingOrder = spriteMaskID;
 
             int craterCount = RandomNum.Get(1, 15, Target.RandomNumberGenerator);
+
             for (int i = 1; i < craterCount; i++)
-            {
                 AddNewCrater();
-            }
         }
 
         public void SpawnMoon(float orbitRadius, int seed, float orbitSpeed)

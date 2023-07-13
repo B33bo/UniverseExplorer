@@ -15,14 +15,14 @@ namespace Universe.CelestialBodies.Planets
             TargetPlanet = Target as TerrestrialPlanet;
             continents = new ContinentRenderer[TargetPlanet.continents.Length];
 
-            transform.localScale = GetFairSize((float)Target.Width, (float)TerrestrialPlanet.MinScale, (float)TerrestrialPlanet.MaxScale) * Vector2.one;
+            Scale = GetFairSize((float)Target.Width, (float)TerrestrialPlanet.MinScale, (float)TerrestrialPlanet.MaxScale) * Vector2.one;
             ContinentRenderer continentRenderer = Resources.Load<ContinentRenderer>("Objects/Continent");
             for (int i = 0; i < continents.Length; i++)
             {
                 continents[i] = Instantiate(continentRenderer, transform);
                 continents[i].Target = TargetPlanet.continents[i];
                 continents[i].Init();
-                continents[i].transform.localScale = new Vector3(.1f, .1f);
+                continents[i].Scale = new Vector3(.1f, .1f);
                 Vector3 localPos = RandomNum.GetVector(-.5f, .5f, Target.RandomNumberGenerator);
 
                 continents[i].Target.Position = localPos;
@@ -34,7 +34,7 @@ namespace Universe.CelestialBodies.Planets
             GetComponent<CircleCollider2D>().enabled = !(BodyManager.Parent is Planet);
         }
 
-        public override void Destroyed()
+        protected override void Destroyed()
         {
             for (int i = 0; i < continents.Length; i++)
             {

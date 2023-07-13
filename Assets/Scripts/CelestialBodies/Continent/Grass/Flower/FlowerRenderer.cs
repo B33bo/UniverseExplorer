@@ -11,17 +11,11 @@ namespace Universe
         [SerializeField]
         private SpriteRenderer flowerSprite;
 
-        public int seed;
-
-        private void Awake()
-        {
-            Spawn(transform.position, seed);
-        }
-
         public override void Spawn(Vector2 pos, int? seed)
         {
             Flower flower = new Flower();
             Target = flower;
+            pos.y++;
             if (seed.HasValue)
                 flower.SetSeed(seed.Value);
             flower.Create(pos);

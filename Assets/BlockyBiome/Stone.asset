@@ -15,3 +15,5 @@ MonoBehaviour:
   Y: -20
   Error: 0
   block: {fileID: -5009321642335315732, guid: edb4431445f165c40831f68d18cfbb64, type: 3}
+  renderTop: 0
+  top: {fileID: 0}

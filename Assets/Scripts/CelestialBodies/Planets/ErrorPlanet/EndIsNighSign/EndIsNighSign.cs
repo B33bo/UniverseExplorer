@@ -17,8 +17,8 @@ namespace Universe.CelestialBodies.Planets.Error
         {
             Position = pos;
             Name = "The End Is Nigh";
-            Width = 4;
-            Height = 4;
+            Width = 4 * Measurement.M;
+            Height = 4 * Measurement.M;
         }
 
         public override string GetBonusTypes()

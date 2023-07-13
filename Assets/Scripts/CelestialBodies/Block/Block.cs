@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Universe
@@ -7,6 +8,10 @@ namespace Universe
         public Vector2 BlockScale;
         public abstract string BlockName { get; }
         public abstract string Path { get; }
+        public virtual string ScenePath { get => string.Empty; }
+
+        public static Block blockSelected;
+        private static Dictionary<Vector2Int, object> getSaveData = new Dictionary<Vector2Int, object>();
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -18,6 +23,7 @@ namespace Universe
                 Width = BlockScale.x * Measurement.M,
                 Height = BlockScale.y * Measurement.M,
                 Name = BlockName,
+                blockTravelTarget = ScenePath,
             };
 
             if (seed.HasValue)
@@ -32,16 +38,51 @@ namespace Universe
             }
         }
 
+        private void Update()
+        {
+            if (blockSelected != this)
+                return;
+
+            if (Input.GetMouseButtonDown(0))
+                DestroyBlock();
+        }
+
+        private void DestroyBlock()
+        {
+            if (blockSelected == this)
+                blockSelected = null;
+
+            //if (getSaveData.ContainsKey((Vector2Int)Target.Position))
+            Destroy(gameObject);
+        }
+
         public abstract void BlockCreate(Vector2 pos);
 
-        public virtual string GetSaveData()
+        public virtual SaveData GetSaveData()
         {
             SaveData saveData = new SaveData
             {
                 Position = Target.Position,
             };
 
-            return JsonUtility.ToJson(saveData);
+            return saveData;
+        }
+
+        private void OnMouseDown()
+        {
+            
+        }
+
+        private void OnMouseEnter()
+        {
+            blockSelected = this;
+        }
+
+        private void OnMouseExit()
+        {
+            if (blockSelected != this)
+                return;
+            blockSelected = null;
         }
 
         public class SaveData

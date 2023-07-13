@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 833765690585975045}
   - component: {fileID: 833765690585975050}
   - component: {fileID: 833765690585975046}
-  - component: {fileID: -4274001519458466604}
   - component: {fileID: -2504757262761459066}
   m_Layer: 0
   m_Name: MoltenPlanet
@@ -130,7 +129,9 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 833765690585975044}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  orbiter: {fileID: -4274001519458466604}
+  scaleLerp: 1
+  IsDestroyed: 0
+  orbiter: {fileID: 0}
   lineRenderers:
   - {fileID: 3793696745864037470}
   - {fileID: 3793696747095664307}
@@ -147,19 +148,6 @@ MonoBehaviour:
   lerpStart: {r: 1, g: 0.63676953, b: 0, a: 1}
   lerpEnd: {r: 1, g: 0.30037916, b: 0, a: 1}
   spriteRenderer: {fileID: 833765690585975045}
---- !u!114 &-4274001519458466604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833765690585975047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce4f9bba28b4484a9031f36ac582454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfRotation: {x: 0, y: 0}
 --- !u!210 &-2504757262761459066
 SortingGroup:
   m_ObjectHideFlags: 0

@@ -184,6 +184,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 2205463368216652937}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 0
   sprites:
   - {fileID: 0}
   - {fileID: 5540668397679465389, guid: 94a91b398360e2d47919341f258fb8d2, type: 3}

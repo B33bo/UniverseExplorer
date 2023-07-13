@@ -201,6 +201,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 1037331677632221914}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  lerpScale: 0
   ionName: AbstractIon
   text: {fileID: 1037331677854582218}
 --- !u!58 &1037331677632221917

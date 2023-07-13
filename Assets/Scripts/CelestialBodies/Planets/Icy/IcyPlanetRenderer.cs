@@ -12,7 +12,7 @@ namespace Universe.CelestialBodies.Planets
 
         public override void SpawnPlanet(Vector2 pos, int? seed)
         {
-            transform.localScale = GetFairSize((float)Target.Width, (float)IcyPlanet.MinScale, (float)IcyPlanet.MaxScale) * Vector2.one;
+            Scale = GetFairSize((float)Target.Width, (float)IcyPlanet.MinScale, (float)IcyPlanet.MaxScale) * Vector2.one;
 
             for (int i = 0; i < icePanels.Length; i++)
             {

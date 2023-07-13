@@ -6,9 +6,9 @@ namespace Universe
     {
         private float OrbitalRadius;
         private float Rotation;
+        private CelestialBody celestialBody;
 
-        [SerializeField]
-        private Vector2 centerOfRotation;
+        public Vector2 centerOfRotation;
 
         private bool Activated;
 
@@ -42,20 +42,30 @@ namespace Universe
             Rotation = Mathf.Atan2(transform.position.y, transform.position.x) * Mathf.Rad2Deg;
 
             Activated = true;
+
+            CelestialBodyRenderer bodyRenderer = GetComponent<CelestialBodyRenderer>();
+            if (bodyRenderer is null)
+                return;
+            celestialBody = bodyRenderer.Target;
         }
 
         private void Update()
         {
             if (!Activated)
                 return;
-            if (transform.position == Vector3.zero)
-                return;
 
+            Debug.DrawLine(transform.position, centerOfRotation, Color.green);
             float RotationRad = Rotation * Mathf.Deg2Rad;
 
-            transform.position = new Vector2(Mathf.Cos(RotationRad), Mathf.Sin(RotationRad)) * OrbitalRadius + centerOfRotation;
+            Vector2 pos = new Vector2(Mathf.Cos(RotationRad), Mathf.Sin(RotationRad)) * OrbitalRadius;
+
+            if (celestialBody is null)
+                transform.position = pos + centerOfRotation;
+            else
+                celestialBody.Position = pos + centerOfRotation;
 
             Rotation = GlobalTime.Time * rotationDelta + initialRotation;
+            Rotation %= 360;
 
             transform.rotation = Quaternion.Euler(0, 0, Rotation);
         }

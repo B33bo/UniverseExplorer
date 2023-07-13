@@ -4,7 +4,7 @@ namespace Universe.CelestialBodies.Planets
 {
     public class ErrorPlanet : Planet
     {
-        public override string ObjectFilePos => "Objects/ErrorPlanet";
+        public override string ObjectFilePos => "Objects/Planet/ErrorPlanet";
 
         public override string PlanetTargetScene => "ErrorPlanet";
 

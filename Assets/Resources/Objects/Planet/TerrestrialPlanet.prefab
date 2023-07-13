@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7958682789850154186}
   - component: {fileID: 7958682789850154191}
   - component: {fileID: 7958682789850154184}
-  - component: {fileID: 3923299402847706344}
   - component: {fileID: -4328358750134597636}
   - component: {fileID: 1173647202606152094}
   m_Layer: 0
@@ -103,7 +102,9 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 8031292415859879150}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  orbiter: {fileID: 3923299402847706344}
+  scaleLerp: 1
+  IsDestroyed: 0
+  orbiter: {fileID: 0}
   continents: []
 --- !u!58 &7958682789850154184
 CircleCollider2D:
@@ -121,19 +122,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &3923299402847706344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7958682789850154187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce4f9bba28b4484a9031f36ac582454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfRotation: {x: 0, y: 0}
 --- !u!210 &-4328358750134597636
 SortingGroup:
   m_ObjectHideFlags: 0

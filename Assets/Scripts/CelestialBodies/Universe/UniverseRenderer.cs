@@ -19,7 +19,7 @@ namespace Universe.CelestialBodies
             float Size = GetFairSize((float)Target.Width, 1e35f, float.MaxValue);
             if (float.IsPositiveInfinity(Size))
                 Size = 2.5f;
-            transform.localScale = Size * Vector2.one;
+            Scale = Size * Vector2.one;
 
             StartCoroutine(LoadSprites());
         }

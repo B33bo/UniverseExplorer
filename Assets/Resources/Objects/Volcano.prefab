@@ -245,6 +245,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 7876840772620293786}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  lerpScale: 1
   Rock: {fileID: 7855614237133087846}
 --- !u!60 &4457827489898461637
 PolygonCollider2D:

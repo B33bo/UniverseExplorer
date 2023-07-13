@@ -18,7 +18,7 @@ namespace Universe
             leftarm.localPosition = new Vector3(leftarm.localPosition.x, (float)RandomNum.Get(-.1, .75, Target.RandomNumberGenerator));
             rightarm.localPosition = new Vector3(rightarm.localPosition.x, (float)RandomNum.Get(-.1, .75, Target.RandomNumberGenerator));
 
-            transform.localScale = new Vector3((float)Target.Width, (float)Target.Height) / (float)Measurement.M;
+            Scale = new Vector3((float)Target.Width, (float)Target.Height) / (float)Measurement.M;
         }
     }
 }

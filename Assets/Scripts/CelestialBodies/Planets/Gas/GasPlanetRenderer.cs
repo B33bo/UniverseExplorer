@@ -12,7 +12,7 @@ namespace Universe.CelestialBodies.Planets
 
         public override void SpawnPlanet(Vector2 pos, int? seed)
         {
-            transform.localScale = GetFairSize((float)Target.Radius, (float)GasPlanet.MinScale, (float)GasPlanet.MaxScale) * 3 * Vector2.one;
+            Scale = GetFairSize((float)Target.Radius, (float)GasPlanet.MinScale, (float)GasPlanet.MaxScale) * 3 * Vector2.one;
             for (int i = 0; i < particles.Length; i++)
             {
                 var particleSystem = particles[i].main;

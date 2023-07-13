@@ -9621,7 +9621,6 @@ GameObject:
   - component: {fileID: 7937537469929500622}
   - component: {fileID: 7937537469929500621}
   - component: {fileID: 7937537469929500617}
-  - component: {fileID: -660198720732446839}
   - component: {fileID: 7937537469929500618}
   - component: {fileID: 8451949592480361393}
   m_Layer: 0
@@ -9782,24 +9781,13 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 7937537469929500616}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  orbiter: {fileID: -660198720732446839}
+  scaleLerp: 1
+  IsDestroyed: 0
+  orbiter: {fileID: 0}
   particles:
   - {fileID: 7937537469925881123}
   - {fileID: 7937537471129155429}
   - {fileID: 7937537470774372152}
---- !u!114 &-660198720732446839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7937537469929500620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce4f9bba28b4484a9031f36ac582454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfRotation: {x: 0, y: 0}
 --- !u!58 &7937537469929500618
 CircleCollider2D:
   m_ObjectHideFlags: 0

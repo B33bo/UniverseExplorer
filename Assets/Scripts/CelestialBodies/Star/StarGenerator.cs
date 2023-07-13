@@ -28,7 +28,7 @@ namespace Universe
             yield return new WaitForFrames(1);
 
             BodyManager.ReloadCommands();
-            BodyManager.InvokeSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+            BodyManager.RegisterSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
             if (BodyManager.Parent is Star newStar)
             {

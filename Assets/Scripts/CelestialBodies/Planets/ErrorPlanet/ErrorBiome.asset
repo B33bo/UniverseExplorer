@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0790426aac8254c8983c62f4c341f9, type: 3}
   m_Name: ErrorBiome
   m_EditorClassIdentifier: 
-  objects: []
-  weights: []
+  objects:
+  - {fileID: 0}
+  - {fileID: 6274852281940903194, guid: 95ed3fe99ae711043ae580c6e6cbf1f8, type: 3}
+  weights:
+  - 10
+  - 1
   MaxHeight: 2
   groundColor: {r: 1, g: 0, b: 0, a: 1}
   colorGround: 1

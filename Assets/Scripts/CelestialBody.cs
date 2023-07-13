@@ -30,8 +30,10 @@ namespace Universe
         public int GetSeed()
         {
             if (BodyManager.Parent is null)
-                return (int)(Position.x * Position.x + Position.y * 1053);
-            return (int)Mathf.Pow((int)Position.x, 2) + (int)Position.y + BodyManager.Parent.Seed;
+                return Position.GetHashCode();
+                //return (int)(Position.x * Position.x + Position.y * 1053);
+            return Position.GetHashCode() + BodyManager.GetSeed();
+            //return (int)Mathf.Pow((int)Position.x, 2) + (int)Position.y + BodyManager.Parent.Seed;
         }
 
         public void SetSeed(int seed)

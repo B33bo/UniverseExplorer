@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Universe
 {
@@ -60,7 +61,11 @@ namespace Universe
         public void Unfocus()
         {
             animator.Play("Unfocus");
-            Btools.TimedEvents.Timed.RunAfterTime(() => { UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("ObjectData"); }, .5f);
+            Btools.TimedEvents.Timed.RunAfterTime(() =>
+            {
+                if (SceneManager.GetSceneByName("ObjectData").isLoaded)
+                    SceneManager.UnloadSceneAsync("ObjectData");
+            }, .5f);
             CameraControl.Instance.UnFocus();
         }
 
@@ -70,7 +75,7 @@ namespace Universe
             BodyManager.Parent = celestialBody;
 
             if (!(celestialBody.composition.weights is null))
-            CelestialBodies.Atomic.ChemicalCompositionSpawner.Composition = celestialBody.composition;
+                CelestialBodies.Atomic.ChemicalCompositionSpawner.Composition = celestialBody.composition;
         }
     }
 }

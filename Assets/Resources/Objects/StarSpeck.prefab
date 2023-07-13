@@ -317,7 +317,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7614443068247088434
 MonoBehaviour:
@@ -335,8 +335,10 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 0}
   cameraLerpSize: 0
   cameraLerpMultiplyBySize: 0
+  scaleLerp: 1
   starText: {fileID: 6087489572900634687}
   canvas: {fileID: 8867554640528195279}
+  spriteRenderer: {fileID: 7614443068247088432}
   isOriginal: 0
 --- !u!61 &3986593903213585901
 BoxCollider2D:

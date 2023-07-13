@@ -12,7 +12,7 @@ namespace Universe
 
         private void Start()
         {
-            scale = transform.localScale.y;
+            scale = Scale.y;
             position = transform.position;
 
             CameraControl.Instance.OnPositionUpdate += TerrainObjectReload;

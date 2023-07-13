@@ -61,6 +61,9 @@ namespace Universe
 
         private byte isLoading = 0;
 
+        [SerializeField]
+        private bool wasdMovement = true;
+
         private void Start()
         {
             Instance = this;
@@ -89,35 +92,33 @@ namespace Universe
             return Position.ToString();
         }
 
-        private void Update()
+        private void KeepFocusing()
         {
-            if (FocusTarget is null)
+            if (!FocusTarget)
             {
-                Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-                if (Application.isMobilePlatform)
-                    movement = MobileMovement();
-
-                Position += Speed * Time.deltaTime * movement;
-                PositionText.text = Position.ToString();
+                FocusTarget = null;
+                return;
             }
-            else
+            Vector3 position = FocusTarget.position;
+            position.z = -10;
+            transform.position = position;
+        }
+
+        private void Move()
+        {
+            if (FocusTarget)
             {
-                if (!FocusTarget)
-                {
-                    FocusTarget = null;
-                    return;
-                }
-                Vector3 position = FocusTarget.position;
-                position.z = -10;
-                transform.position = position;
+                KeepFocusing();
+                return;
             }
 
-            if (Input.mouseScrollDelta.y != 0)
-                mouseScrollDelta = 
-                    Input.mouseScrollDelta.y == 0 ? 0 : 
-                    Input.mouseScrollDelta.y > 0 ? 1.1f :
-                    .9f;
+            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+            if (Application.isMobilePlatform)
+                movement = MobileMovement();
+
+            Position += Speed * Time.deltaTime * movement;
+            PositionText.text = Position.ToString();
 
             if (Input.GetMouseButtonDown(1))
             {
@@ -126,6 +127,20 @@ namespace Universe
                 cameraMoveRenderer.Spawn(position, null);
                 Focus(cameraMoveRenderer);
             }
+        }
+
+        private void Update()
+        {
+            if (!wasdMovement)
+                return;
+
+            Move();
+
+            if (Input.mouseScrollDelta.y != 0)
+                mouseScrollDelta =
+                    Input.mouseScrollDelta.y == 0 ? 0 :
+                    Input.mouseScrollDelta.y > 0 ? 1.1f :
+                    .9f;
         }
 
         private Vector2 MobileMovement()
@@ -151,7 +166,7 @@ namespace Universe
 
         private void FixedUpdate()
         {
-            TryUpdateScroll();
+            Zoom(mouseScrollDelta);
 
             if (mouseScrollDelta != 0 && lastPosition == (Vector2)transform.position)
                 return;
@@ -163,12 +178,11 @@ namespace Universe
             lastPosition = transform.position;
         }
 
-        private void TryUpdateScroll()
+        public void Zoom(float amount)
         {
-            if (mouseScrollDelta == 0)
+            if (amount == 0)
                 return;
-            CamScale /= mouseScrollDelta * 1;//+= -mouseScrollDelta * Time.fixedDeltaTime * 100;
-            //CamScale = Mathf.Clamp(CamScale, 0.001f, float.PositiveInfinity);
+            CamScale /= amount;
             MyCamera.orthographicSize = CamScale;
             mouseScrollDelta = 0;
         }
@@ -177,6 +191,9 @@ namespace Universe
 
         public void Focus(CelestialBodyRenderer focus)
         {
+            if (!wasdMovement)
+                return;
+
             float targetScale = focus.cameraLerpSize;
 
             if (focus.cameraLerpMultiplyBySize)
@@ -218,6 +235,8 @@ namespace Universe
 
         public void UnFocus()
         {
+            if (!wasdMovement)
+                return; 
             if (FocusTarget is null)
                 return;
             FocusTarget = null;

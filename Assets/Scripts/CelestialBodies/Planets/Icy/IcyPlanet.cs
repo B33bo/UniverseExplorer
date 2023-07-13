@@ -12,7 +12,7 @@ namespace Universe.CelestialBodies.Planets
 
         public override bool Circular => true;
 
-        public override string ObjectFilePos => "Objects/IcyPlanet";
+        public override string ObjectFilePos => "Objects/Planet/IcyPlanet";
 
         public override string PlanetTargetScene => "IcyPlanet";
 

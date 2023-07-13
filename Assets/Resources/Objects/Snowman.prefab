@@ -797,6 +797,7 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 239881989594766515}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 0
   leftArm: {fileID: 239881990020479839}
   rightArm: {fileID: 239881991569952947}
   leftEye: {fileID: 239881989433440451}
