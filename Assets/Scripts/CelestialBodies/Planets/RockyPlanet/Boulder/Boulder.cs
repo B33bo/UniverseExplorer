@@ -21,16 +21,14 @@ namespace Universe.CelestialBodies.Planets.Rocky
             Vector3[] newVerticies = new Vector3[rock.vertexCount];
 
             for (int j = 0; j < rock.vertexCount; j++)
-            {
                 newVerticies[j] = new Vector3(rock.vertices[j].x, rock.vertices[j].y * .5f, rock.vertices[j].z) * scale;
-            }
             rock.vertices = newVerticies;
             return rock;
         }
 
         public override void Create(Vector2 pos)
         {
-            Position = pos; //so the random number generator seed gets triggered
+            Position = pos; // so the random number generator seed gets triggered
             Create(pos, GetRock(RandomNumberGenerator));
         }
 

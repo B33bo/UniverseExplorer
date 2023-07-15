@@ -23,7 +23,7 @@ namespace Universe
 
         public override void Spawn(Vector2 pos, int? seed)
         {
-            pos.y += 4;
+            pos.y += 5;
             aurora = new Aurora();
             Target = aurora;
             if (seed.HasValue)
@@ -63,7 +63,6 @@ namespace Universe
 
                 var color = colorsOfAurora[(int)aurora.color];
                 color.h += Mathf.Sin(time + (i * Mathf.Deg2Rad)) / 20f;
-                //color.h = Mathf.Sin(time + (i * Mathf.Deg2Rad)) / 20f;
                 flares[i].color = color;
             }
         }

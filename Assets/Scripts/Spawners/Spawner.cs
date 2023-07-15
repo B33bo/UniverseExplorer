@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace Universe
@@ -113,11 +115,9 @@ namespace Universe
             var target = objects[GetSeededIndex(weights, rand)];
 
             if (target is null)
-                return System.Array.Empty<GameObject>();
+                return Array.Empty<GameObject>();
 
-            Debug.Log($"Spawning {target.name} at {position}");
-            CelestialBodyRenderer newObject = Instantiate(target, position, Quaternion.identity);
-            newObject.Spawn(position, positionSeed);
+            var newObject = SpawnAt(target, position, positionSeed);
 
             float CellSizeRadius = CellSize / 2;
 
@@ -125,7 +125,6 @@ namespace Universe
                 newObject.Target.Position += (Vector3)RandomNum.GetVector(-CellSizeRadius, CellSizeRadius, rand);
 
             var spawnedObjects = new GameObject[] { newObject.gameObject };
-            PositionsByObjects.Add(position, spawnedObjects);
             return spawnedObjects;
         }
 
@@ -133,6 +132,8 @@ namespace Universe
         {
             if (prefab is null)
                 return null;
+            Debug.Log($"Spawning {prefab.name} at {position}");
+
             CelestialBodyRenderer newObject = Instantiate(prefab, position, Quaternion.identity);
             newObject.Spawn(position, seed);
             PositionsByObjects.Add(position, new GameObject[] { newObject.gameObject });

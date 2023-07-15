@@ -32,22 +32,11 @@ namespace Universe
 
                 highestPos = HighestPointOf(rockPile[i].vertices).y + meshFilters[i].transform.position.y + .1f;
 
-                if (FindObjectOfType<TerrainGenerator>())
+                if (ColorHighlights.Instance)
                 {
-                    Color color;
-                    if (BodyManager.Parent is RockyPlanet rockyPlanet)
-                        color = rockyPlanet.RockColor;
-                    else
-                        color = TerrainGenerator.Instance.BiomeAtPosition(Target.Position.x).groundColor;
-
-                    ColorHSV colorHSV = color;
-
-                    colorHSV.s += RandomNum.GetFloat(-.1f, .1f, Target.RandomNumberGenerator);
-                    colorHSV.v += RandomNum.GetFloat(-.1f, .1f, Target.RandomNumberGenerator);
-
-                    Color newColor = colorHSV;
-                    meshFilters[i].GetComponent<MeshRenderer>().material.color = newColor;
-                    rockPile.colors[i] = newColor;
+                    Color color = Color.Lerp(ColorHighlights.Instance.primary, ColorHighlights.Instance.secondary, RandomNum.GetFloat(1, Target.RandomNumberGenerator));
+                    meshFilters[i].GetComponent<MeshRenderer>().material.color = color;
+                    rockPile.colors[i] = color;
                 }
                 else
                     rockPile.colors[i] = meshFilters[i].GetComponent<MeshRenderer>().material.color;

@@ -24,10 +24,10 @@ EditorBuildSettings:
     path: Assets/Scripts/CelestialBodies/Galaxy/Galaxy.unity
     guid: 8eb4e11463a29d44f975dfeaeb0b169c
   - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Star/SolarSystem.unity
-    guid: 2f3667500069a494eb6d2ea6a5e72f68
+    path: Assets/Scripts/CelestialBodies/Continent/Grass/GrassBiome.unity
+    guid: a7db103fdbeda1849859dba43a7055a1
   - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Planets/PlanetOrbiter.unity
+    path: Assets/Scripts/CelestialBodies/Planets/Terrestrial/TerrestrialPlanet.unity
     guid: 113d4d73f1ca3404c8aa640a3a11c873
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Testing/TestLand.unity
@@ -59,9 +59,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Continent/Desert/SandBiome.unity
     guid: 0c5daca0ee126ea4aa28c998f69a36bf
-  - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Continent/Grass/GrassBiome.unity
-    guid: 34adc520f93090a43aa0a52ba4a648a9
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Planets/RockyPlanet/RockPile/RockPile.unity
     guid: 8794aa65777d3b243a309d31a2ba9f2f

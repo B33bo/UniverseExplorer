@@ -136,7 +136,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -58.69525
+      value: -58.695255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1925470337199409101, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchorMax.x
@@ -316,6 +328,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: DayNight
       objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: dayColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: dayColor.b
+      value: 0.02745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: dayColor.g
+      value: 0.02745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: dayColor.r
+      value: 0.16470589
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: nightColor.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361286, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -362,17 +394,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
---- !u!114 &886362492 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
-  m_PrefabInstance: {fileID: 645457428}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 457c53faded0a0d41aafbd1252a63cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1232208617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -500,6 +521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1788316022}
+  - component: {fileID: 1788316023}
   - component: {fileID: 1788316021}
   m_Layer: 0
   m_Name: Object Spawner
@@ -517,17 +539,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1788316020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc315cdff6cdf134e829debcd34a4b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 99006f60a8684a04292c4bce6b293ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YOffset: 0
-  seedOffset: 0
-  ColorSky: 1
-  SkyDayColor: {r: 0.165, g: 0.025955051, b: 0.025955051, a: 1}
-  SkyNightColor: {r: 0, g: 0, b: 0, a: 1}
-  dayNightSystem: {fileID: 886362492}
-  doEssentialFunctions: 1
-  defaultBiome: {fileID: 11400000, guid: ee5c58454d35e234684df8bbce395b2e, type: 2}
+  primary: {r: 0.07450981, g: 0.07450981, b: 0.07450981, a: 1}
+  secondary: {r: 0.5660378, g: 0, b: 0, a: 1}
+  tertiary: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1788316022
 Transform:
   m_ObjectHideFlags: 0
@@ -542,3 +559,81 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1788316023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788316020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4dc1faa5eddd14086f3db73a9e9661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CellSize: 2
+  registerSceneLoad: 1
+  objects:
+  - {fileID: 0}
+  - {fileID: 3079588604657707496, guid: d5355ddc2eec87a4f981ceec8c5e31e3, type: 3}
+  - {fileID: 5238249913941902148, guid: c29fdfa0c574a6e47a73fec706398992, type: 3}
+  - {fileID: 6274852281940903194, guid: 95ed3fe99ae711043ae580c6e6cbf1f8, type: 3}
+  - {fileID: 3041290244316146864, guid: 296ae8435cc32ee4593047e164edb756, type: 3}
+  weights:
+  - 200
+  - 5
+  - 5
+  - 5
+  - 1
+  randomOffset: 0
+  extraPadding: 3
+  Steepness: 7
+  Wideness: 0.8
+  topBlock: {fileID: 2273139860212649144, guid: 470a14b7a116cce4ea5207d148f089bb, type: 3}
+  layers:
+  - layer: {fileID: 1861227840}
+    height: 10
+--- !u!1 &1861227838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1861227839}
+  - component: {fileID: 1861227840}
+  m_Layer: 0
+  m_Name: Black Rock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1861227839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861227838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1861227840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861227838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1921176ffcb965c4894b0cf55d0ea024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block: {fileID: 2273139860212649144, guid: 470a14b7a116cce4ea5207d148f089bb, type: 3}

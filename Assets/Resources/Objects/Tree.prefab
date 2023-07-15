@@ -2922,6 +2922,8 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 2006531188167352154}
   cameraLerpSize: 4
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
+  IsDestroyed: 0
   lowLevelBranches:
   - {fileID: 762939438941448511}
   - {fileID: 762939440361402388}

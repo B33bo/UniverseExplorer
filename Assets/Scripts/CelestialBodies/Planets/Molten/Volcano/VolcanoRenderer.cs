@@ -1,5 +1,4 @@
 using UnityEngine;
-using Universe.CelestialBodies.Planets;
 using Universe.CelestialBodies.Planets.Molten;
 
 namespace Universe
@@ -16,11 +15,11 @@ namespace Universe
                 Target.SetSeed(seed.Value);
             Target.Create(pos);
 
-            pos.y += RandomNum.GetFloat(0, 3.5f, Target.RandomNumberGenerator);
+            pos.y += .85f;
             Target.Position = pos;
-            
-            if (BodyManager.Parent is Planet p)
-                Rock.color = TerrainGenerator.Instance.BiomeAtPosition(Target.Position.x).groundColor;
+
+            if (ColorHighlights.Instance)
+                Rock.color = ColorHighlights.Instance.primary;
         }
     }
 }

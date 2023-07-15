@@ -39,8 +39,6 @@ namespace Universe
             transform.localPosition = Target.Position;
             if (scaleLerp)
                 transform.localScale = Vector2.Lerp(transform.localScale, Scale, Time.deltaTime * 3);
-            //else
-             //   transform.localScale = Scale;
 
             name = Target.Name;
             OnUpdate();

@@ -35,5 +35,10 @@ namespace Universe.CelestialBodies.Planets
                 newMoon.Target.Position = new Vector3(Mathf.Cos(rotation), Mathf.Sin(rotation)) * distance;
             }
         }
+
+        public override string GetBonusTypes()
+        {
+            return "Sun - " + sun.Name;
+        }
     }
 }

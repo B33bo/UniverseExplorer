@@ -10,8 +10,7 @@ namespace Universe.CelestialBodies.Planets
 
         public override string TypeString => "Terrestrial Planet";
 
-        public override string PlanetTargetScene => "WaterPlanet";
-        public override string TravelTarget => BodyManager.Parent is Planet ? PlanetTargetScene : "PlanetOrbiter";
+        public override string PlanetTargetScene => "TerrestrialPlanet";
 
         public override bool Circular => true;
 

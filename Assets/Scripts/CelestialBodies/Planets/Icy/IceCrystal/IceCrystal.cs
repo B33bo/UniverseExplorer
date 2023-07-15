@@ -16,7 +16,7 @@ namespace Universe.CelestialBodies.Planets.Icy
         {
             Position = pos;
             Name = "Crystal";
-            Width = 1;
+            Width = Measurement.M;
             CrystalHeight = RandomNum.GetFloat(1, 5, RandomNumberGenerator);
             Height = CrystalHeight * Measurement.M;
             Mass = Height * Density;

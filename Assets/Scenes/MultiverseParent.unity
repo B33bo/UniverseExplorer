@@ -193,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1925470335524108213, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -58.69525
+      value: -58.69524
       objectReference: {fileID: 0}
     - target: {fileID: 1925470336169445107, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
       propertyPath: m_AnchorMax.x
@@ -356,6 +356,8 @@ MonoBehaviour:
   registerSceneLoad: 1
   objects: []
   weights: []
+  randomOffset: 1
+  extraPadding: 3
 --- !u!1001 &4506332355208568298
 PrefabInstance:
   m_ObjectHideFlags: 0

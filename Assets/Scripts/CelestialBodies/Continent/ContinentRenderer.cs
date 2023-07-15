@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Universe.CelestialBodies.Biomes;
 
 namespace Universe.CelestialBodies
@@ -39,7 +40,7 @@ namespace Universe.CelestialBodies
             };
 
             polygonCollider.points = mesh.vertices.ToVector2();
-            polygonCollider.enabled = BodyManager.Parent is Planets.Planet;
+            polygonCollider.enabled = SceneManager.GetActiveScene().name == "TerrestrialPlanet";
         }
     }
 }

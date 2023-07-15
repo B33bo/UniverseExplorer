@@ -100,7 +100,8 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 5238249913941902151}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 0
+  scaleLerp: 1
+  IsDestroyed: 0
   meshFilter: {fileID: 5238249913941902150}
 --- !u!210 &808131671142767426
 SortingGroup:

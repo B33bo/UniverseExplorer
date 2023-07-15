@@ -40,7 +40,6 @@ namespace Universe
         {
             TreePlant tree = new TreePlant();
             Target = tree;
-            pos.y++;
 
             if (seed.HasValue)
                 tree.SetSeed(seed.Value);

@@ -36,13 +36,15 @@ namespace Universe
         [SerializeField]
         private BlackHoleAccretionDiskRenderer blackHoleAccretionDiskPrefab;
 
+        [SerializeField]
+        private Color dayColor, nightColor;
+
         private StarSpeck[] starSpecks;
 
         private TerrainGenerator terrainGenerator;
 
         private IEnumerator Start()
         {
-            terrainGenerator = GameObject.FindObjectOfType<TerrainGenerator>();
             yield return new WaitForFrames(2);
 
             if (BodyManager.Parent is BlackHoleAccretionDisk)
@@ -96,6 +98,13 @@ namespace Universe
 
             LoadDay();
             LoadNight();
+        }
+
+        private Color GetCameraColor()
+        {
+            if (Time > 1)
+                return Color.Lerp(nightColor, dayColor, Time - 1);
+            return Color.Lerp(dayColor, nightColor, Time);
         }
 
         private void LoadBlackHoleMoon()
@@ -215,12 +224,13 @@ namespace Universe
 
         private void Update()
         {
+            CameraControl.Instance.MyCamera.backgroundColor = GetCameraColor();
             transform.localScale = CameraControl.Instance.MyCamera.orthographicSize / 20 * Vector2.one;
             transform.position = new Vector2(CameraControl.Instance.Position.x,
                 Mathf.Max(CameraControl.Instance.CameraBounds.yMin, 2));
 
             Time = GlobalTime.Time % 360 / 180; //0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
-            rotator.transform.rotation = Quaternion.Euler(0, 0, GlobalTime.Time);
+            rotator.transform.rotation = Quaternion.Euler(0, 0, Time * 180);
 
             float time = Time % 1;
 

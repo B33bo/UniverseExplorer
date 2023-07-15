@@ -1,7 +1,22 @@
-debug logs
+== NEW ==
+
+- shiny nebulae
+- blocky planets
+	- probably scrap the biome feature tho - just make them continents
+	- objects like snowmen or trees remain objects. Only floor = blocks >:(
+- improve sun
+- make gas giant particles load better
+- random sky events (airplane, shooting star, etc)
+- weather
+- jungle continent
+- quasars
+
+- dirt -> pebble
+- snow -> snowflakes
+- volcano scene
+
 improve ice planet
 save planet to storage
-galaxy background uses chunks and mathf.perlinNoise
 improve water planet
 improve deserts (add pyramids)
 improve snow continents

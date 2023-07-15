@@ -25,9 +25,11 @@ namespace Universe
             float extension = (Target as IceCrystal).CrystalHeight;
             Mesh mesh = ShapeMaker.GetRegularShape(5, 1);
             Vector3[] verticies = mesh.vertices;
+            verticies[0].y = 0;
             verticies[1] += new Vector3(0, extension);
             verticies[2] += new Vector3(0, extension);
             verticies[3] += new Vector3(0, extension);
+            verticies[4].y = 0;
             mesh.vertices = verticies;
 
             cameraLerpTarget.localPosition = new Vector3(0, extension / 2);

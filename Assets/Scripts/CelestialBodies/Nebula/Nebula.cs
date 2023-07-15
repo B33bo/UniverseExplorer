@@ -12,7 +12,7 @@ namespace Universe.CelestialBodies
         public override string TravelTarget => "";
 
         public override bool Circular => false;
-        private Vector2 bottomLeft, topRight;
+        private Vector2 bottomLeft, topRight, averagePos;
 
         public override void Create(Vector2 pos)
         {
@@ -22,16 +22,25 @@ namespace Universe.CelestialBodies
             Bands = new Band[RandomNum.Get(1, 5, RandomNumberGenerator)];
             Mass = 0;
 
+            Vector2 sumPositions = Vector2.zero;
+            int positionCount = 0;
+
             for (int i = 0; i < Bands.Length; i++)
-                Bands[i] = GenerateBand();
+            {
+                Bands[i] = GenerateBand(ref sumPositions);
+                positionCount += Bands[i].lights.Length;
+            }
+
+            averagePos = sumPositions / positionCount;
 
             Mass *= Measurement.Kg * 10000;
 
             Width = (topRight.x - bottomLeft.x) * Measurement.LY;
             Height = (topRight.y - bottomLeft.y) * Measurement.LY;
+            Center();
         }
 
-        public Band GenerateBand()
+        public Band GenerateBand(ref Vector2 sumPositions)
         {
             Band b = new Band()
             {
@@ -48,6 +57,7 @@ namespace Universe.CelestialBodies
                 position = startPos,
                 radius = RandomNum.GetFloat(minRadius, maxRadius, RandomNumberGenerator),
             };
+            sumPositions += startPos;
 
             for (int i = 1; i < b.lights.Length; i++)
             {
@@ -63,6 +73,7 @@ namespace Universe.CelestialBodies
                     radius = radius,
                 };
 
+                sumPositions += b.lights[i].position;
                 rotation += RandomNum.GetFloat(-25, 25, RandomNumberGenerator);
 
                 if (b.lights[i].position.x < bottomLeft.x)
@@ -77,6 +88,15 @@ namespace Universe.CelestialBodies
             }
 
             return b;
+        }
+
+        public void Center()
+        {
+            for (int i = 0; i < Bands.Length; i++)
+            {
+                for (int j = 0; j < Bands[i].lights.Length; j++)
+                    Bands[i].lights[j].position -= averagePos;
+            }
         }
 
         public struct Band

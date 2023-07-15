@@ -23,20 +23,7 @@ namespace Universe.CelestialBodies.Planets
 
         private void Start()
         {
-            if (BodyManager.Parent is Star)
-            {
-                Spawn(Vector2.zero, BodyManager.Parent.Seed);
-                LoadWorley(128, GetStarColor(), RandomNum.Get(10, 55, Target.RandomNumberGenerator));
-            }
-            else if (SceneManager.GetActiveScene().name == "SolarSystem")
-            {
-                Spawn(Vector2.zero, null);
-                LoadWorley(128, GetStarColor(), RandomNum.Get(10, 55, Target.RandomNumberGenerator));
-            }
-            else
-            {
-                worleyNoise.color = GetStarColor();
-            }
+            worleyNoise.color = GetStarColor();
 
             SolarSystemSpawner.sun = Target as Star;
 
@@ -87,18 +74,6 @@ namespace Universe.CelestialBodies.Planets
         public override void OnUpdate()
         {
             transform.rotation = Quaternion.Euler(0, 0, GlobalTime.Time);
-        }
-
-        protected override void Destroyed()
-        {
-            return;
-            var planets = TargetStar.planets;
-            for (int i = 0; i < planets.Length; i++)
-            {
-                if (planets[i].IsDestroyed)
-                    continue;
-                Destroy(planets[i].gameObject);
-            }
         }
     }
 }

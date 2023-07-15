@@ -4,8 +4,7 @@ namespace Universe.CelestialBodies.Planets.Error
 {
     public class EndIsNighSign : CelestialBody
     {
-        //fun fact, this is he number I got while testing what position my game was crashing at
-        public const float TheEnd = 8_388_532;
+        public const float TheEnd = 16_777_216; // this is the limit because in floating point, you can no longer increment by 1. Needs to be > 1
 
         public override string TypeString => "Sign";
 

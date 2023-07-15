@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Universe.CelestialBodies
 {
@@ -29,13 +28,12 @@ namespace Universe.CelestialBodies
         {
             Position = pos;
             Name = "Aurora " + RandomNum.GetPlanetName(RandomNumberGenerator);
-            Width = RandomNum.Get(8, 56, RandomNumberGenerator);
+            Width = RandomNum.GetFloat(8, 56, RandomNumberGenerator);
             Height = 5;
             Flares = Mathf.CeilToInt((float)Width / FlareSize);
             Mass = 0;
 
             float randomWeight = RandomNum.GetFloat(0, sumOfWeightChart, RandomNumberGenerator);
-
             //fine because the weights correspond to the index of the enum (green = 0)
             color = (Color)RandomNum.GetIndexFromWeight(WeightChart, randomWeight);
         }

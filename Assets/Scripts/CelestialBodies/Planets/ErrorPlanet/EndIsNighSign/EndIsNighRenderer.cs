@@ -14,7 +14,7 @@ namespace Universe
         private void Start()
         {
             if (create)
-                Spawn(new Vector2(positive ? EndIsNighSign.TheEnd : -EndIsNighSign.TheEnd, 4), null);
+                Spawn(new Vector2(positive ? EndIsNighSign.TheEnd - 16 : -EndIsNighSign.TheEnd + 16, 4), null);
         }
 
         public override void Spawn(Vector2 pos, int? seed)
