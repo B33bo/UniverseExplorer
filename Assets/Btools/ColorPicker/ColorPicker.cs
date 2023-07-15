@@ -1,349 +1,289 @@
-using UnityEngine;
-using UnityEngine.UI;
+using Btools.utils;
+using System;
+using System.Collections.Specialized;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Btools.Components
 {
     public class ColorPicker : MonoBehaviour
     {
-        private Color _Color;
+        const float min = 1 / 255f;
+
+        public enum Type : byte
+        {
+            RGB,
+            HSV,
+        }
+
+        private (float r, float g, float b) rgb;
+        private (float h, float s, float v) hsv;
+        private float alpha;
 
         [SerializeField]
-        private Image ColorDisplay;
+        [HideInInspector]
+        private Type type;
 
         [SerializeField]
-        private TextMeshProUGUI ColorDisplayText;
+        private GameObject RGBObject;
 
         [SerializeField]
-        private Image ColorSquareOutline;
+        private GameObject HSVObject;
 
         [SerializeField]
-        private ColorSliderImages Alpha;
+        private SliderValue[] RGBSliders;
 
         [SerializeField]
-        private ColorSliderImages Red, Green, Blue;
+        private SliderValue[] HSVSliders;
 
         [SerializeField]
-        private Image Saturation, SaturationOff, ValueOn;
+        private SliderValue AlphaSlider;
 
         [SerializeField]
-        private TextMeshProUGUI HSVButtonText;
-        private ColorType colorType;
+        private Image RGBButton, HSVButton;
 
         [SerializeField]
-        private Slider A_slider;
+        private Slider2D satvalSlider;
 
         [SerializeField]
-        private ColorTypeContainer RGB, HSV;
+        private Image satvalSliderImage;
 
         [SerializeField]
-        private Slider2D ColorSquare;
+        private TMP_InputField hexCode;
 
         [SerializeField]
-        private TMP_InputField ColorCode;
-
-        private bool IsEditingThisFrame = false;
+        private TextMeshProUGUI hexCodeText;
 
         [SerializeField]
-        private UnityEngine.Events.UnityEvent<Color> onColourChange;
+        private Image hexCodeBackground;
 
-        private enum ColorType : byte
-        {
-            RGBA,
-            HSVA,
-        }
-
-        #region Methods for UnityEvents
-
-        public void SetAlpha(float alpha)
-        {
-            if (IsEditingThisFrame)
-                return;
-            _Color.a = alpha / 255f;
-            ResetColor();
-            ResetAllExceptSquare();
-            onColourChange.Invoke(_Color);
-        }
-
-        public void SetRed(float red)
-        {
-            if (IsEditingThisFrame)
-                return;
-            _Color.r = red / 255f;
-            ResetColor();
-            ResetHSV();
-            onColourChange.Invoke(_Color);
-        }
-
-        public void SetGreen(float green)
-        {
-            if (IsEditingThisFrame)
-                return;
-            _Color.g = green / 255f;
-            ResetColor();
-            ResetHSV();
-            onColourChange.Invoke(_Color);
-        }
-
-        public void SetBlue(float blue)
-        {
-            if (IsEditingThisFrame)
-                return;
-            _Color.b = blue / 255f;
-            ResetColor();
-            ResetHSV();
-            onColourChange.Invoke(_Color);
-        }
-
-        public void SetHue(float hue)
-        {
-            if (IsEditingThisFrame)
-                return;
-            Color.RGBToHSV(_Color, out float H, out float S, out float V);
-            _Color = Color.HSVToRGB(hue / 360f, S, V);
-            ResetColor();
-            ResetRGB();
-            onColourChange.Invoke(_Color);
-        }
-
-        public void SetSaturation(float sat)
-        {
-            if (IsEditingThisFrame)
-                return;
-            Color.RGBToHSV(_Color, out float H, out float _, out float V);
-            _Color = Color.HSVToRGB(H, sat / 255f, V);
-            ResetColor();
-            ResetRGB();
-            onColourChange.Invoke(_Color);
-        }
-
-        public void SetValue(float value)
-        {
-            if (IsEditingThisFrame)
-                return;
-            Color.RGBToHSV(_Color, out float H, out float S, out float _);
-            _Color = Color.HSVToRGB(H, S, value / 255f);
-            ResetColor();
-            ResetRGB();
-            onColourChange.Invoke(_Color);
-        }
-
-        public void SetSatVal(Vector2 SatVal)
-        {
-            if (IsEditingThisFrame)
-                return;
-            Color.RGBToHSV(_Color, out float H, out float _, out float _);
-            _Color = Color.HSVToRGB(H, SatVal.x / 255f, SatVal.y / 255f);
-            ResetColor();
-            ResetAllExceptSquare();
-            onColourChange.Invoke(_Color);
-        }
-
-        public void SetHTMLString(string HTMLstring)
-        {
-            if (IsEditingThisFrame)
-                return;
-            IsEditingThisFrame = true;
-
-            if (!ColorUtility.TryParseHtmlString(HTMLstring, out Color color))
-            {
-                Debug.Log("could not parse " + HTMLstring);
-                IsEditingThisFrame = false;
-                return;
-            }
-            _Color = color;
-
-            Color.RGBToHSV(color, out float H, out float S, out float V);
-            ColorSquare.Value = new Vector2(S * 255, V * 255);
-
-            HSV.sliders[0].value = H * 360;
-            HSV.sliders[1].value = S * 255;
-            HSV.sliders[2].value = V * 255;
-
-            A_slider.value = _Color.a * 255;
-
-            RGB.sliders[0].value = _Color.r * 255;
-            RGB.sliders[1].value = _Color.g * 255;
-            RGB.sliders[2].value = _Color.b * 255;
-
-            IsEditingThisFrame = false;
-            ResetColor();
-            onColourChange.Invoke(_Color);
-        }
-        #endregion
-
-        private void ResetHSV()
-        {
-            if (IsEditingThisFrame)
-                return;
-            IsEditingThisFrame = true;
-
-            Color.RGBToHSV(_Color, out float H, out float S, out float V);
-
-            A_slider.value = _Color.a * 255;
-
-            ColorSquare.Value = new Vector2(S * 255, V * 255);
-
-            HSV.sliders[0].value = H * 360;
-            HSV.sliders[1].value = S * 255;
-            HSV.sliders[2].value = V * 255;
-
-            ColorCode.text = "#" + ColorUtility.ToHtmlStringRGBA(_Color);
-
-            IsEditingThisFrame = false;
-
-            ResetColor();
-        }
-
-        private void ResetRGB()
-        {
-            IsEditingThisFrame = true;
-
-            A_slider.value = _Color.a * 255;
-            RGB.sliders[0].value = _Color.r * 255;
-            RGB.sliders[1].value = _Color.g * 255;
-            RGB.sliders[2].value = _Color.b * 255;
-
-            Color.RGBToHSV(_Color, out float _, out float S, out float V);
-            ColorSquare.Value = new Vector2(S * 255, V * 255);
-
-            ColorCode.text = "#" + ColorUtility.ToHtmlStringRGBA(_Color);
-
-            IsEditingThisFrame = false;
-        }
-
-        private void ResetAllExceptSquare()
-        {
-            IsEditingThisFrame = true;
-            Color.RGBToHSV(_Color, out float H, out float S, out float V);
-
-            A_slider.value = _Color.a * 255;
-
-            RGB.sliders[0].value = _Color.r * 255;
-            RGB.sliders[1].value = _Color.g * 255;
-            RGB.sliders[2].value = _Color.b * 255;
-
-            HSV.sliders[0].value = H * 360;
-            HSV.sliders[1].value = S * 255;
-            HSV.sliders[2].value = V * 255;
-
-            ColorCode.text = "#" + ColorUtility.ToHtmlStringRGBA(_Color);
-
-            IsEditingThisFrame = false;
-        }
-
-        public void HSVToggle()
-        {
-            colorType++;
-
-            if (colorType > ColorType.HSVA)
-                colorType = ColorType.RGBA;
-
-            switch (colorType)
-            {
-                case ColorType.RGBA:
-                    HSV.Target.SetActive(false);
-                    RGB.Target.SetActive(true);
-                    HSVButtonText.text = "RGB";
-                    break;
-                case ColorType.HSVA:
-                    RGB.Target.SetActive(false);
-                    HSV.Target.SetActive(true);
-                    HSVButtonText.text = "HSV";
-                    break;
-                default:
-                    RGB.Target.SetActive(false);
-                    HSV.Target.SetActive(false);
-                    HSVButtonText.text = colorType.ToString();
-                    break;
-            }
-        }
-
-        private void ResetColor()
-        {
-            Color.RGBToHSV(_Color, out float H, out float S, out float V);
-            Color ColorWithFullAlpha = _Color;
-            ColorWithFullAlpha.a = 1;
-
-            ColorSquareOutline.color = Color.HSVToRGB(H, 1, 1);
-            ColorDisplay.color = ColorWithFullAlpha;
-            ColorDisplayText.color = Invert(ColorWithFullAlpha);
-
-            Alpha.SetColor(_Color);
-            Red.SetColor(_Color);
-            Green.SetColor(_Color);
-            Blue.SetColor(_Color);
-
-            ValueOn.color = Color.HSVToRGB(H, S, 1);
-            Saturation.color = Color.HSVToRGB(H, 1, V);
-            SaturationOff.color = Color.HSVToRGB(H, 0, V);
-        }
-
-        private Color Invert(Color c) =>
-            new Color
-            {
-                r = 1 - c.r,
-                g = 1 - c.g,
-                b = 1 - c.b,
-                a = c.a,
-            };
+        [Space]
+        [SerializeField]
+        private UnityEvent<Color> OnValueChanged;
 
         [System.Serializable]
-        public class ColorSliderImages
+        private class SliderValue
         {
-            public Image on, off;
-            public Color Mask;
-            public bool Transparency;
-            public bool HSV;
+            public Image with, without;
+            public Slider slider;
+        }
 
-            public void SetColor(Color newColor)
+        private void ResetSlidersRGB()
+        {
+            var oldType = type;
+            type = (Type)255;
+
+            //red
+            RGBSliders[0].with.color = new Color(1, rgb.g, rgb.b);
+            RGBSliders[0].without.color = new Color(0, rgb.g, rgb.b);
+            RGBSliders[0].slider.value = rgb.r;
+
+            //green
+            RGBSliders[1].with.color = new Color(rgb.r, 1, rgb.b);
+            RGBSliders[1].without.color = new Color(rgb.r, 0, rgb.b);
+            RGBSliders[1].slider.value = rgb.g;
+
+            //blue
+            RGBSliders[2].with.color = new Color(rgb.r, rgb.g, 1);
+            RGBSliders[2].without.color = new Color(rgb.r, rgb.g, 0);
+            RGBSliders[2].slider.value = rgb.b;
+
+            AlphaSlider.with.color = new Color(rgb.r, rgb.g, rgb.b);
+            AlphaSlider.slider.value = alpha;
+
+            Color.RGBToHSV(new Color(rgb.r, rgb.g, rgb.b), out float h, out float s, out float v);
+            if (h == 0)
+                h = hsv.h;
+
+            satvalSliderImage.color = Color.HSVToRGB(h, 1, 1);
+            satvalSlider.Value = new Vector2(s, v);
+
+            hexCode.text = ColorUtility.ToHtmlStringRGB(new Color(rgb.r, rgb.g, rgb.b));
+            hexCodeText.color = new Color(1 - rgb.r, 1 - rgb.g, 1 - rgb.b);
+            hexCodeBackground.color = new Color(rgb.r, rgb.g, rgb.b, alpha);
+            hsv.h = h;
+
+            type = oldType;
+        }
+
+        private void ResetSlidersHSV()
+        {
+            var oldType = type;
+            type = (Type)255;
+
+            //hue
+            HSVSliders[0].slider.value = hsv.h;
+
+            //saturation
+            HSVSliders[1].with.color = Color.HSVToRGB(hsv.h, 1, hsv.v);
+            HSVSliders[1].without.color = Color.HSVToRGB(hsv.h, 0, hsv.v);
+            HSVSliders[1].slider.value = hsv.s;
+
+            //value
+            HSVSliders[2].with.color = Color.HSVToRGB(hsv.h, hsv.s, 1);
+            HSVSliders[2].without.color = Color.HSVToRGB(hsv.h, hsv.s, 0);
+            HSVSliders[2].slider.value = hsv.v;
+
+            AlphaSlider.with.color = Color.HSVToRGB(hsv.h, hsv.s, hsv.v);
+            AlphaSlider.slider.value = alpha;
+
+            satvalSlider.Value = new Vector2(hsv.s, hsv.v);
+            var colorRGB = Color.HSVToRGB(hsv.h, hsv.s, hsv.v);
+            satvalSliderImage.color = Color.HSVToRGB(hsv.h, 1, 1);
+
+            hexCode.text = ColorUtility.ToHtmlStringRGB(colorRGB);
+            hexCodeText.color = new Color(1 - colorRGB.r, 1 - colorRGB.g, 1 - colorRGB.b);
+
+            colorRGB.a = alpha;
+            hexCodeBackground.color = colorRGB;
+
+            type = oldType;
+        }
+
+        private void Set(ref float current, float newValue)
+        {
+            if (type == (Type)255)
+                return;
+            current = newValue;
+            if (type == Type.RGB)
+                ResetSlidersRGB();
+            else if (type == Type.HSV)
+                ResetSlidersHSV();
+            OnValueChanged.Invoke(Color);
+        }
+
+        public void SetRed(float value) => Set(ref rgb.r, value);
+        public void SetGreen(float value) => Set(ref rgb.g, value);
+        public void SetBlue(float value) => Set(ref rgb.b, value);
+
+        public void SetHue(float value) => Set(ref hsv.h, value);
+        public void SetSaturation(float value) => Set(ref hsv.s, value);
+        public void SetValue(float value) => Set(ref hsv.v, value);
+
+        public void SetAlpha(float value) => Set(ref alpha, value);
+
+        public void SwitchToRGB()
+        {
+            if (type == Type.RGB)
+                return;
+            type = Type.RGB;
+            var color = Color.HSVToRGB(hsv.h, hsv.s, hsv.v);
+            (rgb.r, rgb.g, rgb.b) = (color.r, color.g, color.b);
+
+            RGBObject.SetActive(true);
+            HSVObject.SetActive(false);
+
+            RGBButton.color = new Color(1, 1, 0);
+            HSVButton.color = new Color(1, 1, 1);
+
+            ResetSlidersRGB();
+        }
+
+        public void SwitchToHSV()
+        {
+            if (type == Type.HSV)
+                return;
+            type = Type.HSV;
+            var color = new Color(rgb.r, rgb.g, rgb.b);
+            Color.RGBToHSV(color, out hsv.h, out hsv.s, out hsv.v);
+
+            RGBObject.SetActive(false);
+            HSVObject.SetActive(true);
+
+            RGBButton.color = new Color(1, 1, 1);
+            HSVButton.color = new Color(1, 1, 0);
+
+            ResetSlidersHSV();
+        }
+
+        public void SetHSV(Vector2 square)
+        {
+            if (type == Type.RGB)
             {
-                Color offColor = newColor, onColor = newColor;
+                Color.RGBToHSV(new Color(rgb.r, rgb.g, rgb.b), out float H, out _, out _);
+                bool hueUnknown = H == 0;
 
-                if (Mask.r >= 1)
-                {
-                    offColor = new Color(0, offColor.g, offColor.b);
-                    onColor = new Color(1, onColor.g, onColor.b);
-                }
+                if (!hueUnknown)
+                    hsv.h = H;
 
-                if (Mask.g >= 1)
-                {
-                    offColor = new Color(offColor.r, 0, offColor.b);
-                    onColor = new Color(onColor.r, 1, onColor.b);
-                }
+                if (hueUnknown)
+                    H = hsv.h;
 
-                if (Mask.b >= 1)
-                {
-                    offColor = new Color(offColor.r, offColor.g, 0);
-                    onColor = new Color(onColor.r, onColor.g, 1);
-                }
+                var rgbColor = Color.HSVToRGB(H, square.x, square.y);
 
-                if (Transparency)
-                {
-                    if (Mask.a >= 1)
-                    {
-                        offColor = new Color(offColor.r, offColor.g, 0);
-                        onColor = new Color(onColor.r, onColor.g, 1);
-                    }
-                }
-                else
-                {
-                    offColor.a = 1;
-                    onColor.a = 1;
-                }
+                rgb = (rgbColor.r, rgbColor.g, rgbColor.b);
+                ResetSlidersRGB();
+                OnValueChanged.Invoke(rgbColor);
+                return;
+            }
 
-                if (off)
-                    off.color = offColor;
-                if (on)
-                    on.color = onColor;
+            hsv.s = square.x;
+            hsv.v = square.y;
+            ResetSlidersHSV();
+            OnValueChanged.Invoke(Color.HSVToRGB(hsv.h, hsv.s, hsv.v));
+        }
+
+        public void SetHexCode(string hexCode)
+        {
+            if (type == (Type)255)
+                return;
+            if (!ColorParser.TryParse(hexCode, out Color c))
+                return;
+            if (type == Type.RGB)
+            {
+                rgb = (c.r, c.g, c.b);
+                ResetSlidersRGB();
+            }
+            else if (type == Type.HSV)
+            {
+                Color.RGBToHSV(c, out hsv.h, out hsv.s, out hsv.v);
+                ResetSlidersHSV();
+            }
+            OnValueChanged.Invoke(c);
+        }
+
+        public Color Color
+        {
+            get
+            {
+                if (type == Type.RGB)
+                    return new Color(rgb.r, rgb.g, rgb.b, alpha);
+                if (type == Type.HSV)
+                {
+                    Color c = Color.HSVToRGB(hsv.h, hsv.s, hsv.v);
+                    c.a = alpha;
+                    return c;
+                }
+                return new Color();
+            }
+            set
+            {
+                alpha = value.a;
+                if (type == Type.RGB)
+                {
+                    rgb = (value.r, value.g, value.b);
+                    ResetSlidersRGB();
+                }
+                else if (type == Type.HSV)
+                {
+                    Color.RGBToHSV(value, out hsv.h, out hsv.s, out hsv.v);
+                    ResetSlidersHSV();
+                }
             }
         }
 
-        [System.Serializable]
-        private class ColorTypeContainer
+        public Type ColorSpace
         {
-            public GameObject Target;
-            public Slider[] sliders;
+            get => type;
+            set
+            {
+                if (value == Type.RGB)
+                    SwitchToRGB();
+                else if (value == Type.HSV)
+                    SwitchToHSV();
+            }
         }
     }
 }

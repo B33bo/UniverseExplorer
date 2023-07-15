@@ -64,6 +64,7 @@ namespace Btools.Components
         private void Awake()
         {
             scrollRect = GetComponent<UnityEngine.UI.ScrollRect>();
+            ForceReloadList();
         }
 
         private void Update()
@@ -135,8 +136,7 @@ namespace Btools.Components
 
         public void ForceReloadList()
         {
-            if (scrollRect is null)
-                scrollRect = GetComponent<UnityEngine.UI.ScrollRect>();
+            scrollRect = scrollRect != null ? scrollRect : GetComponent<UnityEngine.UI.ScrollRect>();
 
             if (scrollRect is null)
                 return;
@@ -189,29 +189,30 @@ namespace Btools.Components
                 switch (Orientation)
                 {
                     case Direction.LeftToRight:
-                        items[i].rectTransform.anchoredPosition = new Vector3(CurrentPosition, 0);
-                        CurrentPosition += items[i].Width;
+                        var diffX = items[i].Width / 2;
+                        CurrentPosition += diffX;
+                        items[i].RectTransform.anchoredPosition = new Vector3(CurrentPosition, 0);
+                        CurrentPosition += diffX;
 
                         //Scale Left
-                        items[i].rectTransform.anchorMin = new Vector2(0, 0);
-                        items[i].rectTransform.anchorMax = new Vector2(0, 1);
+                        items[i].RectTransform.anchorMin = new Vector2(0, 0);
+                        items[i].RectTransform.anchorMax = new Vector2(0, 1);
                         break;
                     case Direction.TopToBottom:
-                        items[i].rectTransform.anchoredPosition = new Vector3(0, -CurrentPosition);
-                        CurrentPosition += items[i].Height;
+                        var diffY = items[i].Height / 2;
+                        CurrentPosition += diffY;
+                        items[i].RectTransform.anchoredPosition = new Vector3(0, -CurrentPosition);
+                        CurrentPosition += diffY;
 
                         //Scale Top
-                        items[i].rectTransform.anchorMin = new Vector2(0, 1);
-                        items[i].rectTransform.anchorMax = new Vector2(1, 1);
+                        items[i].RectTransform.anchorMin = new Vector2(0, 1);
+                        items[i].RectTransform.anchorMax = new Vector2(1, 1);
                         break;
                     default:
-                        items[i].rectTransform.position = new Vector3(0, 0);
+                        items[i].RectTransform.position = new Vector3(0, 0);
                         break;
                 }
                 CurrentPosition += Padding;
-
-                if (i == items.Count - 1)
-                    continue;
             }
 
             switch (Orientation)
@@ -308,7 +309,7 @@ namespace Btools.Components
                 script.ReadjustList();
 
             if (GUILayout.Button("Refresh"))
-                script.ReadjustList();
+                script.ForceReloadList();
 
             serializedObject.ApplyModifiedProperties();
         }

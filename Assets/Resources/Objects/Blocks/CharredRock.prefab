@@ -213,6 +213,7 @@ MonoBehaviour:
   IsDestroyed: 0
   blockName: Molten Rock
   travelTarget: 
+  rock: {fileID: 6107097517228743571}
   lava: {fileID: 4396606385584893078}
   gradient:
     serializedVersion: 2

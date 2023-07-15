@@ -36,12 +36,9 @@ namespace Universe
         [SerializeField]
         private BlackHoleAccretionDiskRenderer blackHoleAccretionDiskPrefab;
 
-        [SerializeField]
-        private Color dayColor, nightColor;
+        public Color dayColor, nightColor;
 
         private StarSpeck[] starSpecks;
-
-        private TerrainGenerator terrainGenerator;
 
         private IEnumerator Start()
         {

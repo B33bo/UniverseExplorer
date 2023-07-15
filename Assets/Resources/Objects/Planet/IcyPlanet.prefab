@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 504427289
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b9fcd616c360af44da408dbccbc9d4d2, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: f02b8936f5f8278488f8b92dcbb5893e, type: 3}
   m_Color: {r: 0.8632076, g: 0.9899602, b: 1, a: 0.7529412}
   m_FlipX: 0
   m_FlipY: 0
@@ -157,7 +157,6 @@ MonoBehaviour:
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
-  orbiter: {fileID: 0}
   icePanels:
   - {fileID: 7944783084329882738}
   - {fileID: 7944783084140657470}

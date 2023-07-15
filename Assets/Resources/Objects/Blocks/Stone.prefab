@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1656121100722966657, guid: 714632abd23978b42994be0d273c0b10, type: 3}
       propertyPath: blockName
-      value: Stone
+      value: Rock
       objectReference: {fileID: 0}
     - target: {fileID: 1656121100722966658, guid: 714632abd23978b42994be0d273c0b10, type: 3}
       propertyPath: m_Name

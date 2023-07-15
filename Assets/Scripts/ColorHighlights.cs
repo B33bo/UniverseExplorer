@@ -11,7 +11,10 @@ namespace Universe
         private void Awake()
         {
             Instance = this;
+            OnAwake();
         }
+
+        protected virtual void OnAwake() { }
 
         private void OnDestroy()
         {

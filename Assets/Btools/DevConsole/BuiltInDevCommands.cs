@@ -47,7 +47,7 @@ namespace Btools.DevConsole
             {"new_command", new DevConsoleCommand("new_command", "make a new command that runs other commands", NewCommand, "Name", "Description", "Command", "Params") },
             {"remove_command", new DevConsoleCommand("remove_command", "remove a command", RemoveCommand, "CommandName") },
             {"remove_variable", new DevConsoleCommand("remove_variable", "remove a variable", RemoveVariable, "VarName") },
-            {"fall", new DevConsoleCommand("fall", "make all objects fall", Fall, "2D|3D") }
+            {"fall", new DevConsoleCommand("fall", "make all objects fall", Fall, "2D|3D") },
         };
 
         private static string Quit(string[] Parameters)

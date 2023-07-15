@@ -19,6 +19,7 @@ namespace Universe
 
         public override void Spawn(Vector2 pos, int? seed)
         {
+            pos.y += .6f;
             Target = new Snowman();
             if (seed.HasValue)
                 Target.SetSeed(seed.Value);

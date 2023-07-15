@@ -42,7 +42,7 @@ namespace Universe.CelestialBodies.Planets
                 string planetName = PlanetStrings[RandomNumberGenerator.Next(0, PlanetStrings.Length)];
                 PlanetRenderer newPlanet = Object.Instantiate(Resources.Load<PlanetRenderer>("Objects/Planet/" + planetName), transform);
                 newPlanet.Spawn(Vector2.zero, RandomNumberGenerator.Next());
-                newPlanet.Scale = newPlanet.Scale / (float)trueRadius;
+                newPlanet.Scale /= (float)trueRadius;
 
                 float distance = RandomNum.GetFloat(1, 4, newPlanet.Target.RandomNumberGenerator);
                 float currentRot = RandomNum.GetFloat(0, Mathf.PI * 2, newPlanet.Target.RandomNumberGenerator);
@@ -51,6 +51,9 @@ namespace Universe.CelestialBodies.Planets
 
                 planets[i] = newPlanet;
                 (newPlanet.Target as Planet).sun = this;
+
+                if (planetName == "IcyPlanet")
+                    Debug.Log(newPlanet.Target.Name);
             }
         }
 

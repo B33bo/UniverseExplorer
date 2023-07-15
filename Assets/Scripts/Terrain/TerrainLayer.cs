@@ -14,8 +14,9 @@ namespace Universe
             if (takenBlocks.ContainsKey(position))
                 return null;
 
+            Vector2 posFloat = new Vector2(position.x, position.y);
             var newBlock = Instantiate(block);
-            newBlock.Spawn(position, seed);
+            newBlock.Spawn(posFloat, seed);
             takenBlocks.Add(position, newBlock);
             return newBlock;
         }

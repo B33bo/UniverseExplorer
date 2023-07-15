@@ -5,10 +5,27 @@ namespace Btools.Components
     public class UIScrollContent : MonoBehaviour
     {
         private RectTransform _child;
-        public RectTransform rectTransform { get; private set; }
-        public RectTransform child
+
+        private RectTransform _rectTransform;
+        public RectTransform RectTransform
         {
-            get => _child;
+            get
+            {
+                _rectTransform = _rectTransform != null ? _rectTransform : GetComponent<RectTransform>();
+                return _rectTransform;
+            }
+            private set
+            {
+                _rectTransform = value;
+            }
+        }
+        public RectTransform Child
+        {
+            get
+            {
+                _child ??= GetComponentInChildren<RectTransform>();
+                return _child;
+            }
             set
             {
                 if (_child is null)
@@ -18,26 +35,26 @@ namespace Btools.Components
             }
         }
 
-        public float Width => child.sizeDelta.x;
-        public float Height => child.sizeDelta.y;
+        public float Width => Child.sizeDelta.x;
+        public float Height => Child.sizeDelta.y;
 
         public static UIScrollContent New(RectTransform parent, RectTransform child)
         {
             GameObject newObj = new GameObject("UI Scroll Content");
             UIScrollContent uIScrollContent = newObj.AddComponent<UIScrollContent>();
             newObj.transform.SetParent(parent);
-            uIScrollContent.rectTransform = newObj.AddComponent<RectTransform>();
+            uIScrollContent.RectTransform = newObj.AddComponent<RectTransform>();
 
-            uIScrollContent.rectTransform.localScale = Vector2.one;
+            uIScrollContent.RectTransform.localScale = Vector2.one;
 
             Vector3 oldChildScale = child.localScale;
 
-            uIScrollContent.child = child;
-            child.SetParent(uIScrollContent.rectTransform);
+            uIScrollContent.Child = child;
+            child.SetParent(uIScrollContent.RectTransform);
             child.localPosition = Vector2.zero;
             child.localScale = oldChildScale;
 
-            uIScrollContent.rectTransform.sizeDelta = child.sizeDelta;
+            uIScrollContent.RectTransform.sizeDelta = child.sizeDelta;
             return uIScrollContent;
         }
     }

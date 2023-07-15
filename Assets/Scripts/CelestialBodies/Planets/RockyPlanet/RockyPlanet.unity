@@ -134,6 +134,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: DayNight
       objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: dayColor.b
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: dayColor.g
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: dayColor.r
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361286, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -365,6 +377,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53d45b049a685e6489da4b91f9e2a087, type: 3}
+--- !u!1 &1429374023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1429374024}
+  - component: {fileID: 1429374025}
+  m_Layer: 0
+  m_Name: Rock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1429374024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429374023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1429374025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429374023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1921176ffcb965c4894b0cf55d0ea024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block: {fileID: 3401344289583144821, guid: 5c767a70c2c43244288743d5d317e378, type: 3}
 --- !u!1 &1434637773
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1434637775}
+  - component: {fileID: 1434637776}
   - component: {fileID: 1434637774}
   m_Layer: 0
   m_Name: Object Spawner
@@ -391,17 +448,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1434637773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc315cdff6cdf134e829debcd34a4b78, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c4dc1faa5eddd14086f3db73a9e9661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YOffset: 0
-  seedOffset: 0
-  ColorSky: 1
-  SkyDayColor: {r: 0.0754717, g: 0.07445155, b: 0.07297971, a: 1}
-  SkyNightColor: {r: 0, g: 0, b: 0, a: 1}
-  dayNightSystem: {fileID: 347338256}
-  doEssentialFunctions: 1
-  defaultBiome: {fileID: 11400000, guid: eff66aad85fb98b45850cc3474efab83, type: 2}
+  CellSize: 2
+  registerSceneLoad: 1
+  objects:
+  - {fileID: 0}
+  - {fileID: 6274852281940903194, guid: 95ed3fe99ae711043ae580c6e6cbf1f8, type: 3}
+  - {fileID: 5238249913941902148, guid: c29fdfa0c574a6e47a73fec706398992, type: 3}
+  weights:
+  - 100
+  - 10
+  - 10
+  randomOffset: 1
+  extraPadding: 3
+  Steepness: 5
+  Wideness: 0.8
+  topBlock: {fileID: 3401344289583144821, guid: 5c767a70c2c43244288743d5d317e378, type: 3}
+  layers:
+  - layer: {fileID: 1429374025}
+    height: 20
 --- !u!4 &1434637775
 Transform:
   m_ObjectHideFlags: 0
@@ -416,6 +483,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1434637776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434637773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3fa0ef916dcf846a4497fec0e0f941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primary: {r: 0.49803925, g: 0.49803925, b: 0.49803925, a: 1}
+  secondary: {r: 0.504, g: 0.504, b: 0.504, a: 1}
+  tertiary: {r: 0, g: 0, b: 0, a: 0}
+  dayNightSystem: {fileID: 347338256}
 --- !u!1001 &1671737489
 PrefabInstance:
   m_ObjectHideFlags: 0

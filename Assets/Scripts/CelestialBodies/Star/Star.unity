@@ -197,7 +197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &653975488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +276,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1404150456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1404150458}
+  - component: {fileID: 1404150457}
+  m_Layer: 0
+  m_Name: Plasma
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1404150457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404150456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1921176ffcb965c4894b0cf55d0ea024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block: {fileID: 3428254535724854943, guid: e5cd0819cbcb97e418bdb2a0b58302ac, type: 3}
+--- !u!4 &1404150458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404150456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1583370269
 PrefabInstance:
@@ -403,6 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1734090207}
+  - component: {fileID: 1734090208}
   - component: {fileID: 1734090206}
   m_Layer: 0
   m_Name: Object Spawner
@@ -420,11 +465,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1734090205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8595655bbb1db64eab440f239771058, type: 3}
+  m_Script: {fileID: 11500000, guid: 0103ffd041042304c93fa61e3d4deed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starParticles: {fileID: 798321062924296457, guid: 3323aa44532a3f14eb333da72a51db99, type: 3}
-  ground: {fileID: 653975489}
+  primary: {r: 1, g: 0.99247026, b: 0, a: 1}
+  secondary: {r: 1, g: 1, b: 1, a: 1}
+  tertiary: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1734090207
 Transform:
   m_ObjectHideFlags: 0
@@ -439,3 +485,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734090208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734090205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4dc1faa5eddd14086f3db73a9e9661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CellSize: 2
+  registerSceneLoad: 1
+  objects: []
+  weights: []
+  randomOffset: 1
+  extraPadding: 3
+  Steepness: 0
+  Wideness: 1
+  topBlock: {fileID: 3428254535724854943, guid: e5cd0819cbcb97e418bdb2a0b58302ac, type: 3}
+  layers:
+  - layer: {fileID: 1404150457}
+    height: 5

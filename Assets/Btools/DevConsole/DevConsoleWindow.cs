@@ -24,7 +24,7 @@ namespace Btools.DevConsole
 
 #if UNITY_EDITOR
             if (!CommandOnStart.StartsWith("//"))
-                Debug.Log("DV:\n" + DevCommands.Execute(CommandOnStart));
+                DevCommands.Execute(CommandOnStart);
 #endif
         }
 

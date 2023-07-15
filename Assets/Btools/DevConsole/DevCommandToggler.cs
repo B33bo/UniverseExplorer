@@ -27,7 +27,9 @@ namespace Btools.Components
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.BackQuote))
+            {
                 DevConsole.SetActive(!DevConsole.activeSelf);
+            }
         }
     }
 }
