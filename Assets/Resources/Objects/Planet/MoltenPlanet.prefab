@@ -127,11 +127,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 833765690585975044}
-  cameraLerpSize: 1
+  cameraLerpSize: 5
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
-  orbiter: {fileID: 0}
   lineRenderers:
   - {fileID: 3793696745864037470}
   - {fileID: 3793696747095664307}

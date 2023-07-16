@@ -349,11 +349,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 117376946365310826}
-  cameraLerpSize: 1
+  cameraLerpSize: 5
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
-  orbiter: {fileID: 0}
   rocks:
   - {fileID: 117376945566501447}
   - {fileID: 117376945619317761}

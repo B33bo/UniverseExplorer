@@ -34,11 +34,14 @@ namespace Universe
         private IEnumerator SpawnMoons()
         {
             yield return new WaitForEndOfFrame();
+
             (Target as Planet).SpawnMoons(transform);
         }
 
         public override void OnUpdate()
         {
+            if (transform.parent is null)
+                return;
             Debug.DrawLine(transform.position, transform.parent.position);
             transform.rotation = Quaternion.Euler(0, 0, GlobalTime.Time);
         }

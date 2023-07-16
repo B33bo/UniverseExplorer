@@ -99,5 +99,5 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 0}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
+  scaleLerp: 0
   IsDestroyed: 0

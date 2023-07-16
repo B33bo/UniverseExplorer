@@ -6,7 +6,7 @@ namespace Universe
 {
     public class AuroraRenderer : CelestialBodyRenderer
     {
-        private static readonly ColorHSV[] colorsOfAurora = new ColorHSV[]
+        public static readonly ColorHSV[] colorsOfAurora = new ColorHSV[]
         {
             new ColorHSV(136 / 360f, 1, 1), //Green
             new ColorHSV(310 / 360f, .81f, 1), //Pink

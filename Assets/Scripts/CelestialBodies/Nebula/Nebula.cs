@@ -9,7 +9,7 @@ namespace Universe.CelestialBodies
 
         public override string TypeString => "Nebula";
 
-        public override string TravelTarget => "";
+        public override string TravelTarget => "Lights";
 
         public override bool Circular => false;
         private Vector2 bottomLeft, topRight, averagePos;

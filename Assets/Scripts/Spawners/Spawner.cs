@@ -9,7 +9,7 @@ namespace Universe
 {
     public abstract class Spawner : MonoBehaviour
     {
-        public const int MaxCells = 5000;
+        public static int MaxCells = 10000;
         public float CellSize = 2;
 
         public bool registerSceneLoad = true;
@@ -62,8 +62,7 @@ namespace Universe
         private Vector2 positionOfLastReload = new Vector2(200, 200);
         public virtual void ReloadCells(Rect cameraRect)
         {
-            float camSize = cameraRect.width / 4;
-            if ((cameraRect.position - positionOfLastReload).sqrMagnitude < camSize * camSize)
+            if ((cameraRect.position - positionOfLastReload).sqrMagnitude < CellSize * CellSize)
                 return;
             positionOfLastReload = cameraRect.position;
             var cellsOnScreen = CellsOnScreen(cameraRect);
@@ -80,7 +79,6 @@ namespace Universe
             {
                 if (PositionsByObjects.ContainsKey(cellsOnScreen[i]))
                     continue;
-
                 SpawnAt(cellsOnScreen[i]);
             }
         }

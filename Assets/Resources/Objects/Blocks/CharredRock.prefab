@@ -208,7 +208,7 @@ MonoBehaviour:
   CameraFocus: 1
   cameraLerpTarget: {fileID: 0}
   cameraLerpSize: 1
-  cameraLerpMultiplyBySize: 1
+  cameraLerpMultiplyBySize: 0
   scaleLerp: 0
   IsDestroyed: 0
   blockName: Molten Rock

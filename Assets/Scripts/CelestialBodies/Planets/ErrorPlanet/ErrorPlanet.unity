@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1921176ffcb965c4894b0cf55d0ea024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1656121100722966657, guid: 714632abd23978b42994be0d273c0b10, type: 3}
+  block: {fileID: 6419916738130160216, guid: 4622e64992f98814685d2cd490e5c992, type: 3}
 --- !u!1001 &888137544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -500,11 +500,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: dayColor.g
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: dayColor.r
-      value: 1
+      value: 0.90780354
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.a
@@ -587,8 +587,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellSize: 2
   registerSceneLoad: 1
-  objects: []
-  weights: []
+  objects:
+  - {fileID: 0}
+  - {fileID: 8567648032500254227, guid: d923041603a6e1b42ad3491c2f6cf8ac, type: 3}
+  weights:
+  - 100
+  - 10
   randomOffset: 1
   extraPadding: 3
   Steepness: 0

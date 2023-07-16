@@ -115,11 +115,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 7453179742243823547}
-  cameraLerpSize: 1
+  cameraLerpSize: 5
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
-  orbiter: {fileID: 0}
 --- !u!210 &-4395388784586294023
 SortingGroup:
   m_ObjectHideFlags: 0

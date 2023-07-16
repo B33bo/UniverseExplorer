@@ -22,10 +22,8 @@ namespace Universe.CelestialBodies.Planets
 
         public override void Create(Vector2 position)
         {
-            StarNames ??= Resources.Load<TextAsset>("StarNames").text.Split('\n');
-
             Position = position;
-            Name = StarNames[RandomNum.Get(0, StarNames.Length, RandomNumberGenerator)].Trim() + " " + RandomNum.GetString(1, RandomNumberGenerator);
+            Name = RandomNum.GetPlanetName(Seed);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
 
             trueRadius = RandomNum.CurveAt(RandomNum.GetInfiniteDouble(0.4, RandomNumberGenerator), 4, 1.2) * 3;

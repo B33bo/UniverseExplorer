@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 7944783083674845319}
-  cameraLerpSize: 1
+  cameraLerpSize: 5
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0

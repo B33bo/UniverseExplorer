@@ -35,7 +35,6 @@ namespace Universe.CelestialBodies
 
                 Target.Create(pos);
                 Scale = GetFairSize((float)Target.Radius, (float)SupermassiveBlackHole.MinScale, (float)SupermassiveBlackHole.MaxScale) * 5 * Vector2.one;
-                Debug.Log(Scale);
             }
             else
             {

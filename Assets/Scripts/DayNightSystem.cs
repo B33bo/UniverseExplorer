@@ -50,7 +50,7 @@ namespace Universe
 
                 yield break;
             }
-            else if (BodyManager.Parent is Moon moon)
+            else if (BodyManager.Parent is Moon moon && moon.planet != null)
             {
                 planet = moon.planet;
 
@@ -83,10 +83,9 @@ namespace Universe
             }
             else if (BodyManager.Parent is Continent c)
                 planet = c.planet;
+            else if (BodyManager.Parent is Planet parentPlanet)
+                planet = parentPlanet;
             else
-                planet = BodyManager.Parent as Planet;
-
-            if (planet is null)
             {
                 planet = new ErrorPlanet();
                 planet.SetSeed(0);
@@ -163,13 +162,16 @@ namespace Universe
         private void LoadNight()
         {
             planet.moons ??= new MoonRenderer[0];
-
             for (int i = 0; i < planet.moons.Length; i++)
             {
                 if (BodyManager.Parent is Moon moon)
                 {
-                    if (planet.moons[i].Target == moon)
+                    Debug.Log(planet.moons[i].Target.Seed + " " + moon.Seed);
+                    if (planet.moons[i].Target.Seed == moon.Seed)
+                    {
+                        Debug.Log("cont");
                         continue;
+                    }
                 }
                 var newMoon = Instantiate(moonRenderer, night);
                 System.Random rand = new System.Random(planet.moons[i].Target.Seed + i);
@@ -191,22 +193,21 @@ namespace Universe
 
             for (int i = 0; i < starCount; i++)
             {
-                Vector2 pos;
                 var newSpeck = Instantiate(starSpeck, night);
 
                 if (i < ObjectSpawner.starsLoaded.Count && ObjectSpawner.starsLoaded[i] != planet.sun)
                 {
                     int seed = ObjectSpawner.starsLoaded[i].Seed;
                     var rand = new System.Random(seed);
-                    pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 0, rand));
+                    Vector2 pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 0, rand));
                     newSpeck.isOriginal = true;
                     newSpeck.Spawn(pos, ObjectSpawner.starsLoaded[i].Seed);
                 }
                 else
                 {
-                    int seed = planet.Seed + i;
+                    int seed = planet.Seed + (i - ObjectSpawner.starsLoaded.Count);
                     System.Random rand = new System.Random(seed + i);
-                    pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 50, rand));
+                    Vector2 pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 50, rand));
 
                     var newStar = new Star();
                     newStar.Create(pos);

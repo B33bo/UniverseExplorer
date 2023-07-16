@@ -77,4 +77,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/ChemicalComposition/Ion/Proton/Proton.unity
     guid: a54aeea65bfada64baa26177284e6514
+  - enabled: 1
+    path: Assets/Scripts/CelestialBodies/Nebula/Lights.unity
+    guid: ccba2a7911809b94d91665d8417e3b92
   m_configObjects: {}

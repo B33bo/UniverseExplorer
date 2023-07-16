@@ -14,11 +14,13 @@ namespace Universe.CelestialBodies.Planets
 
         public string GenerateName()
         {
-            return RandomNum.GetPlanetName(RandomNumberGenerator) + " " + RandomNum.GetString(1, RandomNumberGenerator);
+            return RandomNum.GetPlanetName(Seed) + " " + RandomNum.GetString(1, RandomNumberGenerator);
         }
 
         public void SpawnMoons(Transform transform)
         {
+            if (sun == null)
+                return;
             moons = new MoonRenderer[RandomNumberGenerator.Next(0, 3)];
 
             for (int i = 0; i < moons.Length; i++)
@@ -38,6 +40,8 @@ namespace Universe.CelestialBodies.Planets
 
         public override string GetBonusTypes()
         {
+            if (sun == null)
+                return "";
             return "Sun - " + sun.Name;
         }
     }

@@ -4,15 +4,14 @@ namespace Universe
 {
     public static class RandomNum
     {
-        private static string[] _PlanetNames;
+        private static string[] _Names;
 
-        public static string[] PlanetNames
+        public static string[] Names
         {
             get
             {
-                if (_PlanetNames is null)
-                    _PlanetNames = UnityEngine.Resources.Load<UnityEngine.TextAsset>("PlanetNames").text.Split('\n');
-                return _PlanetNames;
+                _Names ??= UnityEngine.Resources.Load<UnityEngine.TextAsset>("Names").text.Split('\n');
+                return _Names;
             }
         }
 
@@ -117,7 +116,15 @@ namespace Universe
             random.NextDouble() < probability;
 
         public static string GetPlanetName(Random random) =>
-            PlanetNames[random.Next(0, PlanetNames.Length)].Trim();
+            Names[random.Next(0, Names.Length)].Trim();
+
+        public static string GetPlanetName(int seed)
+        {
+            seed %= Names.Length;
+            if (seed < 0)
+                seed += Names.Length;
+            return Names[seed].Trim();
+        }
 
         public static UnityEngine.Color GetColor(Random random)
         {

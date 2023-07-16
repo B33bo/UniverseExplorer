@@ -7,7 +7,7 @@ namespace Universe.CelestialBodies
         public const float FlareSize = 0.1f;
         public override string TypeString => "Aurora";
 
-        public override string TravelTarget => string.Empty;
+        public override string TravelTarget => "Lights";
 
         public override bool Circular => false;
 
@@ -36,6 +36,11 @@ namespace Universe.CelestialBodies
             float randomWeight = RandomNum.GetFloat(0, sumOfWeightChart, RandomNumberGenerator);
             //fine because the weights correspond to the index of the enum (green = 0)
             color = (Color)RandomNum.GetIndexFromWeight(WeightChart, randomWeight);
+        }
+
+        public override string GetBonusTypes()
+        {
+            return "Color - " + color;
         }
 
         public enum Color

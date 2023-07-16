@@ -27,6 +27,8 @@ namespace Universe
 
         public override string GetBonusTypes()
         {
+            if (planet == null)
+                return "";
             return "Planet - " + planet.Name;
         }
     }
