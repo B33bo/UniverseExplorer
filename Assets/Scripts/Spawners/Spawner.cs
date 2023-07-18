@@ -130,7 +130,6 @@ namespace Universe
         {
             if (prefab is null)
                 return null;
-            Debug.Log($"Spawning {prefab.name} at {position}");
 
             CelestialBodyRenderer newObject = Instantiate(prefab, position, Quaternion.identity);
             newObject.Spawn(position, seed);

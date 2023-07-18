@@ -1,15 +1,15 @@
-using Btools.utils;
-using System.Collections;
 using UnityEngine;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Planets
 {
     public class Star : CelestialBody
     {
+        public const float minTemp = 3000, maxTemp = 10_000;
         public override bool Circular => true;
         public override string TravelTarget => "Star";
         public override string TypeString => "Star";
-        public double Temperature;
+        private double temperature;
 
         private static readonly string[] PlanetStrings = new string[] { "WaterPlanet", "TerrestrialPlanet", "RockyPlanet", "GasPlanet", "IcyPlanet", "MoltenPlanet" };
         public const double MinMass = 1.5912E+29, MaxMass = 2.9835E+32;
@@ -17,8 +17,27 @@ namespace Universe.CelestialBodies.Planets
         public static string[] StarNames = null;
         public double trueRadius;
         public PlanetRenderer[] planets;
+        public System.Action<object> ColorChange;
+        private Color _color;
 
-        public Color starColor;
+        [InspectableVar("Color")]
+        public Color StarColor { get => _color; set
+            {
+                _color = value;
+                ColorChange(value);
+            } 
+        }
+
+        [InspectableVar("Temperature", Params = new object[] { 3000, 10_000 })]
+        public double Temperature
+        {
+            get => temperature;
+            set
+            {
+                temperature = value;
+                ColorChange(value);
+            }
+        }
 
         public override void Create(Vector2 position)
         {
@@ -27,8 +46,8 @@ namespace Universe.CelestialBodies.Planets
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
 
             trueRadius = RandomNum.CurveAt(RandomNum.GetInfiniteDouble(0.4, RandomNumberGenerator), 4, 1.2) * 3;
-            Radius = trueRadius * 1_000_000; //RandomNum.Get(MinSize, MaxSize, RandomNumberGenerator);
-            Temperature = RandomNum.Get(3000, 10000, RandomNumberGenerator);
+            Radius = trueRadius * 1_000_000;
+            temperature = RandomNum.Get(3000, 10000, RandomNumberGenerator);
         }
 
         public void SpawnPlanets(Transform transform)
@@ -49,13 +68,10 @@ namespace Universe.CelestialBodies.Planets
 
                 planets[i] = newPlanet;
                 (newPlanet.Target as Planet).sun = this;
-
-                if (planetName == "IcyPlanet")
-                    Debug.Log(newPlanet.Target.Name);
             }
         }
 
         public override string GetBonusTypes() =>
-            "Temperature - " + Temperature;
+            "Temperature - " + temperature;
     }
 }

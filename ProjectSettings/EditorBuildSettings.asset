@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ObjectData.unity
     guid: cfbfdc0c8754c9c4ab1a6269842fb08a
   - enabled: 1
+    path: Assets/Scenes/Inspector.unity
+    guid: 590f0e4dd2220bc40a064ac45988c41f
+  - enabled: 1
     path: Assets/Scripts/CelestialBodies/BlackHole/BlackHole.unity
     guid: 4f2aed3d2e03e3f4f9e09f3dbbd6ed05
   - enabled: 1

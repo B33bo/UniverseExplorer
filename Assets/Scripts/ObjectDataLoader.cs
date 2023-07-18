@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Universe.Inspector;
 
 namespace Universe
 {
     public class ObjectDataLoader : MonoBehaviour
     {
         public static CelestialBody celestialBody;
+
         [SerializeField, Multiline]
         private string FormattedString;
 
@@ -16,14 +18,13 @@ namespace Universe
         private Animator animator;
 
         [SerializeField]
-        private GameObject travelButton;
+        private GameObject travelButton, inspectButton;
 
         public static ObjectDataLoader Instance { get; private set; }
 
         private void Awake()
         {
-            if (celestialBody is null)
-                celestialBody = new CelestialBodies.UnknownItem();
+            celestialBody ??= new CelestialBodies.UnknownItem();
             Instance = this;
             extraInfoTextComponent.text = string.Format(FormattedString,
                 celestialBody.Name,
@@ -43,7 +44,7 @@ namespace Universe
         {
             if (Circular)
             {
-                var radius = celestialBody.Width / 2;
+                var radius = celestialBody.Radius;
                 DistanceUnit distanceUnit = UnitConversion.ReasonableFormat(radius);
                 return "Radius - " +
                     UnitConversion.Convert(radius, DistanceUnit.Kilometers, distanceUnit).ToCleanString() + " " + UnitConversion.ToAbbreviation(distanceUnit);
@@ -67,6 +68,17 @@ namespace Universe
                     SceneManager.UnloadSceneAsync("ObjectData");
             }, .5f);
             CameraControl.Instance.UnFocus();
+        }
+
+        public void Inspect()
+        {
+            animator.Play("Unfocus");
+            Btools.TimedEvents.Timed.RunAfterTime(() =>
+            {
+                if (SceneManager.GetSceneByName("ObjectData").isLoaded)
+                    SceneManager.UnloadSceneAsync("ObjectData");
+                SceneManager.LoadScene("Inspector", LoadSceneMode.Additive);
+            }, .5f);
         }
 
         public void Travel()

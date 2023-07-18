@@ -21,7 +21,10 @@ namespace Universe
                 Spawn(new Vector2(positive ? EndIsNighSign.TheEnd - 16 : -EndIsNighSign.TheEnd + 16, yPos), null);
 
             if (positive)
+            {
                 DevCommands.RegisterVar(new DevConsoleVariable("terrainend", "The end of terrain generation", typeof(int), () => EndIsNighSign.TheEnd.ToString()));
+                DevCommands.RegisterVar(new DevConsoleVariable("-terrainend", "The negative end of terrain generation", typeof(int), () => (-EndIsNighSign.TheEnd).ToString()));
+            }
         }
 
         public override void Spawn(Vector2 pos, int? seed)

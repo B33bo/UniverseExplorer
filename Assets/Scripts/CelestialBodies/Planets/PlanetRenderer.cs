@@ -9,26 +9,15 @@ namespace Universe
     {
         public override void Spawn(Vector2 pos, int? seed)
         {
-            if (BodyManager.Parent is Planet && !(BodyManager.Parent is Moon))
-            {
-                Target = BodyManager.Parent;
-                Target.SetSeed(Target.Seed);
-                Target.Create(pos);
+            Target = (Planet)Activator.CreateInstance(PlanetType);
+            if (seed.HasValue)
+                Target.SetSeed(seed.Value);
+            Target.Create(pos);
 
-                SpawnPlanet(pos, seed);
-            }
-            else
-            {
-                Target = (Planet)Activator.CreateInstance(PlanetType);
-                if (seed.HasValue)
-                    Target.SetSeed(seed.Value);
-                Target.Create(pos);
+            SpawnPlanet(pos, seed);
 
-                SpawnPlanet(pos, seed);
-
-                if (!(BodyManager.Parent is Moon))
-                    StartCoroutine(SpawnMoons());
-            }
+            if (!(BodyManager.Parent is Moon))
+                StartCoroutine(SpawnMoons());
         }
 
         private IEnumerator SpawnMoons()

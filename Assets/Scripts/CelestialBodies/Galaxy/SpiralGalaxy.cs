@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies
 {
@@ -8,6 +10,40 @@ namespace Universe.CelestialBodies
         public const double MinMass = 4e40 * Measurement.Kg, MaxMass = 4e42 * Measurement.Kg;
         public (Color outer, Color inner) Color;
         public bool IsRainbow;
+        public Action OnRefreshColor;
+
+        [InspectableVar("Outer")]
+        public Color OuterEditable
+        {
+            get => Color.outer;
+            set
+            {
+                Color.outer = value;
+                OnRefreshColor.Invoke();
+            }
+        }
+
+        [InspectableVar("Inner")]
+        public Color InnerEditable
+        {
+            get => Color.inner;
+            set
+            {
+                Color.inner = value;
+                OnRefreshColor.Invoke();
+            }
+        }
+
+        [InspectableVar("Rainbow")]
+        public bool Rainbow
+        {
+            get => IsRainbow;
+            set
+            {
+                IsRainbow = value;
+                OnRefreshColor.Invoke();
+            }
+        }
 
         public override void Create(Vector2 position)
         {

@@ -10,7 +10,12 @@ namespace Universe.CelestialBodies.Atomic
             if (seed.HasValue)
                 Target.SetSeed(seed.Value);
             Target.Create(pos);
-            Target.Name = name;
+
+            string compoundName = name;
+            if (compoundName.EndsWith("(Clone)"))
+                compoundName = compoundName.Substring(0, compoundName.Length - 7);
+
+            Target.Name = compoundName;
         }
 
         public void Spawn(Vector2 pos, int? seed, Chemical chemical)

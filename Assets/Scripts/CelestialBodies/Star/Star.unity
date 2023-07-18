@@ -499,8 +499,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CellSize: 2
   registerSceneLoad: 1
-  objects: []
-  weights: []
+  objects:
+  - {fileID: 0}
+  - {fileID: 6820613682624263166, guid: 7d164c10caa617d41b397869fe02c49b, type: 3}
+  weights:
+  - 100
+  - 1
   randomOffset: 1
   extraPadding: 3
   Steepness: 0

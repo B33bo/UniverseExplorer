@@ -85,7 +85,9 @@ namespace Universe
                 planet = c.planet;
             else if (BodyManager.Parent is Planet parentPlanet)
                 planet = parentPlanet;
-            else
+
+            // don't make it an else statement as other statements above could fail
+            if (planet == null)
             {
                 planet = new ErrorPlanet();
                 planet.SetSeed(0);

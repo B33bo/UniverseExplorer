@@ -6,14 +6,6 @@ namespace Universe
 {
     public class AuroraRenderer : CelestialBodyRenderer
     {
-        public static readonly ColorHSV[] colorsOfAurora = new ColorHSV[]
-        {
-            new ColorHSV(136 / 360f, 1, 1), //Green
-            new ColorHSV(310 / 360f, .81f, 1), //Pink
-            new ColorHSV(221 / 360f, 1, 1), //Blue
-            new ColorHSV(0, .93f, 1), //Red
-        };
-
         [SerializeField]
         private SpriteRenderer auroraFlare;
 
@@ -53,7 +45,7 @@ namespace Universe
                 currentPos.y = Mathf.Sin(time + (i * Mathf.Deg2Rad));
                 flares[i].transform.localPosition = currentPos;
 
-                if (aurora.color == Aurora.Color.Rainbow)
+                if (aurora.AuroraCol == Aurora.AuroraColor.Rainbow)
                 {
                     float hueValue = Mathf.Sin(time + (i * Mathf.Deg2Rad));
                     hueValue = (hueValue + 1) / 2f;
@@ -61,7 +53,7 @@ namespace Universe
                     continue;
                 }
 
-                var color = colorsOfAurora[(int)aurora.color];
+                var color = aurora.Color;
                 color.h += Mathf.Sin(time + (i * Mathf.Deg2Rad)) / 20f;
                 flares[i].color = color;
             }

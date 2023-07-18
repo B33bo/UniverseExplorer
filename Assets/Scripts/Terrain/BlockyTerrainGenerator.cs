@@ -142,7 +142,7 @@ namespace Universe
         {
             if (prefab is null)
                 return null;
-            CelestialBodyRenderer newObject = Instantiate(prefab, position, Quaternion.identity);
+            CelestialBodyRenderer newObject = Instantiate(prefab);
             newObject.Spawn(new Vector2(position.x, position.y - .5f), seed);
             blocksTaken.Add(new Vector2Int((int)position.x, (int)position.y), newObject);
             return newObject;

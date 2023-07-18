@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6e8395fe5f4e24fbcfe844a053121c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraFocus: 1
+  CameraFocus: 0
   cameraLerpTarget: {fileID: 0}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1

@@ -50,10 +50,13 @@ namespace Universe
                 var prefab = Resources.Load<CelestialBodyRenderer>("Objects/" + parameters[1]);
                 var obj = MonoBehaviour.Instantiate(prefab);
 
-                if (parameters.Length == 2)
+                if (parameters.Length < 3)
                     obj.Spawn(Camera.main.transform.position, null);
                 else
                     obj.Spawn(Camera.main.transform.position, int.Parse(parameters[2]));
+
+                if (parameters.Length >= 4 && parameters[3] == "true")
+                    obj.gameObject.AddComponent<BoxCollider2D>();
 
                 return obj.Target.ToString();
             }

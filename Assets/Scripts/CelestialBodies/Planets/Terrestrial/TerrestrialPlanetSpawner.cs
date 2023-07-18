@@ -35,6 +35,10 @@ namespace Universe.CelestialBodies.Planets
                 newCont.Target.Position = startPos + new Vector2(i, 0);
                 newCont.Init();
             }
+
+            var waterPlanet = Instantiate(Resources.Load<WaterPlanetRenderer>("Objects/Planet/WaterPlanet"));
+            waterPlanet.SpawnOcean(new Vector2(0, 2), BodyManager.GetSeed());
+            waterPlanet.Scale = .5f * Vector2.one;
         }
 
         private void OnDestroy()

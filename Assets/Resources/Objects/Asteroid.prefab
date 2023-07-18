@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2302354638181068914}
   - component: {fileID: 2302354638181068913}
-  - component: {fileID: 7198651641392640712}
   - component: {fileID: 475890315275291332}
   m_Layer: 0
   m_Name: Asteroid
@@ -49,20 +48,10 @@ MonoBehaviour:
   CameraFocus: 1
   cameraLerpTarget: {fileID: 2302354638181068914}
   cameraLerpSize: 3
+  cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
+  IsDestroyed: 0
   meshFilter: {fileID: 2302354638810062719}
---- !u!114 &7198651641392640712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2302354638181068915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce4f9bba28b4484a9031f36ac582454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfRotation: {x: 0, y: 0}
 --- !u!60 &475890315275291332
 PolygonCollider2D:
   m_ObjectHideFlags: 0

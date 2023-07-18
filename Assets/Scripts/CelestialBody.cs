@@ -1,10 +1,13 @@
 using UnityEngine;
+using Universe.Inspector;
 
 namespace Universe
 {
     public abstract class CelestialBody
     {
         private (double x, double y) _Scale;
+
+        [InspectableVar("Name")]
         public string Name { get; set; }
         public double Width { get => _Scale.x; set => _Scale.x = value; }
         public double Height { get => _Scale.y; set => _Scale.y = value; }
@@ -31,9 +34,7 @@ namespace Universe
         {
             if (BodyManager.Parent is null)
                 return Position.GetHashCode();
-                //return (int)(Position.x * Position.x + Position.y * 1053);
             return Position.GetHashCode() + BodyManager.GetSeed();
-            //return (int)Mathf.Pow((int)Position.x, 2) + (int)Position.y + BodyManager.Parent.Seed;
         }
 
         public void SetSeed(int seed)

@@ -21,7 +21,7 @@ namespace Universe.Blocks
             base.Spawn(pos, seed);
 
             if (BodyManager.Parent is Star star)
-                rock.color = star.starColor;
+                rock.color = star.StarColor;
 
             lava.sprite = sprites[Target.RandomNumberGenerator.Next(0, 4)];
             lava.name = lava.sprite.name;

@@ -7,6 +7,7 @@ namespace Universe.CelestialBodies
     {
         [SerializeField]
         private SpriteRenderer spriteRenderer;
+        private bool rainbow = false;
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -22,9 +23,10 @@ namespace Universe.CelestialBodies
             {
                 a = galaxy.Color.outer;
                 b = galaxy.Color.inner;
+                rainbow = galaxy.Rainbow;
             }
 
-            galaxySection.Create(pos, 64, transform.localScale.x, a, b);
+            galaxySection.Create(pos, 64, transform.localScale.x, a, b, rainbow);
             StartCoroutine(LoadSprite(galaxySection));
         }
 

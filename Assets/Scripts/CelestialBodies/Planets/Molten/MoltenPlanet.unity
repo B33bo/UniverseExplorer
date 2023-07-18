@@ -584,7 +584,7 @@ MonoBehaviour:
   - 5
   - 5
   - 5
-  - 1
+  - 0.01
   randomOffset: 0
   extraPadding: 3
   Steepness: 7

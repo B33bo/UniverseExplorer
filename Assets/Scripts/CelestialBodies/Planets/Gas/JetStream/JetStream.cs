@@ -36,19 +36,18 @@ namespace Universe.CelestialBodies.Planets.Gas
             jetParticles.GetComponent<ParticleSystemRenderer>().sortingOrder = RandomNum.Get(int.MinValue, int.MaxValue, randomNumGenerator);
             jetParticles.randomSeed = (uint)Seed;
             jetParticles.Play();
-
             CameraControl.Instance.OnPositionUpdate += UpdatePosition;
         }
 
         private void UpdatePosition(Rect cameraRect)
         {
-            float width = cameraRect.width;
+            transform.position = new Vector3(cameraRect.xMin - 2, transform.position.y);
 
-            Vector2 v = transform.position;
-            v.x = cameraRect.position.x - width / 2 - 2;
-            transform.position = v;
+            float time = cameraRect.width / main.startSpeed.constantMax;
+            jetParticles.Simulate(time);
+            jetParticles.Play();
 
-            main.startLifetime = cameraRect.width;
+            main.startLifetime = time;
         }
 
         private void OnDestroy()

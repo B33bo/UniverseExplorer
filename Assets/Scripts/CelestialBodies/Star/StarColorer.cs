@@ -11,7 +11,7 @@ namespace Universe
             if (!(BodyManager.Parent is Star star))
                 return;
 
-            primary = star.starColor;
+            primary = star.StarColor;
         }
 
         private IEnumerator Start()

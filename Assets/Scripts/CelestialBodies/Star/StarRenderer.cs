@@ -21,16 +21,13 @@ namespace Universe.CelestialBodies.Planets
         [SerializeField]
         private SpriteMask spriteMask;
 
-        private void Start()
+        private void ColorChanged(object val)
         {
-            worleyNoise.color = GetStarColor();
-
-            SolarSystemSpawner.sun = Target as Star;
-
-            if (SceneManager.GetActiveScene().name == "Galaxy")
-                TargetStar.SpawnPlanets(transform);
-            else
-                TargetStar.planets = new PlanetRenderer[0];
+            if (val is double)
+                TargetStar.StarColor = GetStarColor();
+            spriteRenderer.color = TargetStar.StarColor;
+            worleyNoise.color = spriteRenderer.color;
+            Glow.color = spriteRenderer.color;
         }
 
         private void LoadWorley(int size, Color color, int pointCount)
@@ -50,11 +47,9 @@ namespace Universe.CelestialBodies.Planets
             Target.Create(pos);
 
             Scale = GetFairSizeCurve((Target as Star).trueRadius, 4f, 1.2f) * Vector3.one;
+            TargetStar.ColorChange += ColorChanged;
 
-            TargetStar.starColor = GetStarColor();
-
-            spriteRenderer.color = TargetStar.starColor;
-            Glow.color = spriteRenderer.color;
+            TargetStar.StarColor = GetStarColor();
 
             //This is to do with sprite masks and sorting order
             //This happens so the weird texture doesn't clash with another star
@@ -64,11 +59,18 @@ namespace Universe.CelestialBodies.Planets
             worleyNoise.sortingOrder = sortingOrder;
 
             transform.localScale = Scale;
+
+            SolarSystemSpawner.sun = Target as Star;
+
+            if (SceneManager.GetActiveScene().name == "Galaxy")
+                TargetStar.SpawnPlanets(transform);
+            else
+                TargetStar.planets = new PlanetRenderer[0];
         }
 
         public Color GetStarColor()
         {
-            return colorGradient.Evaluate((float)(TargetStar.Temperature - 3000) / 7000);
+            return colorGradient.Evaluate((float)(TargetStar.Temperature - Star.minTemp) / (Star.maxTemp - Star.minTemp));
         }
 
         public override void OnUpdate()

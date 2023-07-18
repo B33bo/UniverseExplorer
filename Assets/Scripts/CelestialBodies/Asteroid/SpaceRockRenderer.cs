@@ -15,11 +15,6 @@ namespace Universe
                 Target.SetSeed(seed.Value);
             Target.Create(pos);
 
-            if (BodyManager.Parent is SpaceRock)
-                Destroy(GetComponent<Orbiter>());
-            else
-                GetComponent<Orbiter>().Activate(RandomNum.GetFloat(0f, 360, Target.RandomNumberGenerator), Target.Position.x, RandomNum.Get(0, 25, Target.RandomNumberGenerator));
-
             meshFilter.mesh = ShapeMaker.NormalizeMesh(ShapeMaker.RandomizeMesh(
                 ShapeMaker.GetRegularShape(
                     RandomNum.Get(3, 30, Target.RandomNumberGenerator), .5f), 1, Target.RandomNumberGenerator)

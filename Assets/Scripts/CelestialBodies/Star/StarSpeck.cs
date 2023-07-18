@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Universe.CelestialBodies.Planets;
 
 namespace Universe
@@ -42,7 +41,7 @@ namespace Universe
 
         public void Init(Star star)
         {
-            c = Resources.Load<StarRenderer>("Objects/Star").colorGradient.Evaluate(((float)star.Temperature - 3000) / 7000);
+            c = Resources.Load<StarRenderer>("Objects/Star").colorGradient.Evaluate(((float)star.Temperature - Star.minTemp) / (Star.maxTemp - Star.minTemp));
             GetComponent<SpriteRenderer>().color = c;
             CameraFocus = false;
 

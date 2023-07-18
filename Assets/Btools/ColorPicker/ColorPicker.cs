@@ -1,6 +1,4 @@
 using Btools.utils;
-using System;
-using System.Collections.Specialized;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -39,6 +37,9 @@ namespace Btools.Components
         private SliderValue[] HSVSliders;
 
         [SerializeField]
+        private bool useAlpha;
+
+        [SerializeField]
         private SliderValue AlphaSlider;
 
         [SerializeField]
@@ -62,6 +63,8 @@ namespace Btools.Components
         [Space]
         [SerializeField]
         private UnityEvent<Color> OnValueChanged;
+
+        private bool setThisFrame = false;
 
         [System.Serializable]
         private class SliderValue
@@ -90,8 +93,11 @@ namespace Btools.Components
             RGBSliders[2].without.color = new Color(rgb.r, rgb.g, 0);
             RGBSliders[2].slider.value = rgb.b;
 
-            AlphaSlider.with.color = new Color(rgb.r, rgb.g, rgb.b);
-            AlphaSlider.slider.value = alpha;
+            if (useAlpha)
+            {
+                AlphaSlider.with.color = new Color(rgb.r, rgb.g, rgb.b);
+                AlphaSlider.slider.value = alpha;
+            }
 
             Color.RGBToHSV(new Color(rgb.r, rgb.g, rgb.b), out float h, out float s, out float v);
             if (h == 0)
@@ -126,8 +132,11 @@ namespace Btools.Components
             HSVSliders[2].without.color = Color.HSVToRGB(hsv.h, hsv.s, 0);
             HSVSliders[2].slider.value = hsv.v;
 
-            AlphaSlider.with.color = Color.HSVToRGB(hsv.h, hsv.s, hsv.v);
-            AlphaSlider.slider.value = alpha;
+            if (useAlpha)
+            {
+                AlphaSlider.with.color = Color.HSVToRGB(hsv.h, hsv.s, hsv.v);
+                AlphaSlider.slider.value = alpha;
+            }
 
             satvalSlider.Value = new Vector2(hsv.s, hsv.v);
             var colorRGB = Color.HSVToRGB(hsv.h, hsv.s, hsv.v);
@@ -151,7 +160,16 @@ namespace Btools.Components
                 ResetSlidersRGB();
             else if (type == Type.HSV)
                 ResetSlidersHSV();
-            OnValueChanged.Invoke(Color);
+
+            if (setThisFrame)
+                return;
+            setThisFrame = true;
+            OnValueChanged?.Invoke(Color);
+        }
+
+        private void Update()
+        {
+            setThisFrame = false;
         }
 
         public void SetRed(float value) => Set(ref rgb.r, value);

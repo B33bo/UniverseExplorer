@@ -1,4 +1,5 @@
 using UnityEngine;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies
 {
@@ -19,10 +20,35 @@ namespace Universe.CelestialBodies
             1, //Red
             0.1f, // Rainbow
         };
+
+        public static readonly ColorHSV[] colorsOfAurora = new ColorHSV[]
+        {
+            new ColorHSV(136 / 360f, 1, 1), //Green
+            new ColorHSV(310 / 360f, .81f, 1), //Pink
+            new ColorHSV(221 / 360f, 1, 1), //Blue
+            new ColorHSV(0, .93f, 1), //Red
+            new ColorHSV(0, 0, 0), //Rainbow
+        };
+
         const float sumOfWeightChart = 161.1f;
 
         public int Flares;
-        public Color color;
+
+        private Color _color;
+        private AuroraColor _auroraColor;
+
+        [InspectableVar("Color")]
+        public ColorHSV Color { get => _color; set => _color = value; }
+
+        [InspectableVar("Color Type")]
+        public AuroraColor AuroraCol
+        {
+            get => _auroraColor; set
+            {
+                _auroraColor = value;
+                _color = colorsOfAurora[(int)value];
+            }
+        }
 
         public override void Create(Vector2 pos)
         {
@@ -35,15 +61,15 @@ namespace Universe.CelestialBodies
 
             float randomWeight = RandomNum.GetFloat(0, sumOfWeightChart, RandomNumberGenerator);
             //fine because the weights correspond to the index of the enum (green = 0)
-            color = (Color)RandomNum.GetIndexFromWeight(WeightChart, randomWeight);
+            AuroraCol = (AuroraColor)RandomNum.GetIndexFromWeight(WeightChart, randomWeight);
         }
 
         public override string GetBonusTypes()
         {
-            return "Color - " + color;
+            return "Color - " + AuroraCol;
         }
 
-        public enum Color
+        public enum AuroraColor
         {
             Green,
             Pink,

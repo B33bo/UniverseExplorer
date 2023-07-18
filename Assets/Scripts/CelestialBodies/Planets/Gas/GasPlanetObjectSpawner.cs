@@ -20,6 +20,7 @@ namespace Universe
 
             BodyManager.RegisterSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             BodyManager.ReloadCommands();
+            CameraControl.Instance.MyCamera.backgroundColor = new Color(1, .5f, 0);
         }
 
         private void ResetCells(Rect cameraRect)
