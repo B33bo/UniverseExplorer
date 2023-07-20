@@ -6,33 +6,35 @@ namespace Universe
     {
         public float _h, _s, _v, _a;
 
-        public float h
+        public float h { get => _h; set => _h = Mod(value); }
+        public float s { get => _s; set => _s = Limit(value); }
+        public float v { get => _v; set => _v = Limit(value); }
+        public float a { get => _a; set => _a = Limit(value); }
+
+        private static float Mod(float f)
         {
-            get => _h; set
-            {
-                _h = value % 1;
-                if (_h < 0)
-                    _h += 1;
-            }
+            f %= 1;
+            if (f < 0)
+                f += 1;
+            return f;
         }
-        public float s { get => _s; set => _s = Mathf.Clamp(value, 0, 1); }
-        public float v { get => _v; set => _v = Mathf.Clamp(value, 0, 1); }
-        public float a { get => _a; set => _a = Mathf.Clamp(value, 0, 1); }
+
+        private static float Limit(float f) => Mathf.Clamp01(f);
 
         public ColorHSV(float H, float S, float V)
         {
-            _h = H;
-            _s = S;
-            _v = V;
+            _h = Mod(H);
+            _s = Limit(S);
+            _v = Limit(V);
             _a = 1;
         }
 
         public ColorHSV(float H, float S, float V, float A)
         {
-            _h = H;
-            _s = S;
-            _v = V;
-            _a = A;
+            _h = Mod(H);
+            _s = Limit(S);
+            _v = Limit(V);
+            _a = Limit(A);
         }
 
         private ColorHSV(Color color)

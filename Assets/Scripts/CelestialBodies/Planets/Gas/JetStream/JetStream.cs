@@ -20,15 +20,11 @@ namespace Universe.CelestialBodies.Planets.Gas
             main = jetParticles.main;
             main.startSize = size;
 
-            float color = RandomNum.Get(20, 50, randomNumGenerator);
-            Color colorA = Color.HSVToRGB((color - 3) / 360f, 1, 1);
-            Color colorB = Color.HSVToRGB((color + 3) / 360f, 1, 1);
+            float lerp = RandomNum.GetFloat(1, randomNumGenerator);
+            Color color = Color.Lerp(ColorHighlights.Instance.primary, ColorHighlights.Instance.secondary, lerp);
 
-            var minMaxGradient = new ParticleSystem.MinMaxGradient(colorA, colorB)
-            {
-                mode = ParticleSystemGradientMode.TwoColors,
-            };
-            main.startColor = minMaxGradient;
+            var startColor = new ParticleSystem.MinMaxGradient(color);
+            main.startColor = startColor;
 
             float speed = (float)RandomNum.Get(10, 25f, randomNumGenerator);
             main.startSpeed = speed;

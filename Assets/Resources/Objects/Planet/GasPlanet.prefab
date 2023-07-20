@@ -108,7 +108,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1370047956
+  randomSeed: 0
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4852,9 +4852,9 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
@@ -9621,7 +9621,6 @@ GameObject:
   - component: {fileID: 7937537469929500622}
   - component: {fileID: 7937537469929500621}
   - component: {fileID: 7937537469929500617}
-  - component: {fileID: 7937537469929500618}
   - component: {fileID: 8451949592480361393}
   m_Layer: 0
   m_Name: GasPlanet
@@ -9787,22 +9786,7 @@ MonoBehaviour:
   - {fileID: 7937537469925881123}
   - {fileID: 7937537471129155429}
   - {fileID: 7937537470774372152}
---- !u!58 &7937537469929500618
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7937537469929500620}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  body: {fileID: 7937537469929500623}
 --- !u!210 &8451949592480361393
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -9862,9 +9846,9 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
@@ -14666,9 +14650,9 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2

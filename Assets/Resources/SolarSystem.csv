@@ -1,0 +1,10 @@
+Name,PlanetType,Multiplier
+Mercury,RockyPlanet,0.7
+Venus,MoltenPlanet,0.9
+Earth,TerrestrialPlanet,1
+Mars,RockyPlanet,.98
+Jupiter,GasPlanet,3
+Saturn,GasPlanet,2.5
+Uranus,GasPlanet,2
+Neptune,GasPlanet,1.8
+Pluto,IcyPlanet,0.4

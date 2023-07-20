@@ -29,7 +29,7 @@ namespace Universe.CelestialBodies.Biomes.Grass
 
             RandomNumberGenerator.NextDouble(); // for some reason this is necessary else it all goes pink. Why? good question
             var selectedColorWeight = RandomNum.GetFloat(colorWeightTotal, RandomNumberGenerator);
-            color = (TreeColor)RandomNum.GetIndexFromWeight(colorWeights, selectedColorWeight);
+            color = (TreeColor)RandomNum.GetIndexFromWeights(colorWeights, selectedColorWeight);
 
             Name = "Tree";
 

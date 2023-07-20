@@ -19,9 +19,19 @@ namespace Universe.CelestialBodies.Planets
         public override void Create(Vector2 pos)
         {
             Position = pos;
-            Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
-            Name = GenerateName();
-            Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
+
+            if (Seed == Star.Pluto)
+            {
+                Name = "Pluto";
+                Radius = 1188.3 * Measurement.Km;
+                Mass = 1.309e22 * Measurement.Kg;
+            }
+            else
+            {
+                Name = GenerateName();
+                Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
+                Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
+            }
         }
     }
 }

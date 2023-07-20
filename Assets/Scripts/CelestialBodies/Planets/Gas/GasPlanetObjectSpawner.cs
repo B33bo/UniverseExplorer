@@ -2,10 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Universe.CelestialBodies.Planets.Gas;
+using Universe.CelestialBodies.Planets;
 
 namespace Universe
 {
-    public class GasPlanetObjectSpawner : MonoBehaviour
+    public class GasPlanetObjectSpawner : ColorHighlights
     {
         [SerializeField]
         private JetStream jetStream;
@@ -16,11 +17,32 @@ namespace Universe
 
         private void Start()
         {
+            if (BodyManager.Parent is GasPlanet gasPlanet)
+                SetColors(gasPlanet);
+
             CameraControl.Instance.OnPositionUpdate += ResetCells;
 
             BodyManager.RegisterSceneLoad(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             BodyManager.ReloadCommands();
-            CameraControl.Instance.MyCamera.backgroundColor = new Color(1, .5f, 0);
+            CameraControl.Instance.MyCamera.backgroundColor = tertiary;
+        }
+
+        private void SetColors(GasPlanet gasPlanet)
+        {
+            var min = gasPlanet.GasColor;
+            var max = gasPlanet.GasColor;
+
+            min.h -= gasPlanet.Contrast;
+            min.s -= gasPlanet.Contrast * GasPlanet.ContrastSatDropoff;
+            min.v -= gasPlanet.Contrast * GasPlanet.ContrastSatDropoff;
+
+            max.h += gasPlanet.Contrast;
+            max.s += gasPlanet.Contrast * GasPlanet.ContrastSatDropoff;
+            max.v += gasPlanet.Contrast * GasPlanet.ContrastSatDropoff;
+
+            primary = min;
+            secondary = max;
+            tertiary = gasPlanet.GasColor;
         }
 
         private void ResetCells(Rect cameraRect)

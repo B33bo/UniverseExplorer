@@ -54,6 +54,8 @@ namespace Universe
         private GridDisplay grid;
 
         private TextMeshProUGUI PositionText;
+
+        [SerializeField]
         private float CamScale = 5;
         public event CameraPositionUpdate OnPositionUpdate;
 

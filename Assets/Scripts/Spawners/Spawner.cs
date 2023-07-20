@@ -201,7 +201,7 @@ namespace Universe
                 weightSum += weights[i];
 
             float rndNum = RandomNum.GetFloat(weightSum, rand);
-            int randomIndex = RandomNum.GetIndexFromWeight(weights, rndNum);
+            int randomIndex = RandomNum.GetIndexFromWeights(weights, rndNum);
 
             return randomIndex;
         }

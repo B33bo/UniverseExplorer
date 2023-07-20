@@ -1,0 +1,23 @@
+-- This text file is just to keep track of every easter egg in the game --
+
+- Yellow snow
+- Rainbow objects
+	- Galaxies
+	- Nebulae
+	- Auroras
+	- Trees
+	- Ore
+- Molten planet has a low chance of spawning a flower
+- Star with seed of 0 is our solar system
+	- Earth's continents are in real time
+	- Antarctica's auroras are all named aurora borealis
+- End is nigh sign at edges of each planet where terrain generation stops
+	- Is a buoy on water planets
+- Error planet
+- Inspect rock pile
+- Galaxy Backgrounds take you to galaxies
+- Stars in night sky are found nearby
+- Terrestrial Planet ocean
+- Unknownium ore
+- Yellow snow
+- Can't escape black hole

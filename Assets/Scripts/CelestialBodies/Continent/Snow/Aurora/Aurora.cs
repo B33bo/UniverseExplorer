@@ -1,4 +1,5 @@
 using UnityEngine;
+using Universe.CelestialBodies.Biomes;
 using Universe.Inspector;
 
 namespace Universe.CelestialBodies
@@ -53,15 +54,23 @@ namespace Universe.CelestialBodies
         public override void Create(Vector2 pos)
         {
             Position = pos;
+
             Name = "Aurora " + RandomNum.GetPlanetName(RandomNumberGenerator);
             Width = RandomNum.GetFloat(8, 56, RandomNumberGenerator);
             Height = 5;
             Flares = Mathf.CeilToInt((float)Width / FlareSize);
             Mass = 0;
 
+            if (BodyManager.Parent is Continent c && c.Name == "Antarctica")
+            {
+                Name = "Aurora Australis";
+                AuroraCol = AuroraColor.Pink;
+                return;
+            }
+
             float randomWeight = RandomNum.GetFloat(0, sumOfWeightChart, RandomNumberGenerator);
             //fine because the weights correspond to the index of the enum (green = 0)
-            AuroraCol = (AuroraColor)RandomNum.GetIndexFromWeight(WeightChart, randomWeight);
+            AuroraCol = (AuroraColor)RandomNum.GetIndexFromWeights(WeightChart, randomWeight);
         }
 
         public override string GetBonusTypes()

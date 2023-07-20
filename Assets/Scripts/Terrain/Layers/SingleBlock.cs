@@ -10,6 +10,8 @@ namespace Universe.Terrain
 
         public override void Generate(Vector2Int bottomLeft, Vector2Int topRight, ref Dictionary<Vector2Int, CelestialBodyRenderer> takenPositions)
         {
+            if (block == null)
+                return;
             for (int x = bottomLeft.x; x <= topRight.x; x++)
             {
                 for (int y = bottomLeft.y; y <= topRight.y; y++)

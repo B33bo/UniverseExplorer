@@ -18,8 +18,17 @@ namespace Universe.CelestialBodies.Planets
         public override void Create(Vector2 pos)
         {
             Position = pos;
-            Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
+
+            if (Seed == Star.Venus)
+            {
+                Name = "Venus";
+                Radius = 6051 * Measurement.Km;
+                Mass = 4.867e27 * Measurement.Kg;
+                return;
+            }
+
             Name = GenerateName();
+            Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
         }
     }

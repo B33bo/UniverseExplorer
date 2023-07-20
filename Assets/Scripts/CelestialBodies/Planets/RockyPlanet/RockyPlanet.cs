@@ -18,11 +18,28 @@ namespace Universe.CelestialBodies.Planets
         public override void Create(Vector2 pos)
         {
             Position = pos;
-            Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
-            Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
-            Name = GenerateName();
 
-            RockColor = new ColorHSV(13 / 360f, RandomNum.GetFloat(1, RandomNumberGenerator), .5f);
+            if (Seed == Star.Mercury)
+            {
+                Name = "Mercury";
+                Radius = 2439 * Measurement.Km;
+                Mass = 3.285e23;
+                RockColor = new ColorHSV(13 / 360f, 0, .5f);
+            }
+            else if (Seed == Star.Mars)
+            {
+                Name = "Mars";
+                Radius = 3389 * Measurement.Km;
+                Mass = 6.39e23 * Measurement.Kg;
+                RockColor = new ColorHSV(13 / 360f, 1, .5f);
+            }
+            else
+            {
+                Name = GenerateName();
+                Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
+                Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
+                RockColor = new ColorHSV(13 / 360f, RandomNum.GetFloat(1, RandomNumberGenerator), .5f);
+            }
         }
     }
 }

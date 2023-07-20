@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Universe
+namespace Universe.Terrain
 {
     public abstract class TerrainLayer : MonoBehaviour
     {
@@ -14,9 +14,10 @@ namespace Universe
             if (takenBlocks.ContainsKey(position))
                 return null;
 
-            Vector2 posFloat = new Vector2(position.x, position.y);
             var newBlock = Instantiate(block);
+            Vector2 posFloat = new Vector2(position.x, position.y);
             newBlock.Spawn(posFloat, seed);
+
             takenBlocks.Add(position, newBlock);
             return newBlock;
         }

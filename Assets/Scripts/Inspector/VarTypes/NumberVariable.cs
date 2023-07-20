@@ -64,20 +64,20 @@ namespace Universe.Inspector
 
         private object ToObject(float val)
         {
-            return type switch
-            {
-                Type.Float => val,
-                Type.Double => (double)val,
-                Type.Integer => (int)val,
-                _ => throw new System.NotImplementedException(),
-            };
+            // don't use switch statement it doesn't work for some reason. casted to double
+            if (type == Type.Float)
+                return val;
+            if (type == Type.Double)
+                return (double)val;
+            if (type == Type.Integer)
+                return (int)val;
+            throw new System.NotImplementedException();
         }
 
         public void SetFloatFromStr(string val)
         {
             if (float.TryParse(val, out float fVal))
                 Set(fVal);
-            return;
         }
 
         public void SetFloatFromSlider(float f)

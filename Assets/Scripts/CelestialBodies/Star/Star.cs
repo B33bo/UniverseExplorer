@@ -5,6 +5,7 @@ namespace Universe.CelestialBodies.Planets
 {
     public class Star : CelestialBody
     {
+        public const int Mercury = 0, Venus = 1, Earth = 2, Mars = 3, Jupiter = 4, Saturn = 5, Uranus = 6, Neptune = 7, Pluto = 8;
         public const float minTemp = 3000, maxTemp = 10_000;
         public override bool Circular => true;
         public override string TravelTarget => "Star";
@@ -42,6 +43,17 @@ namespace Universe.CelestialBodies.Planets
         public override void Create(Vector2 position)
         {
             Position = position;
+
+            if (Seed == 0)
+            {
+                Name = "Sol";
+                Mass = 1.989e30 * Measurement.Kg;
+                Radius = 696_340 * Measurement.Km;
+                trueRadius = 3.96340 * Measurement.Km;
+                temperature = 5600;
+                return;
+            }
+
             Name = RandomNum.GetPlanetName(Seed);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
 
@@ -52,6 +64,12 @@ namespace Universe.CelestialBodies.Planets
 
         public void SpawnPlanets(Transform transform)
         {
+            if (Seed == 0)
+            {
+                SpawnEarthSolarSystem(transform);
+                return;
+            }
+
             planets = new PlanetRenderer[RandomNumberGenerator.Next(0, 5)];
 
             for (int i = 0; i < planets.Length; i++)
@@ -71,7 +89,37 @@ namespace Universe.CelestialBodies.Planets
             }
         }
 
+        private void SpawnEarthSolarSystem(Transform transform) // idfk what our solar system is called, why doesn't it have a name
+        {
+            var data = CSVreader.GetValues<PlanetCSVData>(Resources.Load<TextAsset>("SolarSystem").text.Trim('\r').Split('\n'));
+            planets = new PlanetRenderer[8];
+            float dist = 0;
+
+            for (int i = 0; i < planets.Length; i++)
+            {
+                PlanetRenderer newPlanet = Object.Instantiate(Resources.Load<PlanetRenderer>("Objects/Planet/" + data[i].PlanetType), transform);
+                newPlanet.Spawn(Vector2.zero, i);
+                newPlanet.Scale /= (float)trueRadius;
+                newPlanet.Scale *= data[i].Multiplier * 1.2f;
+
+                dist += RandomNum.GetFloat(2, 4, newPlanet.Target.RandomNumberGenerator);
+
+                float currentRot = RandomNum.GetFloat(0, Mathf.PI * 2, newPlanet.Target.RandomNumberGenerator);
+
+                newPlanet.Target.Position = new Vector3(Mathf.Cos(currentRot), Mathf.Sin(currentRot)) * dist;
+
+                planets[i] = newPlanet;
+                (newPlanet.Target as Planet).sun = this;
+            }
+        }
+
         public override string GetBonusTypes() =>
             "Temperature - " + temperature;
+
+        private struct PlanetCSVData
+        {
+            public string Name, PlanetType;
+            public float Multiplier;
+        }
     }
 }

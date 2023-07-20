@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Universe.Inspector
         {
             this.variable = variable;
             label.text = variable.VariableName;
+            args ??= Array.Empty<object>();
             InitValue(variable.GetValue(), args);
             initialised = true;
         }

@@ -26,11 +26,57 @@ namespace Universe.CelestialBodies.Biomes
 
         public override void Create(Vector2 pos)
         {
-            Name = RandomNum.GetPlanetName(RandomNumberGenerator);
             Position = pos;
-            GenerateMesh();
+
+            if (Seed <= TerrestrialPlanet.Antarctica && Seed >= 0)
+            {
+                GenerateEarth();
+                return;
+            }
+
+            Name = RandomNum.GetPlanetName(RandomNumberGenerator);
             continentType = (ContinentType)RandomNum.Get(0, 3, RandomNumberGenerator);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
+            GenerateMesh();
+        }
+
+        private void GenerateEarth()
+        {
+            Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator); // idfk ok
+            switch (Seed)
+            {
+                default:
+                    break;
+                case TerrestrialPlanet.NorthAmerica:
+                    Name = "North America";
+                    continentType = ContinentType.Grass;
+                    break;
+                case TerrestrialPlanet.SouthAmerica:
+                    Name = "South America";
+                    continentType = ContinentType.Grass;
+                    break;
+                case TerrestrialPlanet.Africa:
+                    Name = "Africa";
+                    continentType = ContinentType.Sand;
+                    break;
+                case TerrestrialPlanet.Europe:
+                    Name = "Europe";
+                    continentType = ContinentType.Grass;
+                    break;
+                case TerrestrialPlanet.Asia:
+                    Name = "Asia";
+                    continentType = ContinentType.Grass;
+                    break;
+                case TerrestrialPlanet.Oceania:
+                    Name = "Oceania";
+                    continentType = ContinentType.Sand;
+                    break;
+                case TerrestrialPlanet.Antarctica:
+                    Name = "Antarctica";
+                    continentType = ContinentType.Snow;
+                    break;
+            }
+            GenerateMesh();
         }
 
         private void GenerateMesh()

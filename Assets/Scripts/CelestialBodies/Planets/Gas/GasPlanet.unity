@@ -352,4 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980c46da77de5334cbd5210d12225295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  primary: {r: 1, g: 0.25, b: 0, a: 1}
+  secondary: {r: 1, g: 0.7202713, b: 0, a: 1}
+  tertiary: {r: 1, g: 0.4862745, b: 0, a: 1}
   jetStream: {fileID: 2969538904622288422, guid: 70a7056223674214c9085d1a10a77fd9, type: 3}

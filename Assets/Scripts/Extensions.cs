@@ -29,13 +29,16 @@ namespace Universe
 
         public static string ToHumanString(this Color c)
         {
-            Color.RGBToHSV(c, out float Hue, out float S, out float V);
+            return ToHumanString((ColorHSV)c);
+        }
 
-            if (S == 0)
-                return GetClosest(Grayscale, (int)(V * 255));
+        public static string ToHumanString(this ColorHSV c)
+        {
+            if (c.s < .05f)
+                return GetClosest(Grayscale, (int)(c.v * 255));
 
-            string result = GetClosest(Colors, (int)(Hue * 360));
-            if (result == "Magenta" && S < .5f)
+            string result = GetClosest(Colors, (int)(c.h * 360));
+            if (result == "Magenta" && c.s < .5f)
                 return "Pink";
             return result;
         }
@@ -66,7 +69,6 @@ namespace Universe
         public static int HashPos(this Vector2 vector, int seed)
         {
             int hash = -2128831035;
-            // Suitable nullity checks etc, of course :)
             hash = (hash * 16777619) ^ vector.x.GetHashCode();
             hash = (hash * 16777619) ^ vector.y.GetHashCode();
             hash = (hash * 16777619) ^ seed.GetHashCode();

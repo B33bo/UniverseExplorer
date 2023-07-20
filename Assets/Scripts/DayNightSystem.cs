@@ -1,9 +1,8 @@
-using UnityEngine;
-using Universe.CelestialBodies.Planets;
-using Universe.CelestialBodies;
 using System.Collections;
+using UnityEngine;
+using Universe.CelestialBodies;
 using Universe.CelestialBodies.Biomes;
-using UnityEngine.XR;
+using Universe.CelestialBodies.Planets;
 
 namespace Universe
 {
@@ -229,7 +228,7 @@ namespace Universe
             transform.position = new Vector2(CameraControl.Instance.Position.x,
                 Mathf.Max(CameraControl.Instance.CameraBounds.yMin, 2));
 
-            Time = GlobalTime.Time % 360 / 180; //0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
+            Time = GetTime(); //0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
             rotator.transform.rotation = Quaternion.Euler(0, 0, Time * 180);
 
             float time = Time % 1;
@@ -251,6 +250,18 @@ namespace Universe
                 else
                     starSpecks[i].SetAlpha(Time);
             }
+        }
+
+        private float GetTime()
+        {
+            if (BodyManager.Parent is Continent c)
+            {
+                var time = TimeInContinent.ContinentTime(c);
+                if (time >= 0)
+                    return time;
+            }
+
+            return GlobalTime.Time % 360 / 180; //0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
         }
     }
 }

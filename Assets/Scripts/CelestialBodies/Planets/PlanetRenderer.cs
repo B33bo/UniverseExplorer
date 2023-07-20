@@ -16,7 +16,7 @@ namespace Universe
 
             SpawnPlanet(pos, seed);
 
-            if (!(BodyManager.Parent is Moon))
+            if (!(BodyManager.Parent is Moon) && (Target.Seed < 0 || Target.Seed > Star.Pluto))
                 StartCoroutine(SpawnMoons());
         }
 

@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-namespace Universe
+namespace Universe.Terrain
 {
     public class BlockyTerrainGenerator : Spawner
     {
@@ -57,15 +55,15 @@ namespace Universe
                 if (depth > -cameraRect.yMin)
                     break;
 
-                float minY = Mathf.Max(cameraRect.yMin, -depth - layers[i].height);
-                float maxY = Mathf.Min(cameraRect.yMax, -depth);
-                Vector2Int min = new Vector2Int(xMin, (int)minY - 1);
+                float minY = Mathf.Max(cameraRect.yMin, -(depth + layers[i].height));
+                float maxY = Mathf.Min(cameraRect.yMax, -(depth));
+                Vector2Int min = new Vector2Int(xMin, (int)minY);
                 Vector2Int max = new Vector2Int(xMax, (int)maxY);
 
                 if (!IsInBounds(min, 2))
                     continue;
 
-                depth += layers[i].height;
+                depth += layers[i].height + 1;
                 layers[i].layer.Generate(min, max, ref blocksTaken);
             }
 
@@ -73,7 +71,7 @@ namespace Universe
                 return;
 
             Vector2Int finishMin = new Vector2Int(xMin, (int)cameraRect.yMin - 1);
-            Vector2Int finishMax = new Vector2Int(xMax, (int)Mathf.Min(-totalDepth + 3, cameraRect.yMax + 3));
+            Vector2Int finishMax = new Vector2Int(xMax, (int)Mathf.Min(-depth, cameraRect.yMax));
             layers[layers.Length - 1].layer.Generate(finishMin, finishMax, ref blocksTaken);
         }
 

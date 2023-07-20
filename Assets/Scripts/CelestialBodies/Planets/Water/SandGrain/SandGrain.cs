@@ -38,7 +38,7 @@ namespace Universe.CelestialBodies.Planets.Water
             Height = size.y * Measurement.mm;
             Mass = 0.0647989 * Measurement.g * ((size.x + size.y) / 2);
 
-            color = (Color)RandomNum.GetIndexFromWeight(ColorWeightChars, 
+            color = (Color)RandomNum.GetIndexFromWeights(ColorWeightChars, 
                 RandomNum.GetFloat(0, SumOfWeightCharts, RandomNumberGenerator));
 
             composition = new ChemicalComposition(ChemicalComposition.BondingType.Covalent, new Chemical(100, "SiO2"));

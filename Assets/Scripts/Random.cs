@@ -78,7 +78,7 @@ namespace Universe
                 total += weights[i];
 
             float current = GetFloat(total, random);
-            int index = GetIndexFromWeight(weights, current);
+            int index = GetIndexFromWeights(weights, current);
             return index;
         }
 
@@ -88,11 +88,11 @@ namespace Universe
             for (int i = 0; i < weights.Length; i++)
                 total += weights[i];
             value = GetFloat(total, random);
-            int index = GetIndexFromWeight(weights, value);
+            int index = GetIndexFromWeights(weights, value);
             return index;
         }
 
-        public static int GetIndexFromWeight(float[] weights, float number)
+        public static int GetIndexFromWeights(float[] weights, float number)
         {
             float sum = 0;
             for (int i = 0; i < weights.Length; i++)
