@@ -10,7 +10,7 @@
 - Molten planet has a low chance of spawning a flower
 - Star with seed of 0 is our solar system
 	- Earth's continents are in real time
-	- Antarctica's auroras are all named aurora borealis
+	- Antarctica's auroras are all named aurora astralis
 - End is nigh sign at edges of each planet where terrain generation stops
 	- Is a buoy on water planets
 - Error planet
