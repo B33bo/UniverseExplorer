@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Universe.Blocks;
-// psst! seed 97090 gives rainbonite in grass world (unless more added ;P)
 
 namespace Universe.Terrain
 {
@@ -22,6 +21,8 @@ namespace Universe.Terrain
         [SerializeField]
         private int OreSize = 6;
 
+        private Vector2Int min, max;
+
         private int ToLowestCellSize(int pos)
         {
             int i;
@@ -31,6 +32,8 @@ namespace Universe.Terrain
 
         public override void Generate(Vector2Int min, Vector2Int max, ref Dictionary<Vector2Int, CelestialBodyRenderer> takenPositions)
         {
+            this.min = min;
+            this.max = max;
             min.x = ToLowestCellSize(min.x);
             min.y = ToLowestCellSize(min.y);
             // miny % 6 not same ?
@@ -45,11 +48,17 @@ namespace Universe.Terrain
                     SpawnOreVein(position, maxPos, seed, max.y, ref takenPositions);
                 }
             }
+
+            
         }
 
         public CelestialBodyRenderer SpawnAtOre(OreBlockRenderer block, OreType oreType, Vector2Int position, int seed, ref Dictionary<Vector2Int, CelestialBodyRenderer> takenBlocks)
         {
             if (takenBlocks.ContainsKey(position))
+                return null;
+            if (position.x < min.x || position.x > max.x)
+                return null;
+            if (position.y < min.y || position.y > max.y)
                 return null;
 
             Vector2 posFloat = new Vector2(position.x, position.y);
@@ -57,6 +66,15 @@ namespace Universe.Terrain
             newBlock.Spawn(posFloat, seed, oreType, rockSprite);
             takenBlocks.Add(position, newBlock);
             return newBlock;
+        }
+
+        public override CelestialBodyRenderer SpawnAt(CelestialBodyRenderer block, int seed, Vector2Int position, ref Dictionary<Vector2Int, CelestialBodyRenderer> takenBlocks)
+        {
+            if (position.x < min.x || position.x > max.x)
+                return null;
+            if (position.y < min.y || position.y > max.y)
+                return null;
+            return base.SpawnAt(block, seed, position, ref takenBlocks);
         }
 
         private OreType? GetOreType(System.Random rand, float depth)

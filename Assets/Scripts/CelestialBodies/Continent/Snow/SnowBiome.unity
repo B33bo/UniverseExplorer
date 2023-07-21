@@ -185,7 +185,7 @@ MonoBehaviour:
   - layer: {fileID: 763749166}
     height: 10
   - layer: {fileID: 949647475}
-    height: 5
+    height: 30
 --- !u!1001 &557490286
 PrefabInstance:
   m_ObjectHideFlags: 0

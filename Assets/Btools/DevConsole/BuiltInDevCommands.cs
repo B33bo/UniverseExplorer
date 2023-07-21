@@ -48,6 +48,7 @@ namespace Btools.DevConsole
             {"remove_command", new DevConsoleCommand("remove_command", "remove a command", RemoveCommand, "CommandName") },
             {"remove_variable", new DevConsoleCommand("remove_variable", "remove a variable", RemoveVariable, "VarName") },
             {"fall", new DevConsoleCommand("fall", "make all objects fall", Fall, "2D|3D") },
+            {"devcam", new DevConsoleCommand("devcam", "Developer camera, Press X to destroy, IJKL to move, OU to change size, +- to change speed", DebugCamEnable ) },
         };
 
         private static string Quit(string[] Parameters)
@@ -350,9 +351,9 @@ namespace Btools.DevConsole
 
             var Target = type.GetMember(Parameters[3])[0];
 
-            MemberType memberType = MemberType.Unknown;
+            MemberType memberType;
 
-            PropertyInfo propertyInfo = null;
+            PropertyInfo propertyInfo;
             FieldInfo fieldInfo = null;
             MethodInfo methodInfo = null;
 
@@ -734,6 +735,12 @@ namespace Btools.DevConsole
             }
 
             return "deleted rigidbodies";
+        }
+
+        private static string DebugCamEnable(string[] Parameters)
+        {
+            UnityEngine.Object.Instantiate(Resources.Load("DebugCam"));
+            return "IJKL, OU, =-, X";
         }
 
         private enum MemberType : byte

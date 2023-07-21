@@ -9,7 +9,7 @@ namespace Universe.Terrain
 
         public void GenerateAt(Vector2Int position, ref Dictionary<Vector2Int, CelestialBodyRenderer> takenPositions) => Generate(position, position, ref takenPositions);
 
-        public CelestialBodyRenderer SpawnAt(CelestialBodyRenderer block, int seed, Vector2Int position, ref Dictionary<Vector2Int, CelestialBodyRenderer> takenBlocks)
+        public virtual CelestialBodyRenderer SpawnAt(CelestialBodyRenderer block, int seed, Vector2Int position, ref Dictionary<Vector2Int, CelestialBodyRenderer> takenBlocks)
         {
             if (takenBlocks.ContainsKey(position))
                 return null;
