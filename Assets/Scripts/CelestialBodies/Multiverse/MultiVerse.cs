@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies
 {
@@ -24,12 +25,16 @@ namespace Universe.CelestialBodies
         public override string TravelTarget => "Multiverse";
         public override bool Circular => true;
 
+        [InspectableVar("Rotation Speed")]
+        public float RotateSpeed { get; set; }
+
         public override void Create(Vector2 position)
         {
             Position = position;
             Width = double.PositiveInfinity;
             Height = double.PositiveInfinity;
             Radius = double.PositiveInfinity;
+            RotateSpeed = RandomNum.GetFloat(-500, 500, RandomNumberGenerator);
         }
     }
 }

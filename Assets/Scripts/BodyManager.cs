@@ -10,6 +10,7 @@ namespace Universe
         private static Stack<string> ScenesVisited = new Stack<string>();
         private static Stack<CelestialBody> BodiesVisited = new Stack<CelestialBody>();
         public static CelestialBody Parent;
+        public static CelestialBodies.Universe Universe { get; private set; }
         public static int SceneVisitedCount => ScenesVisited.Count;
 
         public delegate void Loaded(string Scene);
@@ -19,12 +20,15 @@ namespace Universe
         {
             Debug.Log($"Loaded Scene {Scene}");
             OnSceneLoad?.Invoke(Scene);
+
+            if (Parent is CelestialBodies.Universe u)
+                Universe = u;
         }
 
         public static CelestialBody[] GetPath => BodiesVisited.ToArray();
 
         public static int GetSeed() =>
-            Parent is null ? 1 : Parent.Seed;
+            Parent is null ? 0 : Parent.Seed;
 
         public static void ReloadCommands()
         {
@@ -48,7 +52,7 @@ namespace Universe
             string Spawn(string[] parameters)
             {
                 var prefab = Resources.Load<CelestialBodyRenderer>("Objects/" + parameters[1]);
-                var obj = MonoBehaviour.Instantiate(prefab);
+                var obj = Object.Instantiate(prefab);
 
                 if (parameters.Length < 3)
                     obj.Spawn(Camera.main.transform.position, null);
@@ -73,6 +77,8 @@ namespace Universe
 
         public static void LoadSceneBackwards()
         {
+            if (Parent == Universe)
+                Universe = null;
             Parent = BodiesVisited.Pop();
             UnityEngine.SceneManagement.SceneManager.LoadScene(ScenesVisited.Pop());
         }

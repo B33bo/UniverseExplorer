@@ -131,6 +131,7 @@ MonoBehaviour:
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
+  SpawnWeight: 20
   lineRenderers:
   - {fileID: 3793696745864037470}
   - {fileID: 3793696747095664307}

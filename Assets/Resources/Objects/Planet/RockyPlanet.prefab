@@ -353,6 +353,7 @@ MonoBehaviour:
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
+  SpawnWeight: 100
   rocks:
   - {fileID: 117376945566501447}
   - {fileID: 117376945619317761}

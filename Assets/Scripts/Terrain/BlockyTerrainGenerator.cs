@@ -6,6 +6,7 @@ namespace Universe.Terrain
 {
     public class BlockyTerrainGenerator : Spawner
     {
+        public const int MaxBlocks = 5000;
         public float Steepness;
         public float Wideness = 1;
 

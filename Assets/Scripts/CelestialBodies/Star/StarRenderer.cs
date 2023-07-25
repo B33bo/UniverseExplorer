@@ -7,8 +7,6 @@ namespace Universe.CelestialBodies.Planets
     {
         private Star TargetStar => Target as Star;
 
-        public Gradient colorGradient;
-
         [SerializeField]
         private SpriteRenderer spriteRenderer;
 
@@ -51,8 +49,8 @@ namespace Universe.CelestialBodies.Planets
 
             TargetStar.StarColor = GetStarColor();
 
-            //This is to do with sprite masks and sorting order
-            //This happens so the weird texture doesn't clash with another star
+            // This is to do with sprite masks and sorting order
+            // This happens so the weird texture doesn't clash with another star
             int sortingOrder = RandomNum.Get(0, 10000, Target.RandomNumberGenerator);
             spriteMask.frontSortingOrder = sortingOrder + 1;
             spriteMask.backSortingOrder = sortingOrder;
@@ -70,7 +68,7 @@ namespace Universe.CelestialBodies.Planets
 
         public Color GetStarColor()
         {
-            return colorGradient.Evaluate((float)(TargetStar.Temperature - Star.minTemp) / (Star.maxTemp - Star.minTemp));
+            return Universe.LoadedInfo.BlackBodyRadiation.Evaluate((float)(TargetStar.Temperature - Star.minTemp) / (Star.maxTemp - Star.minTemp));
         }
 
         public override void OnUpdate()

@@ -157,6 +157,7 @@ MonoBehaviour:
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
+  SpawnWeight: 50
   icePanels:
   - {fileID: 7944783084329882738}
   - {fileID: 7944783084140657470}

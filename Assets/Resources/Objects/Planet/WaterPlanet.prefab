@@ -119,6 +119,7 @@ MonoBehaviour:
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
+  SpawnWeight: 25
 --- !u!210 &-4395388784586294023
 SortingGroup:
   m_ObjectHideFlags: 0

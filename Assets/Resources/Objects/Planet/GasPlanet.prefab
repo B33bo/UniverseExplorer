@@ -9782,6 +9782,7 @@ MonoBehaviour:
   cameraLerpMultiplyBySize: 1
   scaleLerp: 1
   IsDestroyed: 0
+  SpawnWeight: 100
   particles:
   - {fileID: 7937537469925881123}
   - {fileID: 7937537471129155429}

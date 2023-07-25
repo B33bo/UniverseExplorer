@@ -7,6 +7,7 @@ namespace Universe
 {
     public abstract class PlanetRenderer : CelestialBodyRenderer
     {
+        public float SpawnWeight;
         public override void Spawn(Vector2 pos, int? seed)
         {
             Target = (Planet)Activator.CreateInstance(PlanetType);

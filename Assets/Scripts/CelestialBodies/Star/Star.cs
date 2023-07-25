@@ -11,8 +11,9 @@ namespace Universe.CelestialBodies.Planets
         public override string TravelTarget => "Star";
         public override string TypeString => "Star";
         private double temperature;
+        private static float totalPlanetWeights;
 
-        private static readonly string[] PlanetStrings = new string[] { "WaterPlanet", "TerrestrialPlanet", "RockyPlanet", "GasPlanet", "IcyPlanet", "MoltenPlanet" };
+        private static readonly PlanetRenderer[] PlanetPrefabs = Resources.LoadAll<PlanetRenderer>("Objects/Planet");
         public const double MinMass = 1.5912E+29, MaxMass = 2.9835E+32;
         public const double MinSize = 1_000_000, MaxSize = 10_000_000;
         public static string[] StarNames = null;
@@ -42,6 +43,12 @@ namespace Universe.CelestialBodies.Planets
 
         public override void Create(Vector2 position)
         {
+            if (totalPlanetWeights == 0)
+            {
+                for (int i = 0; i < PlanetPrefabs.Length; i++)
+                    totalPlanetWeights += PlanetPrefabs[i].SpawnWeight;
+            }
+
             Position = position;
 
             if (Seed == 0)
@@ -74,8 +81,7 @@ namespace Universe.CelestialBodies.Planets
 
             for (int i = 0; i < planets.Length; i++)
             {
-                string planetName = PlanetStrings[RandomNumberGenerator.Next(0, PlanetStrings.Length)];
-                PlanetRenderer newPlanet = Object.Instantiate(Resources.Load<PlanetRenderer>("Objects/Planet/" + planetName), transform);
+                PlanetRenderer newPlanet = Object.Instantiate(PlanetPrefabs[GetPlanet()], transform);
                 newPlanet.Spawn(Vector2.zero, RandomNumberGenerator.Next());
                 newPlanet.Scale /= (float)trueRadius;
 
@@ -87,6 +93,21 @@ namespace Universe.CelestialBodies.Planets
                 planets[i] = newPlanet;
                 (newPlanet.Target as Planet).sun = this;
             }
+        }
+
+        private int GetPlanet()
+        {
+            float weightChosen = RandomNum.GetFloat(totalPlanetWeights, RandomNumberGenerator);
+            float sum = 0;
+
+            for (int i = 0; i < PlanetPrefabs.Length; i++)
+            {
+                float next = sum + PlanetPrefabs[i].SpawnWeight;
+                if (next > weightChosen)
+                    return i;
+                sum = next;
+            }
+            return PlanetPrefabs.Length;
         }
 
         private void SpawnEarthSolarSystem(Transform transform) // idfk what our solar system is called, why doesn't it have a name

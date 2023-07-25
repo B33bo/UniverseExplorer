@@ -482,7 +482,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1952231105903891512}
         m_TargetAssemblyTypeName: Universe.Inspector.NumberVariable, Assembly-CSharp
-        m_MethodName: SetFloat
+        m_MethodName: SetFloatFromStr
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
