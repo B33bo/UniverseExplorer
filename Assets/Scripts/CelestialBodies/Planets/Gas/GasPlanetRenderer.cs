@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Planets
 {
@@ -17,11 +18,11 @@ namespace Universe.CelestialBodies.Planets
         {
             Scale = GetFairSize((float)Target.Radius, (float)GasPlanet.MinScale, (float)GasPlanet.MaxScale) * 3 * Vector2.one;
 
-            RegenColors();
-            (Target as GasPlanet).OnColorChange += RegenColors;
+            Target.OnInspected += RegenColors;
+            RegenColors(null);
         }
 
-        private void RegenColors()
+        private void RegenColors(Variable variable)
         {
             ColorHSV gasColor = (Target as GasPlanet).GasColor;
             float contrast = (Target as GasPlanet).Contrast;

@@ -1,10 +1,12 @@
 using UnityEngine;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Biomes.Grass
 {
     public class TreePlant : CelestialBody
     {
         public override string TypeString => "Tree";
+        public bool IsDead = false;
 
         public override string TravelTarget => string.Empty;
 
@@ -21,6 +23,7 @@ namespace Universe.CelestialBodies.Biomes.Grass
         };
         private const float colorWeightTotal = 306;
 
+        [InspectableVar("Type")]
         public TreeColor color;
 
         public override void Create(Vector2 pos)

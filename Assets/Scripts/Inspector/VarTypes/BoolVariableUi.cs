@@ -15,9 +15,7 @@ namespace Universe.Inspector
 
         public void SetBool(bool value)
         {
-            if (!initialised)
-                return;
-            variable.SetValue(value);
+            Set(value);
         }
     }
 }

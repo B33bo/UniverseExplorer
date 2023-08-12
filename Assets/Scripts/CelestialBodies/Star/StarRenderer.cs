@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Planets
 {
@@ -19,9 +20,9 @@ namespace Universe.CelestialBodies.Planets
         [SerializeField]
         private SpriteMask spriteMask;
 
-        private void ColorChanged(object val)
+        private void ColorChanged(Variable val)
         {
-            if (val is double)
+            if (val == null || val.VariableName == "Temperature")
                 TargetStar.StarColor = GetStarColor();
             spriteRenderer.color = TargetStar.StarColor;
             worleyNoise.color = spriteRenderer.color;
@@ -45,7 +46,8 @@ namespace Universe.CelestialBodies.Planets
             Target.Create(pos);
 
             Scale = GetFairSizeCurve((Target as Star).trueRadius, 4f, 1.2f) * Vector3.one;
-            TargetStar.ColorChange += ColorChanged;
+            TargetStar.OnInspected += ColorChanged;
+            ColorChanged(null);
 
             TargetStar.StarColor = GetStarColor();
 

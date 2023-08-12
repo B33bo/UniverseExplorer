@@ -62,8 +62,13 @@ namespace Universe
 
         public static float GetFairSize(float Size, float minSize, float maxSize)
         {
-            float SizeDifference = maxSize - minSize;
-            return (float)((Size - minSize) / SizeDifference) + 1;
+            return (float)GetFairSize((double)Size, minSize, maxSize);
+        }
+
+        public static double GetFairSize(double Size, double minSize, double maxSize)
+        {
+            double SizeDifference = maxSize - minSize;
+            return ((Size - minSize) / SizeDifference) + 1;
         }
 
         public static float GetFairSizeCurve(double size, double coefficient, double pwrBase)

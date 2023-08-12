@@ -12,17 +12,7 @@ namespace Universe.CelestialBodies.Planets.Iron
 
         public override bool Circular => false;
 
-        private ScrapType _scrap;
-        public ScrapType ScrapData
-        {
-            get => _scrap;
-            set
-            {
-                _scrap = value;
-                OnScrapChange?.Invoke();
-            }
-        }
-        public Action OnScrapChange;
+        private ScrapType ScrapData;
 
         public override void Create(Vector2 pos)
         {
@@ -35,7 +25,7 @@ namespace Universe.CelestialBodies.Planets.Iron
             Height = Width;
         }
 
-        public enum ScrapType
+        public enum ScrapType : byte
         {
             Sheet = 1,
             Pole = 2,

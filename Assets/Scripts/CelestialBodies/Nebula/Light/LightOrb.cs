@@ -25,12 +25,7 @@ namespace Universe.CelestialBodies
             speed = RandomNum.GetFloat(0.1f, 1f, RandomNumberGenerator);
             alphaShift = RandomNum.GetFloat(.01f, 1f, RandomNumberGenerator);
 
-            if (BodyManager.Parent is Nebula nebula)
-                InitNebula(nebula);
-            else if (BodyManager.Parent is Aurora aurora)
-                InitAurora(aurora);
-            else
-                color = RandomNum.GetColor(RandomNumberGenerator);
+            color = LightColorSpawner.Instance.GetColor(RandomNumberGenerator);
         }
 
         private void InitNebula(Nebula nebula)

@@ -84,6 +84,12 @@ EditorBuildSettings:
     path: Assets/Scripts/CelestialBodies/Nebula/Lights.unity
     guid: ccba2a7911809b94d91665d8417e3b92
   - enabled: 1
+    path: Assets/Scripts/CelestialBodies/Planets/Opal/OpalPlanet.unity
+    guid: 5e307d7c4b0db904aaab5f50b578e529
+  - enabled: 1
     path: Assets/Scripts/CelestialBodies/Planets/Iron/IronPlanet.unity
     guid: f510a0daf347ee44db938c2e9704895c
+  - enabled: 1
+    path: Assets/Scripts/CelestialBodies/Planets/Toxic/ToxicPlanet.unity
+    guid: 14da47ec47d328b469aa5109d33ee480
   m_configObjects: {}

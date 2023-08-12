@@ -29,6 +29,7 @@ namespace Universe.Inspector
             if (!initialised)
                 return;
             variable.SetValue(value);
+            ObjectDataLoader.celestialBody.Inspected(variable);
         }
     }
 }

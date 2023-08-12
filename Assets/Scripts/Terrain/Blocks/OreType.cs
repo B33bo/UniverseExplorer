@@ -17,6 +17,7 @@ namespace Universe.Blocks
             new OreType("Emerald", new Color(0, 194f / 255, 0)),
             new OreType("Copper", new Color(76f / 255, 239f / 255, 169f / 255)),
             new OreType("Rainbonite"),
+            new OreType("Opal", new Color(232f / 255, 239f / 255, 213f / 255)),
             Unknownium,
         };
 
@@ -32,9 +33,8 @@ namespace Universe.Blocks
             Emerald,
             Copper,
             Rainbonite,
+            Opal,
             Unknownium,
-
-            Max = Unknownium,
         }
 
         public string Name { get; private set; }

@@ -27,9 +27,9 @@ namespace Universe
                 return;
 
             if (hsv)
-                variable.SetValue((ColorHSV)col);
+                Set((ColorHSV)col);
             else
-                variable.SetValue(col);
+                Set(col);
         }
     }
 }

@@ -26,11 +26,10 @@ namespace Universe.CelestialBodies
             particleSystem.randomSeed = unchecked((uint)Target.Seed);
 
             ParticleColorInit();
-            (Target as SpiralGalaxy).OnRefreshColor = () =>
+            (Target as SpiralGalaxy).OnInspected += _ =>
             {
-                var (outer, inner) = (Target as SpiralGalaxy).Color;
-                bool isRainbow = (Target as SpiralGalaxy).Rainbow;
-                SetColor(outer, inner, isRainbow);
+                var TargetGalaxy = (Target as SpiralGalaxy);
+                SetColor(TargetGalaxy.outer, TargetGalaxy.inner, TargetGalaxy.IsRainbow);
             };
 
             particleSystem.Play();
@@ -41,19 +40,9 @@ namespace Universe.CelestialBodies
         private void ParticleColorInit() //Particle colour, innit bruv
         {
             rainbowGradient ??= particleSystem.colorOverLifetime.color.gradient;
+            var target = Target as SpiralGalaxy;
 
-            if (RandomNum.GetBool(4, Target.RandomNumberGenerator) || Target.Seed == 1337) // 1 / 1,073,741,823 chance (rainbow galaxy)
-            {
-                (Target as SpiralGalaxy).IsRainbow = true;
-                SetColor(Color.white, Color.white, true);
-                return;
-            }
-
-            float color = RandomNum.GetFloat(1f, Target.RandomNumberGenerator);
-            Color outerColor = Color.HSVToRGB(color, 1, 1);
-            Color innerColor = Color.HSVToRGB(RandomNum.GetFloat(1, Target.RandomNumberGenerator), 1, 1);
-            (Target as SpiralGalaxy).Color = (outerColor, innerColor);
-            SetColor(outerColor, innerColor, false);
+            SetColor(target.outer, target.inner, target.IsRainbow);
         }
 
         private void SetColor(Color outer, Color inner, bool isRainbow)
@@ -63,7 +52,6 @@ namespace Universe.CelestialBodies
 
             if (isRainbow)
             {
-                Debug.Log("setting");
                 gradient = rainbowGradient;
             }
             else

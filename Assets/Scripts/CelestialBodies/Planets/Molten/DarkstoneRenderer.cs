@@ -6,10 +6,10 @@ namespace Universe.Blocks
     public class DarkstoneRenderer : BasicBlockRenderer
     {
         [SerializeField]
-        private SpriteRenderer rock, lava;
+        protected SpriteRenderer rock, lava;
 
         [SerializeField]
-        private Gradient gradient;
+        protected Gradient gradient;
 
         [SerializeField]
         private Sprite[] sprites;
@@ -23,7 +23,7 @@ namespace Universe.Blocks
             if (BodyManager.Parent is Star star)
                 rock.color = star.StarColor;
 
-            lava.sprite = sprites[Target.RandomNumberGenerator.Next(0, 4)];
+            lava.sprite = sprites[Target.RandomNumberGenerator.Next(0, sprites.Length)];
             lava.name = lava.sprite.name;
             sprites = null;
             offset = Mathf.PerlinNoise(pos.x * .1f, pos.y * .1f);

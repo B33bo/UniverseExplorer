@@ -417,10 +417,110 @@ MonoBehaviour:
   m_GameObject: {fileID: 1429374023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1921176ffcb965c4894b0cf55d0ea024, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b0d9e0c8e11834489b2b712cc48243a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 3401344289583144821, guid: 5c767a70c2c43244288743d5d317e378, type: 3}
+  ores:
+  - OreType: 0
+    Weight: 200
+    WeightMultiplier:
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    MaxDepth: Infinity
+  - OreType: 5
+    Weight: 10
+    WeightMultiplier:
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    MaxDepth: Infinity
+  - OreType: 6
+    Weight: 10
+    WeightMultiplier:
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    MaxDepth: Infinity
+  rockSprite: {fileID: 21300000, guid: fcca92e3075b205428026dab7589b6d7, type: 3}
+  rock: {fileID: 3401344289583144821, guid: 5c767a70c2c43244288743d5d317e378, type: 3}
+  oreBlock: {fileID: 952549357821897053, guid: 793f6ee2d6ec5ab4dbacd8dd5dd2e065, type: 3}
+  OreSize: 6
 --- !u!1 &1434637773
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +569,7 @@ MonoBehaviour:
   layers:
   - layer: {fileID: 1429374025}
     height: 20
+  alwaysRenderTop: 0
 --- !u!4 &1434637775
 Transform:
   m_ObjectHideFlags: 0

@@ -221,5 +221,42 @@ namespace Universe
                 result[i] = v[i];
             return result;
         }
+
+        public static List<(Vector2, Vector2)> GetRandomWebLines(System.Random rand)
+        {
+            // Start from the middle and draw 4 lines from the center to random points
+            // from each of those lines, draw 2 lines originating from any point on the line and ending at the middle
+
+            const int BaseLines = 4;
+            List<(Vector2, Vector2)> lines = new List<(Vector2, Vector2)>();
+
+            for (int i = 0; i < BaseLines; i++)
+            {
+                float rotation = i * (360f / BaseLines) + RandomNum.GetFloat(5, rand);
+
+                //This was a bug, Mathf.Rad2Deg should be Mathf.Deg2Rad but doing that makes it look too normal, I prefer the chaotic sprawl of the bug
+                float rotationRad = rotation * Mathf.Rad2Deg;
+
+                Vector2 end = new Vector2(Mathf.Cos(rotationRad), Mathf.Sin(rotationRad)) / 2;
+                lines.Add((Vector2.zero, end));
+
+                lines.Add(GetBranch(end, rotation + 15));
+                lines.Add(GetBranch(end, rotation - 15));
+            }
+
+            return lines;
+
+            (Vector2, Vector2) GetBranch(Vector2 parentBranchEnd, float rotation)
+            {
+                float DistanceFromOrigin = RandomNum.GetFloat(1, rand);
+                Vector2 startPos = Vector2.Lerp(Vector2.zero, parentBranchEnd, DistanceFromOrigin);
+
+                Vector2 direction = new Vector2(Mathf.Cos(rotation * Mathf.Deg2Rad), Mathf.Sin(rotation * Mathf.Deg2Rad));
+                Vector2 endPos = startPos + direction;
+
+                endPos = endPos.normalized / 2;
+                return (startPos, endPos);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Universe.Terrain
 {
@@ -16,11 +17,14 @@ namespace Universe.Terrain
         [SerializeField]
         private LayerData[] layers;
 
-        private Dictionary<Vector2Int, CelestialBodyRenderer> blocksTaken;
+        public Dictionary<Vector2Int, CelestialBodyRenderer> blocksTaken;
         private Rect cameraRect;
         private Dictionary<int, float> perlinCache = new Dictionary<int, float>();
         private Vector2 lastReload;
         private float maxDepth;
+
+        [SerializeField]
+        private bool alwaysRenderTop, generate = true;
 
         public static BlockyTerrainGenerator Instance { get; private set; }
 
@@ -32,6 +36,11 @@ namespace Universe.Terrain
 
             for (int i = 0; i < layers.Length; i++)
                 maxDepth += layers[i].height;
+        }
+
+        public override List<Vector2> CellsOnScreen(Rect cameraBounds)
+        {
+            return null;
         }
 
         public static CelestialBodyRenderer BlockAt(int x, int y)
@@ -50,6 +59,8 @@ namespace Universe.Terrain
 
         public override void ReloadCells(Rect cameraRect)
         {
+            if (!generate)
+                return;
             if ((cameraRect.position - lastReload).sqrMagnitude < .8f)
                 return;
             this.cameraRect = cameraRect;
@@ -60,43 +71,10 @@ namespace Universe.Terrain
 
         public override void GenerateNewCells(List<Vector2> cellsOnScreen)
         {
-            int cameraBottomDepth = -(int)cameraRect.yMin;
-            int cameraTopDepth = -(int)cameraRect.yMax;
-
             int xMin = Mathf.FloorToInt(cameraRect.xMin) - 3;
             int xMax = Mathf.CeilToInt(cameraRect.xMax) + 3;
 
-            if (cameraRect.yMax > 0)
-                GenerateTopLayer(xMin, xMax);
-
-
-            int depth = 0;
-            for (int i = 0; i < layers.Length; i++)
-            {
-                if (layers[i].height == 0)
-                    continue;
-                int oreTopDepth = depth;
-                int oreBottomDepth = depth + layers[i].height - 1;
-                depth += layers[i].height;
-
-                if (cameraTopDepth > oreBottomDepth)
-                    continue;
-
-                if (cameraBottomDepth < oreTopDepth)
-                    return;
-
-                layers[i].layer.Generate(new Vector2Int(xMin, -oreBottomDepth), new Vector2Int(xMax, -oreTopDepth), ref blocksTaken);
-            }
-
-            if (depth > cameraBottomDepth)
-                return;
-            int finishLayerTop = depth;
-            if (cameraTopDepth > finishLayerTop)
-                finishLayerTop = cameraTopDepth;
-
-            Vector2Int finishMin = new Vector2Int(xMin, -(cameraBottomDepth + 3));
-            Vector2Int finishMax = new Vector2Int(xMax, -finishLayerTop);
-            layers[layers.Length - 1].layer.Generate(finishMin, finishMax, ref blocksTaken);
+            GenerateBetween(xMin, xMax);
         }
 
         private void GenerateTopLayer(int xMin, int xMax)
@@ -106,7 +84,9 @@ namespace Universe.Terrain
 
             if (topBlock == null)
                 return;
+
             int seed = BodyManager.GetSeed();
+
             for (int i = xMin; i < xMax; i++)
             {
                 float perlinVal;
@@ -121,7 +101,7 @@ namespace Universe.Terrain
                 float heightValue = perlinVal * Steepness + 1;
                 Vector2Int position = new Vector2Int(i, (int)heightValue);
 
-                if (!IsInBounds(position, 2))
+                if (!IsInBounds(position, 2) && !alwaysRenderTop)
                     continue;
 
                 Vector2Int spawnAtPos = new Vector2Int(position.x, position.y + 1);
@@ -173,6 +153,8 @@ namespace Universe.Terrain
 
         public override void RemoveOldCells(List<Vector2> cellsOnScreen)
         {
+            if (!generate)
+                return;
             var positions = blocksTaken.Keys.ToArray();
             foreach (var pos in positions)
             {
@@ -188,6 +170,43 @@ namespace Universe.Terrain
                 Destroy(blocksTaken[pos].gameObject);
                 blocksTaken.Remove(pos);
             }
+        }
+
+        public void GenerateBetween(int xMin, int xMax)
+        {
+            int cameraBottomDepth = -(int)cameraRect.yMin;
+            int cameraTopDepth = -(int)cameraRect.yMax;
+
+            if (alwaysRenderTop || cameraRect.yMax > 0)
+                GenerateTopLayer(xMin, xMax);
+
+            int depth = 0;
+            for (int i = 0; i < layers.Length; i++)
+            {
+                if (layers[i].height == 0)
+                    continue;
+                int oreTopDepth = depth;
+                int oreBottomDepth = depth + layers[i].height - 1;
+                depth += layers[i].height;
+
+                if (cameraTopDepth > oreBottomDepth)
+                    continue;
+
+                if (cameraBottomDepth < oreTopDepth)
+                    return;
+
+                layers[i].layer.Generate(new Vector2Int(xMin, -oreBottomDepth), new Vector2Int(xMax, -oreTopDepth), ref blocksTaken);
+            }
+
+            if (depth > cameraBottomDepth)
+                return;
+            int finishLayerTop = depth;
+            if (cameraTopDepth > finishLayerTop)
+                finishLayerTop = cameraTopDepth;
+
+            Vector2Int finishMin = new Vector2Int(xMin, -(cameraBottomDepth + 3));
+            Vector2Int finishMax = new Vector2Int(xMax, -finishLayerTop);
+            layers[layers.Length - 1].layer.Generate(finishMin, finishMax, ref blocksTaken);
         }
 
         private bool IsInBounds(Vector2 position, int area)

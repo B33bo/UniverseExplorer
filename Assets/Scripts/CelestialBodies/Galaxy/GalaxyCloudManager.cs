@@ -22,8 +22,6 @@ namespace Universe.CelestialBodies
                 Galaxy = new SpiralGalaxy();
                 Galaxy.SetSeed(0);
                 Galaxy.Create(Vector2.zero);
-                Galaxy.IsRainbow = false;
-                Galaxy.Color = (Color.red, Color.blue);
             }
 
             if (Galaxy.IsRainbow)
@@ -32,8 +30,8 @@ namespace Universe.CelestialBodies
                 return;
             }
 
-            Outer.color = Galaxy.Color.outer;
-            Inner.color = Galaxy.Color.inner;
+            Outer.color = Galaxy.outer;
+            Inner.color = Galaxy.inner;
         }
 
         private void LateUpdate()

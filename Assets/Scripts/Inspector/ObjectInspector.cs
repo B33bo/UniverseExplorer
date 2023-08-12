@@ -37,6 +37,24 @@ namespace Universe.Inspector
                 pos -= halfHeight;
             }
 
+            foreach (var prop in t.GetFields())
+            {
+                var attribute = prop.GetCustomAttribute<InspectableVarAttribute>();
+                if (attribute == null)
+                    continue;
+
+                string uiName = prop.FieldType.IsEnum ? GetUiType[typeof(Enum)] : GetUiType[prop.FieldType];
+
+                var variablePrefab = Resources.Load<VariableUI>(uiName);
+                float halfHeight = variablePrefab.Height / 2;
+                pos -= halfHeight;
+                var newVariable = Instantiate(variablePrefab, scrollContent);
+                newVariable.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, pos);
+                newVariable.Init(new Variable(attribute.VariableName, () => prop.GetValue(ObjectDataLoader.celestialBody),
+                    x => prop.SetValue(ObjectDataLoader.celestialBody, x)), attribute.Params);
+                pos -= halfHeight;
+            }
+
             scrollContent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, -pos);
         }
     

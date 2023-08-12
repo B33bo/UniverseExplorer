@@ -11,6 +11,9 @@ namespace Universe
         [SerializeField]
         private SpriteRenderer[] leaves;
 
+        [SerializeField]
+        private bool IsDead;
+
         private bool isRainbow = false;
 
         private static readonly Color[] ColorValuesForLeaves = new Color[]
@@ -41,6 +44,9 @@ namespace Universe
             TreePlant tree = new TreePlant();
             Target = tree;
 
+            if (IsDead)
+                tree.IsDead = true;
+
             if (seed.HasValue)
                 tree.SetSeed(seed.Value);
 
@@ -55,6 +61,13 @@ namespace Universe
                 rainbowTreeColorValues = new Color[leaves.Length];
             }
 
+            ReloadLeaves();
+            Target.OnInspected += v => { if (v.VariableName == "Type") ReloadLeaves(); };
+        }
+
+        private void ReloadLeaves()
+        {
+            var tree = Target as TreePlant;
             for (int i = 0; i < leaves.Length; i++)
             {
                 Color currentLeafColor = ColorValuesForLeaves[(int)tree.color];

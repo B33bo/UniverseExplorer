@@ -21,9 +21,9 @@ namespace Universe.CelestialBodies
 
             if (BodyManager.Parent is SpiralGalaxy galaxy)
             {
-                a = galaxy.Color.outer;
-                b = galaxy.Color.inner;
-                rainbow = galaxy.Rainbow;
+                a = galaxy.outer;
+                b = galaxy.inner;
+                rainbow = galaxy.IsRainbow;
             }
 
             galaxySection.Create(pos, 64, transform.localScale.x, a, b, rainbow);

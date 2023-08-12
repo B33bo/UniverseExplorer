@@ -5,7 +5,7 @@ namespace Universe.Blocks
     public class OreBlockRenderer : CelestialBodyRenderer
     {
         [SerializeField]
-        private SpriteRenderer rockSpriteRenderer, oreSpriteRenderer;
+        protected SpriteRenderer rockSpriteRenderer, oreSpriteRenderer;
         private bool isRainbow;
 
         public override void Spawn(Vector2 pos, int? seed)
@@ -13,7 +13,7 @@ namespace Universe.Blocks
             Spawn(pos, seed, OreType.Unknownium, null);
         }
 
-        public void Spawn(Vector2 pos, int? seed, OreType oreType, Sprite rockSprite)
+        public virtual void Spawn(Vector2 pos, int? seed, OreType oreType, Sprite rockSprite)
         {
             OreBlock oreBlock = new OreBlock();
             Target = oreBlock;

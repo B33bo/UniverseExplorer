@@ -207,7 +207,7 @@ namespace Universe
                 else
                 {
                     int seed = planet.Seed + (i - ObjectSpawner.starsLoaded.Count);
-                    System.Random rand = new System.Random(seed + i);
+                    System.Random rand = new System.Random(seed);
                     Vector2 pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 50, rand));
 
                     var newStar = new Star();

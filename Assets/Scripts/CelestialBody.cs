@@ -29,6 +29,8 @@ namespace Universe
         public int Seed;
 
         public ChemicalComposition composition;
+        public delegate void OnInspectedHandler(Variable val);
+        public event OnInspectedHandler OnInspected;
 
         public int GetSeed()
         {
@@ -36,6 +38,8 @@ namespace Universe
                 return Position.GetHashCode();
             return Position.GetHashCode() + BodyManager.GetSeed();
         }
+
+        public void Inspected(Variable val) => OnInspected?.Invoke(val);
 
         public void SetSeed(int seed)
         {

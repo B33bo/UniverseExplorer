@@ -1,4 +1,5 @@
 using UnityEngine;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Planets.Iron
 {
@@ -22,7 +23,7 @@ namespace Universe.CelestialBodies.Planets.Iron
                 scrap.SetSeed(seed.Value);
 
             scrap.Create(pos);
-            scrap.OnScrapChange = RefreshScrap;
+            scrap.OnInspected += RefreshScrap;
 
             sheet.transform.rotation = Quaternion.Euler(0, 0, RandomNum.GetFloat(6, Target.RandomNumberGenerator) - 3);
             pole.transform.rotation = Quaternion.Euler(0, 0, RandomNum.GetFloat(10, 15, Target.RandomNumberGenerator));
@@ -38,7 +39,7 @@ namespace Universe.CelestialBodies.Planets.Iron
                 period[i] = 1 / RandomNum.GetFloat(.2f, 3f, Target.RandomNumberGenerator);
             }
 
-            RefreshScrap();
+            RefreshScrap(null);
         }
 
         public override void OnUpdate()
@@ -53,10 +54,9 @@ namespace Universe.CelestialBodies.Planets.Iron
             }
         }
 
-        private void RefreshScrap()
+        private void RefreshScrap(Variable v)
         {
             Scrap scrap = Target as Scrap;
-            Debug.Log(scrap.Sheet);
             sheet.SetActive(scrap.Sheet);
             pole.SetActive(scrap.Pole);
             disc.SetActive(scrap.Disc);

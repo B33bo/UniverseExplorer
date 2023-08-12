@@ -1,60 +1,88 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Universe.CelestialBodies.Planets
 {
     public class TerrestrialPlanetRenderer : PlanetRenderer
     {
-        public TerrestrialPlanet TargetPlanet;
-        public ContinentRenderer[] continents;
+        private float perlinScale;
+        private Vector2 perlinStart;
+        private bool isLoading = false;
+
+        [SerializeField]
+        private SpriteRenderer spriteRenderer;
 
         public override Type PlanetType => typeof(TerrestrialPlanet);
 
         public override void SpawnPlanet(Vector2 pos, int? seed)
         {
-            TargetPlanet = Target as TerrestrialPlanet;
-
-            continents = new ContinentRenderer[TargetPlanet.continents.Length];
-
+            perlinScale = RandomNum.GetFloat(5, 10, Target.RandomNumberGenerator);
+            perlinStart = RandomNum.GetVector(-100_000, 100_000, Target.RandomNumberGenerator);
             Scale = GetFairSize((float)Target.Width, (float)TerrestrialPlanet.MinScale, (float)TerrestrialPlanet.MaxScale) * Vector2.one;
-            ContinentRenderer continentRenderer = Resources.Load<ContinentRenderer>("Objects/Continent");
-            for (int i = 0; i < continents.Length; i++)
+            StartCoroutine(GenerateSprites());
+
+            Target.OnInspected += variable =>
             {
-                continents[i] = Instantiate(continentRenderer, transform);
-                continents[i].Target = TargetPlanet.continents[i];
-                continents[i].Init();
-                continents[i].Scale = new Vector3(.1f, .1f);
-                Vector3 localPos = Target.Seed == Star.Earth ? 
-                    GetEarthContinentPos(i) :
-                    RandomNum.GetVector(-.5f, .5f, Target.RandomNumberGenerator);
-
-                continents[i].Target.Position = localPos;
-
-                if (BodyManager.Parent is Moon)
-                    continents[i].CameraFocus = false;
-            }
-        }
-
-        private Vector2 GetEarthContinentPos(int index)
-        {
-            return index switch
-            {
-                TerrestrialPlanet.NorthAmerica => new Vector2(-.28f, 1.5f),
-                TerrestrialPlanet.SouthAmerica => new Vector2(-.28f, -1.5f),
-                TerrestrialPlanet.Africa => new Vector2(0, -.2f),
-                TerrestrialPlanet.Europe => new Vector2(0, .3f),
-                TerrestrialPlanet.Oceania => new Vector2(.5f, -.4f),
-                TerrestrialPlanet.Antarctica => new Vector2(0, -.5f),
-                _ => Vector2.zero
+                if (variable.VariableName != "Sea Level")
+                    return;
+                StartCoroutine(LoadSprite(64));
             };
         }
 
-        protected override void Destroyed()
+        private IEnumerator LoadSprite(int scale)
         {
-            for (int i = 0; i < continents.Length; i++)
+            if (isLoading)
+                yield break;
+            isLoading = true;
+            Vector2 half = new Vector2(scale * .5f, scale * .5f);
+            Texture2D texture = new Texture2D(scale, scale);
+            int circleRadSquared = (scale * scale) / 4;
+            const float waterLevel = .5f;
+
+            float normalizer = perlinScale / scale;
+
+            for (int x = 0; x < scale; x++)
             {
-                if (continents[i].enabled)
-                    Destroy(continents[i].gameObject);
+                for (int y = 0; y < scale; y++)
+                {
+                    Vector2 iterator = new Vector2(x - half.x, y - half.y);
+
+                    if (iterator.sqrMagnitude > circleRadSquared)
+                    {
+                        texture.SetPixel(x, y, Color.clear);
+                        continue;
+                    }
+
+                    Vector2 perlinPos = iterator * normalizer + perlinStart;
+                    float perlin = Mathf.PerlinNoise(perlinPos.x, perlinPos.y);
+
+                    Color c;
+                    if (perlin < waterLevel)
+                        c = Color.blue;
+                    else if (perlin < waterLevel + .05f)
+                        c = Color.yellow;
+                    else
+                        c = new Color(0, perlin, 0);
+
+                    texture.SetPixel(x, y, c);
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+            texture.filterMode = FilterMode.Trilinear;
+            texture.Apply();
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), texture.width);
+            spriteRenderer.sprite = sprite;
+            isLoading = false;
+        }
+
+        private IEnumerator GenerateSprites()
+        {
+            for (int i = 16; i <= 512; i *= 2)
+            {
+                yield return LoadSprite(i);
+                yield return new WaitForEndOfFrame();
             }
         }
     }

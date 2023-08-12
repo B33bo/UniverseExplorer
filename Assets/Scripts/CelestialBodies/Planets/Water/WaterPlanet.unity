@@ -440,10 +440,11 @@ MonoBehaviour:
   extraPadding: 3
   Steepness: 5
   Wideness: 0.2
-  topBlock: {fileID: 456708996117282061, guid: 976026416c185ef429ce1e7e53bab695, type: 3}
+  topBlock: {fileID: 7873637829336176357, guid: 976026416c185ef429ce1e7e53bab695, type: 3}
   layers:
   - layer: {fileID: 1532748032}
     height: 10
+  alwaysRenderTop: 1
 --- !u!4 &967698145
 Transform:
   m_ObjectHideFlags: 0

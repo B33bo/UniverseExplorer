@@ -147,28 +147,32 @@ namespace Universe
 
         public static string GetHumanName(Random random)
         {
-            //storing in memory would be a bit extreme
+            // storing in memory would be a bit extreme
             var humanNames = UnityEngine.Resources.Load<UnityEngine.TextAsset>("HumanNames").text.Split('\n');
             return humanNames[random.Next(0, humanNames.Length)].Trim();
         }
 
         public static string GetWord(int syllables, Random random)
         {
-            string consonants = "qwrtypsdfghjklzxcvbnm";
-            string vowels = "aeiou";
+            string consonants = "bcdfghjklmnpqrstvwxyz";
+            string joiner = "rsfhlnm";
+            string vowels = "aeiouy";
             string word = "";
 
-            if (random.Next(0, consonants.Length + vowels.Length) > consonants.Length)
-                word += vowels[random.Next(vowels.Length)];
+            int letter = random.Next(0, consonants.Length + vowels.Length);
+            if (letter >= consonants.Length)
+                word += vowels[letter - consonants.Length];
             else
-                word += consonants[random.Next(consonants.Length)];
+                word += consonants[letter];
+
+            word = word.ToUpper();
 
             for (int i = 0; i < syllables; i++)
             {
                 word += vowels[random.Next(vowels.Length)];
 
                 if (random.Next(0, 2) == 1)
-                    word += vowels[random.Next(vowels.Length)];
+                    word += joiner[random.Next(joiner.Length)];
 
                 word += consonants[random.Next(consonants.Length)];
             }
