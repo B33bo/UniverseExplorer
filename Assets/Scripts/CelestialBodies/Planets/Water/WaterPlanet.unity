@@ -413,6 +413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967698145}
   - component: {fileID: 967698144}
+  - component: {fileID: 967698146}
   m_Layer: 0
   m_Name: SandObjectSpawner
   m_TagString: Untagged
@@ -445,6 +446,9 @@ MonoBehaviour:
   - layer: {fileID: 1532748032}
     height: 10
   alwaysRenderTop: 1
+  generate: 1
+  animalSpawner: {fileID: 967698146}
+  animalFrequency: 3
 --- !u!4 &967698145
 Transform:
   m_ObjectHideFlags: 0
@@ -459,6 +463,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &967698146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967698143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a780d9900903b4b9a817c61eed53dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalPrefabs:
+  - {fileID: 5859033942018462664, guid: 6d01933d41888e247bb5402e74191604, type: 3}
+  weights:
+  - 100
+  chanceOfSpawning: 20
+  AnimalCountBounds: {x: 5, y: 5}
 --- !u!1 &1021861649
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1921176ffcb965c4894b0cf55d0ea024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 2724931362633460390, guid: 51ae5b8e3405a5d4fa2b4b4616a869f2, type: 3}
+  block: {fileID: 4512780920469427140, guid: 5c1e6293c471ebb4c9536ebd8a8f602e, type: 3}
 --- !u!4 &1532748033
 Transform:
   m_ObjectHideFlags: 0

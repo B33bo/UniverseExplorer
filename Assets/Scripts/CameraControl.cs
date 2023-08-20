@@ -20,17 +20,9 @@ namespace Universe
 
         [SerializeField]
         private CelestialBodies.CameraMoverRenderer cameraMoverRendererPrefab;
+        private Rect _cameraBounds;
 
-        public Rect CameraBounds
-        {
-            get
-            {
-                Vector2 middle = transform.position;
-                Vector2 scale = new Vector2(Width, Height);
-                Vector2 bottomLeft = (middle - scale / 2);
-                return new Rect(bottomLeft, scale);
-            }
-        }
+        public Rect CameraBounds => _cameraBounds;
 
         public Camera MyCamera
         {
@@ -133,9 +125,18 @@ namespace Universe
 
         private void Update()
         {
+            Rect bounds()
+            {
+                Vector2 middle = transform.position;
+                Vector2 scale = new Vector2(Width, Height);
+                Vector2 bottomLeft = (middle - scale / 2);
+                return new Rect(bottomLeft, scale);
+            }
+
             if (!wasdMovement)
                 return;
 
+            _cameraBounds = bounds();
             Move();
 
             if (Input.mouseScrollDelta.y != 0)

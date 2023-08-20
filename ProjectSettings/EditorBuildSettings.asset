@@ -66,7 +66,7 @@ EditorBuildSettings:
     path: Assets/Scripts/CelestialBodies/Planets/Rocky/RockPile/RockPile.unity
     guid: 8794aa65777d3b243a309d31a2ba9f2f
   - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Planets/Water/SandGrain/SandGround.unity
+    path: Assets/Scripts/CelestialBodies/Planets/Water/Sand/SandGrain/SandGround.unity
     guid: ce4132925f90dd4439f708d25f7276d8
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/ChemicalComposition/ChemicalComposition.unity

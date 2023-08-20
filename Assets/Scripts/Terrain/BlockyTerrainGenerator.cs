@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Universe.Animals;
 
 namespace Universe.Terrain
 {
@@ -25,6 +26,12 @@ namespace Universe.Terrain
 
         [SerializeField]
         private bool alwaysRenderTop, generate = true;
+
+        [SerializeField]
+        private AnimalSpawner animalSpawner;
+
+        [SerializeField]
+        private int animalFrequency;
 
         public static BlockyTerrainGenerator Instance { get; private set; }
 
@@ -113,11 +120,17 @@ namespace Universe.Terrain
                     continue;
 
                 var block = Instantiate(topBlock);
-                block.Spawn(position, ((Vector2)position).HashPos(BodyManager.GetSeed()));
+                int blockseed = ((Vector2)position).HashPos(BodyManager.GetSeed());
+                block.Spawn(position, blockseed);
                 blocksTaken.Add(position, block);
 
                 position.y--;
                 layers[0].layer.Generate(new Vector2Int(position.x, 1), position, ref blocksTaken);
+
+                if (animalFrequency == 0)
+                    animalFrequency = 1;
+                if (i % animalFrequency == 0)
+                    animalSpawner?.SpawnAnimalAt(position, blockseed);
             }
         }
 

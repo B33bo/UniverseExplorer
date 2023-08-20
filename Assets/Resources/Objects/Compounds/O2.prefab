@@ -101,6 +101,8 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 4070840535402858835}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
+  IsDestroyed: 0
   ionName: O
   text: {fileID: 4070840536887394390}
 --- !u!58 &4070840535402858834
@@ -499,6 +501,8 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 4070840536694550696}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
+  IsDestroyed: 0
 --- !u!1 &4070840536887394388
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +838,8 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 4070840537115507883}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
+  IsDestroyed: 0
   ionName: O
   text: {fileID: 4070840536064625524}
 --- !u!58 &4070840537115507882

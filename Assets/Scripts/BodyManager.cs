@@ -38,6 +38,8 @@ namespace Universe
 
             DevCommands.Register("spawn", "spawn an object", Spawn);
             DevCommands.Register("objectlst", "list all objects", ObjectLst);
+            DevCommands.RegisterVar(new DevConsoleVariable("Time", "Time of simulation", typeof(float),
+                () => GlobalTime.Time, x => GlobalTime.SetTime(float.Parse(x))));
 
             string LoadCmd(string[] parameters)
             {

@@ -47,6 +47,9 @@ TagManager:
   - name: CelestialBody
     uniqueID: 504427289
     locked: 0
+  - name: Animal
+    uniqueID: 2081131065
+    locked: 0
   - name: Grid
     uniqueID: 1519894537
     locked: 0

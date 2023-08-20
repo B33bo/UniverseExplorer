@@ -28,8 +28,6 @@ namespace Universe
             }
         }
 
-        public float Age => GlobalTime.TotalAge / 360f;
-
         private float rotationDelta;
         private float initialRotation;
 

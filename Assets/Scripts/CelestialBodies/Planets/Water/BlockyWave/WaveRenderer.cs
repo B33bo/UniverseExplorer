@@ -7,7 +7,8 @@ namespace Universe.Blocks
     {
         private static readonly float[] NumCache = new float[] { 1, 2, 3, 1, 4, 1.2f, 4.5f, 6f, 3.1f }; // random nums 
         private const float speed = .2f;
-        private const float waveHeight = .02f;
+        private const float waveHeight = .2f;
+        private const float waveScale = .2f;
         private const float height = 20;
         private static int _res = 30;
         private static int Res { get => _res; set { _res = value; OnResetMesh(); } }
@@ -102,7 +103,7 @@ namespace Universe.Blocks
 
         private float Sin(float x, float waveLength, float peak, float time)
         {
-            return Mathf.Sin(x * waveLength + time) * peak;
+            return Mathf.Sin(waveScale * x * waveLength + time) * peak;
         }
 
         private float SumOfSines(float x)

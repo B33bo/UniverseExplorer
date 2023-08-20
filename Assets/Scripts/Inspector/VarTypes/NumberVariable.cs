@@ -27,7 +27,10 @@ namespace Universe.Inspector
             else if (value is double)
                 type = Type.Double;
             else if (value is int)
+            {
                 type = Type.Integer;
+                slider.wholeNumbers = true;
+            }
 
             if (args.Length == 0)
             {
@@ -77,7 +80,7 @@ namespace Universe.Inspector
         public void SetFloatFromStr(string val)
         {
             if (float.TryParse(val, out float fVal))
-                Set(fVal);
+                Set(ToObject(fVal));
         }
 
         public void SetFloatFromSlider(float f)
