@@ -122,14 +122,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7901d74d7a0d03e45b2882298687e48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraFocus: 1
+  CameraFocus: 0
   cameraLerpTarget: {fileID: 0}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 0
   scaleLerp: 0
   IsDestroyed: 0
   blockName: Sand
-  travelTarget: Sand
+  travelTarget: SandGround
   collision: {fileID: 7353563846210573835}
   bodies:
   - {fileID: 0}

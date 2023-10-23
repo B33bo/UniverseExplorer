@@ -15,19 +15,18 @@ namespace Universe.CelestialBodies
 
         private float rainbowH;
 
-        public override void OnUpdate()
-        {
-            if (rainbow.Count == 0)
-                return;
+        [SerializeField]
+        private AudioSource[] audioSources;
 
-            rainbowH = GlobalTime.Time % 1;
-            Color c = Color.HSVToRGB(rainbowH, 1, 1);
+        [SerializeField]
+        private float timeBetweenDing, distanceVolumeMultiplier;
 
-            for (int i = 0; i < rainbow.Count; i++)
-            {
-                rainbow[i].color = c;
-            }
-        }
+        [SerializeField]
+        [Range(0f, 1f)]
+        private float dingChance;
+
+        private float lastDingTime = 0;
+        private System.Random soundRand;
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -41,9 +40,52 @@ namespace Universe.CelestialBodies
             Target.Create(pos);
 
             for (int i = 0; i < nebula.Bands.Length; i++)
-            {
                 DrawBand(nebula.Bands[i]);
+            soundRand = new System.Random(Target.Seed);
+        }
+
+        public override void OnUpdate()
+        {
+            if (Time.time - lastDingTime > timeBetweenDing)
+                Ding();
+
+            if (rainbow.Count == 0)
+                return;
+
+            rainbowH = GlobalTime.Time % 1;
+            Color c = Color.HSVToRGB(rainbowH, 1, 1);
+
+            for (int i = 0; i < rainbow.Count; i++)
+                rainbow[i].color = c;
+        }
+
+        private void Ding()
+        {
+            lastDingTime = Time.time;
+
+            if (RandomNum.GetFloat(1, soundRand) > dingChance)
+                return;
+            Vector2 cameraCenter = CameraControl.Instance.CameraBounds.center;
+            Vector3 positionOfCam = new Vector3(cameraCenter.x, cameraCenter.y, CameraControl.Instance.CameraBounds.height);
+
+            AudioSource audio = GetNextAudioSource();
+
+            if (audio == null)
+                return;
+
+            audio.volume = distanceVolumeMultiplier / (positionOfCam - transform.position).sqrMagnitude;
+            audio.pitch = RandomNum.GetFloat(3, 1, soundRand);
+            audio.Play();
+        }
+
+        private AudioSource GetNextAudioSource()
+        {
+            for (int i = 0; i < audioSources.Length; i++)
+            {
+                if (!audioSources[i].isPlaying)
+                    return audioSources[i];
             }
+            return null;
         }
 
         private void DrawBand(Nebula.Band band, bool forceRainbow = false)

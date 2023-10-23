@@ -1,4 +1,5 @@
 using UnityEngine;
+using Universe.Animals;
 
 namespace Universe.CelestialBodies.Biomes.Grass
 {
@@ -13,6 +14,9 @@ namespace Universe.CelestialBodies.Biomes.Grass
         public Color color = Color.white;
         public Type type;
         public Vector2 offset;
+
+        public Butterfly butterflySpecies;
+        public int butterflyCount;
 
         public override void Create(Vector2 pos)
         {
@@ -34,6 +38,17 @@ namespace Universe.CelestialBodies.Biomes.Grass
                 Type.BubblegumFlower => "Bubblegum Flower",
                 _ => type.ToString(),
             };
+
+            butterflySpecies = new Butterfly();
+            butterflySpecies.SetSeed(Seed);
+            butterflySpecies.CreateSpecies();
+
+            butterflyCount = RandomNum.Get(0, 3, RandomNumberGenerator) == 1 ? RandomNum.Get(0, 6, RandomNumberGenerator) : 0;
+        }
+
+        public override string GetBonusTypes()
+        {
+            return "Butterflies - " + butterflyCount;
         }
 
         public enum Type

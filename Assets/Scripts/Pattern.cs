@@ -52,5 +52,26 @@ namespace Universe
                 _ => Primary.ToHumanString() + " and " + Secondary.ToHumanString(),
             };
         }
+
+        public static bool operator ==(Pattern a, Pattern b)
+        {
+            return a.patternType == b.patternType && 
+                a.rotation == b.rotation && 
+                a.Primary == b.Primary && 
+                a.Secondary == b.Secondary && 
+                a.Tertiary == b.Tertiary;
+        }
+
+        public static bool operator !=(Pattern a, Pattern b) => !(a == b);
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

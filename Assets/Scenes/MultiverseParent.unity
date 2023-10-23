@@ -369,6 +369,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Multiverse
       objectReference: {fileID: 0}
+    - target: {fileID: 4506332355125680536, guid: 7ea11728ee7e05a4cb57287b0b41a305, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4506332355125680542, guid: 7ea11728ee7e05a4cb57287b0b41a305, type: 3}
       propertyPath: m_RootOrder
       value: 1

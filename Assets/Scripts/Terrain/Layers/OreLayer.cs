@@ -48,8 +48,6 @@ namespace Universe.Terrain
                     SpawnOreVein(position, maxPos, seed, max.y, ref takenPositions);
                 }
             }
-
-            
         }
 
         public CelestialBodyRenderer SpawnAtOre(OreBlockRenderer block, OreType oreType, Vector2Int position, int seed, ref Dictionary<Vector2Int, CelestialBodyRenderer> takenBlocks)

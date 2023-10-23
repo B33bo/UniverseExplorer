@@ -37,12 +37,7 @@ namespace Universe.Animals
             transform.position = position;
 
             initPos = position;
-
-            pattern.sprite = Resources.Load<Sprite>("Patterns/" + urchin.pattern.patternType.ToString());
-            pattern.material.SetColor("_ColorA", urchin.pattern.Primary);
-            pattern.material.SetColor("_ColorB", urchin.pattern.Secondary);
-            pattern.material.SetColor("_ColorC", urchin.pattern.Tertiary);
-            pattern.transform.rotation = Quaternion.Euler(0, 0, urchin.pattern.rotation);
+            SetPattern(urchin.pattern, masks[0], pattern);
 
             transform.localScale = urchin.size * Vector2.one;
         }
@@ -51,7 +46,8 @@ namespace Universe.Animals
         {
             if (initPos.y < 3)
                 return;
-            transform.SetPositionAndRotation(new Vector3(initPos.x, Mathf.Sin(Time.time * .2f) + initPos.y), Quaternion.Lerp(Quaternion.Euler(0, 0, -5), Quaternion.Euler(0, 0, 5), GlobalTime.SinTime));
+            transform.SetPositionAndRotation(new Vector3(initPos.x, Mathf.Sin(Time.time * .2f) + initPos.y),
+                Quaternion.Lerp(Quaternion.Euler(0, 0, -5), Quaternion.Euler(0, 0, 5), GlobalTime.SinTime));
         }
     }
 }

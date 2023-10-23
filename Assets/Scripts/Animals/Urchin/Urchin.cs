@@ -75,13 +75,13 @@ namespace Universe
             25,  // Diamond gradient
             45,  // Spiral gradient
             15,  // Stripes
-            100,  // Spots
+            100, // Spots
             5,   // Scales
             40,  // Perlin
             40,  // Worley
             75,  // Cracks
             2,   // Checkerboard
-            100,  // Dalmation
+            100, // Dalmation
             50,  // LSD
         }; private const float patternWeightSum = 899;
     }

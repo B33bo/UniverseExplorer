@@ -4,25 +4,26 @@
 - weather
 - jungle continent
 - quasars
+- asteroid clump planet
 
 - dirt -> pebble
 - snow -> snowflakes
 - volcano scene
+
+== OLD ==
 
 improve ice planet
 save planet to storage
 improve water planet
 improve deserts (add pyramids)
 improve snow continents
-nebulae / supernovae
+supernovae
 satellites
 tropical islands on ocean
 space junk
 crystal planet
-very rocky planets use raycasting and rock piles
 
 BIG UPDATES::
--ores
 -weather
 -clouds and sky
 -animals

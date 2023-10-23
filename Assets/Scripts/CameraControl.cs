@@ -112,7 +112,9 @@ namespace Universe
                 movement = MobileMovement();
 
             Position += Speed * Time.deltaTime * movement;
-            PositionText.text = Position.ToString();
+
+            if (PositionText)
+                PositionText.text = Position.ToString();
 
             if (Input.GetMouseButtonDown(1))
             {

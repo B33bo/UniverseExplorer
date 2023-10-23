@@ -7,6 +7,10 @@ namespace Universe.CelestialBodies
     {
         [SerializeField]
         private new ParticleSystem particleSystem;
+
+        [SerializeField]
+        private AudioSource audioSource;
+
         private static Gradient rainbowGradient;
 
         public override void Spawn(Vector2 position, int? seed)
@@ -20,6 +24,8 @@ namespace Universe.CelestialBodies
             transform.rotation = Quaternion.Euler(0, 0, RandomNum.GetFloat(1, Target.RandomNumberGenerator));
 
             var scale = GetFairSize((float)Target.Height, (float)SpiralGalaxy.MinWidth, (float)SpiralGalaxy.MaxWidth);
+
+            audioSource.pitch = RandomNum.GetFloat(-3, 3, Target.RandomNumberGenerator);
 
             Scale = scale * Vector2.one;
             particleSystem.transform.localScale = scale / 10f * Vector2.one;

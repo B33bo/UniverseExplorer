@@ -101,6 +101,7 @@ MonoBehaviour:
   cameraLerpSize: 5
   cameraLerpMultiplyBySize: 1
   scaleLerp: 0
+  IsDestroyed: 0
   blackHoleRenderer: {fileID: 0}
   collision: {fileID: 3708027696301886304}
 --- !u!60 &3708027696301886304
