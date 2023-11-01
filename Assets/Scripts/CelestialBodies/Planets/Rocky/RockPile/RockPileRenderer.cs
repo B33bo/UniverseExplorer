@@ -1,6 +1,4 @@
 using UnityEngine;
-using Universe.CelestialBodies;
-using Universe.CelestialBodies.Planets;
 using Universe.CelestialBodies.Planets.Rocky;
 
 namespace Universe

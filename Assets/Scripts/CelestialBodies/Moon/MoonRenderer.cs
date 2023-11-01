@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Universe
 {
@@ -23,7 +22,7 @@ namespace Universe
 
             int spriteMaskID = Target.RandomNumberGenerator.Next(0, short.MaxValue);
             var spriteMask = GetComponent<SpriteMask>();
-            spriteMask.frontSortingOrder = spriteMaskID;
+            spriteMask.frontSortingOrder = spriteMaskID + 1;
             spriteMask.backSortingOrder = spriteMaskID - 1;
 
             crater.GetComponent<SpriteRenderer>().sortingOrder = spriteMaskID;

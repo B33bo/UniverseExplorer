@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Universe.CelestialBodies;
-using System.Collections.Generic;
 
 namespace Universe
 {

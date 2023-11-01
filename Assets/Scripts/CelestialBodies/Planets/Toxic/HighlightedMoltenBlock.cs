@@ -13,7 +13,7 @@ namespace Universe
             base.Spawn(pos, seed);
 
             Color start = ColorHighlights.Instance.primary;
-            gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(start, 0)}, new GradientAlphaKey[] {
+            gradient.SetKeys(new GradientColorKey[] { new GradientColorKey(start, 0) }, new GradientAlphaKey[] {
             new GradientAlphaKey(alpha, 0), new GradientAlphaKey(0, .5f), new GradientAlphaKey(alpha, 1)});
         }
     }

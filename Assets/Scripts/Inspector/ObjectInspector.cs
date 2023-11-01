@@ -57,7 +57,7 @@ namespace Universe.Inspector
 
             scrollContent.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, -pos);
         }
-    
+
         public void Close()
         {
             animator.Play("Unfocus");

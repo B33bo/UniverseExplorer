@@ -5,7 +5,7 @@ namespace Universe
 {
     public static class GlobalTime
     {
-        public const long TimeOfReset = TimeSpan.TicksPerDay; //1 day
+        public const long TimeOfReset = TimeSpan.TicksPerDay;
 
         private static float? _TimeOfInit;
         public static float TimeOfInit
@@ -25,7 +25,7 @@ namespace Universe
         {
             get
             {
-                if (sinTimeLast == UnityEngine.Time.frameCount)
+                if (sinTimeLast == (byte)UnityEngine.Time.frameCount)
                     return _sinTime;
                 _sinTime = Mathf.Sin(UnityEngine.Time.time);
                 sinTimeLast = (byte)UnityEngine.Time.frameCount;
@@ -39,7 +39,7 @@ namespace Universe
         {
             get
             {
-                return DateTime.UtcNow.Ticks * TimeSpan.TicksPerSecond;
+                return DateTime.UtcNow.Ticks / (double)TimeSpan.TicksPerSecond;
             }
         }
 

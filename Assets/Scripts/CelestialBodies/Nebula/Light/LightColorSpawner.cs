@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using UnityEngine;
 using Universe.Blocks;
 using Universe.CelestialBodies;
@@ -25,6 +24,8 @@ namespace Universe
                 return GetAurora(aurora, random);
             else if (BodyManager.Parent is BasicBlock block && block.TypeString == "Opal")
                 return GetOpal(random);
+            else if (BodyManager.Parent is Rainbow r)
+                return new ColorHSV(RandomNum.GetFloat(1, random), 1, 1);
             return RandomNum.GetColor(random);
         }
 

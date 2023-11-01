@@ -45,7 +45,7 @@ namespace Universe.CelestialBodies.Planets
                 return;
             }
 
-            Name = RandomNum.GetWord(RandomNum.Get(1,4, RandomNumberGenerator), RandomNumberGenerator); //RandomNum.GetPlanetName(Seed);
+            Name = RandomNum.GetWord(RandomNum.Get(1, 4, RandomNumberGenerator), RandomNumberGenerator); //RandomNum.GetPlanetName(Seed);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
 
             trueRadius = RandomNum.CurveAt(RandomNum.GetInfiniteDouble(0.4, RandomNumberGenerator), 4, 1.2) * 3;

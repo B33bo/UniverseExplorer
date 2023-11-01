@@ -4,7 +4,7 @@ namespace Universe.CelestialBodies.Atomic
 {
     public class ChemicalCompositionSpawner : Spawner
     {
-        public static ChemicalComposition Composition = new ChemicalComposition();
+        public static ChemicalComposition Composition = ChemicalComposition.None;
 
         public override void OnStart()
         {

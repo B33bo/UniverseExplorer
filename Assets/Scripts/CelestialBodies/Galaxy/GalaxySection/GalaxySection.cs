@@ -42,7 +42,7 @@ namespace Universe.CelestialBodies
         {
             texture = new Texture2D(resolution, resolution)
             {
-                filterMode = FilterMode.Point, // Looks weird otherwise idk why
+                filterMode = FilterMode.Bilinear,
             };
 
             for (int x = 0; x < resolution; x++)

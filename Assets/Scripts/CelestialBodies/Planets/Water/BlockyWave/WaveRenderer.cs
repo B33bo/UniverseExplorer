@@ -74,7 +74,7 @@ namespace Universe.Blocks
 
                 tris[triStartIndex + 3] = i;
                 tris[triStartIndex + 4] = i + 1;
-                tris[triStartIndex + 5] = verts.Length -2 - i;
+                tris[triStartIndex + 5] = verts.Length - 2 - i;
             }
 
             return new Mesh()

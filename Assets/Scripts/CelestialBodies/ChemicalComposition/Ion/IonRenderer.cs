@@ -118,7 +118,7 @@ namespace Universe.CelestialBodies.Atomic
                 if (i < 2)
                     shellNumber = 0;
                 else
-                    shellNumber = (i - 2) / 8 +1;
+                    shellNumber = (i - 2) / 8 + 1;
 
                 if (lastShellNumber != shellNumber)
                 {
@@ -128,7 +128,7 @@ namespace Universe.CelestialBodies.Atomic
 
                 if (shellNumber > 0)
                 {
-                    if (ion.NumberofElectrons -electronsInOuterShell > i)
+                    if (ion.NumberofElectrons - electronsInOuterShell > i)
                         electronsInShell = 8;
                     else
                         electronsInShell = electronsInOuterShell;

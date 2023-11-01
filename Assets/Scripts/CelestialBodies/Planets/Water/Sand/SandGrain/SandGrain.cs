@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Universe.CelestialBodies.Planets.Water
 {
@@ -32,13 +31,13 @@ namespace Universe.CelestialBodies.Planets.Water
             Position = pos;
             Name = "Sand Grain";
             mesh = GetMesh();
-            
+
             Vector2 size = ShapeMaker.Size(mesh.vertices);
             Width = size.x * Measurement.mm;
             Height = size.y * Measurement.mm;
             Mass = 0.0647989 * Measurement.g * ((size.x + size.y) / 2);
 
-            color = (Color)RandomNum.GetIndexFromWeights(ColorWeightChars, 
+            color = (Color)RandomNum.GetIndexFromWeights(ColorWeightChars,
                 RandomNum.GetFloat(0, SumOfWeightCharts, RandomNumberGenerator));
 
             composition = new ChemicalComposition(ChemicalComposition.BondingType.Covalent, new Chemical(100, "SiO2"));

@@ -10,7 +10,7 @@ namespace Universe
 
         public override void SpawnPlanet(Vector2 pos, int? seed)
         {
-            
+
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Universe
 
             for (int i = 1; i < table.Length; i++)
             {
-                values[i-1] = (T)GetValue(table[i], key, type);
+                values[i - 1] = (T)GetValue(table[i], key, type);
             }
             return values;
         }

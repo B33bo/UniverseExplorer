@@ -123,6 +123,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &249852991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 249852993}
+  - component: {fileID: 249852992}
+  m_Layer: 0
+  m_Name: Weather
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &249852992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249852991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a9d32f3e5474b4f8edadc0dd6d37d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Precipitations:
+  - Type: 1
+    chance:
+      Probability: 1
+      Average: 100
+      Deviation: 25
+  WindDirection:
+    Probability: 1
+    Average: 0
+    Deviation: 15
+  WindIntensity:
+    Probability: 1
+    Average: 3
+    Deviation: 1
+  Rainbow:
+    Probability: 0
+    Average: 0
+    Deviation: 0
+  Clouds:
+    Probability: 0
+    Average: 0
+    Deviation: 0
+  RainColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
+  rainColorFromColorHighlight: 1
+  height: 20
+  weatherRendererPrefab: {fileID: 5781608729735631084, guid: 7b5f6a0e794c96f41a62c92455f56f88, type: 3}
+--- !u!4 &249852993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249852991}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &835461620 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
@@ -321,15 +390,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: dayColor.b
-      value: 0.92131764
+      value: 0.4787736
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: dayColor.g
-      value: 0.96415496
+      value: 0.49336675
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: dayColor.r
-      value: 0.9843137
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.a
@@ -337,15 +406,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.b
-      value: 0.136112
+      value: 0.1762193
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.g
-      value: 0.28971586
+      value: 0.2105638
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.r
-      value: 0.36200002
+      value: 0.2264151
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361286, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: m_RootOrder
@@ -444,19 +513,23 @@ MonoBehaviour:
   objects:
   - {fileID: 0}
   - {fileID: 6214131174201489389, guid: 9a93328d1bf00ab43b7a084c32d85169, type: 3}
+  - {fileID: 948190394188443619, guid: 6cff1362c332a6e4c935a81835bb27b7, type: 3}
   weights:
   - 100
   - 1
+  - 5
   randomOffset: 1
   extraPadding: 3
-  Steepness: 0
-  Wideness: 1
+  Steepness: 3
+  Wideness: 0.8
   topBlock: {fileID: 1730601332589720036, guid: ddc870a4c3f5efd4aa0ba4f19a703730, type: 3}
   layers:
   - layer: {fileID: 1003327116}
     height: 5
   alwaysRenderTop: 0
   generate: 1
+  animalSpawner: {fileID: 0}
+  animalFrequency: 0
 --- !u!4 &1311852294
 Transform:
   m_ObjectHideFlags: 0

@@ -133,7 +133,7 @@ namespace Universe.Terrain
                         continue;
                     if (ores.Contains(newPos))
                         SpawnAtOre(oreBlock, oreType, newPos, 0, ref takenBlocks);
-                    else 
+                    else
                         SpawnAt(rock, 0, newPos, ref takenBlocks);
                 }
             }

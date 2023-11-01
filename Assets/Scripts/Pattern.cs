@@ -31,6 +31,27 @@ namespace Universe
 
         public override string ToString()
         {
+            if (Primary.ToHumanString() == Secondary.ToHumanString())
+            {
+                switch (patternType)
+                {
+                    case Type.LinearGradient:
+                    case Type.LinearReflectedGradient:
+                    case Type.Dalmation:
+                        return Primary.ToHumanString();
+                    case Type.Stripes:
+                        return Primary.ToHumanString() + "Striped";
+                    case Type.Checkerboard:
+                        return Primary.ToHumanString() + "Checkered";
+                    case Type.LSD:
+                        return Primary.ToHumanString() + "Magical";
+                    case Type.Mash:
+                        return Primary.ToHumanString() + "Tripped";
+                    default:
+                        break;
+                }
+            }
+
             return patternType switch
             {
                 Type.Solid => Primary.ToHumanString(),
@@ -55,10 +76,10 @@ namespace Universe
 
         public static bool operator ==(Pattern a, Pattern b)
         {
-            return a.patternType == b.patternType && 
-                a.rotation == b.rotation && 
-                a.Primary == b.Primary && 
-                a.Secondary == b.Secondary && 
+            return a.patternType == b.patternType &&
+                a.rotation == b.rotation &&
+                a.Primary == b.Primary &&
+                a.Secondary == b.Secondary &&
                 a.Tertiary == b.Tertiary;
         }
 

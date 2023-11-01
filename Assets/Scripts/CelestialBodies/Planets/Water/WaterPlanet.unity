@@ -563,6 +563,89 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1095816832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1095816834}
+  - component: {fileID: 1095816833}
+  m_Layer: 0
+  m_Name: Weather
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1095816833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095816832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a9d32f3e5474b4f8edadc0dd6d37d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Precipitations:
+  - Type: 0
+    chance:
+      Probability: 0.4
+      Average: 200
+      Deviation: 50
+  - Type: 1
+    chance:
+      Probability: 0.3
+      Average: 100
+      Deviation: 25
+  - Type: 2
+    chance:
+      Probability: 0.2
+      Average: 100
+      Deviation: 25
+  - Type: 3
+    chance:
+      Probability: 0.1
+      Average: 1
+      Deviation: 0.1
+  WindDirection:
+    Probability: 1
+    Average: 0
+    Deviation: 15
+  WindIntensity:
+    Probability: 1
+    Average: 3
+    Deviation: 1
+  Rainbow:
+    Probability: 0.05
+    Average: 0.75
+    Deviation: 0.25
+  Clouds:
+    Probability: 1
+    Average: 0.5
+    Deviation: 0.25
+  RainColor: {r: 0.3915094, g: 1, b: 0.98116094, a: 1}
+  height: 40
+  weatherRendererPrefab: {fileID: 5781608729735631084, guid: 7b5f6a0e794c96f41a62c92455f56f88, type: 3}
+--- !u!4 &1095816834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095816832}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1392368985
 GameObject:
   m_ObjectHideFlags: 0

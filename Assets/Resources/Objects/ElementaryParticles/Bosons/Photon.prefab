@@ -365,7 +365,14 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 966316541497035307}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
+  IsDestroyed: 0
   Type: Boson
   Name: Photon
   Symbol: y
+  charge: 0
+  spin: 1
+  mass: 0
+  Create: 0
+  SeedModifier: 0
   text: {fileID: 8862527690904076172}

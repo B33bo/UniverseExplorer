@@ -57,8 +57,8 @@ namespace Btools.DevConsole
                 typeof(float), () => 1 / Time.fixedDeltaTime, x => Time.fixedDeltaTime = 1 / float.Parse(x)) },
 
             {"cam_size", new DevConsoleVariable(
-                "cam_size", 
-                "camera orthographic size for default camera", 
+                "cam_size",
+                "camera orthographic size for default camera",
                 typeof(float), () => Camera.main.orthographicSize, x => Camera.main.orthographicSize = float.Parse(x)) },
 
             {"platform", new DevConsoleVariable(
@@ -68,7 +68,7 @@ namespace Btools.DevConsole
 
             {"unity_pro_license", new DevConsoleVariable(
                 "unity_pro_license",
-                "does the user have unity pro license", 
+                "does the user have unity pro license",
                 typeof(bool), () => Application.HasProLicense()) },
 
             {"version", new DevConsoleVariable(
@@ -102,8 +102,8 @@ namespace Btools.DevConsole
                 typeof(string), () => Application.isFocused) },
 
             {"company", new DevConsoleVariable(
-                "company", 
-                "the company that made the game", 
+                "company",
+                "the company that made the game",
                 typeof(string), () => Application.companyName) },
 
             {"splash_screen_on", new DevConsoleVariable(

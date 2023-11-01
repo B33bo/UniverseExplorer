@@ -1,8 +1,8 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using Universe.CelestialBodies.Planets.Gas;
+using UnityEngine;
 using Universe.CelestialBodies.Planets;
+using Universe.CelestialBodies.Planets.Gas;
 
 namespace Universe
 {

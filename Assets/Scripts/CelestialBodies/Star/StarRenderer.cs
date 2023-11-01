@@ -53,7 +53,7 @@ namespace Universe.CelestialBodies.Planets
 
             // This is to do with sprite masks and sorting order
             // This happens so the weird texture doesn't clash with another star
-            int sortingOrder = RandomNum.Get(0, 10000, Target.RandomNumberGenerator);
+            int sortingOrder = RandomNum.Get(0, 32767, Target.RandomNumberGenerator);
             spriteMask.frontSortingOrder = sortingOrder + 1;
             spriteMask.backSortingOrder = sortingOrder;
             worleyNoise.sortingOrder = sortingOrder;

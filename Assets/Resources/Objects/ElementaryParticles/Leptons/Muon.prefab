@@ -448,7 +448,14 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 966316541497035307}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
+  IsDestroyed: 0
   Type: Lepton
   Name: Muon
   Symbol: 
+  charge: -1
+  spin: 1/2
+  mass: 105660000
+  Create: 0
+  SeedModifier: 0
   text: {fileID: 8862527690904076172}

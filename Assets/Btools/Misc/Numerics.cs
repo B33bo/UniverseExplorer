@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Btools.utils;
-
 namespace Btools.numerics
 {
     /// <summary>Useful randomizer functions</summary>
@@ -30,7 +25,7 @@ namespace Btools.numerics
 
             //Incase it finds it right at the end
             if (weightTotalCurrent >= randomNumber)
-                return weights.Length-1;
+                return weights.Length - 1;
 
             //There was some kind of error
             return -1;

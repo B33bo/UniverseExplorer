@@ -1,6 +1,5 @@
-using UnityEditor;
-using UnityEngine;
 using Btools.Components;
+using UnityEditor;
 
 namespace Btools.Editors
 {

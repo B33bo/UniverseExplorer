@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -19,7 +17,8 @@ namespace Btools.Components
 
         public bool WholeNumbers;
 
-        [Space] [SerializeField]
+        [Space]
+        [SerializeField]
         private UnityEvent<Vector2> OnValueChanged = new UnityEvent<Vector2>();
 
         /// <summary>A normalised version of Value, goes from 0-1</summary>

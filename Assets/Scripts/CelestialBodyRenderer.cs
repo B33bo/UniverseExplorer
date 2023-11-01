@@ -57,7 +57,7 @@ namespace Universe
                 CameraControl.Instance.Focus(this);
         }
 
-        public virtual void OnUpdate(){}
+        public virtual void OnUpdate() { }
         public abstract void Spawn(Vector2 pos, int? seed);
 
         public static float GetFairSize(float Size, float minSize, float maxSize)

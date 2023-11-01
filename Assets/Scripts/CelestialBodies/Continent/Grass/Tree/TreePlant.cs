@@ -52,6 +52,8 @@ namespace Universe.CelestialBodies.Biomes.Grass
 
         public override string GetBonusTypes()
         {
+            if (IsDead)
+                return "";
             return "Color - " + color;
         }
     }

@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using TMPro;
 using Btools.TimedEvents;
+using TMPro;
+using UnityEngine;
 
 namespace Btools.DialougeSystem
 {
@@ -76,8 +73,8 @@ namespace Btools.DialougeSystem
 
         public static void ClearResponses() =>
             Instance.ClearResponsesInstance();
-			
-		public static void Skip() =>
+
+        public static void Skip() =>
             Instance._Skip = true;
         #endregion
 
@@ -184,8 +181,8 @@ namespace Btools.DialougeSystem
 
         public void HideInstance() =>
             gameObject.SetActive(false);
-			
-		public void SkipInstance() =>
+
+        public void SkipInstance() =>
             _Skip = true;
 
         #endregion

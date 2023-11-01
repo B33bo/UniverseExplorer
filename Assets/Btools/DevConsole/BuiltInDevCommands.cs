@@ -1,10 +1,10 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using System;
-using System.Reflection;
-using System.Collections.Generic;
 using Btools.Extensions;
 using Btools.utils;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Btools.DevConsole
 {

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Universe.Animals
@@ -24,7 +23,7 @@ namespace Universe.Animals
 
             urchin.CreateAnimal(species);
             Target = urchin;
-            
+
             pattern.sortingOrder = urchin.pattern.id;
 
             for (int i = 0; i < masks.Length; i++)

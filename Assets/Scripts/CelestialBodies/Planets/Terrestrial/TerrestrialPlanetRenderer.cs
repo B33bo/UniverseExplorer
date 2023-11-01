@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Universe.CelestialBodies.Biomes;
 
 namespace Universe.CelestialBodies.Planets
 {
@@ -9,6 +11,7 @@ namespace Universe.CelestialBodies.Planets
         private float perlinScale;
         private Vector2 perlinStart;
         private bool isLoading = false;
+        private List<Continent.ContinentType> continentsClaimed;
 
         [SerializeField]
         private SpriteRenderer spriteRenderer;
@@ -20,14 +23,33 @@ namespace Universe.CelestialBodies.Planets
             perlinScale = RandomNum.GetFloat(5, 10, Target.RandomNumberGenerator);
             perlinStart = RandomNum.GetVector(-100_000, 100_000, Target.RandomNumberGenerator);
             Scale = GetFairSize((float)Target.Width, (float)TerrestrialPlanet.MinScale, (float)TerrestrialPlanet.MaxScale) * Vector2.one;
-            StartCoroutine(GenerateSprites());
+            continentsClaimed = new List<Continent.ContinentType>();
 
-            Target.OnInspected += variable =>
+            TerrestrialPlanet t = Target as TerrestrialPlanet;
+            for (int i = 0; i < t.continents.Length; i++)
             {
-                if (variable.VariableName != "Sea Level")
-                    return;
-                StartCoroutine(LoadSprite(64));
-            };
+                if (!continentsClaimed.Contains(t.continents[i].continentType))
+                    continentsClaimed.Add(t.continents[i].continentType);
+            }
+
+            StartCoroutine(GenerateSprites());
+        }
+
+        private Color GetColorOfTerrain(Vector2 perlinPos)
+        {
+            const float waterLevel = .5f;
+            const float snowLevel = .9f;
+
+            perlinPos += perlinStart * 2;
+            float perlin = Mathf.PerlinNoise(perlinPos.x, perlinPos.y);
+
+            if (perlin < waterLevel)
+                return Color.blue;
+            if (perlin < waterLevel + .05f && continentsClaimed.Contains(Continent.ContinentType.Sand))
+                return Color.yellow;
+            else if (perlin > snowLevel && continentsClaimed.Contains(Continent.ContinentType.Snow))
+                return Color.white;
+            return Color.green;
         }
 
         private IEnumerator LoadSprite(int scale)
@@ -38,7 +60,6 @@ namespace Universe.CelestialBodies.Planets
             Vector2 half = new Vector2(scale * .5f, scale * .5f);
             Texture2D texture = new Texture2D(scale, scale);
             int circleRadSquared = (scale * scale) / 4;
-            const float waterLevel = .5f;
 
             float normalizer = perlinScale / scale;
 
@@ -55,15 +76,7 @@ namespace Universe.CelestialBodies.Planets
                     }
 
                     Vector2 perlinPos = iterator * normalizer + perlinStart;
-                    float perlin = Mathf.PerlinNoise(perlinPos.x, perlinPos.y);
-
-                    Color c;
-                    if (perlin < waterLevel)
-                        c = Color.blue;
-                    else if (perlin < waterLevel + .05f)
-                        c = Color.yellow;
-                    else
-                        c = new Color(0, perlin, 0);
+                    Color c = GetColorOfTerrain(perlinPos);
 
                     texture.SetPixel(x, y, c);
                 }

@@ -5,7 +5,12 @@ namespace Universe
     public class QuarkRenderer : CelestialBodyRenderer
     {
         public string Type, Name, Symbol;
-        public int PreonConfig, AntiPreonConfig;
+
+        [SerializeField]
+        private string charge, spin;
+
+        [SerializeField]
+        private float mass;
 
         public bool Create;
         public int SeedModifier;
@@ -15,8 +20,9 @@ namespace Universe
 
         private void Start()
         {
-            if (Create)
-                Spawn(transform.position, BodyManager.GetSeed() + SeedModifier);
+            if (!Create)
+                return;
+            Spawn(transform.position, BodyManager.GetSeed() + SeedModifier);
         }
 
         public override void Spawn(Vector2 pos, int? seed)
@@ -29,6 +35,11 @@ namespace Universe
             quark.Name = Name;
             quark.Symbol = Symbol;
             quark.Type = Type;
+
+            quark.Charge = charge;
+            quark.Spin = spin;
+            quark.Mass = mass * Measurement.evC2;
+
             quark.Create(pos);
 
             text.text = Symbol;

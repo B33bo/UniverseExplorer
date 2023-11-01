@@ -365,7 +365,14 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 966316541497035307}
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
+  scaleLerp: 1
+  IsDestroyed: 0
   Type: Boson
   Name: Higgs
   Symbol: H
+  charge: 0
+  spin: 0
+  mass: 1.2497e+11
+  Create: 0
+  SeedModifier: 0
   text: {fileID: 8862527690904076172}

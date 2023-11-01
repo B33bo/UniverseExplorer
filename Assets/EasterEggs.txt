@@ -22,3 +22,6 @@
 - Yellow snow
 - Can't escape black hole
 - DevCommands
+- Unknown item
+- Every type of quark
+- Meteor Showers

@@ -1,6 +1,5 @@
-using UnityEngine;
 using UnityEditor;
-using Btools.Extensions;
+using UnityEngine;
 
 namespace Btools.DevConsole
 {

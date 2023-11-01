@@ -49,7 +49,10 @@ namespace Universe
         protected override void Destroyed()
         {
             for (int i = 0; i < butterflies.Length; i++)
-                Destroy(butterflies[i].gameObject);
+            {
+                if (!butterflies[i].IsDestroyed)
+                    Destroy(butterflies[i].gameObject);
+            }
         }
     }
 }

@@ -1,6 +1,3 @@
-using UnityEngine;
-using System.Collections.Generic;
-
 namespace Universe
 {
     public struct ChemicalComposition
@@ -8,6 +5,8 @@ namespace Universe
         public Chemical[] chemicals;
         public BondingType bondingType;
         public float[] weights;
+
+        public static readonly ChemicalComposition None = new ChemicalComposition(BondingType.Covalent);
 
         public Chemical this[int index]
         {

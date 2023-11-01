@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Universe
 {
     public abstract class Block : CelestialBody

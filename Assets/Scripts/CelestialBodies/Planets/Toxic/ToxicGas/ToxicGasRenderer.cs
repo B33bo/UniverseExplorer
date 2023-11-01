@@ -16,7 +16,8 @@ namespace Universe.CelestialBodies.Planets.Toxic
             Target.Create(pos);
 
             var main = particles.main;
-            ColorHSV a = ColorHighlights.Instance.primary;
+
+            ColorHSV a = ColorHighlights.Instance ? ColorHighlights.Instance.primary : RandomNum.GetColor(new System.Random());
             ColorHSV b = a;
 
             a.s -= .1f;

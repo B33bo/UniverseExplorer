@@ -1,14 +1,14 @@
-using UnityEngine;
-using TMPro;
 using Btools.DevConsole;
 using Btools.TimedEvents;
-using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine;
 
 namespace Universe
 {
     [RequireComponent(typeof(Camera))]
     public class CameraControl : MonoBehaviour
     {
+        private const bool AllowCameraRotate = false; // makes me dizzy soz
         public static CameraControl Instance { get; private set; }
 
         private Camera _camera;
@@ -21,6 +21,7 @@ namespace Universe
         [SerializeField]
         private CelestialBodies.CameraMoverRenderer cameraMoverRendererPrefab;
         private Rect _cameraBounds;
+        private Vector2 cachedMovement;
 
         public Rect CameraBounds => _cameraBounds;
 
@@ -58,9 +59,14 @@ namespace Universe
         [SerializeField]
         private bool wasdMovement = true;
 
+        private void Awake()
+        {
+            // So that instance doesn't get overriten, use the ??=
+            Instance ??= this;
+        }
+
         private void Start()
         {
-            Instance = this;
             PositionText = GameObject.Find("PositionText").GetComponent<TextMeshProUGUI>();
             DevCommands.Register("position", "set the position of the camera", PositionCommand, "x", "y");
             DevCommands.RegisterVar(new DevConsoleVariable("speed", "the speed of the camera", typeof(float),
@@ -88,14 +94,9 @@ namespace Universe
 
         private void KeepFocusing()
         {
-            if (!FocusTarget)
-            {
-                FocusTarget = null;
-                return;
-            }
             Vector3 position = FocusTarget.position;
             position.z = -10;
-            transform.position = position;
+            transform.SetPositionAndRotation(position, AllowCameraRotate ? FocusTarget.rotation : transform.rotation);
         }
 
         private void Move()
@@ -111,7 +112,7 @@ namespace Universe
             if (Application.isMobilePlatform)
                 movement = MobileMovement();
 
-            Position += Speed * Time.deltaTime * movement;
+            MoveByVector(Speed * Time.deltaTime * movement);
 
             if (PositionText)
                 PositionText.text = Position.ToString();
@@ -123,6 +124,22 @@ namespace Universe
                 cameraMoveRenderer.Spawn(position, null);
                 Focus(cameraMoveRenderer);
             }
+        }
+
+        private void MoveByVector(Vector2 movement)
+        {
+            /* it's done like this because for very large values of the position,
+             * the change in movement for each frame is below the floating point precision, resulting in 0 net movement.
+             * This is the fix. It results in jagged movement but that's better than no movement. Also it's unavoidable
+             */
+            cachedMovement += movement;
+            Vector2 oldPosition = Position;
+            Position += cachedMovement;
+
+            if (Position.x != oldPosition.x)
+                cachedMovement.x = 0;
+            if (Position.y != oldPosition.y)
+                cachedMovement.y = 0;
         }
 
         private void Update()
@@ -207,8 +224,8 @@ namespace Universe
             float startCamLerp = MyCamera.orthographicSize;
 
             Vector2 startPosition = transform.position;
-            Vector3 newPosition = focus.transform.position;
-            newPosition.z = -10;
+
+            Quaternion startRotation = Quaternion.identity;
 
             BeforeLerpCamScale = MyCamera.orthographicSize;
 
@@ -228,9 +245,12 @@ namespace Universe
                 Vector3 position = Vector3.Lerp(startPosition, focus.cameraLerpTarget.position, t);
                 position.z = -10;
 
+                Quaternion rotation = AllowCameraRotate ? Quaternion.Lerp(startRotation, focus.cameraLerpTarget.rotation, t) : startRotation;
+
                 if (targetScale >= 0)
                     _camera.orthographicSize = Mathf.Lerp(startCamLerp, targetScale, t);
-                transform.position = position;
+
+                transform.SetPositionAndRotation(position, rotation);
 
                 if (t >= 1)
                     FocusTarget = focus.cameraLerpTarget;
@@ -241,7 +261,7 @@ namespace Universe
         public void UnFocus()
         {
             if (!wasdMovement)
-                return; 
+                return;
             if (FocusTarget is null)
                 return;
             FocusTarget = null;
@@ -249,11 +269,14 @@ namespace Universe
             float targetScale = BeforeLerpCamScale;
             float startCamLerp = MyCamera.orthographicSize;
 
+            Quaternion startRotation = transform.rotation;
+
             float t = 0;
             Timed.RepeatUntil(() =>
             {
                 t += Time.deltaTime * 2;
                 MyCamera.orthographicSize = Mathf.Lerp(startCamLerp, targetScale, t);
+                transform.rotation = Quaternion.Lerp(startRotation, Quaternion.identity, t);
                 return t >= 1;
             });
         }

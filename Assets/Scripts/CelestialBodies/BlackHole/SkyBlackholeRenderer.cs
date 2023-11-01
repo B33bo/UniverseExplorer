@@ -8,7 +8,7 @@ namespace Universe
     {
         public override void Spawn(Vector2 pos, int? seed)
         {
-            
+
         }
 
         public void Spawn(BlackHole b)
