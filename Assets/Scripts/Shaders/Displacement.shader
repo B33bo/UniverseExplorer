@@ -10,7 +10,8 @@ Shader "Custom/Displacement"
         _SpeedX("X Speed", float) = 0
         _SpeedY("Y Speed", float) = 0
         _Speed2X("X Speed", float) = 0
-        _Speed2Y("Y Speed", float) = 0
+        _Speed2Y("X Speed", float) = 0
+        _Color("Tint", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -53,7 +54,8 @@ Shader "Custom/Displacement"
             float _SpeedY;
             float _Speed2X;
             float _Speed2Y;
-            bool _ShowDisplacement2;
+            int _ShowDisplacement2;
+            fixed4 _Color;
 
             float mod(float a, float b) {
                 a %= b;
@@ -67,7 +69,7 @@ Shader "Custom/Displacement"
                 float2 displacementPos = float2(mod(i.uv.x + _Time * _SpeedX,1), mod(i.uv.y + _Time * _SpeedY,1));
                 fixed4 displacement = tex2D(_Displacement, displacementPos);
 
-                if (_ShowDisplacement2) {
+                if (_ShowDisplacement2 > 0) {
                     displacementPos = float2(mod(i.uv.x + _Time * _Speed2X, 1), mod(i.uv.y + _Time * _Speed2Y, 1));
                     displacement += tex2D(_Displacement2, displacementPos);
                 }
@@ -81,7 +83,7 @@ Shader "Custom/Displacement"
                 i.uv.x = mod(i.uv.x, 1);
                 i.uv.y = mod(i.uv.y, 1);
 
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
                 
                 // just invert the colors
                 col.rgb = col.rgb;

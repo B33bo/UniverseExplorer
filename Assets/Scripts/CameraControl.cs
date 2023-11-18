@@ -159,10 +159,14 @@ namespace Universe
             Move();
 
             if (Input.mouseScrollDelta.y != 0)
-                mouseScrollDelta =
-                    Input.mouseScrollDelta.y == 0 ? 0 :
-                    Input.mouseScrollDelta.y > 0 ? 1.1f :
-                    .9f;
+            {
+                if (Input.mouseScrollDelta.y == 0)
+                    mouseScrollDelta = 0;
+                else if (Input.mouseScrollDelta.y > 0)
+                    mouseScrollDelta = 1.1f;
+                else
+                    mouseScrollDelta = .9f;
+            }
         }
 
         private Vector2 MobileMovement()
@@ -205,6 +209,13 @@ namespace Universe
             if (amount == 0)
                 return;
             CamScale /= amount;
+            MyCamera.orthographicSize = CamScale;
+            mouseScrollDelta = 0;
+        }
+
+        public void SetScale(float amount)
+        {
+            CamScale = amount;
             MyCamera.orthographicSize = CamScale;
             mouseScrollDelta = 0;
         }

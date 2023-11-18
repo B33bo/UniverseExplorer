@@ -420,10 +420,10 @@ MonoBehaviour:
       Probability: 0
       Average: 200
       Deviation: 50
-  - Type: 1
+  - Type: 7
     chance:
       Probability: 1
-      Average: 1
+      Average: 10
       Deviation: 0
   WindDirection:
     Probability: 0

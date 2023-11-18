@@ -34,6 +34,11 @@ namespace Universe.Terrain
 
         public static BlockyTerrainGenerator Instance { get; private set; }
 
+        private void Awake()
+        {
+            CameraControl.Instance.SetScale(5); // reduce lag
+        }
+
         public override void OnStart()
         {
             Instance = this;

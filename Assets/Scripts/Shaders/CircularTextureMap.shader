@@ -65,7 +65,7 @@ Shader "Hidden/CircularTextureMap"
                 if (polar.x > 1 || polar.x < _Ring)
                     return fixed4(0, 0, 0, 0);
 
-                fixed4 col = tex2D(_MainTex, (argAsPercent, 1- stretchRing(polar.x)));
+                fixed4 col = tex2D(_MainTex, float2(argAsPercent, 1- stretchRing(polar.x)));
                 col.a *= _Alpha;
                 return col;
             }

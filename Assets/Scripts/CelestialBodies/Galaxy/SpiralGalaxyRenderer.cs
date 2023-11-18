@@ -11,11 +11,10 @@ namespace Universe.CelestialBodies
         [SerializeField]
         private AudioSource audioSource;
 
-        private static Gradient rainbowGradient;
-
         public override void Spawn(Vector2 position, int? seed)
         {
-            Target = new SpiralGalaxy();
+            SpiralGalaxy galaxy = new SpiralGalaxy();
+            Target = galaxy;
 
             if (seed.HasValue)
                 Target.SetSeed(seed.Value);
@@ -31,8 +30,8 @@ namespace Universe.CelestialBodies
             particleSystem.transform.localScale = scale / 10f * Vector2.one;
             particleSystem.randomSeed = unchecked((uint)Target.Seed);
 
-            ParticleColorInit();
-            (Target as SpiralGalaxy).OnInspected += _ =>
+            SetColor(galaxy.outer, galaxy.inner, galaxy.IsRainbow);
+            galaxy.OnInspected += _ =>
             {
                 var TargetGalaxy = (Target as SpiralGalaxy);
                 SetColor(TargetGalaxy.outer, TargetGalaxy.inner, TargetGalaxy.IsRainbow);
@@ -43,14 +42,6 @@ namespace Universe.CelestialBodies
             StartCoroutine(SkipForwards());
         }
 
-        private void ParticleColorInit() //Particle colour, innit bruv
-        {
-            rainbowGradient ??= particleSystem.colorOverLifetime.color.gradient;
-            var target = Target as SpiralGalaxy;
-
-            SetColor(target.outer, target.inner, target.IsRainbow);
-        }
-
         private void SetColor(Color outer, Color inner, bool isRainbow)
         {
             ParticleSystem.ColorOverLifetimeModule colorOverLifetime = particleSystem.colorOverLifetime;
@@ -58,7 +49,7 @@ namespace Universe.CelestialBodies
 
             if (isRainbow)
             {
-                gradient = rainbowGradient;
+                gradient = Resources.Load<GradientContainer>("RainbowGradient").gradient;
             }
             else
             {
