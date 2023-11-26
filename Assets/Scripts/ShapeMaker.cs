@@ -19,7 +19,7 @@ namespace Universe
                 currentAngle += AnglePerPoint;
                 float currentAngleRadians = currentAngle * Mathf.Deg2Rad;
                 position += new Vector3(Mathf.Cos(currentAngleRadians), Mathf.Sin(currentAngleRadians)) * lengthOfLines;
-                verts[i] = position;
+                verts[points - i - 1] = position;
             }
 
             int[] tris = new int[points * 3];

@@ -150,10 +150,7 @@ namespace Universe
             for (float x = topLeft.x; x < bottomRight.x; x += CellSize)
             {
                 if (x == previousX)
-                {
-                    Debug.LogError("Out of valid world generation");
-                    break;
-                }
+                    x = NextAfter.NextSigned(x);
 
                 previousX = x;
                 float previousY = float.NaN;
@@ -161,10 +158,7 @@ namespace Universe
                 for (float y = bottomRight.y; y < topLeft.y; y += CellSize)
                 {
                     if (y == previousY)
-                    {
-                        Debug.LogError("Out of valid world generation");
-                        break;
-                    }
+                        y = NextAfter.NextSigned(y);
 
                     previousY = y;
                     value.Add(new Vector2(x, y));

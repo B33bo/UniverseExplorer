@@ -22,7 +22,7 @@ namespace Universe.CelestialBodies.Planets
         [InspectableVar("Color")]
         public Color StarColor;
 
-        [InspectableVar("Temperature", Params = new object[] { 3000, 10_000 })]
+        [InspectableVar("Temperature", Params = new object[] { 1000, 40_000 })]
         public double Temperature;
 
         public override void Create(Vector2 position)
@@ -45,12 +45,23 @@ namespace Universe.CelestialBodies.Planets
                 return;
             }
 
-            Name = RandomNum.GetWord(RandomNum.Get(1, 4, RandomNumberGenerator), RandomNumberGenerator); //RandomNum.GetPlanetName(Seed);
+            float nameLengthBonus = Mathf.Log10(position.x) - 3; // Reeeeeally far away objects have longer names because it's scarier
+
+            if (nameLengthBonus < 1)
+                nameLengthBonus = 1;
+
+            Name = RandomNum.GetWord((int)(RandomNum.Get(1, 3, RandomNumberGenerator) * nameLengthBonus), RandomNumberGenerator);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
 
             trueRadius = RandomNum.CurveAt(RandomNum.GetInfiniteDouble(0.4, RandomNumberGenerator), 4, 1.2) * 3;
             Radius = trueRadius * 1_000_000;
-            Temperature = RandomNum.Get(3000, 10000, RandomNumberGenerator);
+            Temperature = RandomNum.Get(1000, 20000, RandomNumberGenerator);
+            ResetColor();
+        }
+
+        public void ResetColor()
+        {
+            StarColor = Mathf.CorrelatedColorTemperatureToRGB((float)Temperature);
         }
 
         public void SpawnPlanets(Transform transform)

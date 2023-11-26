@@ -1,4 +1,4 @@
-Shader "Hidden/CircularTextureMap"
+Shader "Custom/CircularTextureMap"
 {
     Properties
     {
@@ -61,11 +61,12 @@ Shader "Hidden/CircularTextureMap"
                 const float pi = 3.141592653589793238462;
                 float2 polar = ToPolarCoordinates(i.uv);
                 float argAsPercent = (polar.y + pi) / (2 * pi);
+                float magnitude = stretchRing(polar.x);
 
                 if (polar.x > 1 || polar.x < _Ring)
                     return fixed4(0, 0, 0, 0);
 
-                fixed4 col = tex2D(_MainTex, float2(argAsPercent, 1- stretchRing(polar.x)));
+                fixed4 col = tex2D(_MainTex, float2(1-magnitude, argAsPercent));
                 col.a *= _Alpha;
                 return col;
             }

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8977432506575518542}
   - component: {fileID: 8977432506575518543}
   - component: {fileID: 1491715020029402556}
+  - component: {fileID: 1750960178263094752}
   m_Layer: 0
   m_Name: IceShard
   m_TagString: Untagged
@@ -81,6 +82,8 @@ MonoBehaviour:
   cameraLerpTarget: {fileID: 1797093688610290151}
   cameraLerpSize: 5
   cameraLerpMultiplyBySize: 0
+  scaleLerp: 1
+  IsDestroyed: 0
   meshFilter: {fileID: 8977432506575518542}
 --- !u!33 &8977432506575518542
 MeshFilter:
@@ -161,3 +164,14 @@ PolygonCollider2D:
       - {x: -0.2938926, y: -0.40450853}
       - {x: 0.29389268, y: -0.40450847}
       - {x: 0.47552824, y: 0.15450856}
+--- !u!210 &1750960178263094752
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8977432506575518541}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -6

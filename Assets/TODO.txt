@@ -1,5 +1,115 @@
+-TODO
+
+- Iron planet terrain
+- Molten planet terrain
+	- Custom renderer for lava cracks
+- Opal planet terrain
+- Rocky planet terrain
+- Grass Terrain
+- Desert Terrain
+- Snow biome Terrain
+- Toxic Terrain
+- Water Terrain
+
+BIOMES:
+	Layer array as well but it's added on top of normal layers depending on position. This means that biomes can only change top layers
+
+CLOUDS!!
+BACKGROUND ITEMS
+GIANT AURORAS
+FIX WEATHER
+
+- IRON PLANET UPGRADE
+	- Animals
+		- Magnites (magnet)
+		- Wooly mammoth
+	- Objects
+		- Metal shards
+		- Magnets
+	- Biomes
+		- Junkyard
+		- Wasteland
+
+- MOLTEN PLANET UPGRADE
+	- Animals
+		- Lava slug
+		- Rock Creature
+	- Objects
+		- Geysers
+		- Volcanic rock formation
+	- Terrain
+		- Volcanoes
+		- Lava lake
+	- Weather
+		- Falling ash
+
+- OPAL PLANET UPGRADE
+	- Animals
+		- Unicorn
+	- Objects
+		- Crystal
+		- Clumps of color
+	- Terrain
+		- Lakes of white
+
+- ROCKY PLANET UPGRADE
+	- Animals
+		- Bones
+		- Dinosaur
+		- Rock imitator
+	- Objects
+		- Fossils
+	- Terrain
+		- Mountains
+
+- TOXIC PLANET UPGRADE
+	- Animals
+		- Toxic Crocodile
+		- Bugs
+	- Objects
+		- Toxic waste barrel leaking
+	- Terrain
+		- Acid lakes
+	
+- WATER PLANET UPGRADE
+	- Animals
+		- Sharks
+		- Clams
+	- Objects
+		- Sand castles
+		- Seagrass
+		- Seaglass
+		- Shells
+		- Rocks
+	- Terrain
+		- Coral reefs
+
+- TERRRESTRIAL PLANET UPGRADE
+	- Merge all continents with continent system 2.0
+
+- NEW VAPOURWAVE WORLD
+	- Objects
+		- Palm trees
+		- Statue
+		- Pillars
+		- Buildings
+		- Cars
+	- Terrain
+		- Lakes of sound waves
+	
+- NEW CRYSTAL PLANET
+	- Objects
+		- Giant crystal
+	- Terrain
+		- Floor is crystal above a layer of rock
+		- Crystal protusions
+
+- Animals
+
 == NEW ==
 
+- caves
+	- lava caves
 - random sky events (airplane, shooting star, etc)
 - weather
 - jungle continent

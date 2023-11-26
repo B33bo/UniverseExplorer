@@ -51,8 +51,10 @@ namespace Universe
         [SerializeField]
         private float CamScale = 5;
         public event CameraPositionUpdate OnPositionUpdate;
+        public event CameraFinishedLoading OnFinishedLoading;
 
         public delegate void CameraPositionUpdate(Rect bounds);
+        public delegate void CameraFinishedLoading();
 
         private byte isLoading = 0;
 
@@ -75,11 +77,11 @@ namespace Universe
 
             BodyManager.OnSceneLoad += _ =>
             {
+                isLoading++;
                 MyCamera.orthographicSize = CamScale;
                 transform.position = new Vector3(0, 0, -10);
                 MyCamera.backgroundColor = Color.black;
-                isLoading++;
-                Timed.RunAfterFrames(() => isLoading--, 1);
+                Timed.RunAfterFrames(() => { isLoading--; OnFinishedLoading?.Invoke(); }, 1);
             };
 
             grid.EnableDevCommand();

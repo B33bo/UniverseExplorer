@@ -20,7 +20,7 @@ namespace Universe.CelestialBodies.Planets
         private void ColorChanged(Variable val)
         {
             if (val == null || val.VariableName == "Temperature")
-                TargetStar.StarColor = GetStarColor();
+                TargetStar.ResetColor();
             spriteRenderer.color = TargetStar.StarColor;
             worleyNoise.color = spriteRenderer.color;
             Glow.color = spriteRenderer.color;
@@ -39,8 +39,6 @@ namespace Universe.CelestialBodies.Planets
             TargetStar.OnInspected += ColorChanged;
             ColorChanged(null);
 
-            TargetStar.StarColor = GetStarColor();
-
             transform.localScale = Scale;
 
             SolarSystemSpawner.sun = Target as Star;
@@ -49,11 +47,6 @@ namespace Universe.CelestialBodies.Planets
                 TargetStar.SpawnPlanets(transform);
             else
                 TargetStar.planets = new PlanetRenderer[0];
-        }
-
-        public Color GetStarColor()
-        {
-            return Universe.LoadedInfo.BlackBodyRadiation.Evaluate((float)(TargetStar.Temperature - Star.minTemp) / (Star.maxTemp - Star.minTemp));
         }
 
         public override void OnUpdate()

@@ -2,7 +2,7 @@ using System;
 
 namespace Universe
 {
-    public static class RandomNum
+    public static partial class RandomNum
     {
         private static string[] _Names;
 
@@ -21,7 +21,7 @@ namespace Universe
         public static int Get(int min, int max, Random random) =>
             random.Next(min, max);
 
-        //doesn't actually need to do anything, referencing the random will make it initialize
+        // doesn't actually need to do anything, referencing the random will make it initialize
         public static void Init(Random random) { random.Next(); }
 
         public static double Get(double min, double max, Random random)
@@ -150,34 +150,6 @@ namespace Universe
             // storing in memory would be a bit extreme
             var humanNames = UnityEngine.Resources.Load<UnityEngine.TextAsset>("HumanNames").text.Split('\n');
             return humanNames[random.Next(0, humanNames.Length)].Trim();
-        }
-
-        public static string GetWord(int syllables, Random random)
-        {
-            string consonants = "bcdfghjklmnpqrstvwxyz";
-            string joiner = "rsfhlnm";
-            string vowels = "aeiouy";
-            string word = "";
-
-            int letter = random.Next(0, consonants.Length + vowels.Length);
-            if (letter >= consonants.Length)
-                word += vowels[letter - consonants.Length];
-            else
-                word += consonants[letter];
-
-            word = word.ToUpper();
-
-            for (int i = 0; i < syllables; i++)
-            {
-                word += vowels[random.Next(vowels.Length)];
-
-                if (random.Next(0, 2) == 1)
-                    word += joiner[random.Next(joiner.Length)];
-
-                word += consonants[random.Next(consonants.Length)];
-            }
-
-            return word;
         }
 
         public static double GetInfiniteDouble(double changeChance, Random random)

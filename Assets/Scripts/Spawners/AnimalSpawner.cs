@@ -5,6 +5,9 @@ namespace Universe.Animals
 {
     public class AnimalSpawner : MonoBehaviour
     {
+        public static AnimalSpawner InsideAnimals { get; private set; }
+        public static AnimalSpawner WalkingAnimals { get; private set; }
+
         [SerializeField]
         private AnimalRenderer[] animalPrefabs;
 
@@ -17,11 +20,19 @@ namespace Universe.Animals
         [SerializeField]
         private Vector2Int AnimalCountBounds;
 
+        [SerializeField]
+        private bool IsInside = true;
+
         public static Animal[] Animals;
         private static string[] AnimalRendererTypes;
 
         private void Awake()
         {
+            if (IsInside)
+                InsideAnimals = this;
+            else
+                WalkingAnimals = this;
+
             float weightTotal = 0;
             for (int i = 0; i < weights.Length; i++)
                 weightTotal += weights[i];

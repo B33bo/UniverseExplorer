@@ -26,13 +26,20 @@ namespace Universe.CelestialBodies
                 rainbow = galaxy.IsRainbow;
             }
 
+            ColorHSV aHSV = a;
+            ColorHSV bHSV = b;
+            aHSV.v = .25f;
+            bHSV.v = .25f;
+            a = aHSV;
+            b = bHSV;
+
             galaxySection.Create(pos, 64, transform.localScale.x, a, b, rainbow);
             StartCoroutine(LoadSprite(galaxySection));
         }
 
         private IEnumerator LoadSprite(GalaxySection section)
         {
-            for (int res = 4; res < 128; res *= 2)
+            for (int res = 16; res <= 512; res *= 2)
             {
                 section.resolution = res;
                 yield return section.GenerateTexture();

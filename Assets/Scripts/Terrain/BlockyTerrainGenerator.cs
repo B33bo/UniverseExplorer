@@ -32,6 +32,9 @@ namespace Universe.Terrain
         [SerializeField]
         private int animalFrequency;
 
+        [SerializeField]
+        private bool SpawnAnimals;
+
         public static BlockyTerrainGenerator Instance { get; private set; }
 
         private void Awake()
