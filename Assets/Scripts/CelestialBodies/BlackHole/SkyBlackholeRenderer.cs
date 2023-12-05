@@ -8,22 +8,18 @@ namespace Universe
     {
         public override void Spawn(Vector2 pos, int? seed)
         {
-
+            Target = new BlackHole();
+            if (seed.HasValue)
+                Target.SetSeed(seed.Value);
+            Target.Create(pos);
+            CameraFocus = false;
         }
 
         public void Spawn(BlackHole b)
         {
             Target = b;
             Target.Position = new Vector3(0, 10);
-        }
-
-        private void OnMouseDown()
-        {
-            if (SceneManager.sceneCount > 1)
-                return;
-
-            ObjectDataLoader.celestialBody = Target;
-            SceneManager.LoadScene("ObjectData", LoadSceneMode.Additive);
+            CameraFocus = false;
         }
     }
 }

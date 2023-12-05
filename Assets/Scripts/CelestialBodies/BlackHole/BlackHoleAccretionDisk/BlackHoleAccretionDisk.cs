@@ -12,6 +12,7 @@ namespace Universe.CelestialBodies
 
         public BlackHole blackHole;
         public bool IsSupermassive;
+        public float rotationOffset;
 
         public override void Create(Vector2 pos)
         {
@@ -19,6 +20,7 @@ namespace Universe.CelestialBodies
             Name = "Asteroid";
             Radius = 10;
             Mass = 1000;
+            rotationOffset = RandomNum.GetFloat(360, RandomNumberGenerator);
         }
 
         public void Create(Vector2 pos, BlackHole black)
@@ -27,6 +29,7 @@ namespace Universe.CelestialBodies
             Name = "Asteroid";
             Radius = 10;
             Mass = 1000;
+            rotationOffset = RandomNum.GetFloat(360, RandomNumberGenerator);
             blackHole = black;
         }
 

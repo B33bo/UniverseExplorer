@@ -9,14 +9,17 @@ Shader "Custom/Displacement"
         _ShowDisplacement2("Show Displacement 2", int) = 0
         _SpeedX("X Speed", float) = 0
         _SpeedY("Y Speed", float) = 0
-        _Speed2X("X Speed", float) = 0
-        _Speed2Y("X Speed", float) = 0
+        _SpeedRot("Rotate Speed", float) = 0
+        _Speed2X("X Speed 2", float) = 0
+        _Speed2Y("X Speed 2", float) = 0
+        _Speed2Rot("Rotate Speed 2", float) = 0
         _Color("Tint", Color) = (1,1,1,1)
     }
     SubShader
     {
         // No culling or depth
         Cull Off ZWrite Off ZTest Always
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
@@ -52,8 +55,10 @@ Shader "Custom/Displacement"
             float _Multiplier;
             float _SpeedX;
             float _SpeedY;
+            float _SpeedRot;
             float _Speed2X;
             float _Speed2Y;
+            float _Speed2Rot;
             int _ShowDisplacement2;
             fixed4 _Color;
 
@@ -64,14 +69,27 @@ Shader "Custom/Displacement"
                 return a;
             }
 
+            float2 rotate(float2 pos, float amount) {
+                pos.x -= .5f;
+                pos.y -= .5f;
+
+                float magnitude = sqrt(pos.x * pos.x + pos.y * pos.y);
+                float rotation = atan2(pos.y, pos.x) + amount;
+
+                pos.x = cos(rotation) * magnitude + .5;
+                pos.y = sin(rotation) * magnitude + .5;
+
+                return pos;
+            }
+
             fixed4 frag(v2f i) : SV_Target
             {
                 float2 displacementPos = float2(mod(i.uv.x + _Time * _SpeedX,1), mod(i.uv.y + _Time * _SpeedY,1));
-                fixed4 displacement = tex2D(_Displacement, displacementPos);
+                fixed4 displacement = tex2D(_Displacement, rotate(displacementPos, _SpeedRot * _Time));
 
                 if (_ShowDisplacement2 > 0) {
                     displacementPos = float2(mod(i.uv.x + _Time * _Speed2X, 1), mod(i.uv.y + _Time * _Speed2Y, 1));
-                    displacement += tex2D(_Displacement2, displacementPos);
+                    displacement += tex2D(_Displacement2, rotate(displacementPos, _Speed2Rot * _Time));
                 }
                 else {
                     displacement *= 2;
@@ -84,9 +102,6 @@ Shader "Custom/Displacement"
                 i.uv.y = mod(i.uv.y, 1);
 
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-                
-                // just invert the colors
-                col.rgb = col.rgb;
                 return col;
             }
             ENDCG

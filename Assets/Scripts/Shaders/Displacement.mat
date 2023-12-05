@@ -2,20 +2,24 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Displacement
   m_Shader: {fileID: 4800000, guid: 89a69c71b1f11d14b87a8bb0298024c2, type: 3}
-  m_ShaderKeywords: 
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 5000
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -32,16 +36,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 79779ec2e68d4034ba302f07cc6c9736, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9dd5fb7055077634f8598f1a56ce262a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Multiplier: 1
     - _ShowDisplacement2: 1
+    - _Speed2Rot: 0
     - _Speed2X: -0.2
     - _Speed2Y: 0.1
     - _Speed3X: 0.09
     - _Speed3Y: -0.46
+    - _SpeedRot: 0
     - _SpeedX: 1
     - _SpeedY: 0.2
     m_Colors:

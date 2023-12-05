@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Universe.Animals;
 
 namespace Universe.Terrain
 {
@@ -9,6 +8,9 @@ namespace Universe.Terrain
     {
         [SerializeField]
         private PolyTerrainLayer[] layers;
+
+        [SerializeField]
+        private bool colorBottomGround;
 
         [SerializeField]
         private SpriteRenderer bottomGround;
@@ -31,6 +33,9 @@ namespace Universe.Terrain
             }
 
             bottomGround.transform.position = new Vector3(0, minimumY);
+
+            if (colorBottomGround)
+                bottomGround.color = ColorHighlights.Instance.primary;
         }
 
         private void UpdateBottomFloor(Rect bounds)
@@ -88,18 +93,18 @@ namespace Universe.Terrain
 
             while (xPos <= xMax)
             {
-                if (terrain.ContainsKey(xPos))
-                {
-                    xPos += PolyTerrain.RealWidth;
-                    continue;
-                }
-
                 if (xPos == lastVal)
                 {
                     Debug.LogWarning("uh oh floating point screw ups");
                     xPos = NextAfter.Next(xPos);
                 }
                 lastVal = xPos;
+
+                if (terrain.ContainsKey(xPos))
+                {
+                    xPos += PolyTerrain.RealWidth;
+                    continue;
+                }
 
                 PolyTerrainRenderer[] layerObjects = new PolyTerrainRenderer[layers.Length];
                 float yVal = minimumY;

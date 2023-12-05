@@ -9,17 +9,18 @@ namespace Universe.CelestialBodies.Planets.Toxic
 
         protected override void OnAwake()
         {
-            if (!(BodyManager.Parent is ToxicPlanet toxicPlanet))
-                return;
-            primary = toxicPlanet.ToxicColor;
+            ColorHSV color;
+            color = BodyManager.Parent is ToxicPlanet toxicPlanet ? toxicPlanet.ToxicColor : primary;
+            primary = color;
 
-            ColorHSV color = primary;
             color.s -= .5f;
             color.v -= .1f;
             dayNight.dayColor = color;
+            secondary = color;
             color = primary;
-            color.v -= .6f;
+            color.v -= .8f;
             dayNight.nightColor = color;
+            tertiary = color;
         }
     }
 }

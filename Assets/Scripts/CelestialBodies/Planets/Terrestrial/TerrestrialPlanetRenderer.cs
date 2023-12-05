@@ -13,9 +13,6 @@ namespace Universe.CelestialBodies.Planets
         private bool isLoading = false;
         private List<Continent.ContinentType> continentsClaimed;
 
-        [SerializeField]
-        private SpriteRenderer spriteRenderer;
-
         public override Type PlanetType => typeof(TerrestrialPlanet);
 
         public override void SpawnPlanet(Vector2 pos, int? seed)
@@ -67,7 +64,7 @@ namespace Universe.CelestialBodies.Planets
             {
                 for (int y = 0; y < scale; y++)
                 {
-                    Vector2 iterator = new Vector2(x - half.x, y - half.y);
+                    Vector2 iterator = new(x - half.x, y - half.y);
 
                     if (iterator.sqrMagnitude > circleRadSquared)
                     {
@@ -83,10 +80,14 @@ namespace Universe.CelestialBodies.Planets
 
                 yield return new WaitForEndOfFrame();
             }
+
+            if (IsDestroyed)
+                yield break;
+
             texture.filterMode = FilterMode.Trilinear;
             texture.Apply();
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), texture.width);
-            spriteRenderer.sprite = sprite;
+            Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), texture.width);
+            sprite.sprite = newSprite;
             isLoading = false;
         }
 
@@ -95,6 +96,13 @@ namespace Universe.CelestialBodies.Planets
             for (int i = 16; i <= 512; i *= 2)
             {
                 yield return LoadSprite(i);
+
+                while (IsLowRes)
+                    yield return new WaitForEndOfFrame();
+
+                if (IsDestroyed)
+                    yield break;
+
                 yield return new WaitForEndOfFrame();
             }
         }

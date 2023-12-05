@@ -56,7 +56,7 @@ namespace Universe.CelestialBodies
             Position = pos;
 
             RandomNumberGenerator.Next();
-            Name = "Aurora " + RandomNum.GetPlanetName(RandomNumberGenerator);
+            Name = "Aurora " + RandomNum.GetWord(3, RandomNumberGenerator);
             Width = RandomNum.GetFloat(8, 56, RandomNumberGenerator);
             Height = 5;
             Flares = Mathf.CeilToInt((float)Width / FlareSize);

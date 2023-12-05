@@ -19,7 +19,7 @@ namespace Universe.CelestialBodies.Planets
         public override void Create(Vector2 pos)
         {
             Position = pos;
-            Name = RandomNum.Get(0, 999, RandomNumberGenerator) + " " + RandomNum.GetPlanetName(RandomNumberGenerator);
+            Name = RandomNum.Get(0, 999, RandomNumberGenerator) + " " + RandomNum.GetWord(2, RandomNumberGenerator);
             type = Type.Asteroid;
         }
 

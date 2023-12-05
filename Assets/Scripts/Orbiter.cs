@@ -22,7 +22,7 @@ namespace Universe
                 _UnitsPerSecond = value;
 
                 float orbitalCircumference = Mathf.PI * OrbitalRadius * OrbitalRadius;
-                //360 * speed = orbitalCircumference * rotationDelta
+                // 360 * speed = orbitalCircumference * rotationDelta
 
                 rotationDelta = 360 * _UnitsPerSecond / orbitalCircumference;
             }

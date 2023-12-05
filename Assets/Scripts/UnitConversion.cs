@@ -11,17 +11,17 @@ namespace Universe
             return d * ConversionToKM[from] / ConversionToKM[to];
         }
 
-        private static IReadOnlyDictionary<DistanceUnit, double> ConversionToKM = new Dictionary<DistanceUnit, double>()
+        private static readonly IReadOnlyDictionary<DistanceUnit, double> ConversionToKM = new Dictionary<DistanceUnit, double>()
         {
-            {DistanceUnit.None, 0 },
-            {DistanceUnit.PlanckLength, 1.6e-38 },
-            {DistanceUnit.HydrogenAtom, 2.50e-14 },
-            {DistanceUnit.NanoMetres, 1e-12},
-            {DistanceUnit.Millimetres, 1e-6 },
-            {DistanceUnit.Centimetres, 1e-5 },
-            {DistanceUnit.Metres, 1e-3},
-            {DistanceUnit.Kilometers, 1 },
-            {DistanceUnit.LightYear, 9.461e+12 },
+            { DistanceUnit.None, 0 },
+            { DistanceUnit.PlanckLength, 1.6e-38 },
+            { DistanceUnit.HydrogenAtom, 2.50e-14 },
+            { DistanceUnit.NanoMetres, 1e-12},
+            { DistanceUnit.Millimetres, 1e-6 },
+            { DistanceUnit.Centimetres, 1e-5 },
+            { DistanceUnit.Metres, 1e-3},
+            { DistanceUnit.Kilometers, 1 },
+            { DistanceUnit.LightYear, 9.461e+12 },
         };
 
         public static DistanceUnit ReasonableFormat(double km)
@@ -93,10 +93,10 @@ namespace Universe
                 return "";
 
             if (newStr[0] == ',')
-                return newStr.Substring(1);
+                return newStr[1..];
 
             if (newStr[0] == '-' && newStr[1] == ',')
-                newStr = "-" + newStr.Substring(2);
+                newStr = "-" + newStr[2..];
 
             return newStr;
         }

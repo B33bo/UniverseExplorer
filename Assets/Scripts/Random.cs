@@ -4,17 +4,6 @@ namespace Universe
 {
     public static partial class RandomNum
     {
-        private static string[] _Names;
-
-        public static string[] Names
-        {
-            get
-            {
-                _Names ??= UnityEngine.Resources.Load<UnityEngine.TextAsset>("Names").text.Split('\n');
-                return _Names;
-            }
-        }
-
         public static int Get(Random random) =>
             random.Next();
 
@@ -114,17 +103,6 @@ namespace Universe
 
         public static bool GetBool(double probability, Random random) =>
             random.NextDouble() < probability;
-
-        public static string GetPlanetName(Random random) =>
-            Names[random.Next(0, Names.Length)].Trim();
-
-        public static string GetPlanetName(int seed)
-        {
-            seed %= Names.Length;
-            if (seed < 0)
-                seed += Names.Length;
-            return Names[seed].Trim();
-        }
 
         public static UnityEngine.Color GetColor(Random random)
         {

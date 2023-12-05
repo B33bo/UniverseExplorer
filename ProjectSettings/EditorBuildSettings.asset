@@ -60,7 +60,7 @@ EditorBuildSettings:
     path: Assets/Scripts/CelestialBodies/Continent/Snow/SnowBiome.unity
     guid: 224b06884082cd8498a028c1d3d2b52c
   - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Continent/Desert/SandBiome.unity
+    path: Assets/Scripts/CelestialBodies/Planets/Desert/Desert.unity
     guid: 0c5daca0ee126ea4aa28c998f69a36bf
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Planets/Rocky/RockPile/RockPile.unity

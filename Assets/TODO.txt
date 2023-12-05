@@ -1,28 +1,26 @@
 -TODO
 
-- Iron planet terrain
-- Molten planet terrain
-	- Custom renderer for lava cracks
-- Opal planet terrain
-- Rocky planet terrain
-- Grass Terrain
-- Desert Terrain
-- Snow biome Terrain
-- Toxic Terrain
-- Water Terrain
-
 BIOMES:
 	Layer array as well but it's added on top of normal layers depending on position. This means that biomes can only change top layers
 
 CLOUDS!!
 BACKGROUND ITEMS
+ORES SYSTEM (randomized for each planet)
 GIANT AURORAS
-FIX WEATHER
+
+- ICY PLANET UPGRADE
+	- Snow biome merge with icy
+	- Animals
+		- Wooly mammoth
+		- Snowman
+	- Biomes
+		- Frozen Pond
+		- Normal
+		- Christmas
 
 - IRON PLANET UPGRADE
 	- Animals
 		- Magnites (magnet)
-		- Wooly mammoth
 	- Objects
 		- Metal shards
 		- Magnets
@@ -53,6 +51,7 @@ FIX WEATHER
 		- Lakes of white
 
 - ROCKY PLANET UPGRADE
+	- Can be multicolored (very very rare)
 	- Animals
 		- Bones
 		- Dinosaur
@@ -66,10 +65,12 @@ FIX WEATHER
 	- Animals
 		- Toxic Crocodile
 		- Bugs
+		- Ghosts
 	- Objects
 		- Toxic waste barrel leaking
 	- Terrain
 		- Acid lakes
+		- Graveyard
 	
 - WATER PLANET UPGRADE
 	- Animals
@@ -83,6 +84,15 @@ FIX WEATHER
 		- Rocks
 	- Terrain
 		- Coral reefs
+
+- DESERT PLANET UPGRADE
+	- Objects
+		- Pyramid
+		- Shrub
+		- Dead Tree
+	- Biome
+		- Oasis
+		- Quicksand (Moving downwards)
 
 - TERRRESTRIAL PLANET UPGRADE
 	- Merge all continents with continent system 2.0
@@ -104,14 +114,19 @@ FIX WEATHER
 		- Floor is crystal above a layer of rock
 		- Crystal protusions
 
-- Animals
+CAVES
+Maybe universes mandelbrot
+
+Animals:
+	- Arakiel 
+	- Skinwalker / Loric
+	- Slime
 
 == NEW ==
 
 - caves
 	- lava caves
 - random sky events (airplane, shooting star, etc)
-- weather
 - jungle continent
 - quasars
 - asteroid clump planet

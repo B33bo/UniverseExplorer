@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Planets
@@ -39,12 +40,30 @@ namespace Universe.CelestialBodies.Planets
 
         private void ColorReset(Variable v)
         {
+            if (v.VariableName == "Type")
+                (Target as ToxicPlanet).RefreshColor();
             Color c = (Target as ToxicPlanet).ToxicColor;
             for (int i = 0; i < goo.Length; i++)
             {
                 goo[i].startColor = c;
                 goo[i].endColor = c;
             }
+        }
+
+        protected override void HighRes()
+        {
+            base.HighRes();
+            for (int i = 0; i < goo.Length; i++)
+                goo[i].enabled = true;
+        }
+
+        protected override void LowRes()
+        {
+            if (SceneManager.GetActiveScene().name != "Galaxy")
+                return;
+            base.LowRes();
+            for (int i = 0; i < goo.Length; i++)
+                goo[i].enabled = false;
         }
     }
 }

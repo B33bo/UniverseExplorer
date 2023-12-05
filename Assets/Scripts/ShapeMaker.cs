@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Universe
 {
     public static class ShapeMaker
     {
-        public static Mesh GetRegularShape(int points, float lengthOfLines)
+        public static Mesh GetRegularShape(int points, float lengthOfLines, bool UV = false)
         {
             float AnglePerPoint = 360f / points;
 
@@ -14,11 +15,15 @@ namespace Universe
             float currentAngle = 0;
 
             Vector3[] verts = new Vector3[points];
+
             for (int i = 1; i < points; i++)
             {
                 currentAngle += AnglePerPoint;
                 float currentAngleRadians = currentAngle * Mathf.Deg2Rad;
-                position += new Vector3(Mathf.Cos(currentAngleRadians), Mathf.Sin(currentAngleRadians)) * lengthOfLines;
+
+                Vector2 movement = new Vector3(Mathf.Cos(currentAngleRadians), Mathf.Sin(currentAngleRadians));
+                position += (Vector3)movement * lengthOfLines;
+
                 verts[points - i - 1] = position;
             }
 
@@ -48,11 +53,20 @@ namespace Universe
             for (int i = 0; i < verts.Length; i++)
                 verts[i] -= (topRight - bottomLeft) / 2 + bottomLeft;
 
-            Mesh mesh = new Mesh
+            Vector2[] UVs = new Vector2[verts.Length];
+
+            if (UV)
+            {
+                for (int i = 0; i < verts.Length; i++)
+                    UVs[i] = (verts[i].normalized + Vector3.one) * .5f;
+            }
+
+            Mesh mesh = new()
             {
                 name = $"regular {points} sided shape",
                 vertices = verts,
                 triangles = tris,
+                uv = UVs,
             };
 
             return mesh;
@@ -228,7 +242,7 @@ namespace Universe
             // from each of those lines, draw 2 lines originating from any point on the line and ending at the middle
 
             const int BaseLines = 4;
-            List<(Vector2, Vector2)> lines = new List<(Vector2, Vector2)>();
+            List<(Vector2, Vector2)> lines = new();
 
             for (int i = 0; i < BaseLines; i++)
             {
@@ -251,7 +265,7 @@ namespace Universe
                 float DistanceFromOrigin = RandomNum.GetFloat(1, rand);
                 Vector2 startPos = Vector2.Lerp(Vector2.zero, parentBranchEnd, DistanceFromOrigin);
 
-                Vector2 direction = new Vector2(Mathf.Cos(rotation * Mathf.Deg2Rad), Mathf.Sin(rotation * Mathf.Deg2Rad));
+                Vector2 direction = new(Mathf.Cos(rotation * Mathf.Deg2Rad), Mathf.Sin(rotation * Mathf.Deg2Rad));
                 Vector2 endPos = startPos + direction;
 
                 endPos = endPos.normalized / 2;

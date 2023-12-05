@@ -46,39 +46,12 @@ namespace Universe
             if (BodyManager.Parent is BlackHoleAccretionDisk)
             {
                 LoadBlackHoleMoon();
-
                 yield break;
             }
             else if (BodyManager.Parent is Moon moon && moon.planet != null)
             {
                 planet = moon.planet;
-
-                System.Random rand = planet.RandomNumberGenerator;
-                var newPlanet = Instantiate(Resources.Load<CelestialBodyRenderer>(planet.ObjectFilePos), day);
-                newPlanet.Spawn(new Vector2(RandomNum.GetFloat(-10, 10, rand), RandomNum.GetFloat(-10, 10, rand)), moon.planet.Seed);
-                newPlanet.CameraFocus = false;
-
-                if (newPlanet.TryGetComponent(out UnityEngine.Rendering.SortingGroup sg))
-                    Destroy(sg);
-
-                newPlanet.GetComponent<SpriteRenderer>().sortingLayerName = "Sky";
-                var sprites = newPlanet.GetComponentsInChildren<SpriteRenderer>();
-                for (int i = 0; i < sprites.Length; i++)
-                    sprites[i].sortingLayerName = "Sky";
-
-                if (newPlanet.TryGetComponent(out SpriteMask spriteMask))
-                {
-                    spriteMask.backSortingLayerID = SortingLayer.NameToID("Sky");
-                    spriteMask.frontSortingLayerID = SortingLayer.NameToID("Sky");
-                }
-
-                var particles = newPlanet.GetComponentsInChildren<ParticleSystemRenderer>();
-                for (int i = 0; i < particles.Length; i++)
-                    particles[i].sortingLayerName = "Default";
-
-                var sortingGroups = newPlanet.GetComponentsInChildren<UnityEngine.Rendering.SortingGroup>();
-                for (int i = 0; i < sortingGroups.Length; i++)
-                    sortingGroups[i].sortingLayerName = "Sky";
+                SpawnAsMoon(moon);
             }
             else if (BodyManager.Parent is Continent c)
                 planet = c.planet;
@@ -95,6 +68,37 @@ namespace Universe
 
             LoadDay();
             LoadNight();
+        }
+
+        private void SpawnAsMoon(Moon moon)
+        {
+            System.Random rand = planet.RandomNumberGenerator;
+
+            var newPlanet = Instantiate(Resources.Load<CelestialBodyRenderer>(planet.ObjectFilePos), day);
+            newPlanet.Spawn(new Vector2(RandomNum.GetFloat(-10f, 10, rand), RandomNum.GetFloat(-10, 10, rand)), moon.planet.Seed);
+            Destroy(newPlanet.GetComponent<Collider2D>());
+
+            if (newPlanet.TryGetComponent(out UnityEngine.Rendering.SortingGroup sg))
+                Destroy(sg);
+
+            newPlanet.GetComponent<SpriteRenderer>().sortingLayerName = "Sky";
+            var sprites = newPlanet.GetComponentsInChildren<SpriteRenderer>();
+            for (int i = 0; i < sprites.Length; i++)
+                sprites[i].sortingLayerName = "Sky";
+
+            if (newPlanet.TryGetComponent(out SpriteMask spriteMask))
+            {
+                spriteMask.backSortingLayerID = SortingLayer.NameToID("Sky");
+                spriteMask.frontSortingLayerID = SortingLayer.NameToID("Sky");
+            }
+
+            var particles = newPlanet.GetComponentsInChildren<ParticleSystemRenderer>();
+            for (int i = 0; i < particles.Length; i++)
+                particles[i].sortingLayerName = "Default";
+
+            var sortingGroups = newPlanet.GetComponentsInChildren<UnityEngine.Rendering.SortingGroup>();
+            for (int i = 0; i < sortingGroups.Length; i++)
+                sortingGroups[i].sortingLayerName = "Sky";
         }
 
         private Color GetCameraColor()
@@ -117,6 +121,8 @@ namespace Universe
             blackHoleRenderer.gameObject.SetActive(true);
             blackHoleRenderer.Spawn(blackHoleDisk.blackHole);
 
+            Destroy(blackHoleRenderer.GetComponent<Collider2D>());
+
             int moons = 10;
             if (blackHoleDisk.blackHole is SupermassiveBlackHole)
                 moons = 20;
@@ -124,13 +130,17 @@ namespace Universe
             for (int i = 0; i < moons; i++)
             {
                 System.Random rand = new System.Random(i);
+                Vector2 pos = new(RandomNum.GetFloat(-30, 30, rand), RandomNum.GetFloat(-30, 10, rand));
+
                 var newBlackHoleMoon = Instantiate(blackHoleAccretionDiskPrefab, night);
-                Vector2 pos = new Vector2(RandomNum.GetFloat(-30, 30, rand), RandomNum.GetFloat(-30, 10, rand));
                 newBlackHoleMoon.Spawn(pos, null, blackHoleDisk.blackHole);
                 newBlackHoleMoon.transform.position = pos;
-                newBlackHoleMoon.GetComponent<SpriteRenderer>().sortingLayerName = "Sky";
                 newBlackHoleMoon.transform.localScale *= 10;
+
+                newBlackHoleMoon.GetComponent<SpriteRenderer>().sortingLayerName = "Sky";
                 newBlackHoleMoon.CameraFocus = false;
+
+                Destroy(newBlackHoleMoon.GetComponent<Collider2D>());
             }
         }
 
@@ -152,6 +162,8 @@ namespace Universe
             newSun.GetComponent<UnityEngine.Rendering.SortingGroup>().sortingLayerName = "Sky";
             newSun.CameraFocus = false;
 
+            Destroy(newSun.GetComponent<Collider2D>());
+
             var children = newSun.GetComponentsInChildren<SpriteRenderer>();
             foreach (var child in children)
             {
@@ -165,15 +177,10 @@ namespace Universe
             planet.moons ??= new MoonRenderer[0];
             for (int i = 0; i < planet.moons.Length; i++)
             {
-                if (BodyManager.Parent is Moon moon)
-                {
-                    Debug.Log(planet.moons[i].Target.Seed + " " + moon.Seed);
-                    if (planet.moons[i].Target.Seed == moon.Seed)
-                    {
-                        Debug.Log("cont");
-                        continue;
-                    }
-                }
+                if (BodyManager.Parent is Moon moon && planet.moons[i].Target.Seed == moon.Seed)
+                    // don't spawn self as a moon lol
+                    continue;
+
                 var newMoon = Instantiate(moonRenderer, night);
                 System.Random rand = new System.Random(planet.moons[i].Target.Seed + i);
                 newMoon.Spawn(new Vector2(RandomNum.GetFloat(-10, 10, rand), RandomNum.GetFloat(-10, 10, rand)), planet.moons[i].Target.Seed);
@@ -185,6 +192,8 @@ namespace Universe
                 spriteRenderer.maskInteraction = SpriteMaskInteraction.None;
 
                 var children = newMoon.GetComponentsInChildren<SpriteRenderer>();
+                Destroy(newMoon.GetComponent<Collider2D>());
+
                 foreach (var child in children)
                     child.sortingLayerName = "Sky";
             }

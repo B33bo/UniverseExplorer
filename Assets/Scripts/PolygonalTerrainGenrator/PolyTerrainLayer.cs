@@ -7,9 +7,10 @@ namespace Universe.Terrain
     {
         public TerrainNoise[] Noises;
         public PolyTerrainRenderer Renderer;
-        public float Offset;
+        [HideInInspector] public float Offset;
         public float MinimumHeight;
         public bool OverrideColor;
+        public bool UseColorHighlights;
         public Color color;
 
         public float HeightAtPoint(float x)
@@ -17,7 +18,7 @@ namespace Universe.Terrain
             float noise = 0;
             for (int i = 0; i < Noises.Length; i++)
             {
-                noise += Noises[i].NoiseAt(new Vector2(x, Offset + BodyManager.GetSeed()));
+                noise += Noises[i].NoiseAt(new Vector2(x, Offset));
             }
             return noise + MinimumHeight;
         }

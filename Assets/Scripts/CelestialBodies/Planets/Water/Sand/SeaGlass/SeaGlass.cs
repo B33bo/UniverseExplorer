@@ -14,10 +14,10 @@ namespace Universe.CelestialBodies
         [InspectableVar("Points", Params = new object[] { 4, 12 })]
         public int Points = 0;
 
-        [InspectableVar("Smoothness", Params = new object[] { 1, 5 })]
+        [InspectableVar("Smoothness", Params = new object[] { 3, 6 })]
         public int Smoothness = 1;
 
-        [InspectableVar("Shape", Params = new object[] { 0f, 1f })]
+        [InspectableVar("Shape", Params = new object[] { 0f, .2f })]
         public float Shape = 1;
 
         private Type _type;

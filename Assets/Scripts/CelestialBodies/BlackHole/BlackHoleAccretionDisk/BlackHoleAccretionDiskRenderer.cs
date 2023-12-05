@@ -6,16 +6,25 @@ namespace Universe.CelestialBodies
     public class BlackHoleAccretionDiskRenderer : CelestialBodyRenderer
     {
         [SerializeField]
-        private BlackHoleRenderer blackHoleRenderer;
-
-        [SerializeField]
         private Collider2D collision;
 
-        private IEnumerator Start()
+        private void Start()
         {
-            yield return new WaitForFrames(4);
-            if (Target is null)
-                Spawn(Vector2.zero, (int)transform.position.x);
+            LowResScale = 25;
+        }
+
+        protected override void LowRes()
+        {
+            if (BodyManager.Parent is BlackHoleAccretionDisk)
+                return;
+            collision.enabled = false;
+        }
+
+        protected override void HighRes()
+        {
+            if (BodyManager.Parent is BlackHoleAccretionDisk)
+                return;
+            collision.enabled = true;
         }
 
         public override void Spawn(Vector2 pos, int? seed)
@@ -26,22 +35,12 @@ namespace Universe.CelestialBodies
 
             Target.Create(pos);
             name = Target.Name;
-
-            if (blackHoleRenderer is null)
-                return;
-            (Target as BlackHoleAccretionDisk).blackHole = blackHoleRenderer.Target as BlackHole;
         }
 
         public void Spawn(Vector2 pos, int? seed, BlackHole blackHole)
         {
             Spawn(pos, seed);
             (Target as BlackHoleAccretionDisk).blackHole = blackHole;
-        }
-
-        //overrides base.Update
-        private void Update()
-        {
-            collision.enabled = CameraControl.Instance.MyCamera.orthographicSize < 25;
         }
     }
 }

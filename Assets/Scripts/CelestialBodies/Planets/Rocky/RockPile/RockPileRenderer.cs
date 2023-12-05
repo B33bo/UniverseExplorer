@@ -10,7 +10,7 @@ namespace Universe
 
         public override void Spawn(Vector2 pos, int? seed)
         {
-            RockPile rockPile = new RockPile();
+            RockPile rockPile = new();
             Target = rockPile;
             if (seed.HasValue)
                 Target.SetSeed(seed.Value);
@@ -20,7 +20,7 @@ namespace Universe
             MeshFilter lastMeshFilter = null;
             for (int i = 0; i < meshFilters.Length; i++)
             {
-                if (rockPile.Rocks <= i)
+                if (i >= rockPile.Rocks)
                 {
                     Destroy(meshFilters[i].gameObject);
                     continue;
@@ -28,7 +28,7 @@ namespace Universe
 
                 meshFilters[i].mesh = rockPile[i];
 
-                highestPos = HighestPointOf(rockPile[i].vertices).y + meshFilters[i].transform.position.y + .1f;
+                highestPos += HighestPointOf(rockPile[i].vertices).y + .1f;
 
                 if (ColorHighlights.Instance)
                 {
@@ -40,9 +40,11 @@ namespace Universe
                     rockPile.colors[i] = meshFilters[i].GetComponent<MeshRenderer>().material.color;
 
                 lastMeshFilter = meshFilters[i];
+
                 if (i + 1 >= meshFilters.Length)
                     continue;
-                meshFilters[i + 1].transform.position = new Vector3(transform.position.x, highestPos);
+
+                meshFilters[i + 1].transform.localPosition = new Vector3(0, highestPos);
             }
 
             cameraLerpTarget.transform.localPosition = new Vector3(0, lastMeshFilter.transform.localPosition.y / 2);

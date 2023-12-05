@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Universe
 {
@@ -6,6 +8,11 @@ namespace Universe
     {
         [SerializeField]
         private Transform crater;
+
+        [SerializeField]
+        private SpriteRenderer sprite;
+
+        private List<GameObject> craters = new();
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -24,6 +31,8 @@ namespace Universe
             var spriteMask = GetComponent<SpriteMask>();
             spriteMask.frontSortingOrder = spriteMaskID + 1;
             spriteMask.backSortingOrder = spriteMaskID - 1;
+
+            LowResScale = Scale.x * 15;
 
             crater.GetComponent<SpriteRenderer>().sortingOrder = spriteMaskID;
 
@@ -52,6 +61,25 @@ namespace Universe
             if (newCrater.localPosition.magnitude > .5f)
                 newCrater.localPosition = movement;
             crater = newCrater;
+
+            craters.Add(crater.gameObject);
+        }
+
+        protected override void LowRes()
+        {
+            if (SceneManager.GetActiveScene().name != "Galaxy")
+                return;
+            sprite.enabled = false;
+            for (int i = 0; i < craters.Count; i++)
+                craters[i].SetActive(false);
+        }
+
+        protected override void HighRes()
+        {
+            sprite.enabled = true;
+            crater.gameObject.SetActive(true);
+            for (int i = 0; i < craters.Count; i++)
+                craters[i].SetActive(true);
         }
     }
 }

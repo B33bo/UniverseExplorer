@@ -17,7 +17,7 @@ namespace Universe.CelestialBodies
         public override void Create(Vector2 pos)
         {
             Position = pos;
-            Name = RandomNum.GetPlanetName(RandomNumberGenerator) + " Nebula";
+            Name = RandomNum.GetWord(2, RandomNumberGenerator) + " Nebula";
 
             Bands = new Band[RandomNum.Get(1, 5, RandomNumberGenerator)];
             Mass = 0;

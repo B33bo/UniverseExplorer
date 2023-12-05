@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Planets
@@ -10,7 +11,7 @@ namespace Universe.CelestialBodies.Planets
         private ParticleSystem[] particles;
 
         [SerializeField]
-        private SpriteRenderer body;
+        private ParticleSystem grey;
 
         public override Type PlanetType => typeof(GasPlanet);
 
@@ -28,7 +29,7 @@ namespace Universe.CelestialBodies.Planets
             float contrast = (Target as GasPlanet).Contrast;
             System.Random rand = new System.Random(Target.Seed);
 
-            body.color = gasColor;
+            sprite.color = gasColor;
 
             for (int i = 0; i < particles.Length; i++)
             {
@@ -40,6 +41,24 @@ namespace Universe.CelestialBodies.Planets
                 color.v += RandomNum.GetFloat(-contrast, contrast, rand) * GasPlanet.ContrastSatDropoff;
                 particleSystem.startColor = new ParticleSystem.MinMaxGradient(color);
             }
+        }
+
+        protected override void HighRes()
+        {
+            base.HighRes();
+            for (int i = 0; i < particles.Length; i++)
+                particles[i].Play();
+            grey.Play();
+        }
+
+        protected override void LowRes()
+        {
+            if (SceneManager.GetActiveScene().name != "Galaxy")
+                return;
+            base.LowRes();
+            for (int i = 0; i < particles.Length; i++)
+                particles[i].Stop();
+            grey.Stop();
         }
     }
 }

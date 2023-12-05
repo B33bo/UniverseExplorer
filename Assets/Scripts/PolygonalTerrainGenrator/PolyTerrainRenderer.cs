@@ -7,37 +7,34 @@ namespace Universe.Terrain
     public class PolyTerrainRenderer : CelestialBodyRenderer
     {
         [SerializeField]
-        private MeshFilter meshFilter;
+        protected MeshFilter meshFilter;
 
         [SerializeField]
-        private MeshRenderer meshRenderer;
+        protected MeshRenderer meshRenderer;
 
         [SerializeField]
-        private CelestialBodyRenderer[] Prefabs;
+        private CelestialBodyRenderer[] InsidePrefabs;
 
         [SerializeField]
-        private float[] Weights;
+        private float[] InsideWeights;
 
         [SerializeField]
-        private SpawnMethod spawnMethod;
+        private CelestialBodyRenderer[] SurfacePrefabs;
 
         [SerializeField]
-        private AnimalSpawner animalSpawner;
+        private float[] SurfaceWeights;
+
+        [SerializeField]
+        private bool insideFast = true;
 
         [SerializeField]
         private bool stretchUVs;
 
-        private float weightSum;
+        [SerializeField]
+        private bool spawnWalkingAnimals, spawnAnimalsInside;
 
-        private List<CelestialBodyRenderer> spawned = new List<CelestialBodyRenderer>();
-        private List<AnimalRenderer> animalsSpawned = new List<AnimalRenderer>();
-
-        enum SpawnMethod
-        {
-            Inside,
-            InsideFast,
-            Top,
-        }
+        private readonly List<CelestialBodyRenderer> spawned = new();
+        private readonly List<AnimalRenderer> animalsSpawned = new();
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -49,9 +46,9 @@ namespace Universe.Terrain
             Target.Create(pos);
         }
 
-        public void Spawn(Vector2 pos, int? seed, PolyTerrain previous, PolyTerrainLayer layer)
+        public virtual void Spawn(Vector2 pos, int? seed, PolyTerrain previous, PolyTerrainLayer layer)
         {
-            PolyTerrain polyTerrain = new PolyTerrain();
+            PolyTerrain polyTerrain = new();
             Target = polyTerrain;
 
             if (seed.HasValue)
@@ -71,38 +68,23 @@ namespace Universe.Terrain
 
             if (layer.OverrideColor)
                 meshRenderer.material.color = layer.color;
+            if (layer.UseColorHighlights)
+                meshRenderer.material.color *= ColorHighlights.Instance.primary;
 
             SpawnObjects();
         }
 
         private void SpawnObjects()
         {
-            weightSum = 0;
-            for (int i = 0; i < Weights.Length; i++)
-                weightSum += Weights[i];
-
-            if (spawnMethod == SpawnMethod.Inside)
-            {
-                SpawnObjectsInside();
-                SpawnAnimals();
-            }
-            else if (spawnMethod == SpawnMethod.InsideFast)
+            if (insideFast)
                 SpawnObjectsInsideFast();
             else
-                SpawnObjectsTop();
+                SpawnObjectsInside();
         }
 
-        private int GetRandomObject(System.Random rand)
+        private int GetRandomObject(System.Random rand, float[] weights)
         {
-            return RandomNum.GetIndexFromWeights(Weights, RandomNum.GetFloat(0, weightSum, rand));
-        }
-
-        private void SpawnAnimals()
-        {
-            for (int x = 0; x < PolyTerrain.RealWidth; x++)
-            {
-                SpawnAnimalAtPoint(x, Target as PolyTerrain);
-            }
+            return RandomNum.GetIndexFromWeights(weights, rand);
         }
 
         protected virtual AnimalSpawner GetWalkingAnimals() => AnimalSpawner.WalkingAnimals;
@@ -110,22 +92,18 @@ namespace Universe.Terrain
 
         private void SpawnAnimalAtPoint(float x, PolyTerrain poly)
         {
+            float targetY = poly.HeightAt(x);
+            Vector2 pos = new(x, targetY);
+            pos += (Vector2)Target.Position;
+            int seed = pos.HashPos(poly.ObjectSeed);
+
             var walkingAnimals = GetWalkingAnimals();
             var insideAnimals = GetInsideAnimals();
 
-            if (!walkingAnimals && !insideAnimals)
-                return;
-
-            float targetY = poly.HeightAt(x);
-            Vector2 pos = new Vector2(x, targetY);
-            pos += (Vector2)Target.Position;
-
-            int seed = pos.HashPos(poly.ObjectSeed);
-
-            if (walkingAnimals)
+            if (walkingAnimals && spawnWalkingAnimals)
                 SpawnAnimalAt(walkingAnimals, pos, seed);
 
-            if (!insideAnimals)
+            if (!insideAnimals || !spawnAnimalsInside)
                 return;
 
             var rand = new System.Random(seed);
@@ -150,21 +128,24 @@ namespace Universe.Terrain
         private void SpawnObjectsInside()
         {
             PolyTerrain poly = Target as PolyTerrain;
-            System.Random rand = new System.Random(poly.ObjectSeed);
+            System.Random rand = new(poly.ObjectSeed);
 
             for (int x = 0; x < PolyTerrain.RealWidth; x++)
             {
                 float targetY = poly.HeightAt(x);
                 for (int y = 0; y < targetY; y++)
                 {
-                    int objectIndex = GetRandomObject(rand);
+                    if (InsideWeights.Length > 0)
+                    {
+                        int objectIndex = GetRandomObject(rand, InsideWeights);
+                        SpawnObject(new Vector2(x, y), InsidePrefabs[objectIndex], rand.Next());
+                    }
+                }
 
-                    if (Prefabs[objectIndex] == null)
-                        continue;
-
-                    Vector2 position = new Vector2(x, y);
-
-                    SpawnObject(position, objectIndex, rand.Next());
+                if (SurfaceWeights.Length > 0)
+                {
+                    int objectIndex = GetRandomObject(rand, SurfaceWeights);
+                    SpawnObject(new Vector2(x, targetY), SurfacePrefabs[objectIndex], rand.Next());
                 }
             }
         }
@@ -172,49 +153,38 @@ namespace Universe.Terrain
         private void SpawnObjectsInsideFast()
         {
             PolyTerrain poly = Target as PolyTerrain;
-            System.Random rand = new System.Random(poly.ObjectSeed);
+            System.Random rand = new(poly.ObjectSeed);
 
             for (int x = 0; x < PolyTerrain.RealWidth; x++)
             {
                 SpawnAnimalAtPoint(x, poly);
                 float targetY = poly.HeightAt(x);
-                int objectIndex = GetRandomObject(rand);
 
-                if (Prefabs[objectIndex] == null)
-                    continue;
+                // spawn inside objects
+                if (InsideWeights.Length > 0)
+                {
+                    int objectIndex = GetRandomObject(rand, InsideWeights);
+                    Vector2 position = new(x, RandomNum.GetFloat(0, targetY, rand));
+                    SpawnObject(position, InsidePrefabs[objectIndex], rand.Next());
+                }
 
-                Vector2 position = new Vector2(x, RandomNum.GetFloat(0, targetY, rand));
-
-                SpawnObject(position, objectIndex, rand.Next());
+                // spawn surface objects
+                if (SurfaceWeights.Length > 0)
+                {
+                    int objectIndex = GetRandomObject(rand, SurfaceWeights);
+                    Vector2 position = new(x, targetY);
+                    SpawnObject(position, SurfacePrefabs[objectIndex], rand.Next());
+                }
             }
         }
 
-        private void SpawnObject(Vector2 position, int index, int seed)
+        private void SpawnObject(Vector2 position, CelestialBodyRenderer prefab, int seed)
         {
-            var newObject = Instantiate(Prefabs[index], transform);
+            if (prefab == null)
+                return;
+            var newObject = Instantiate(prefab, transform);
             newObject.Spawn(position, seed);
             spawned.Add(newObject);
-        }
-
-        private void SpawnObjectsTop()
-        {
-            PolyTerrain poly = Target as PolyTerrain;
-            System.Random rand = new System.Random(poly.ObjectSeed);
-
-            for (int x = 0; x < PolyTerrain.RealWidth; x++)
-            {
-                SpawnAnimalAtPoint(x, poly);
-
-                int objectIndex = GetRandomObject(rand);
-                float targetY = poly.HeightAt(x);
-
-                if (Prefabs[objectIndex] == null)
-                    continue;
-
-                Vector2 position = new Vector2(x, targetY);
-
-                SpawnObject(position, objectIndex, rand.Next());
-            }
         }
 
         private Mesh CreateMesh(Vector2[] previousPoints, float bottomDecrease)

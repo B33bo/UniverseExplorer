@@ -21,7 +21,7 @@ namespace Universe
         {
             Position = pos;
             Radius = RandomNum.Get(1000, 3000, RandomNumberGenerator);
-            Name = RandomNum.GetPlanetName(RandomNumberGenerator);
+            Name = RandomNum.GetWord(1, RandomNumberGenerator);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
         }
 

@@ -5,7 +5,7 @@ namespace Universe.Blocks
 {
     public class WaveRenderer : CelestialBodyRenderer
     {
-        private static readonly float[] NumCache = new float[] { 1, 2, 3, 1, 4, 1.2f, 4.5f, 6f, 3.1f }; // random nums 
+        private static readonly float[] NumCache = new float[] { 1, 2, 3, 5, 4, 1.2f, 4.5f, 6f, 3.1f }; // random nums 
         private const float speed = .2f;
         private const float waveHeight = .2f;
         private const float waveScale = .2f;

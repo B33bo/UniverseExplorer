@@ -18,26 +18,19 @@ namespace Universe.CelestialBodies
             meshFilter.mesh = GetMesh();
 
             Target.OnInspected += ChangeVar;
-            meshFilter.mesh.colors = GetColors();
-            transform.rotation = Quaternion.Euler(0, 0, RandomNum.GetFloat(360, Target.RandomNumberGenerator));
-        }
 
-        private Color[] GetColors()
-        {
-            Color[] c = new Color[meshFilter.mesh.vertexCount];
             Color color = (Target as SeaGlass).color;
-            color.a = .25f;
-
-            for (int i = 0; i < c.Length; i++)
-                c[i] = color;
-            return c;
+            color.a = .4f;
+            GetComponent<MeshRenderer>().material.color = color;
+            transform.rotation = Quaternion.Euler(0, 0, RandomNum.GetFloat(360, Target.RandomNumberGenerator));
         }
 
         private void ChangeVar(Variable var)
         {
-            if (var.VariableName == "Points" || var.VariableName == "Smoothness" || var.VariableName == "Shape")
-                meshFilter.mesh = GetMesh();
-            meshFilter.mesh.colors = new Color[] { (Target as SeaGlass).color };
+            meshFilter.mesh = GetMesh();
+            Color color = (Target as SeaGlass).color;
+            color.a = .4f;
+            GetComponent<MeshRenderer>().material.color = color;
         }
 
         private Mesh GetMesh()
@@ -46,7 +39,7 @@ namespace Universe.CelestialBodies
 
             int points = seaGlass.Points * seaGlass.Smoothness;
             var shape = ShapeMaker.GetRegularShape(points, 3f / points);
-            System.Random rand = new System.Random(seaGlass.Seed);
+            System.Random rand = new(seaGlass.Seed);
 
             Vector3[] verts = shape.vertices;
             Vector3 offset = Vector2.zero;

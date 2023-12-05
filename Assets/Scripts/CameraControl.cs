@@ -154,6 +154,8 @@ namespace Universe
                 return new Rect(bottomLeft, scale);
             }
 
+            GlobalTime.MaybeInvokeImportantUpdate();
+
             if (!wasdMovement)
                 return;
 

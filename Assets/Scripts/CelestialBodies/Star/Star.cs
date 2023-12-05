@@ -45,12 +45,13 @@ namespace Universe.CelestialBodies.Planets
                 return;
             }
 
-            float nameLengthBonus = Mathf.Log10(position.x) - 3; // Reeeeeally far away objects have longer names because it's scarier
+            float nameLengthBonus = Mathf.Log10(Mathf.Abs(position.x)) - 3; // Reeeeeally far away objects have longer names because it's scarier
 
             if (nameLengthBonus < 1)
                 nameLengthBonus = 1;
 
-            Name = RandomNum.GetWord((int)(RandomNum.Get(1, 3, RandomNumberGenerator) * nameLengthBonus), RandomNumberGenerator);
+            int nameLength = (int)(RandomNum.Get(1, 3, RandomNumberGenerator) * nameLengthBonus);
+            Name = RandomNum.GetWord(nameLength, RandomNumberGenerator);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
 
             trueRadius = RandomNum.CurveAt(RandomNum.GetInfiniteDouble(0.4, RandomNumberGenerator), 4, 1.2) * 3;

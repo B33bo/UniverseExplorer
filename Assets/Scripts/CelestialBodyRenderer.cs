@@ -14,6 +14,8 @@ namespace Universe
         public bool cameraLerpMultiplyBySize = true;
         public bool scaleLerp = true;
         public bool IsDestroyed;
+        public bool IsLowRes { get; private set; }
+        public float LowResScale = float.NaN;
 
         public Vector2 Scale { get; set; }
 
@@ -36,12 +38,47 @@ namespace Universe
                 Target = new CelestialBodies.UnknownItem();
             }
 
+            ToggleHiddenIfShowing();
+
             transform.localPosition = Target.Position;
             if (scaleLerp)
-                transform.localScale = Vector2.Lerp(transform.localScale, Scale, Time.deltaTime * 3);
+            {
+                if (IsLowRes)
+                {
+                    transform.localScale = Scale;
+                    scaleLerp = false;
+                }
+                else
+                    transform.localScale = Vector2.Lerp(transform.localScale, Scale, Time.deltaTime * 3);
+            }
 
             name = Target.Name;
             OnUpdate();
+        }
+
+        private void ToggleHiddenIfShowing()
+        {
+            if (LowResScale == float.NaN)
+                return;
+
+            float size = CameraControl.Instance.MyCamera.orthographicSize;
+
+            if (IsLowRes)
+            {
+                if (size > LowResScale)
+                    return;
+
+                IsLowRes = false;
+                HighRes();
+            }
+            else
+            {
+                if (size < LowResScale)
+                    return;
+
+                IsLowRes = true;
+                LowRes();
+            }
         }
 
         private void OnMouseDown()
@@ -84,6 +121,9 @@ namespace Universe
         }
 
         protected virtual void Destroyed() { }
+
+        protected virtual void LowRes() { }
+        protected virtual void HighRes() { }
 
         private void OnDestroy()
         {

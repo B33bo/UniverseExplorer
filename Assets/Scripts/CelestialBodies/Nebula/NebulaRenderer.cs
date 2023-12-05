@@ -10,6 +10,9 @@ namespace Universe.CelestialBodies
         [SerializeField]
         private Sprite glowOrb;
 
+        [SerializeField]
+        private ParticleSystem particles;
+
         private List<SpriteRenderer> rainbow;
 
         private float rainbowH;
@@ -41,6 +44,7 @@ namespace Universe.CelestialBodies
             for (int i = 0; i < nebula.Bands.Length; i++)
                 DrawBand(nebula.Bands[i]);
             soundRand = new System.Random(Target.Seed);
+            LowResScale = 30;
         }
 
         public override void OnUpdate()
@@ -60,12 +64,14 @@ namespace Universe.CelestialBodies
 
         private void Ding()
         {
+            if (IsLowRes)
+                return;
             lastDingTime = Time.time;
 
             if (RandomNum.GetFloat(1, soundRand) > dingChance)
                 return;
             Vector2 cameraCenter = CameraControl.Instance.CameraBounds.center;
-            Vector3 positionOfCam = new Vector3(cameraCenter.x, cameraCenter.y, CameraControl.Instance.CameraBounds.height);
+            Vector3 positionOfCam = new(cameraCenter.x, cameraCenter.y, CameraControl.Instance.CameraBounds.height);
 
             AudioSource audio = GetNextAudioSource();
 
@@ -85,6 +91,16 @@ namespace Universe.CelestialBodies
                     return audioSources[i];
             }
             return null;
+        }
+
+        protected override void LowRes()
+        {
+            particles.Pause();
+        }
+
+        protected override void HighRes()
+        {
+            particles.Play();
         }
 
         private void DrawBand(Nebula.Band band, bool forceRainbow = false)

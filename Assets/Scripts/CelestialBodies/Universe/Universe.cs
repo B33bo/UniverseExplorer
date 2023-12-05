@@ -20,6 +20,7 @@ namespace Universe.CelestialBodies
         public double RotationSpeed;
         public override string TypeString { get => "Universe"; }
         public UniverseInfo universeInfo;
+        public int Points;
 
         public override void Create(Vector2 position)
         {
@@ -31,6 +32,8 @@ namespace Universe.CelestialBodies
             background = new Color(0, .337f, .600f);
 
             RotationSpeed = RandomNum.Get(360f, RandomNumberGenerator);
+
+            Points = RandomNum.Get(3, 10, RandomNumberGenerator);
 
             universeInfo = new UniverseInfo(DefaultUniverseColorer.Instance.BlackBodyRadiation);
 
@@ -53,7 +56,7 @@ namespace Universe.CelestialBodies
                 keys.Add((val, RandomNum.GetColor(RandomNumberGenerator)));
             }
 
-            Gradient g = new Gradient
+            Gradient g = new()
             {
                 colorKeys = new GradientColorKey[keys.Count],
                 alphaKeys = new GradientAlphaKey[] { new GradientAlphaKey(1, 0), new GradientAlphaKey(1, 1) },

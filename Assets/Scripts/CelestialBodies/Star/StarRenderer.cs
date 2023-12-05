@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using Universe.Inspector;
 
@@ -6,8 +7,6 @@ namespace Universe.CelestialBodies.Planets
 {
     public class StarRenderer : CelestialBodyRenderer
     {
-        private Star TargetStar => Target as Star;
-
         [SerializeField]
         private SpriteRenderer spriteRenderer;
 
@@ -15,43 +14,62 @@ namespace Universe.CelestialBodies.Planets
         private SpriteRenderer worleyNoise;
 
         [SerializeField]
-        private SpriteRenderer Glow;
+        private Light2D starLight;
 
         private void ColorChanged(Variable val)
         {
+            Star star = Target as Star;
             if (val == null || val.VariableName == "Temperature")
-                TargetStar.ResetColor();
-            spriteRenderer.color = TargetStar.StarColor;
+                star.ResetColor();
+            spriteRenderer.color = star.StarColor;
             worleyNoise.color = spriteRenderer.color;
-            Glow.color = spriteRenderer.color;
-            worleyNoise.material.SetColor("_Color", TargetStar.StarColor);
+            worleyNoise.material.SetColor("_Color", star.StarColor);
+            starLight.color = star.StarColor;
         }
 
         public override void Spawn(Vector2 pos, int? seed)
         {
-            Target = new Star();
+            Star star = new();
+            Target = star;
 
             if (seed.HasValue)
                 Target.SetSeed(seed.Value);
             Target.Create(pos);
 
             Scale = GetFairSizeCurve((Target as Star).trueRadius, 4f, 1.2f) * Vector3.one;
-            TargetStar.OnInspected += ColorChanged;
+            star.OnInspected += ColorChanged;
             ColorChanged(null);
 
             transform.localScale = Scale;
+            LowResScale = Scale.x * 10;
 
             SolarSystemSpawner.sun = Target as Star;
 
             if (SceneManager.GetActiveScene().name == "Galaxy")
-                TargetStar.SpawnPlanets(transform);
+                star.SpawnPlanets(transform);
             else
-                TargetStar.planets = new PlanetRenderer[0];
+            {
+                star.planets = new PlanetRenderer[0];
+                starLight.enabled = false;
+            }
+        }
+
+        protected override void HighRes()
+        {
+            worleyNoise.enabled = true;
+        }
+
+        protected override void LowRes()
+        {
+            if (SceneManager.GetActiveScene().name == "Galaxy")
+            {
+                worleyNoise.enabled = false;
+            }
         }
 
         public override void OnUpdate()
         {
-            transform.rotation = Quaternion.Euler(0, 0, GlobalTime.Time);
+            transform.rotation = GlobalTime.Rotation;
         }
     }
 }

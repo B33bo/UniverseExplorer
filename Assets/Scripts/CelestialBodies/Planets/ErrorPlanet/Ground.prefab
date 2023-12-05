@@ -26,12 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6642885647618463831}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6642885647618463826
 MeshFilter:
@@ -52,6 +53,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -100,17 +102,22 @@ MonoBehaviour:
   cameraLerpMultiplyBySize: 0
   scaleLerp: 0
   IsDestroyed: 0
+  LowResScale: NaN
   meshFilter: {fileID: 6642885647618463826}
-  Prefabs:
+  meshRenderer: {fileID: 0}
+  Prefabs: []
+  Weights: []
+  InsidePrefabs:
   - {fileID: 0}
   - {fileID: -201240571002471440, guid: 178cf7bfaee73b941abd27ce6b0b045a, type: 3}
   - {fileID: 8625520115570239929, guid: 0178ef3906e810849b6c1d319c76f445, type: 3}
   - {fileID: -751125326117628009, guid: d438a2c2ade19fa41937154a62e17f45, type: 3}
-  Weights:
+  InsideWeights:
   - 1
   - 1
   - 1
   - 1
+  SurfacePrefabs: []
+  SurfaceWeights: []
   spawnMethod: 1
-  animalSpawner: {fileID: 0}
   stretchUVs: 0

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Universe.CelestialBodies.Planets
 {
@@ -28,6 +29,22 @@ namespace Universe.CelestialBodies.Planets
                 icePanels[i].transform.localPosition = position;
                 icePanels[i].color = c;
             }
+        }
+
+        protected override void HighRes()
+        {
+            base.HighRes();
+            for (int i = 0; i < icePanels.Length; i++)
+                icePanels[i].enabled = true;
+        }
+
+        protected override void LowRes()
+        {
+            if (SceneManager.GetActiveScene().name != "Galaxy")
+                return;
+            base.LowRes();
+            for (int i = 0; i < icePanels.Length; i++)
+                icePanels[i].enabled = false;
         }
     }
 }

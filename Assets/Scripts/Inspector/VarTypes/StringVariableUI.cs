@@ -10,7 +10,8 @@ namespace Universe.Inspector
 
         protected override void InitValue(object value, object[] args)
         {
-            inputField.text = value.ToString();
+            if (value != null)
+                inputField.text = value.ToString();
         }
     }
 }

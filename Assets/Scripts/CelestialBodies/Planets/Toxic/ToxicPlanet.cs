@@ -24,13 +24,18 @@ namespace Universe.CelestialBodies.Planets
             Position = pos;
             Name = GenerateName();
             Type = (ColorType)RandomNum.GetIndexFromWeights(WeightOfColor, RandomNum.GetFloat(0, weightOfColorSum, RandomNumberGenerator));
+            RefreshColor();
+
+            Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
+            Mass = RandomNum.Get(3e22 * Measurement.Kg, 4e24 * Measurement.Kg, RandomNumberGenerator);
+        }
+ 
+        public void RefreshColor()
+        {
             ToxicColor = ColorOfType[(int)Type];
             ToxicColor.r += RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
             ToxicColor.g += RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
             ToxicColor.b += RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
-
-            Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
-            Mass = RandomNum.Get(3e22 * Measurement.Kg, 4e24 * Measurement.Kg, RandomNumberGenerator);
         }
 
         public enum ColorType
@@ -57,7 +62,7 @@ namespace Universe.CelestialBodies.Planets
         {
             new Color(178 / 255f, 0, 1),
             new Color(58 / 255f, 193 / 255f, 0),
-            new Color(0, 0, 0),
+            new Color(.1f, .1f, .1f),
             new Color(1, 1, .5f),
             new Color(129 / 255f, 1, 247 / 255f),
             new Color(.9f, .9f, .9f),

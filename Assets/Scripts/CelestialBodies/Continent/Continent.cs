@@ -34,7 +34,7 @@ namespace Universe.CelestialBodies.Biomes
                 return;
             }
 
-            Name = RandomNum.GetPlanetName(RandomNumberGenerator);
+            Name = RandomNum.GetWord(2, RandomNumberGenerator);
             continentType = (ContinentType)RandomNum.Get(0, 3, RandomNumberGenerator);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
             GenerateMesh();

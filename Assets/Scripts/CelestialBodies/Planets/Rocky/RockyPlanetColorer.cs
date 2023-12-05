@@ -8,14 +8,24 @@ namespace Universe
         [SerializeField]
         private DayNightSystem dayNightSystem;
 
+        [SerializeField]
+        private SpriteRenderer bottomGround;
+
         protected override void OnAwake()
         {
-            if (!(BodyManager.Parent is RockyPlanet rockyPlanet))
-                return;
-            primary = rockyPlanet.RockColor;
+            ColorHSV color;
 
-            dayNightSystem.dayColor = new ColorHSV(rockyPlanet.RockColor.h, rockyPlanet.RockColor.s - .1f, rockyPlanet.RockColor.v - .2f);
-            dayNightSystem.nightColor = new ColorHSV(rockyPlanet.RockColor.h, rockyPlanet.RockColor.s - .1f, rockyPlanet.RockColor.v - .5f);
+            if (BodyManager.Parent is RockyPlanet rockyPlanet)
+            {
+                primary = rockyPlanet.RockColor;
+                color = rockyPlanet.RockColor;
+            }
+            else
+                color = primary;
+
+            bottomGround.color *= primary;
+            dayNightSystem.dayColor = new ColorHSV(color.h, color.s - .1f, color.v - .2f);
+            dayNightSystem.nightColor = new ColorHSV(color.h, color.s - .1f, color.v - .5f);
         }
     }
 }

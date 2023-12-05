@@ -14,7 +14,7 @@ namespace Universe.CelestialBodies.Planets
 
         public string GenerateName()
         {
-            return RandomNum.GetPlanetName(Seed) + " " + RandomNum.GetString(1, RandomNumberGenerator);
+            return RandomNum.GetWord(3, RandomNumberGenerator) + " " + RandomNum.GetString(1, RandomNumberGenerator);
         }
 
         public void SpawnMoons(Transform transform)

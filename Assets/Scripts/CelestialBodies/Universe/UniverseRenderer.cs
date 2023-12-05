@@ -6,7 +6,16 @@ namespace Universe.CelestialBodies
     public class UniverseRenderer : CelestialBodyRenderer
     {
         [SerializeField]
-        private SpriteRenderer spriteRenderer;
+        private MeshFilter meshFilter;
+
+        [SerializeField]
+        private MeshRenderer meshRenderer;
+
+        [SerializeField]
+        private PolygonCollider2D polygonCollider;
+
+        [SerializeField]
+        private GameObject lightObject;
 
         public override void Spawn(Vector2 position, int? seed)
         {
@@ -22,6 +31,30 @@ namespace Universe.CelestialBodies
             Scale = Size * Vector2.one;
 
             StartCoroutine(LoadSprites());
+
+            meshFilter.mesh = ShapeMaker.GetRegularShape((Target as Universe).Points, 5f / (Target as Universe).Points, true);
+            meshRenderer.material.SetFloat("_SpeedX", RandomNum.GetFloat(.6f, Target.RandomNumberGenerator) - .3f);
+            meshRenderer.material.SetFloat("_SpeedY", RandomNum.GetFloat(.6f, Target.RandomNumberGenerator) - .3f);
+            meshRenderer.material.SetFloat("_Multiplier", RandomNum.GetFloat(.75f, Target.RandomNumberGenerator));
+
+            Vector2[] colliderPoints = new Vector2[meshFilter.mesh.vertexCount];
+            for (int i = 0; i < meshFilter.mesh.vertexCount; i++)
+            {
+                colliderPoints[i] = meshFilter.mesh.vertices[i];
+            }
+            polygonCollider.points = colliderPoints;
+
+            LowResScale = 50;
+        }
+
+        protected override void LowRes()
+        {
+            lightObject.SetActive(false);
+        }
+
+        protected override void HighRes()
+        {
+            lightObject.SetActive(true);
         }
 
         private IEnumerator LoadSprite(int width, int height)
@@ -50,13 +83,12 @@ namespace Universe.CelestialBodies
 
             texture.filterMode = FilterMode.Point;
             texture.Apply();
-            Sprite x = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), texture.width);
-            spriteRenderer.sprite = x;
+            meshRenderer.material.mainTexture = texture;
         }
 
         private IEnumerator LoadSprites()
         {
-            for (int i = 4; i <= 128; i *= 2)
+            for (int i = 4; i <= 64; i *= 2)
             {
                 yield return LoadSprite(i, i);
                 yield return new WaitForEndOfFrame();

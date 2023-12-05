@@ -18,7 +18,7 @@ namespace Universe.CelestialBodies.Planets.Molten
             Width = pos.y * 2;
             Height = pos.y * 2;
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
-            Name = "Mount " + RandomNum.GetPlanetName(RandomNumberGenerator);
+            Name = "Mount " + RandomNum.GetWord(4, RandomNumberGenerator);
         }
     }
 }

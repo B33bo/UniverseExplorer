@@ -26,7 +26,7 @@ namespace Universe.CelestialBodies.Planets
 
         public void SetOceanName()
         {
-            Name = "Sea of " + RandomNum.GetPlanetName(RandomNumberGenerator); // geenyus
+            Name = "Sea of " + RandomNum.GetWord(2, RandomNumberGenerator); // geenyus
         }
     }
 }
