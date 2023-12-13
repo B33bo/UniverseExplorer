@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Universe.Animals;
 using Universe.CelestialBodies.Biomes.Grass;
@@ -33,13 +34,21 @@ namespace Universe
             flowerSprite.color = flower.color;
             flowerSprite.transform.localPosition += (Vector3)flower.offset;
 
+            StartCoroutine(InitButterflies());
+        }
+
+        private IEnumerator InitButterflies()
+        {
+            yield return new WaitForFrames(2);
+
+            Flower flower = Target as Flower;
             butterflies = new ButterflyRenderer[flower.butterflyCount];
             for (int i = 0; i < butterflies.Length; i++)
             {
                 var newButterfly = Instantiate(Resources.Load<ButterflyRenderer>("Animals/Butterfly"));
                 butterflies[i] = newButterfly;
 
-                Vector2 butterflyPos = pos + RandomNum.GetVector(-1, 1, Target.RandomNumberGenerator);
+                Vector2 butterflyPos = (Vector2)transform.position + RandomNum.GetVector(-1, 1, Target.RandomNumberGenerator);
                 butterflyPos.y++;
                 newButterfly.Spawn(butterflyPos, i + flower.Seed, flower.butterflySpecies);
                 newButterfly.AutoDestroy = false;
@@ -48,6 +57,8 @@ namespace Universe
 
         protected override void Destroyed()
         {
+            if (butterflies == null)
+                return;
             for (int i = 0; i < butterflies.Length; i++)
             {
                 if (!butterflies[i].IsDestroyed)

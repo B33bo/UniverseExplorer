@@ -33,6 +33,9 @@ namespace Universe.Terrain
         [SerializeField]
         private bool spawnWalkingAnimals, spawnAnimalsInside;
 
+        private PolyTerrain previous;
+        private PolyTerrainLayer layer;
+
         private readonly List<CelestialBodyRenderer> spawned = new();
         private readonly List<AnimalRenderer> animalsSpawned = new();
 
@@ -57,14 +60,10 @@ namespace Universe.Terrain
             polyTerrain.Create(pos, layer);
             polyTerrain.height = layer.MinimumHeight;
 
-            if (previous == null)
-            {
-                meshFilter.mesh = CreateMesh(null, 0);
-            }
-            else
-            {
-                meshFilter.mesh = CreateMesh(previous.points, previous.height);
-            }
+            this.previous = previous;
+            this.layer = layer;
+
+            Regenerate();
 
             if (layer.OverrideColor)
                 meshRenderer.material.color = layer.color;
@@ -182,9 +181,29 @@ namespace Universe.Terrain
         {
             if (prefab == null)
                 return;
-            var newObject = Instantiate(prefab, transform);
+            position += (Vector2)Target.Position;
+            var newObject = Instantiate(prefab);
             newObject.Spawn(position, seed);
             spawned.Add(newObject);
+        }
+
+        public void ForcePointStart(int index, Vector2 value)
+        {
+            (Target as PolyTerrain).points[index] = value;
+        }
+
+        public void ForcePointEnd(int index, Vector2 value)
+        {
+            index++;
+            (Target as PolyTerrain).points[^index] = value;
+        }
+
+        public void Regenerate()
+        {
+            if (previous == null)
+                meshFilter.mesh = CreateMesh(null, 0);
+            else
+                meshFilter.mesh = CreateMesh(previous.points, previous.height);
         }
 
         private Mesh CreateMesh(Vector2[] previousPoints, float bottomDecrease)

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Universe.CelestialBodies.Biomes.Grass;
+using Universe.Inspector;
 
 namespace Universe
 {
@@ -14,17 +15,11 @@ namespace Universe
         [SerializeField]
         private bool IsDead;
 
-        private bool isRainbow = false;
+        [SerializeField]
+        private bool GenerateType;
 
-        private static readonly Color[] ColorValuesForLeaves = new Color[]
-        {
-            new Color(0, .8f, 0), //Green
-            new Color(0, 0, 0, 0), //Dead / transparent
-            new Color(1, 0, 0), //Red
-            new Color(1, .5f, 0), //Orange
-            new Color(1, .5f, 1), // Pink
-            new Color(1, 1, 1), // Rainbow
-        };
+        private const int colorBiomeWidth = 100;
+        private bool isRainbow = false;
 
         private Color[] rainbowTreeColorValues;
 
@@ -41,11 +36,14 @@ namespace Universe
 
         public override void Spawn(Vector2 pos, int? seed)
         {
-            TreePlant tree = new TreePlant();
+            TreePlant tree = new();
             Target = tree;
 
             if (IsDead)
                 tree.IsDead = true;
+
+            if (GenerateType)
+                tree.SetType(new System.Random(Mathf.FloorToInt(pos.x / colorBiomeWidth) * colorBiomeWidth));
 
             if (seed.HasValue)
                 tree.SetSeed(seed.Value);
@@ -55,22 +53,24 @@ namespace Universe
             for (int i = 0; i < lowLevelBranches.Length; i++)
                 ReloadBranch(lowLevelBranches[i], 1.25f);
 
-            if (tree.color == TreePlant.TreeColor.Rainbow)
+            if (tree.colorType == TreePlant.TreeColor.Rainbow)
             {
                 isRainbow = true;
                 rainbowTreeColorValues = new Color[leaves.Length];
             }
 
             ReloadLeaves();
-            Target.OnInspected += v => { if (v.VariableName == "Type") ReloadLeaves(); };
+            Target.OnInspected += v => ReloadLeaves();
         }
 
         private void ReloadLeaves()
         {
             var tree = Target as TreePlant;
+                tree.SetTreeColorToType(tree.colorType, tree.RandomNumberGenerator);
+
             for (int i = 0; i < leaves.Length; i++)
             {
-                Color currentLeafColor = ColorValuesForLeaves[(int)tree.color];
+                Color currentLeafColor = tree.color;
 
                 currentLeafColor.r += RandomNum.GetFloat(-.2f, .2f, Target.RandomNumberGenerator);
                 currentLeafColor.g += RandomNum.GetFloat(-.2f, .2f, Target.RandomNumberGenerator);

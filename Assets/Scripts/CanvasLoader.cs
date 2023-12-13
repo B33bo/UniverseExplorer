@@ -11,9 +11,6 @@ namespace Universe
         private Button button;
 
         [SerializeField]
-        private GameObject blackHoleText;
-
-        [SerializeField]
         private TextMeshProUGUI fps;
 
         public void LoadBackwards()
@@ -33,12 +30,10 @@ namespace Universe
             if (Scene == "BlackHole")
             {
                 button.interactable = false;
-                blackHoleText.SetActive(true);
                 return;
             }
 
             button.interactable = true;
-            blackHoleText.SetActive(false);
 
             if (BodyManager.SceneVisitedCount < 1)
                 button.gameObject.SetActive(false);

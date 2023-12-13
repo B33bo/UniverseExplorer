@@ -1,8 +1,7 @@
 -TODO
 
-BIOMES:
-	Layer array as well but it's added on top of normal layers depending on position. This means that biomes can only change top layers
-
+spaceship HUD
+Strange color stars (rare)
 CLOUDS!!
 BACKGROUND ITEMS
 ORES SYSTEM (randomized for each planet)
@@ -121,6 +120,8 @@ Animals:
 	- Arakiel 
 	- Skinwalker / Loric
 	- Slime
+
+Settings
 
 == NEW ==
 

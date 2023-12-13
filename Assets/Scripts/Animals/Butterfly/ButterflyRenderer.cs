@@ -36,7 +36,6 @@ namespace Universe.Animals
             SetPattern(butterfly.leftWingPattern, leftWingMask, leftWingPattern);
             SetPattern(butterfly.rightWingPattern, rightWingMask, rightWingPattern);
 
-
             speed = butterfly.speed;
             animator.SetFloat("speed", butterfly.speed);
             transform.localScale *= butterfly.size;

@@ -7,7 +7,10 @@ namespace Universe.Terrain
     public class PolygonalTerrainGenerator : Spawner
     {
         [SerializeField]
-        private PolyTerrainLayer[] layers;
+        private BiomeManager biomeManager;
+
+        [SerializeField]
+        private List<PolyTerrainLayer> layers;
 
         [SerializeField]
         private bool colorBottomGround;
@@ -22,11 +25,22 @@ namespace Universe.Terrain
         public override void OnStart()
         {
             base.OnStart();
+
             CameraControl.Instance.OnPositionUpdate += UpdateBottomFloor;
             terrain = new Dictionary<float, PolyTerrainRenderer[]>();
+
+            if (biomeManager != null)
+            {
+                var biomeLayer = new PolyTerrainLayer
+                {
+                    MinimumHeight = biomeManager.biomeHeight
+                };
+                layers.Insert(0, biomeLayer);
+            }
+
             minimumY = 0;
 
-            for (int i = 0; i < layers.Length; i++)
+            for (int i = 0; i < layers.Count; i++)
             {
                 minimumY -= layers[i].MinimumHeight;
                 layers[i].Offset += (float)new System.Random(BodyManager.GetSeed()).NextDouble() * 1000 - 500;
@@ -41,7 +55,9 @@ namespace Universe.Terrain
         private void UpdateBottomFloor(Rect bounds)
         {
             float scaleDownwards = Mathf.Min(minimumY - bounds.yMin, bounds.height) * 1.5f;
-            if (scaleDownwards < 0) scaleDownwards = 0;
+
+            if (scaleDownwards < 0)
+                scaleDownwards = 0;
 
             bottomGround.transform.localScale = new Vector3(bounds.width * 1.5f, scaleDownwards);
             bottomGround.transform.position = new Vector3(bounds.center.x, Mathf.Min(bounds.yMax + .5f, minimumY));
@@ -106,12 +122,12 @@ namespace Universe.Terrain
                     continue;
                 }
 
-                PolyTerrainRenderer[] layerObjects = new PolyTerrainRenderer[layers.Length];
+                PolyTerrainRenderer[] layerObjects = new PolyTerrainRenderer[layers.Count];
                 float yVal = minimumY;
 
                 PolyTerrain polyTerrain = null;
 
-                for (int i = layers.Length - 1; i >= 0; i--)
+                for (int i = layers.Count - 1; i >= 0; i--)
                 {
                     PolyTerrainRenderer terrainRenderer = SpawnLayer(i, xPos, yVal, polyTerrain);
                     layerObjects[i] = terrainRenderer;
@@ -127,10 +143,23 @@ namespace Universe.Terrain
 
         private PolyTerrainRenderer SpawnLayer(int index, float x, float y, PolyTerrain previous)
         {
-            var layer = Instantiate(layers[index].Renderer);
-            layer.Spawn(new Vector2(x, y), new Vector2(x, y).HashPos(BodyManager.GetSeed()), previous, layers[index]);
-            layer.Target.Name = $"Layer {x}:" + index;
-            return layer;
+            int seed = new Vector2(x, y).HashPos(BodyManager.GetSeed());
+
+            if (index == 0 && biomeManager != null)
+            {
+                var biomeLayer = biomeManager.GetBiomeAt(x);
+                biomeLayer.MinimumHeight = biomeManager.biomeHeight;
+                PolyTerrainRenderer biomeLayerRenderer = Instantiate(biomeLayer.Renderer);
+                biomeLayerRenderer.Spawn(new Vector2(x, y), seed, previous, biomeLayer);
+
+                biomeLayerRenderer.Target.Name = $"Biome Layer {x}";
+                return biomeLayerRenderer;
+            }
+
+            PolyTerrainRenderer layerRenderer = Instantiate(layers[index].Renderer);
+            layerRenderer.Spawn(new Vector2(x, y), seed, previous, layers[index]);
+            layerRenderer.Target.Name = $"Layer {x}:" + index;
+            return layerRenderer;
         }
 
         public override List<Vector2> CellsOnScreen(Rect cameraBounds)

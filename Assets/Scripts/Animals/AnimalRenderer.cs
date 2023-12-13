@@ -33,7 +33,7 @@ namespace Universe.Animals
         public void SetPattern(Pattern pattern, SpriteMask spriteMask, SpriteRenderer sprite)
         {
             sprite.sortingOrder = pattern.id;
-            spriteMask.backSortingOrder = pattern.id;
+            spriteMask.backSortingOrder = pattern.id - 1;
             spriteMask.frontSortingOrder = pattern.id + 1;
 
             sprite.sprite = Resources.Load<Sprite>("Patterns/" + pattern.patternType.ToString());

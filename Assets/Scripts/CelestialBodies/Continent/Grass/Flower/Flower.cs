@@ -43,7 +43,7 @@ namespace Universe.CelestialBodies.Biomes.Grass
             butterflySpecies.SetSeed(Seed);
             butterflySpecies.CreateSpecies();
 
-            butterflyCount = RandomNum.Get(0, 3, RandomNumberGenerator) == 1 ? RandomNum.Get(0, 6, RandomNumberGenerator) : 0;
+            butterflyCount = RandomNum.Get(0, 2, RandomNumberGenerator) == 0 ? RandomNum.Get(1, 6, RandomNumberGenerator) : 0;
         }
 
         public override string GetBonusTypes()

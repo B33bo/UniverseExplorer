@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Universe.CelestialBodies
 {
     public class LightOrbRenderer : CelestialBodyRenderer
     {
         [SerializeField]
-        private SpriteRenderer spriteRenderer, glow;
+        private SpriteRenderer spriteRenderer;
+
+        [SerializeField]
+        private Light2D glow;
 
         [SerializeField]
         private CircleCollider2D collision;
@@ -13,6 +17,7 @@ namespace Universe.CelestialBodies
         private LightOrb lightOrb;
         private float orbitalRotation;
         private Vector3 origin;
+        private Color color;
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -24,7 +29,7 @@ namespace Universe.CelestialBodies
 
             origin = pos;
             lightOrb.Create(pos);
-            spriteRenderer.color = lightOrb.color;
+            color = lightOrb.color;
             transform.localScale = lightOrb.radius * Vector2.one;
         }
 
@@ -35,10 +40,9 @@ namespace Universe.CelestialBodies
             transform.position += origin;
 
             float alpha = Mathf.Sin(GlobalTime.Time * lightOrb.alphaShift);
-            Color col = spriteRenderer.color;
+            Color col = color;
             col.a = alpha;
             spriteRenderer.color = col;
-            glow.color = spriteRenderer.color;
 
             collision.enabled = alpha > 0;
         }

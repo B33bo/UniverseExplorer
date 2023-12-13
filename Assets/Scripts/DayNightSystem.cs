@@ -209,17 +209,18 @@ namespace Universe
                 {
                     int seed = ObjectSpawner.starsLoaded[i].Seed;
                     var rand = new System.Random(seed);
-                    Vector2 pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 0, rand));
+                    Vector2 pos = new(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 50, rand));
                     newSpeck.isOriginal = true;
                     newSpeck.Spawn(pos, ObjectSpawner.starsLoaded[i].Seed);
                 }
                 else
                 {
                     int seed = planet.Seed + (i - ObjectSpawner.starsLoaded.Count);
-                    System.Random rand = new System.Random(seed);
-                    Vector2 pos = new Vector2(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 50, rand));
+                    System.Random rand = new(seed);
+                    Vector2 pos = new(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 50, rand));
 
                     var newStar = new Star();
+                    newStar.SetSeed(seed);
                     newStar.Create(pos);
                     newStar.Name = $"({newStar.Name})";
                     newSpeck.Target = newStar;
@@ -237,7 +238,7 @@ namespace Universe
             transform.position = new Vector2(CameraControl.Instance.Position.x,
                 Mathf.Max(CameraControl.Instance.CameraBounds.yMin, 2));
 
-            Time = GetTime(); //0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
+            Time = GetTime(); // 0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
             rotator.transform.rotation = Quaternion.Euler(0, 0, Time * 180);
 
             float time = Time % 1;
@@ -270,7 +271,7 @@ namespace Universe
                     return time;
             }
 
-            return GlobalTime.Time % 360 / 180; //0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
+            return GlobalTime.Time % 360 / 180; // 0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
         }
     }
 }

@@ -8,14 +8,14 @@ namespace Universe.Animals
 
         public override string TypeString => "Butterfly";
 
-        public Pattern leftWingPattern;  // darn liberals
+        public Pattern leftWingPattern;  // darn Commies
         public Pattern rightWingPattern; // darn Nazis
         public float size;
         public float speed;
 
         public override void CreateAnimal(Animal speciesPrefab)
         {
-            if (!(speciesPrefab is Butterfly butterfly))
+            if (speciesPrefab is not Butterfly butterfly)
                 return;
 
             leftWingPattern = butterfly.leftWingPattern;

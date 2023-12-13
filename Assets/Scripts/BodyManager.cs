@@ -9,6 +9,8 @@ namespace Universe
     {
         private static Stack<string> ScenesVisited = new Stack<string>();
         private static Stack<CelestialBody> BodiesVisited = new Stack<CelestialBody>();
+        private static Stack<Vector2> CameraPosition = new Stack<Vector2>();
+
         public static CelestialBody Parent;
         public static CelestialBodies.Universe Universe { get; private set; }
         public static int SceneVisitedCount => ScenesVisited.Count;
@@ -83,12 +85,19 @@ namespace Universe
                 Universe = null;
             Parent = BodiesVisited.Pop();
             UnityEngine.SceneManagement.SceneManager.LoadScene(ScenesVisited.Pop());
+            CameraControl.Instance.Position = CameraPosition.Pop();
         }
 
         public static void TravelTo(string position)
         {
             Debug.Log($"Loading {position}");
+
+            CameraPosition.Push(CameraControl.Instance.Position);
+            CameraControl.Instance.UnFocus();
+            CameraControl.Instance.Position = Vector3.zero;
+
             BodiesVisited.Push(Parent);
+
             ScenesVisited.Push(UnityEngine.SceneManagement.SceneManager.GetSceneAt(0).name);
             UnityEngine.SceneManagement.SceneManager.LoadScene(position);
         }

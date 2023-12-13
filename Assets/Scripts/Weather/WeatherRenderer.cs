@@ -23,7 +23,6 @@ namespace Universe.Weather
             rainMain.startColor = rainMain.startColor.color * WeatherManager.Instance.RainColor;
 
             rainbow.Spawn(new Vector2(0, -pos.y + 2), seed);
-            Debug.Log(rainbow.Target.Position);
         }
 
         public void ChangeWeather(int weatherIndex)

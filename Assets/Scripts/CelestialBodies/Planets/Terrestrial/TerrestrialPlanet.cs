@@ -1,5 +1,6 @@
 using UnityEngine;
 using Universe.CelestialBodies.Biomes;
+using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Planets
 {
@@ -17,6 +18,9 @@ namespace Universe.CelestialBodies.Planets
 
         public override string ObjectFilePos => "Objects/Planet/TerrestrialPlanet";
         public Continent[] continents;
+
+        [InspectableVar("Water Level", Params = new object[] { 0, 1 })]
+        public float waterLevel;
 
         public override void Create(Vector2 pos)
         {

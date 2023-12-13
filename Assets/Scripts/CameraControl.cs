@@ -79,7 +79,6 @@ namespace Universe
             {
                 isLoading++;
                 MyCamera.orthographicSize = CamScale;
-                transform.position = new Vector3(0, 0, -10);
                 MyCamera.backgroundColor = Color.black;
                 Timed.RunAfterFrames(() => { isLoading--; OnFinishedLoading?.Invoke(); }, 1);
             };
@@ -109,7 +108,7 @@ namespace Universe
                 return;
             }
 
-            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            Vector2 movement = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
             if (Application.isMobilePlatform)
                 movement = MobileMovement();
@@ -134,6 +133,7 @@ namespace Universe
              * the change in movement for each frame is below the floating point precision, resulting in 0 net movement.
              * This is the fix. It results in jagged movement but that's better than no movement. Also it's unavoidable
              */
+
             cachedMovement += movement;
             Vector2 oldPosition = Position;
             Position += cachedMovement;
@@ -252,6 +252,8 @@ namespace Universe
 
                 if (focus is null)
                     return true;
+                if (focus.IsDestroyed)
+                    return true;
                 if (focus.cameraLerpTarget is null)
                     return true;
 
@@ -263,7 +265,7 @@ namespace Universe
                 Quaternion rotation = AllowCameraRotate ? Quaternion.Lerp(startRotation, focus.cameraLerpTarget.rotation, t) : startRotation;
 
                 if (targetScale >= 0)
-                    _camera.orthographicSize = Mathf.Lerp(startCamLerp, targetScale, t);
+                    SetScale(Mathf.Lerp(startCamLerp, targetScale, t));
 
                 transform.SetPositionAndRotation(position, rotation);
 
@@ -290,7 +292,7 @@ namespace Universe
             Timed.RepeatUntil(() =>
             {
                 t += Time.deltaTime * 2;
-                MyCamera.orthographicSize = Mathf.Lerp(startCamLerp, targetScale, t);
+                SetScale(Mathf.Lerp(startCamLerp, targetScale, t));
                 transform.rotation = Quaternion.Lerp(startRotation, Quaternion.identity, t);
                 return t >= 1;
             });
