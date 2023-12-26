@@ -34,8 +34,8 @@ namespace Universe
 
             if (Target is null)
             {
-                Debug.LogError("Target is null on object " + name);
-                Target = new CelestialBodies.UnknownItem();
+                Spawn(Vector3.zero, 0);
+                return;
             }
 
             ToggleHiddenIfShowing();

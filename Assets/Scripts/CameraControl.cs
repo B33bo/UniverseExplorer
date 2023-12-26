@@ -65,6 +65,7 @@ namespace Universe
         {
             // So that instance doesn't get overriten, use the ??=
             Instance ??= this;
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
         }
 
         private void Start()

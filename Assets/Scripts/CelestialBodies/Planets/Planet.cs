@@ -11,6 +11,7 @@ namespace Universe.CelestialBodies.Planets
         public MoonRenderer[] moons;
         public Star sun;
         public float age = -1;
+        public Color waterColor = new(.15f, .002f, 1);
 
         public string GenerateName()
         {

@@ -1,6 +1,8 @@
 using Btools.DevConsole;
 using UnityEngine;
+using Universe.CelestialBodies.Planets;
 using Universe.Terrain;
+using Universe.Weather;
 
 namespace Universe
 {
@@ -17,6 +19,7 @@ namespace Universe
 
         private Mesh mesh;
         private float originalPos;
+        private Color color;
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -26,6 +29,7 @@ namespace Universe
 
             if (!preLoadedWaveLengths)
                 PreloadWaves();
+            SetColor();
         }
 
         public override void Spawn(Vector2 pos, int? seed, PolyTerrain previous, PolyTerrainLayer layer)
@@ -36,6 +40,23 @@ namespace Universe
 
             if (!preLoadedWaveLengths)
                 PreloadWaves();
+            SetColor();
+        }
+
+        private void SetColor()
+        {
+            if (BodyManager.Parent is Planet p)
+            {
+                color = p.waterColor;
+                meshRenderer.material.color = color;
+            }
+            else
+            {
+                color = WeatherManager.Instance.RainColor;
+            }
+
+            color.a = 1;
+            meshRenderer.material.color = color;
         }
 
         public override void OnUpdate()
@@ -48,6 +69,13 @@ namespace Universe
                 verts[i].y = SumOfSines(Target.Position.x + verts[i].x) + originalPos;
             }
             mesh.vertices = verts;
+
+            if (DayNightSystem.Instance)
+            {
+                Color c = color * DayNightSystem.LightIntensity;
+                c.a = 1;
+                meshRenderer.material.color = c;
+            }
         }
 
         private float Sin(float x, float waveLength, float peak, float time)

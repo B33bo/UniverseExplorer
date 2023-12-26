@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Universe.CelestialBodies
@@ -16,21 +14,31 @@ namespace Universe.CelestialBodies
         private string travelTarget;
         public Color OreColor;
 
-        public override void Create(Vector2 pos)
+        public void LoadRandomOre()
         {
-            Create(pos, "Unknowninium", "", Color.magenta);
+            float weightIndex = RandomNum.GetFloat(OreGenerator.weightTotal, RandomNumberGenerator);
+            int index = RandomNum.GetIndexFromWeights(OreGenerator.weights, weightIndex);
+            Load(OreGenerator.ores[index]);
         }
 
-        public void Create(Vector2 pos, string type, string travelTarget, Color oreColor)
+        public override void Create(Vector2 pos)
+        {
+            Position = pos;
+            Width = RandomNum.Get(1 * Measurement.cm, 200 * Measurement.cm, RandomNumberGenerator);
+            Height = RandomNum.Get(.5f, 2f, RandomNumberGenerator) * Width;
+        }
+
+        public void Load(Ore ore)
+        {
+            Load(ore.oreType, ore.travelTarget, ore.OreColor);
+        }
+
+        public void Load(string type, string travelTarget, Color oreColor)
         {
             Name = type;
-            Position = pos;
             oreType = type;
             this.travelTarget = travelTarget;
             OreColor = oreColor;
-
-            Width = RandomNum.Get(1 * Measurement.cm, 200 * Measurement.cm, RandomNumberGenerator);
-            Height = RandomNum.Get(.5f, 2f, RandomNumberGenerator) * Width;
         }
     }
 }

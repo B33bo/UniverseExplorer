@@ -24,7 +24,7 @@ namespace Universe.Weather
             // seed based on x position, time, and parent seed
             int weatherSeed = new Vector2(Position.x, weatherIndex).HashPos(Seed);
 
-            System.Random rand = new System.Random(weatherSeed);
+            System.Random rand = new(weatherSeed);
 
             int precipitationIndex = GetPrecipitationType(weatherTemplate, rand);
             PrecipitationType = weatherTemplate.Precipitations[precipitationIndex].Type;

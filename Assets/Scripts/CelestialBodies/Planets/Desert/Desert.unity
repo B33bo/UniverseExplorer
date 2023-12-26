@@ -457,9 +457,39 @@ MonoBehaviour:
     Average: 0.1
     Deviation: 0.1
   RainColor: {r: 0.6839622, g: 1, b: 0.9840472, a: 1}
-  rainColorFromColorHighlight: 0
-  height: 20
+  height: 50
   weatherRendererPrefab: {fileID: 5781608729735631084, guid: 7b5f6a0e794c96f41a62c92455f56f88, type: 3}
+  lightning:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  lightningColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &566978597
 Transform:
   m_ObjectHideFlags: 0
@@ -512,7 +542,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -570,6 +600,7 @@ GameObject:
   - component: {fileID: 854996060}
   - component: {fileID: 854996059}
   - component: {fileID: 854996058}
+  - component: {fileID: 854996061}
   m_Layer: 0
   m_Name: ObjectSpawner
   m_TagString: Untagged
@@ -610,15 +641,16 @@ MonoBehaviour:
   weights: []
   randomOffset: 1
   extraPadding: 3
+  biomeManager: {fileID: 0}
   layers:
   - Noises:
     - NoiseType: 1
-      Offset: {x: 0, y: 8.81}
+      Offset: {x: 2.32, y: 8.81}
       Smootheness: 30
       Magnitude: 15
       CanBeNegative: 0
     - NoiseType: 5
-      Offset: {x: 0, y: 8.81}
+      Offset: {x: -0.93, y: 8.81}
       Smootheness: 30
       Magnitude: 5
       CanBeNegative: 0
@@ -654,6 +686,7 @@ MonoBehaviour:
     color: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
   colorBottomGround: 0
   bottomGround: {fileID: 837848090}
+  paddding: 1
 --- !u!4 &854996060
 Transform:
   m_ObjectHideFlags: 0
@@ -669,6 +702,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &854996061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854996057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdab0235dfcf6745baef20dd4a8e067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min: 1
+  max: 3
 --- !u!1001 &989191454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -780,15 +827,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.b
-      value: 0.32941177
+      value: 0.14150941
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.g
-      value: 0.27450982
+      value: 0.11425328
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.r
-      value: 0.1882353
+      value: 0.071422204
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: brightnessAtNight
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361286, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: m_RootOrder

@@ -27,17 +27,11 @@ EditorBuildSettings:
     path: Assets/Scripts/CelestialBodies/Galaxy/Galaxy.unity
     guid: 8eb4e11463a29d44f975dfeaeb0b169c
   - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Continent/Grass/GrassBiome.unity
-    guid: a7db103fdbeda1849859dba43a7055a1
+    path: Assets/Scripts/CelestialBodies/Star/Star.unity
+    guid: 9fd60986a2d55d0458eebc8f7489b2ce
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Planets/Terrestrial/TerrestrialPlanet.unity
     guid: 113d4d73f1ca3404c8aa640a3a11c873
-  - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Testing/TestLand.unity
-    guid: 88444eb08ac47a44889bf273b02fa672
-  - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Star/Star.unity
-    guid: 9fd60986a2d55d0458eebc8f7489b2ce
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Planets/ErrorPlanet/ErrorPlanet.unity
     guid: 73783e18f562ecb42af5084cf6e6f073
@@ -56,9 +50,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Planets/Gas/GasPlanet.unity
     guid: 235c70b7f4b9ee740ade611ccf46bd24
-  - enabled: 1
-    path: Assets/Scripts/CelestialBodies/Continent/Snow/SnowBiome.unity
-    guid: 224b06884082cd8498a028c1d3d2b52c
   - enabled: 1
     path: Assets/Scripts/CelestialBodies/Planets/Desert/Desert.unity
     guid: 0c5daca0ee126ea4aa28c998f69a36bf

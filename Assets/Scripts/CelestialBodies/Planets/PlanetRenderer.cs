@@ -12,6 +12,7 @@ namespace Universe
         protected SpriteRenderer sprite;
 
         public float SpawnWeight;
+
         public override void Spawn(Vector2 pos, int? seed)
         {
             Target = (Planet)Activator.CreateInstance(PlanetType);

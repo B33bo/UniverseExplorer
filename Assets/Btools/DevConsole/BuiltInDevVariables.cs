@@ -177,6 +177,14 @@ namespace Btools.DevConsole
                 () => float.Epsilon
                 )},
 
+            {"vsync", new DevConsoleVariable(
+                "vsync",
+                "Vertical Sync",
+                typeof(int),
+                () => QualitySettings.vSyncCount,
+                x => QualitySettings.vSyncCount = int.Parse(x)
+                ) },
+
             #region Integer Limits
 
             {"floatmax", new DevConsoleVariable(

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Universe.CelestialBodies
 {
@@ -13,9 +12,6 @@ namespace Universe.CelestialBodies
         private Texture texture;
 
         [SerializeField]
-        private Color color;
-
-        [SerializeField]
         private MeshFilter[] filters;
 
         [SerializeField]
@@ -24,10 +20,8 @@ namespace Universe.CelestialBodies
         [SerializeField]
         private PolygonCollider2D collision;
 
-        private void Awake()
-        {
-            Spawn(Vector2.zero, 0);
-        }
+        [SerializeField]
+        private Light2D oreLight;
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -36,18 +30,24 @@ namespace Universe.CelestialBodies
             if (seed.HasValue)
                 ore.SetSeed(seed.Value);
 
-            ore.Create(pos, type, travelTarget, color);
+            ore.Create(pos);
+            ore.LoadRandomOre();
+
             Target = ore;
 
-            LoadPolygon(0);
+            oreLight.color = ore.OreColor;
+
+            LoadPolygon(0, ore);
             for (int i = 1; i < filters.Length; i++)
             {
                 if (!RandomNum.GetBool(.5f, Target.RandomNumberGenerator))
                 {
                     Destroy(filters[i].gameObject);
+                    renderers[i].enabled = false;
                     continue;
                 }
-                LoadPolygon(i);
+
+                LoadPolygon(i, ore);
             }
 
             Vector2[] collider = new Vector2[filters[0].mesh.vertices.Length];
@@ -56,19 +56,33 @@ namespace Universe.CelestialBodies
             collision.points = collider;
         }
 
-        private void LoadPolygon(int index)
+        protected override void HighRes()
+        {
+            oreLight.enabled = true;
+        }
+
+        protected override void LowRes()
+        {
+            oreLight.enabled = false;
+        }
+
+        private void LoadPolygon(int index, Ore ore)
         {
             Mesh mesh = ShapeMaker.GetRegularShape(5, 1, true);
             Vector3[] verts = mesh.vertices;
+
             for (int i = 0; i < verts.Length; i++)
                 verts[i] *= RandomNum.GetFloat(1, Target.RandomNumberGenerator);
+
             mesh.vertices = verts;
 
             filters[index].mesh = mesh;
 
             if (texture != null)
                 renderers[index].material.mainTexture = texture;
-            renderers[index].material.color = color;
+
+            Material mat = renderers[index].material;
+            mat.color = ore.OreColor;
         }
     }
 }

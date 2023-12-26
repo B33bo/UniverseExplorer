@@ -220,20 +220,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
       propertyPath: filters.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
       propertyPath: renderers.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
-      propertyPath: filters.Array.data[1]
-      value: 
-      objectReference: {fileID: 1326252313681664276}
-    - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
-      propertyPath: filters.Array.data[2]
-      value: 
-      objectReference: {fileID: 8044009117252087897}
     - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
       propertyPath: filters.Array.data[3]
       value: 
@@ -241,15 +233,7 @@ PrefabInstance:
     - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
       propertyPath: filters.Array.data[4]
       value: 
-      objectReference: {fileID: 8044009117252087897}
-    - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
-      propertyPath: renderers.Array.data[1]
-      value: 
-      objectReference: {fileID: 3094273840044656306}
-    - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
-      propertyPath: renderers.Array.data[2]
-      value: 
-      objectReference: {fileID: 4387309638105246467}
+      objectReference: {fileID: 1326252313681664276}
     - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
       propertyPath: renderers.Array.data[3]
       value: 
@@ -257,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
       propertyPath: renderers.Array.data[4]
       value: 
-      objectReference: {fileID: 4387309638105246467}
+      objectReference: {fileID: 3094273840044656306}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

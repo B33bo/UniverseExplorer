@@ -34,7 +34,6 @@ namespace Universe
 
         public static void ReloadCommands()
         {
-            DevCommands.Register("load", "load a scene", LoadCmd);
             DevCommands.RegisterVar(new DevConsoleVariable("parent", "list the info of the parent", typeof(CelestialBody),
                 () => Parent.ToString()));
 
@@ -42,16 +41,6 @@ namespace Universe
             DevCommands.Register("objectlst", "list all objects", ObjectLst);
             DevCommands.RegisterVar(new DevConsoleVariable("Time", "Time of simulation", typeof(float),
                 () => GlobalTime.Time, x => GlobalTime.SetTime(float.Parse(x))));
-
-            string LoadCmd(string[] parameters)
-            {
-                TestBody testBody = new TestBody(Vector2.zero, int.Parse(parameters[1]), parameters[2]);
-                ScenesVisited.Clear();
-                BodiesVisited.Clear();
-                Parent = testBody;
-                UnityEngine.SceneManagement.SceneManager.LoadScene(parameters[2]);
-                return testBody.ToString();
-            }
 
             string Spawn(string[] parameters)
             {

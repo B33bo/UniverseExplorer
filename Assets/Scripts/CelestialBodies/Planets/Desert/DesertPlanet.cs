@@ -13,9 +13,11 @@ namespace Universe.CelestialBodies.Planets.Desert
 
         public override void Create(Vector2 pos)
         {
+            Name = GenerateName();
             Position = pos;
             Radius = RandomNum.Get(minRadius, maxRadius, RandomNumberGenerator);
             Mass = Radius * Radius * 11; // hehe
+            waterColor = RandomNum.GetColor(RandomNumberGenerator);
         }
     }
 }

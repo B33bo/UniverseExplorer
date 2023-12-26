@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Universe
 {
-    [CreateAssetMenu(menuName = "SpaceGame/UniverseColorer", fileName = "UniverseColorer")]
+    [CreateAssetMenu(menuName = "Universe/UniverseColorer", fileName = "UniverseColorer")]
     public class DefaultUniverseColorer : ScriptableObject
     {
         private static DefaultUniverseColorer _inst;

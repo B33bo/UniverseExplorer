@@ -1,5 +1,5 @@
+#if false
 using System;
-using Universe.CelestialBodies.Biomes;
 using Universe.CelestialBodies.Planets;
 
 namespace Universe
@@ -32,6 +32,7 @@ namespace Universe
             return days / 180;
         }
 
+        
         public static float ContinentTime(Continent c)
         {
             return c.Seed switch
@@ -45,6 +46,8 @@ namespace Universe
                 TerrestrialPlanet.Antarctica => Antarctica,
                 _ => -1,
             };
-        }
     }
 }
+
+Probably won't ever need this but it's here just in case
+#endif

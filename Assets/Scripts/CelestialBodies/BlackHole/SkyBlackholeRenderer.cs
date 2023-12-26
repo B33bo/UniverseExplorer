@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Universe.CelestialBodies;
 
 namespace Universe

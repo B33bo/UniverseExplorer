@@ -51,5 +51,15 @@ namespace Universe
             c.a = colorHSV.a;
             return c;
         }
+
+        public static ColorHSV operator +(ColorHSV a, ColorHSV b)
+        {
+            return new(a.h + b.h, a.s + b.s, a.v + b.v);
+        }
+
+        public static ColorHSV operator -(ColorHSV a, ColorHSV b)
+        {
+            return new(a.h - b.h, a.s - b.s, a.v - b.v);
+        }
     }
 }

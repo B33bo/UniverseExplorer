@@ -42,6 +42,10 @@ namespace Universe
 
             cameraLerpTarget.localPosition = new Vector3(0, extension / 2);
 
+            var bounds = mesh.bounds;
+            bounds.max += new Vector3(0, 5);
+            mesh.bounds = bounds;
+
             meshFilter.mesh = mesh;
         }
     }

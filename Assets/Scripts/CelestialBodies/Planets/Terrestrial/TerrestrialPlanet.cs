@@ -1,5 +1,4 @@
 using UnityEngine;
-using Universe.CelestialBodies.Biomes;
 using Universe.Inspector;
 
 namespace Universe.CelestialBodies.Planets
@@ -17,7 +16,6 @@ namespace Universe.CelestialBodies.Planets
         public override bool Circular => true;
 
         public override string ObjectFilePos => "Objects/Planet/TerrestrialPlanet";
-        public Continent[] continents;
 
         [InspectableVar("Water Level", Params = new object[] { 0, 1 })]
         public float waterLevel;
@@ -31,42 +29,26 @@ namespace Universe.CelestialBodies.Planets
                 Radius = 6371 * Measurement.Km;
                 Name = "Earth";
                 Mass = 5.972e24 * Measurement.Kg;
-                GenerateEarth();
+                waterColor = new(0, .15f, .71f);
                 return;
+            }
+
+            if (RandomNum.GetBool(RandomNumberGenerator))
+            {
+                float r = RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
+                float g = RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
+                float b = RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
+                waterColor += new Color(r, g, b);
+            }
+            else
+            {
+                waterColor = RandomNum.GetColor(RandomNumberGenerator);
             }
 
             Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
             Name = GenerateName();
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
-
-            continents = new Continent[RandomNum.Get(1, 10, RandomNumberGenerator)];
-
-            for (int i = 0; i < continents.Length; i++)
-            {
-                Continent continent = new Continent();
-                continent.SetSeed(RandomNum.Get(int.MinValue, int.MaxValue, RandomNumberGenerator));
-                continent.Create((Vector2)Position + RandomNum.GetVector(-.5f, .5f, RandomNumberGenerator));
-                continent.planet = this;
-                continents[i] = continent;
-
-                Mass += continents[i].Mass;
-            }
-        }
-
-        private void GenerateEarth()
-        {
-            continents = new Continent[7];
-
-            for (int i = 0; i < continents.Length; i++)
-            {
-                Continent continent = new Continent();
-                continent.SetSeed(i);
-                continent.Create((Vector2)Position + RandomNum.GetVector(-.5f, .5f, RandomNumberGenerator));
-                continent.planet = this;
-                continents[i] = continent;
-
-                Mass += continents[i].Mass;
-            }
+            waterLevel = RandomNum.GetFloat(.5f, RandomNumberGenerator);
         }
     }
 }

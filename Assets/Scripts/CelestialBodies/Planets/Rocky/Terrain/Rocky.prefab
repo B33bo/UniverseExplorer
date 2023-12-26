@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,19 +107,13 @@ MonoBehaviour:
   meshRenderer: {fileID: 4038372494222001348}
   InsidePrefabs:
   - {fileID: 0}
-  - {fileID: 8146045397179449299, guid: 31de7daef35c97046ae803afd4ce41b5, type: 3}
-  - {fileID: 8762418318883461580, guid: 30dd681455a35c84eb776627c3d30009, type: 3}
+  - {fileID: 4995675585721306184, guid: 3f6a358937b73cb4e80ffdae5e88fac1, type: 3}
   InsideWeights:
   - 100
-  - 10
-  - 10
-  SurfacePrefabs:
-  - {fileID: 0}
-  - {fileID: 2881888878437184023, guid: 929ebe13eb0f398428dd411e5ba12d8f, type: 3}
-  - {fileID: 7849962937075791313, guid: 8ea1cd516ac99054bb038c06f534bbd2, type: 3}
-  SurfaceWeights:
-  - 100
-  - 10
-  - 10
+  - 20
+  SurfacePrefabs: []
+  SurfaceWeights: []
   insideFast: 1
   stretchUVs: 0
+  spawnWalkingAnimals: 0
+  spawnAnimalsInside: 0

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Universe.CelestialBodies.Planets;
 
 namespace Universe.Weather
 {
@@ -10,11 +11,8 @@ namespace Universe.Weather
         public Chance WindDirection, WindIntensity, Rainbow, Clouds; // Mutually exclusive events
         public Color RainColor = new Color(0, .5f, 1);
 
-        [SerializeField]
-        private bool rainColorFromColorHighlight;
-
         public const float WeatherReset = 10 * 60;
-        private const int widthOfRenderer = 100;
+        public const int widthOfRenderer = 100;
         private static Dictionary<int, WeatherRenderer> weatherRenderers;
         public static WeatherManager Instance { get; private set; }
         private int currentWeatherResetTick;
@@ -24,6 +22,12 @@ namespace Universe.Weather
 
         [SerializeField]
         private WeatherRenderer weatherRendererPrefab;
+
+        [SerializeField]
+        private Gradient lightning;
+
+        [HideInInspector]
+        public Color lightningColor;
 
         private void Awake()
         {
@@ -35,8 +39,19 @@ namespace Universe.Weather
         {
             CameraControl.Instance.OnPositionUpdate += TrySpawnWeatherObject;
 
-            if (rainColorFromColorHighlight)
-                RainColor = ColorHighlights.Instance.primary;
+            if (BodyManager.Parent is Planet p)
+                RainColor = p.waterColor;
+            else if (BodyManager.Parent is Star star)
+            {
+                RainColor = star.StarColor;
+                lightningColor = star.StarColor;
+                return;
+            }
+
+            System.Random rand = new(BodyManager.GetSeed());
+            RandomNum.Init(rand);
+
+            lightningColor = lightning.Evaluate((float)rand.NextDouble());
         }
 
         private void Update()
@@ -93,7 +108,8 @@ namespace Universe.Weather
         private WeatherRenderer SpawnWeather(int xPos)
         {
             var weatherRenderer = Instantiate(weatherRendererPrefab);
-            weatherRenderer.Spawn(new Vector3(xPos, height), new Vector2(xPos, xPos).HashPos(BodyManager.GetSeed()));
+            int seed = new Vector2(xPos, xPos).HashPos(BodyManager.GetSeed());
+            weatherRenderer.Spawn(new Vector3(xPos, height + (seed % 10) - 5), seed);
             weatherRenderer.ChangeWeather(currentWeatherResetTick);
             return weatherRenderer;
         }

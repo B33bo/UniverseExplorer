@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfacePrefabs.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfaceWeights.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfacePrefabs.Array.data[1]
@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: SurfacePrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 9197080503773545445, guid: cec326f3a1ac1da438ee42c3862f5fa5, type: 3}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: SurfacePrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 4605387478100810198, guid: 54da811e63510d94184e4461346cbe6a, type: 3}
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfaceWeights.Array.data[0]
       value: 200
@@ -43,6 +47,10 @@ PrefabInstance:
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfaceWeights.Array.data[3]
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: SurfaceWeights.Array.data[4]
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2904659521917431192, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: m_LocalPosition.x

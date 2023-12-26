@@ -1,0 +1,28 @@
+1.3.3 - 2023/12/26
+- Additions
+	- Water colors for every planet (for rain & oceans)
+	- Added changelog
+	- Ore system
+	- Strange stars (non-temperature based color)
+	- Clouds
+	- Lightning
+	- Background System
+	- Background for Ice planet
+	- Darkness for planets
+	- "Mesh Checked" script to add if you ever need to see the verticies of a mesh. Wrote it to check smth with aurora, has no effect on gameplay
+- Changes
+	- Improved auroras a bunch 
+	- Lava emits light
+	- Biomes don't have to be on the top layer
+- Fixes
+	- Fixed desert planet names
+	- Forces into landscape mode
+	- When a celestialBodyRenderer doesn't have an object it automatically creates one
+- Removals
+	- Removed all blocks
+	- Removed Volcano
+	- Removed Testing body & unknown item
+	- Removed all references to humanNames.txt
+	- Removed continents
+	- Silver & Copper, ores are now randomly generated for every planet.
+	- Load command

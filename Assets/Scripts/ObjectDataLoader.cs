@@ -23,7 +23,6 @@ namespace Universe
 
         private void Awake()
         {
-            celestialBody ??= new CelestialBodies.UnknownItem();
             Instance = this;
             extraInfoTextComponent.text = string.Format(FormattedString,
                 celestialBody.Name,

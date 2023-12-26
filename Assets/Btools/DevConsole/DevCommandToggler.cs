@@ -19,9 +19,6 @@ namespace Btools.Components
 
             IsLoaded = true;
             DontDestroyOnLoad(this);
-
-            DevConsole.SetActive(false);
-            DevConsole.transform.position = Vector3.zero;
         }
 
         public void Update()

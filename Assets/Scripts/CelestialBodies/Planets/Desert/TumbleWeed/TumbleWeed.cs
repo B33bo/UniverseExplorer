@@ -14,13 +14,12 @@ namespace Universe.CelestialBodies.Planets.Desert
 
         public override void Create(Vector2 pos)
         {
-            var humanNames = Resources.Load<TextAsset>("HumanNames").text.Split('\n');
             Position = pos;
             Radius = RandomNum.Get(0, 4, RandomNumberGenerator) * Measurement.M;
 
             rotation = RandomNum.Get(0, 360f, RandomNumberGenerator);
 
-            Name = humanNames[RandomNum.Get(19480, 20423, RandomNumberGenerator)].Trim() + " The Tumbleweed";
+            Name = "T" + RandomNum.GetWord(2, RandomNumberGenerator)[1..] + " The Tumbleweed";
         }
     }
 }

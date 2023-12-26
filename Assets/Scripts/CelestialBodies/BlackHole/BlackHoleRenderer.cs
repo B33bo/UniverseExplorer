@@ -130,6 +130,8 @@ namespace Universe.CelestialBodies
 
             if (Clockwise)
                 ringObject.spriteRenderer.sortingOrder = t % (Mathf.PI * 2) < Mathf.PI ? 1 : -1;
+            else
+                ringObject.spriteRenderer.sortingOrder = t % (Mathf.PI * 2) < Mathf.PI ? -1 : 1;
 
             if (clockwise)
                 t *= -1;

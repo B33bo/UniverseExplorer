@@ -13,7 +13,7 @@ namespace Universe.CelestialBodies.Planets.Gas
 
         private void Start()
         {
-            System.Random randomNumGenerator = new System.Random(Seed);
+            System.Random randomNumGenerator = new(Seed);
 
             float size = (float)RandomNum.Get(8.0, 15.0, randomNumGenerator);
 

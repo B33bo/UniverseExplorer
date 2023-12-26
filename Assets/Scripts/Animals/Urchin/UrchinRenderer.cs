@@ -29,7 +29,7 @@ namespace Universe.Animals
             for (int i = 0; i < masks.Length; i++)
             {
                 masks[i].frontSortingOrder = pattern.sortingOrder + 1;
-                masks[i].backSortingOrder = pattern.sortingOrder;
+                masks[i].backSortingOrder = pattern.sortingOrder - 1;
             }
 
             transform.position = position;

@@ -1,11 +1,8 @@
 -TODO
 
 spaceship HUD
-Strange color stars (rare)
-CLOUDS!!
 BACKGROUND ITEMS
-ORES SYSTEM (randomized for each planet)
-GIANT AURORAS
+Ores change depending on universe!!
 
 - ICY PLANET UPGRADE
 	- Snow biome merge with icy
@@ -13,11 +10,12 @@ GIANT AURORAS
 		- Wooly mammoth
 		- Snowman
 	- Biomes
-		- Frozen Pond
 		- Normal
 		- Christmas
 
 - IRON PLANET UPGRADE
+	- Background
+		- 
 	- Animals
 		- Magnites (magnet)
 	- Objects
@@ -28,6 +26,7 @@ GIANT AURORAS
 		- Wasteland
 
 - MOLTEN PLANET UPGRADE
+	- Background => Volcanos
 	- Animals
 		- Lava slug
 		- Rock Creature
@@ -41,6 +40,7 @@ GIANT AURORAS
 		- Falling ash
 
 - OPAL PLANET UPGRADE
+	- Background => Hills & Rainbows
 	- Animals
 		- Unicorn
 	- Objects
@@ -50,6 +50,7 @@ GIANT AURORAS
 		- Lakes of white
 
 - ROCKY PLANET UPGRADE
+	- Background => Mountains
 	- Can be multicolored (very very rare)
 	- Animals
 		- Bones
@@ -61,6 +62,7 @@ GIANT AURORAS
 		- Mountains
 
 - TOXIC PLANET UPGRADE
+	- Background - Graveyards and mountains
 	- Animals
 		- Toxic Crocodile
 		- Bugs
@@ -72,6 +74,7 @@ GIANT AURORAS
 		- Graveyard
 	
 - WATER PLANET UPGRADE
+	- Background => Islands & water?
 	- Animals
 		- Sharks
 		- Clams
@@ -85,6 +88,7 @@ GIANT AURORAS
 		- Coral reefs
 
 - DESERT PLANET UPGRADE
+	- Backgrounds => Desert sand
 	- Objects
 		- Pyramid
 		- Shrub
@@ -94,9 +98,10 @@ GIANT AURORAS
 		- Quicksand (Moving downwards)
 
 - TERRRESTRIAL PLANET UPGRADE
-	- Merge all continents with continent system 2.0
+	- Backgrounds => Hills
 
 - NEW VAPOURWAVE WORLD
+	- Backgrounds => Mountains
 	- Objects
 		- Palm trees
 		- Statue

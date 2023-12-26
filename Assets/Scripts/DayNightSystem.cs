@@ -1,18 +1,25 @@
+using Btools.DevConsole;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using Universe.CelestialBodies;
-using Universe.CelestialBodies.Biomes;
 using Universe.CelestialBodies.Planets;
 
 namespace Universe
 {
     public class DayNightSystem : MonoBehaviour
     {
+        public static DayNightSystem Instance { get; private set; }
+        public static float LightIntensity = 1;
+
         public float Time;
         private Planet planet;
 
         [SerializeField]
         private Transform day, night;
+
+        [SerializeField]
+        private Light2D dayNightLight;
 
         [SerializeField]
         private StarRenderer starRenderer;
@@ -35,9 +42,27 @@ namespace Universe
         [SerializeField]
         private BlackHoleAccretionDiskRenderer blackHoleAccretionDiskPrefab;
 
+        [SerializeField]
+        private bool FreezeTime;
+
         public Color dayColor, nightColor;
 
         private StarSpeck[] starSpecks;
+
+        [SerializeField]
+        private float brightnessAtNight = .1f;
+
+        private void Awake()
+        {
+            Instance = this;
+            DevCommands.RegisterVar(new DevConsoleVariable("PlanetTime", "Time on the planet", typeof(float), () => Time, x => Time = float.Parse(x)));
+            DevCommands.Register("FreezeTime", "Freeze Time on planet", _ => { FreezeTime = !FreezeTime; return FreezeTime.ToString(); });
+        }
+
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
 
         private IEnumerator Start()
         {
@@ -53,8 +78,6 @@ namespace Universe
                 planet = moon.planet;
                 SpawnAsMoon(moon);
             }
-            else if (BodyManager.Parent is Continent c)
-                planet = c.planet;
             else if (BodyManager.Parent is Planet parentPlanet)
                 planet = parentPlanet;
 
@@ -170,6 +193,9 @@ namespace Universe
                 child.sortingLayerName = "Sky";
                 child.maskInteraction = SpriteMaskInteraction.None;
             }
+
+            if (planet.sun.StrangeStar)
+                dayColor = .2f * planet.sun.StarColor + .8f * dayColor;
         }
 
         private void LoadNight()
@@ -209,6 +235,7 @@ namespace Universe
                 {
                     int seed = ObjectSpawner.starsLoaded[i].Seed;
                     var rand = new System.Random(seed);
+                    rand.Next();
                     Vector2 pos = new(RandomNum.GetFloat(-50, 50, rand), RandomNum.GetFloat(-50, 50, rand));
                     newSpeck.isOriginal = true;
                     newSpeck.Spawn(pos, ObjectSpawner.starsLoaded[i].Seed);
@@ -238,9 +265,25 @@ namespace Universe
             transform.position = new Vector2(CameraControl.Instance.Position.x,
                 Mathf.Max(CameraControl.Instance.CameraBounds.yMin, 2));
 
-            Time = GetTime(); // 0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
+            if (!FreezeTime)
+                Time = GetTime(); // 0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
             rotator.transform.rotation = Quaternion.Euler(0, 0, Time * 180);
 
+            Brightness();
+            Sunrise();
+            Stars();
+        }
+
+        private void Brightness()
+        {
+            // (1-brightness)(x-1)^2 + brightnessAtNight
+
+            LightIntensity = (1 - brightnessAtNight) * (Time - 1) * (Time - 1) + brightnessAtNight;
+            dayNightLight.intensity = LightIntensity;
+        }
+
+        private void Sunrise()
+        {
             float time = Time % 1;
 
             float alpha;
@@ -250,7 +293,10 @@ namespace Universe
                 alpha = time * 2;
 
             sunrise.color = new Color(1, 1, 1, alpha * .7f);
+        }
 
+        private void Stars()
+        {
             if (starSpecks is null)
                 return;
             for (int i = 0; i < starSpecks.Length; i++)
@@ -264,13 +310,6 @@ namespace Universe
 
         private float GetTime()
         {
-            if (BodyManager.Parent is Continent c)
-            {
-                var time = TimeInContinent.ContinentTime(c);
-                if (time >= 0)
-                    return time;
-            }
-
             return GlobalTime.Time % 360 / 180; // 0 = day, 0.5 = sunset, 1 = night, 1.5 = sunrise
         }
     }

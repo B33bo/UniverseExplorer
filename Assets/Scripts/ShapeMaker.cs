@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
+using Universe.CelestialBodies;
 
 namespace Universe
 {
@@ -67,6 +68,52 @@ namespace Universe
                 vertices = verts,
                 triangles = tris,
                 uv = UVs,
+            };
+
+            return mesh;
+        }
+
+        public static Mesh SubdividedRectangle(Vector2 scale, int subdivisions)
+        {
+            Vector3[] verts = new Vector3[subdivisions * 2 + 4];
+            Vector2[] UVs = new Vector2[verts.Length];
+            int[] tris = new int[3 * (verts.Length - 2)];
+            int trisEndPoint = (verts.Length - 1) / 2;
+
+            UVs[0] = Vector2.zero;
+            UVs[1] = new(0, 1);
+            UVs[subdivisions + 2] = new(1, 1);
+            UVs[subdivisions + 3] = new(1, 0);
+
+            for (int i = 0; i < verts.Length; i++)
+            {
+                if (i < subdivisions)
+                {
+                    float x = (i + 1f) / (subdivisions + 1f);
+                    UVs[i + 2] = new(x, 1);
+                    UVs[UVs.Length - i - 1] = new(x, 0);
+                }
+
+                verts[i] = (UVs[i] - new Vector2(.5f, .5f)) * scale;
+
+                if (i >= trisEndPoint)
+                    continue;
+
+                tris[6 * i] = i;
+                tris[6 * i + 1] = i + 1;
+                tris[6 * i + 2] = verts.Length - i - 1;
+
+                tris[6 * i + 3] = verts.Length - i - 1;
+                tris[6 * i + 4] = i + 1;
+                tris[6 * i + 5] = verts.Length - i - 2;
+            }
+
+            Mesh mesh = new()
+            {
+                name = "Cloud",
+                vertices = verts,
+                uv = UVs,
+                triangles = tris,
             };
 
             return mesh;

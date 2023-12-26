@@ -9,12 +9,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: InsidePrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: InsideWeights.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfacePrefabs.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfaceWeights.Array.size
-      value: 6
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: InsidePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 4995675585721306184, guid: 3f6a358937b73cb4e80ffdae5e88fac1, type: 3}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: InsideWeights.Array.data[0]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: InsideWeights.Array.data[1]
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfacePrefabs.Array.data[1]
@@ -36,6 +56,10 @@ PrefabInstance:
       propertyPath: SurfacePrefabs.Array.data[5]
       value: 
       objectReference: {fileID: 948190394188443619, guid: 6cff1362c332a6e4c935a81835bb27b7, type: 3}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: SurfacePrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 3079588604657707496, guid: d5355ddc2eec87a4f981ceec8c5e31e3, type: 3}
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfaceWeights.Array.data[0]
       value: 200
@@ -59,6 +83,10 @@ PrefabInstance:
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfaceWeights.Array.data[5]
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: SurfaceWeights.Array.data[6]
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2904659521917431192, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: m_LocalPosition.x

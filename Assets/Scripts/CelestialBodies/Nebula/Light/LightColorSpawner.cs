@@ -1,5 +1,4 @@
 using UnityEngine;
-using Universe.Blocks;
 using Universe.CelestialBodies;
 
 namespace Universe
@@ -22,8 +21,6 @@ namespace Universe
                 return GetNebula(nebula, random);
             else if (BodyManager.Parent is Aurora aurora)
                 return GetAurora(aurora, random);
-            else if (BodyManager.Parent is BasicBlock block && block.TypeString == "Opal")
-                return GetOpal(random);
             else if (BodyManager.Parent is Rainbow r)
                 return new ColorHSV(RandomNum.GetFloat(1, random), 1, 1);
             return RandomNum.GetColor(random);
@@ -44,12 +41,12 @@ namespace Universe
 
         private Color GetAurora(Aurora aurora, System.Random rand)
         {
-            if (aurora.AuroraCol == Aurora.AuroraColor.Rainbow)
+            if (aurora.IsRainbow)
             {
                 return new ColorHSV(RandomNum.GetFloat(1f, rand), 1, 1);
             }
 
-            Color color = aurora.Color;
+            Color color = aurora.AuroraColor;
             color.r += RandomNum.GetFloat(-.1f, .1f, rand);
             color.g += RandomNum.GetFloat(-.1f, .1f, rand);
             color.b += RandomNum.GetFloat(-.1f, .1f, rand);

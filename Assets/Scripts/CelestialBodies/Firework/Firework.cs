@@ -77,7 +77,7 @@ namespace Universe.CelestialBodies
             ExplosionSpeed = RandomNum.GetFloat(.3f, 2, RandomNumberGenerator);
             ParticleCount = RandomNum.Get(6, 90, RandomNumberGenerator);
 
-            bool isRainbow = RandomNum.GetBool(20, RandomNumberGenerator);
+            bool isRainbow = RandomNum.GetBool(200_000, RandomNumberGenerator);
 
             Color colorA = new ColorHSV(RandomNum.GetFloat(1, RandomNumberGenerator), 1, 1);
             Color colorB = new ColorHSV(RandomNum.GetFloat(1, RandomNumberGenerator), 1, 1);

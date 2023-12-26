@@ -28,14 +28,16 @@ namespace Universe.CelestialBodies.Planets
 
             Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
             Mass = RandomNum.Get(3e22 * Measurement.Kg, 4e24 * Measurement.Kg, RandomNumberGenerator);
+            waterColor = ToxicColor;
         }
- 
+
         public void RefreshColor()
         {
             ToxicColor = ColorOfType[(int)Type];
             ToxicColor.r += RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
             ToxicColor.g += RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
             ToxicColor.b += RandomNum.GetFloat(-.05f, .05f, RandomNumberGenerator);
+            waterColor = ToxicColor;
         }
 
         public enum ColorType

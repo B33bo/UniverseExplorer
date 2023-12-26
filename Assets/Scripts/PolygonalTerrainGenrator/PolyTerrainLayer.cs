@@ -6,6 +6,7 @@ namespace Universe.Terrain
     public class PolyTerrainLayer
     {
         public TerrainNoise[] Noises;
+        public BiomeManager biomeManager;
         public PolyTerrainRenderer Renderer;
         [HideInInspector] public float Offset;
         public float MinimumHeight;

@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Universe.CelestialBodies.Biomes;
 
 namespace Universe.CelestialBodies.Planets
 {
@@ -11,7 +9,6 @@ namespace Universe.CelestialBodies.Planets
         private float perlinScale;
         private Vector2 perlinStart;
         private bool isLoading = false;
-        private List<Continent.ContinentType> continentsClaimed;
 
         public override Type PlanetType => typeof(TerrestrialPlanet);
 
@@ -20,14 +17,6 @@ namespace Universe.CelestialBodies.Planets
             perlinScale = RandomNum.GetFloat(5, 10, Target.RandomNumberGenerator);
             perlinStart = RandomNum.GetVector(-100_000, 100_000, Target.RandomNumberGenerator);
             Scale = GetFairSize((float)Target.Width, (float)TerrestrialPlanet.MinScale, (float)TerrestrialPlanet.MaxScale) * Vector2.one;
-            continentsClaimed = new List<Continent.ContinentType>();
-
-            TerrestrialPlanet t = Target as TerrestrialPlanet;
-            for (int i = 0; i < t.continents.Length; i++)
-            {
-                if (!continentsClaimed.Contains(t.continents[i].continentType))
-                    continentsClaimed.Add(t.continents[i].continentType);
-            }
 
             StartCoroutine(GenerateSprites());
         }
@@ -41,10 +30,10 @@ namespace Universe.CelestialBodies.Planets
             float perlin = Mathf.PerlinNoise(perlinPos.x, perlinPos.y);
 
             if (perlin < waterLevel)
-                return Color.blue;
-            if (perlin < waterLevel + .05f && continentsClaimed.Contains(Continent.ContinentType.Sand))
+                return (Target as Planet).waterColor;
+            if (perlin < waterLevel + .05f)
                 return Color.yellow;
-            else if (perlin > snowLevel && continentsClaimed.Contains(Continent.ContinentType.Snow))
+            if (perlin > snowLevel)
                 return Color.white;
             return Color.green;
         }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using Universe.CelestialBodies.Planets;
 
 namespace Universe.Terrain

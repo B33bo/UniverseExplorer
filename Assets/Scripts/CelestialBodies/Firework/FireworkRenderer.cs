@@ -21,7 +21,7 @@ namespace Universe.CelestialBodies
             firework.Create(pos);
             InitFirework(firework);
         }
-        
+
         public void InitFirework(Firework firework)
         {
             Target = firework;

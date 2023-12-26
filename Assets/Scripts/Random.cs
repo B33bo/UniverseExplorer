@@ -96,10 +96,10 @@ namespace Universe
         }
 
         public static bool GetBool(Random random) =>
-            random.Next(0, 2) > 0;
+            random.Next(0, 2) == 0;
 
-        public static bool GetBool(uint probability, Random random) =>
-            (uint)random.Next() < probability;
+        public static bool GetBool(int probability, Random random) =>
+            random.Next(probability) == 1;
 
         public static bool GetBool(double probability, Random random) =>
             random.NextDouble() < probability;
@@ -123,13 +123,6 @@ namespace Universe
             return UnityEngine.Color.HSVToRGB(Hue, S, V);
         }
 
-        public static string GetHumanName(Random random)
-        {
-            // storing in memory would be a bit extreme
-            var humanNames = UnityEngine.Resources.Load<UnityEngine.TextAsset>("HumanNames").text.Split('\n');
-            return humanNames[random.Next(0, humanNames.Length)].Trim();
-        }
-
         public static double GetInfiniteDouble(double changeChance, Random random)
         {
             int direction = random.NextDouble() > .5 ? 1 : -1;
@@ -148,6 +141,31 @@ namespace Universe
             // coefficient * base ^ x
 
             return coefficient * Math.Pow(pwrBase, x);
+        }
+
+        public static UnityEngine.Color GetColorFromGradientAlphaWeight(UnityEngine.Gradient gradient, Random rand, int precision)
+        {
+            float change = 1f / precision;
+            float total = 0;
+
+            for (float f = 0; f <= 1; f += change)
+                total += gradient.Evaluate(f).a;
+
+            float numFromWeight = GetFloat(total, rand);
+
+            for (float i = 0; i < 1; i += change)
+            {
+                UnityEngine.Color c = gradient.Evaluate(i);
+                numFromWeight -= c.a;
+
+                if (numFromWeight <= 0)
+                {
+                    c.a = 1;
+                    return c;
+                }
+            }
+
+            return gradient.Evaluate(1);
         }
     }
 }

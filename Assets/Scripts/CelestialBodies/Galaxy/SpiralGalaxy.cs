@@ -33,7 +33,7 @@ namespace Universe.CelestialBodies
                 inner = Color.blue;
             }
 
-            if (RandomNum.GetBool(4, RandomNumberGenerator) || Seed == 1337)
+            if ((uint)RandomNumberGenerator.Next() < 4 || Seed == 1337)
                 IsRainbow = true;
         }
 

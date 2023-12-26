@@ -45,13 +45,13 @@ namespace Universe.CelestialBodies
 
         private void InitAurora(Aurora aurora)
         {
-            if (aurora.AuroraCol == Aurora.AuroraColor.Rainbow)
+            if (aurora.IsRainbow)
             {
                 color = new ColorHSV(RandomNum.GetFloat(1f, RandomNumberGenerator), 1, 1);
                 return;
             }
 
-            color = aurora.Color;
+            color = aurora.AuroraColor;
             color.r += RandomNum.GetFloat(-.1f, .1f, RandomNumberGenerator);
             color.g += RandomNum.GetFloat(-.1f, .1f, RandomNumberGenerator);
             color.b += RandomNum.GetFloat(-.1f, .1f, RandomNumberGenerator);

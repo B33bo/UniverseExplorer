@@ -19,6 +19,9 @@ namespace Universe.CelestialBodies.Planets
         public double trueRadius;
         public PlanetRenderer[] planets;
 
+        [InspectableVar("Strange Star")]
+        public bool StrangeStar;
+
         [InspectableVar("Color")]
         public Color StarColor;
 
@@ -57,11 +60,24 @@ namespace Universe.CelestialBodies.Planets
             trueRadius = RandomNum.CurveAt(RandomNum.GetInfiniteDouble(0.4, RandomNumberGenerator), 4, 1.2) * 3;
             Radius = trueRadius * 1_000_000;
             Temperature = RandomNum.Get(1000, 20000, RandomNumberGenerator);
+
+            StrangeStar = RandomNum.GetBool(250, RandomNumberGenerator);
+
+            if (StrangeStar)
+            {
+                if (RandomNum.GetBool(RandomNumberGenerator))
+                    StarColor = RandomNum.GetColor(RandomNumberGenerator);
+                else
+                    StarColor = Color.HSVToRGB((float)RandomNumberGenerator.NextDouble(), 1, 1);
+            }
+
             ResetColor();
         }
 
         public void ResetColor()
         {
+            if (StrangeStar)
+                return;
             StarColor = Mathf.CorrelatedColorTemperatureToRGB((float)Temperature);
         }
 

@@ -7,9 +7,6 @@ namespace Universe.Terrain
     public class PolygonalTerrainGenerator : Spawner
     {
         [SerializeField]
-        private BiomeManager biomeManager;
-
-        [SerializeField]
         private List<PolyTerrainLayer> layers;
 
         [SerializeField]
@@ -17,6 +14,9 @@ namespace Universe.Terrain
 
         [SerializeField]
         private SpriteRenderer bottomGround;
+
+        [SerializeField]
+        private float paddding = 1;
 
         private Dictionary<float, PolyTerrainRenderer[]> terrain;
 
@@ -28,15 +28,6 @@ namespace Universe.Terrain
 
             CameraControl.Instance.OnPositionUpdate += UpdateBottomFloor;
             terrain = new Dictionary<float, PolyTerrainRenderer[]>();
-
-            if (biomeManager != null)
-            {
-                var biomeLayer = new PolyTerrainLayer
-                {
-                    MinimumHeight = biomeManager.biomeHeight
-                };
-                layers.Insert(0, biomeLayer);
-            }
 
             minimumY = 0;
 
@@ -76,13 +67,13 @@ namespace Universe.Terrain
             xMin = Mathf.Floor(xMin / PolyTerrain.RealWidth) * PolyTerrain.RealWidth;
             xMax = Mathf.Ceil(xMax / PolyTerrain.RealWidth) * PolyTerrain.RealWidth;
 
-            xMin -= PolyTerrain.RealWidth;
-            xMax += PolyTerrain.RealWidth;
+            xMin -= PolyTerrain.RealWidth * paddding;
+            xMax += PolyTerrain.RealWidth * paddding;
 
             SpawnCells(xMin, xMax);
 
-            xMin -= PolyTerrain.RealWidth;
-            xMax += PolyTerrain.RealWidth;
+            xMin -= PolyTerrain.RealWidth * paddding;
+            xMax += PolyTerrain.RealWidth * paddding;
 
             RemoveCells(xMin, xMax);
         }
@@ -145,19 +136,16 @@ namespace Universe.Terrain
         {
             int seed = new Vector2(x, y).HashPos(BodyManager.GetSeed());
 
-            if (index == 0 && biomeManager != null)
-            {
-                var biomeLayer = biomeManager.GetBiomeAt(x);
-                biomeLayer.MinimumHeight = biomeManager.biomeHeight;
-                PolyTerrainRenderer biomeLayerRenderer = Instantiate(biomeLayer.Renderer);
-                biomeLayerRenderer.Spawn(new Vector2(x, y), seed, previous, biomeLayer);
+            var biome = layers[index];
 
-                biomeLayerRenderer.Target.Name = $"Biome Layer {x}";
-                return biomeLayerRenderer;
+            if (layers[index].biomeManager)
+            {
+                biome = layers[index].biomeManager.GetBiomeAt(x);
+                biome.MinimumHeight = layers[index].MinimumHeight;
             }
 
-            PolyTerrainRenderer layerRenderer = Instantiate(layers[index].Renderer);
-            layerRenderer.Spawn(new Vector2(x, y), seed, previous, layers[index]);
+            PolyTerrainRenderer layerRenderer = Instantiate(biome.Renderer);
+            layerRenderer.Spawn(new Vector2(x, y), seed, previous, biome);
             layerRenderer.Target.Name = $"Layer {x}:" + index;
             return layerRenderer;
         }

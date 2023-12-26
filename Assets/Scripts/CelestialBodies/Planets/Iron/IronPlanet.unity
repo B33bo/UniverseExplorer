@@ -218,15 +218,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.b
-      value: 0.1462264
+      value: 0.033775363
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.g
-      value: 0.4073179
+      value: 0.09008172
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: nightColor.r
-      value: 1
+      value: 0.21698111
+      objectReference: {fileID: 0}
+    - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
+      propertyPath: brightnessAtNight
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361286, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: m_RootOrder
@@ -461,6 +465,7 @@ MonoBehaviour:
   weights: []
   randomOffset: 1
   extraPadding: 3
+  biomeManager: {fileID: 0}
   layers:
   - Noises:
     - NoiseType: 1
@@ -477,6 +482,7 @@ MonoBehaviour:
     Offset: 5.04
     MinimumHeight: 20
     OverrideColor: 1
+    UseColorHighlights: 0
     color: {r: 0.5568628, g: 0.21176472, b: 0, a: 1}
   - Noises:
     - NoiseType: 1
@@ -493,6 +499,7 @@ MonoBehaviour:
     Offset: 5.04
     MinimumHeight: 30
     OverrideColor: 1
+    UseColorHighlights: 0
     color: {r: 0.645, g: 0.33601773, b: 0.146415, a: 1}
   - Noises:
     - NoiseType: 1
@@ -509,6 +516,7 @@ MonoBehaviour:
     Offset: 5.04
     MinimumHeight: 40
     OverrideColor: 1
+    UseColorHighlights: 0
     color: {r: 0.806, g: 0.4688889, b: 0.257114, a: 1}
   - Noises:
     - NoiseType: 1
@@ -525,6 +533,7 @@ MonoBehaviour:
     Offset: 5.04
     MinimumHeight: 50
     OverrideColor: 1
+    UseColorHighlights: 0
     color: {r: 0.936, g: 0.69968677, b: 0.551304, a: 1}
   - Noises:
     - NoiseType: 1
@@ -541,8 +550,11 @@ MonoBehaviour:
     Offset: 5.04
     MinimumHeight: 5
     OverrideColor: 1
+    UseColorHighlights: 0
     color: {r: 0.8962264, g: 0.8357044, b: 0.7989943, a: 1}
+  colorBottomGround: 0
   bottomGround: {fileID: 1074731639}
+  paddding: 1
 --- !u!4 &569792757
 Transform:
   m_ObjectHideFlags: 0
@@ -595,7 +607,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -693,10 +705,40 @@ MonoBehaviour:
     Probability: 0
     Average: 0
     Deviation: 0
-  RainColor: {r: 0.3915094, g: 1, b: 0.98116094, a: 0}
-  rainColorFromColorHighlight: 0
-  height: 20
+  RainColor: {r: 0.8301887, g: 0.44638392, b: 0.19971518, a: 1}
+  height: 50
   weatherRendererPrefab: {fileID: 3299303865234986941, guid: 22e2708b000245f4991a772688cf0997, type: 3}
+  lightning:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 0, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 1, b: 1, a: 0}
+    key3: {r: 0, g: 0.10449934, b: 1, a: 0}
+    key4: {r: 0, g: 1, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 8048
+    ctime1: 30660
+    ctime2: 45415
+    ctime3: 55187
+    ctime4: 63810
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 2
+    m_ColorSpace: -1
+    m_NumColorKeys: 5
+    m_NumAlphaKeys: 2
+  lightningColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1445338219
 Transform:
   m_ObjectHideFlags: 0

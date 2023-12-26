@@ -1,4 +1,4 @@
-Shader "Hidden/ColorShift"
+Shader "Custom/ColorShift"
 {
     Properties
     {

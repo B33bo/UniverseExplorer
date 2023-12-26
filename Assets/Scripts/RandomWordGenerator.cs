@@ -11,7 +11,7 @@ namespace Universe
         private const int vowelTotal = 180575;
 
         // Values tooken from: Frankenstein, Random Archive.org text I accidentally copied, Of mice and men, Lorum ipsum, Wikipedia page on the taylor series, This comment
-        private static readonly Dictionary<char, int> letterFrequency = new Dictionary<char, int>() { { 'e', 57977 }, { 't', 38382 }, { 'a', 34411 }, { 'o', 32859 }, { 'n', 31747 }, { 'i', 31445 }, { 's', 26540 }, { 'h', 26164 }, { 'r', 24583 }, { 'd', 21535 }, { 'l', 17438 }, { 'u', 13501 }, { 'm', 12867 }, { 'c', 11443 }, { 'y', 10382 }, { 'w', 10066 }, { 'f', 10058 }, { 'g', 8959 }, { 'p', 7284 }, { 'b', 6542 }, { 'v', 4581 }, { 'k', 3144 }, { 'x', 736 }, { 'q', 405 }, { 'j', 666 }, { 'z', 290 }};
+        private static readonly Dictionary<char, int> letterFrequency = new() { { 'e', 57977 }, { 't', 38382 }, { 'a', 34411 }, { 'o', 32859 }, { 'n', 31747 }, { 'i', 31445 }, { 's', 26540 }, { 'h', 26164 }, { 'r', 24583 }, { 'd', 21535 }, { 'l', 17438 }, { 'u', 13501 }, { 'm', 12867 }, { 'c', 11443 }, { 'y', 10382 }, { 'w', 10066 }, { 'f', 10058 }, { 'g', 8959 }, { 'p', 7284 }, { 'b', 6542 }, { 'v', 4581 }, { 'k', 3144 }, { 'x', 736 }, { 'q', 405 }, { 'j', 666 }, { 'z', 290 } };
 
         public static char GetRandomLetter(Random random, string letters, int totalFrequency)
         {
