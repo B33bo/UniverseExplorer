@@ -34,17 +34,22 @@ namespace Universe
 
         public static void ReloadCommands()
         {
+            var paths = Resources.Load<ObjectPaths>("Paths");
+            System.Text.StringBuilder objectListArgs = new();
+
+            for (int i = 0; i < paths.objects.Length; i++)
+                objectListArgs.Append(paths.objects[i].Path + "|");
+
             DevCommands.RegisterVar(new DevConsoleVariable("parent", "list the info of the parent", typeof(CelestialBody),
                 () => Parent.ToString()));
 
-            DevCommands.Register("spawn", "spawn an object", Spawn);
-            DevCommands.Register("objectlst", "list all objects", ObjectLst);
+            DevCommands.Register("spawn", "spawn an object", Spawn, new string[] { objectListArgs.ToString() });
             DevCommands.RegisterVar(new DevConsoleVariable("Time", "Time of simulation", typeof(float),
                 () => GlobalTime.Time, x => GlobalTime.SetTime(float.Parse(x))));
 
-            string Spawn(string[] parameters)
+            static string Spawn(string[] parameters)
             {
-                var prefab = Resources.Load<CelestialBodyRenderer>("Objects/" + parameters[1]);
+                var prefab = Resources.Load<ObjectPaths>("Paths").GetCelestialBody(parameters[1]);
                 var obj = Object.Instantiate(prefab);
 
                 if (parameters.Length < 3)
@@ -56,15 +61,6 @@ namespace Universe
                     obj.gameObject.AddComponent<BoxCollider2D>();
 
                 return obj.Target.ToString();
-            }
-
-            string ObjectLst(string[] parameters)
-            {
-                string s = "";
-                var objects = Resources.LoadAll<CelestialBodyRenderer>("Objects");
-                for (int i = 0; i < objects.Length; i++)
-                    s += objects[i].name + "\n";
-                return s;
             }
         }
 

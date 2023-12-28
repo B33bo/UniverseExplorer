@@ -119,12 +119,16 @@ Ores change depending on universe!!
 		- Crystal protusions
 
 CAVES
-Maybe universes mandelbrot
 
 Animals:
 	- Arakiel 
 	- Skinwalker / Loric
 	- Slime
+	- Human (Neanderthal idfk)
+
+Ideas:
+	- Galaxies have dominant species
+	- Dominant species have houses with books and story generator
 
 Settings
 

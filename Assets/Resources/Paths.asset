@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c39fd9d38c1844eb2ea5861194d1a2, type: 3}
+  m_Name: Paths
+  m_EditorClassIdentifier: 
+  objects:
+  - Path: Null
+    Object: {fileID: 0}
+  - Path: Ion
+    Object: {fileID: 1037331677632221916, guid: 9cb7a396e1805624f86709a98211069a, type: 3}
+  - Path: Asteroid
+    Object: {fileID: 2302354638181068913, guid: bb91c0381cfdbb0419b1ee8230466382, type: 3}
+  - Path: Aurora
+    Object: {fileID: 4605387478100810198, guid: 54da811e63510d94184e4461346cbe6a, type: 3}
+  - Path: BlackHole
+    Object: {fileID: 460268241262161378, guid: 24ce7429ed099324e8da64e226e1f07c, type: 3}
+  - Path: BlackHole_Moon
+    Object: {fileID: 6888199600509640723, guid: c1414878ff0a999458029199d60b90a8, type: 3}
+  - Path: Boulder
+    Object: {fileID: 5238249913941902148, guid: c29fdfa0c574a6e47a73fec706398992, type: 3}
+  - Path: Cactus
+    Object: {fileID: 374477399542410546, guid: a15ea06c95d3df54bb8e4e23c973c88c, type: 3}
+  - Path: CameraMover
+    Object: {fileID: 8395830122144182308, guid: 19b40c44042708140848b3ff376f2b6a, type: 3}
+  - Path: Cloud
+    Object: {fileID: 3271946589406726046, guid: acbf8a3669036c244a017ff18deb9535, type: 3}
+  - Path: Tree
+    Object: {fileID: 762939440388359616, guid: 8bf1da2ca59d3dd4aaf5a48c9072298c, type: 3}
+  - Path: Tree/Dead
+    Object: {fileID: 948190394188443619, guid: 6cff1362c332a6e4c935a81835bb27b7, type: 3}
+  - Path: Electron
+    Object: {fileID: 8625520115570239929, guid: 0178ef3906e810849b6c1d319c76f445, type: 3}
+  - Path: Proton
+    Object: {fileID: -201240571002471440, guid: 178cf7bfaee73b941abd27ce6b0b045a, type: 3}
+  - Path: Neutron
+    Object: {fileID: -751125326117628009, guid: d438a2c2ade19fa41937154a62e17f45, type: 3}
+  - Path: Positron
+    Object: {fileID: 8625520115570239929, guid: 9161dd766e31795418b2da90e1f16d93, type: 3}
+  - Path: EndSign
+    Object: {fileID: 8567648032500254227, guid: d923041603a6e1b42ad3491c2f6cf8ac, type: 3}
+  - Path: Firework
+    Object: {fileID: 4843031997485191766, guid: dfe58e7a77f724548b62e7fe3081b0eb, type: 3}
+  - Path: Flower
+    Object: {fileID: 3041290244316146864, guid: 296ae8435cc32ee4593047e164edb756, type: 3}
+  - Path: Galaxy
+    Object: {fileID: 1458673881162210111, guid: f04d6c2f1cae15d468c6a407b6493963, type: 3}
+  - Path: Galaxy/Background
+    Object: {fileID: 5622314387096936146, guid: b6b0cad00906d6948b1b0db8641af192, type: 3}
+  - Path: Light
+    Object: {fileID: 7751165115666789632, guid: 488fc32510281024681dfb99017b8265, type: 3}
+  - Path: Weather/Lightning
+    Object: {fileID: 5339814753603018964, guid: 90a75e13dee00b241b34a3b085aacd4b, type: 3}
+  - Path: Multiverse
+    Object: {fileID: 4506332355125680543, guid: 7ea11728ee7e05a4cb57287b0b41a305, type: 3}
+  - Path: Nebula
+    Object: {fileID: 7068847404417978725, guid: 4b710024500061b42b556b2320775ae9, type: 3}
+  - Path: Ore
+    Object: {fileID: 4995675585721306184, guid: 3f6a358937b73cb4e80ffdae5e88fac1, type: 3}
+  - Path: Ore/Surface
+    Object: {fileID: 5232533951012790925, guid: 290853ff24752b546a63e50dc5414f99, type: 3}
+  - Path: Weather/Rainbow
+    Object: {fileID: 738109438327274629, guid: 5d74e225e3d4ae347b6dabc1a1acd244, type: 3}
+  - Path: RockPile
+    Object: {fileID: 6274852281940903194, guid: 95ed3fe99ae711043ae580c6e6cbf1f8, type: 3}
+  - Path: SandGrain
+    Object: {fileID: 1704844997903432683, guid: 91a15b6dcd6aa2c45a0fed1452f09009, type: 3}
+  - Path: Seaglass
+    Object: {fileID: 5647547956009012521, guid: c3cedffe400713a45b32b4a442d74740, type: 3}
+  - Path: Star
+    Object: {fileID: 222219182022447500, guid: 8f983c5938cac51439f144bd42dd86bd, type: 3}
+  - Path: Star/SolarFlare
+    Object: {fileID: 6820613682624263166, guid: 7d164c10caa617d41b397869fe02c49b, type: 3}
+  - Path: Star/Sky
+    Object: {fileID: 7614443068247088434, guid: f9bfbc81e02f7cf4e8a2f05b1eed751c, type: 3}
+  - Path: BlackHole/Supermassive
+    Object: {fileID: 6213174632281832651, guid: bed16f6a44eea9c4aa000c2acf56871f, type: 3}
+  - Path: Universe
+    Object: {fileID: 5382076059744418239, guid: 52b1bd983cb45e5448f4a3150656ca9c, type: 3}
+  - Path: Weather/WeatherObject
+    Object: {fileID: 5781608729735631084, guid: 7b5f6a0e794c96f41a62c92455f56f88, type: 3}
+  - Path: Weather/WeatherObjectMetal
+    Object: {fileID: 3299303865234986941, guid: 22e2708b000245f4991a772688cf0997, type: 3}
+  - Path: Compounds/CH4
+    Object: {fileID: 597146460183757578, guid: e4893961752bd4042a6474dabba173cc, type: 3}
+  - Path: Compounds/CO2
+    Object: {fileID: 8956720632517335412, guid: 53318525249cff141950372d790f6bf9, type: 3}
+  - Path: Compounds/H2O
+    Object: {fileID: 681899406374095131, guid: 8f872e94faab8be42a5151230ae1e0d0, type: 3}
+  - Path: Compounds/NaCl
+    Object: {fileID: 6171573212624028649, guid: 8983d515056fecf4f8b9f44989644a86, type: 3}
+  - Path: Compounds/O2
+    Object: {fileID: 4070840536694550699, guid: b10b16f7a4cb1b24dab3b822c43b8460, type: 3}
+  - Path: Compounds/SiO2
+    Object: {fileID: 751187831609106998, guid: d23a7305e661fe44b8ffe986f17dff5d, type: 3}
+  - Path: Particles/Particle
+    Object: {fileID: 3358088601269286372, guid: 9c5697fd0aab3f5408c10b110c07d56b, type: 3}
+  - Path: Particles/Bosons/Gluon
+    Object: {fileID: 1252129176374841298, guid: fabc54d27829da24a9897601956d4524, type: 3}
+  - Path: Particles/Bosons/Graviton
+    Object: {fileID: 1252129176374841298, guid: 49ebaff99dd2a4c4b8fe0b7903569d6f, type: 3}
+  - Path: Particles/Bosons/Higgs
+    Object: {fileID: 1252129176374841298, guid: 533683e0478055a42bf7738ccd8ab788, type: 3}
+  - Path: Particles/Bosons/Photon
+    Object: {fileID: 1252129176374841298, guid: ea6e61846c79a5740aa33c14ef4edaeb, type: 3}
+  - Path: Particles/Bosons/W
+    Object: {fileID: 1252129176374841298, guid: ede5b943582550e498268d9240ed825d, type: 3}
+  - Path: Particles/Bosons/Z
+    Object: {fileID: 1252129176374841298, guid: dd54e773c2ebd6a4e9818168374e2d25, type: 3}
+  - Path: Particles/Leptons/Electron
+    Object: {fileID: 1252129176374841298, guid: 9d6069129ba0bcf41bd6d4abe1acb839, type: 3}
+  - Path: Particles/Leptons/ElectronNeutrino
+    Object: {fileID: 1252129176374841298, guid: 7eb8322d03e3c2e4497daed74fd7bfe5, type: 3}
+  - Path: Particles/Leptons/Muon
+    Object: {fileID: 1252129176374841298, guid: 372bcd55d4d93a5449b432b92ac86307, type: 3}
+  - Path: Particles/Leptons/MuonNeutrino
+    Object: {fileID: 1252129176374841298, guid: 7e40936b6327a8642b57eff3f2ac332d, type: 3}
+  - Path: Particles/Bosons/Tau
+    Object: {fileID: 1252129176374841298, guid: bd6385e72a60a6e47b7c7e3ecd1a3266, type: 3}
+  - Path: Particles/Bosons/TauNeutrino
+    Object: {fileID: 1252129176374841298, guid: 6e07a9a46810a414cbf9bc83843bf78b, type: 3}
+  - Path: Particles/Quarks/Bottom
+    Object: {fileID: 1252129176374841298, guid: 316c59e8e2ce4b449afb2342f00058c0, type: 3}
+  - Path: Particles/Quarks/Charm
+    Object: {fileID: 1252129176374841298, guid: be8d4073182187e49beaeeae913bcaaa, type: 3}
+  - Path: Particles/Quarks/Down
+    Object: {fileID: 1252129176374841298, guid: c3c1ff3cbdeae5c45b77a57a8f1149c3, type: 3}
+  - Path: Particles/Quarks/Strange
+    Object: {fileID: 1252129176374841298, guid: 768df0a5574b9574880e552c6f2f5d9e, type: 3}
+  - Path: Particles/Quarks/Top
+    Object: {fileID: 1252129176374841298, guid: 4b2cfd536dba8ed4e88fdd1755db7662, type: 3}
+  - Path: Particles/Quarks/Up
+    Object: {fileID: 1252129176374841298, guid: 1fe6bb461b1d7c348802b54abd4c18b1, type: 3}
+  - Path: Planets/Desert
+    Object: {fileID: 3654738362183287467, guid: f7f94024b946bb64fa2bc4a90ea4d40d, type: 3}
+  - Path: Planets/Desert/Tumbleweed
+    Object: {fileID: 9197080503773545445, guid: cec326f3a1ac1da438ee42c3862f5fa5, type: 3}
+  - Path: Planets/Error
+    Object: {fileID: 4985856854512901251, guid: ccf2140ca6f1b7444bf8093dd893f5f8, type: 3}
+  - Path: Planets/Gas
+    Object: {fileID: 7937537469929500617, guid: 18603eb6bfc405b47afd6a52d60271c6, type: 3}
+  - Path: Planets/Ice
+    Object: {fileID: 7944783083674845320, guid: b0a780eb61ef2e74e95b765d532f4996, type: 3}
+  - Path: Planets/Ice/IceShard
+    Object: {fileID: 8977432506575518537, guid: be2ecd64b24218c41a7660650beffd38, type: 3}
+  - Path: Planets/Ice/Snowman
+    Object: {fileID: 239881989945670060, guid: 0b40d12ff5298734a92c3d6a7b6ebe18, type: 3}
+  - Path: Planets/Metal
+    Object: {fileID: 1542967608395058222, guid: 97b11d1b06f143f4eb44bd0407796ea8, type: 3}
+  - Path: Planets/Metal/Scrap
+    Object: {fileID: 8418873780499231363, guid: 05396b65a9dfc7f4db5e94761e4adcf8, type: 3}
+  - Path: Planets/Molten
+    Object: {fileID: 833765690585975046, guid: 82afa6e1f2c291c4680c16037a23269c, type: 3}
+  - Path: Plaents/Molten/LavaFork
+    Object: {fileID: 687939082568247128, guid: 4ea689fdb40b96d4ca1ae602cd4b4540, type: 3}
+  - Path: Planets/Opal
+    Object: {fileID: 4617141570325414390, guid: ab36bf03757d68f428cda0a313147975, type: 3}
+  - Path: Planets/Rocky
+    Object: {fileID: 117376946365310827, guid: 0df357c7414c97a45b5c8a457fdf91f4, type: 3}
+  - Path: Planets/Terrestrial
+    Object: {fileID: 2758043881873616037, guid: 87759852aeb9efc4ca791f06f435110b, type: 3}
+  - Path: Planets/Toxic
+    Object: {fileID: 2152409435952236965, guid: 52edda14bdd8143419e28261aa82e64a, type: 3}
+  - Path: Planets/Toxic/ToxicFork
+    Object: {fileID: 3547912075268781177, guid: 40215f45a8f2f424f96abe519da2ed81, type: 3}
+  - Path: Planets/Toxic/Gas
+    Object: {fileID: 6214131174201489389, guid: 9a93328d1bf00ab43b7a084c32d85169, type: 3}
+  - Path: Planets/Water
+    Object: {fileID: 7453179742243823550, guid: 755d605fa5eb1ee4dae126fa460e51b4, type: 3}
+  - Path: Planets/Moon
+    Object: {fileID: 2695697951722026239, guid: a00c67710593f8f4cabe608d5a5aee58, type: 3}
