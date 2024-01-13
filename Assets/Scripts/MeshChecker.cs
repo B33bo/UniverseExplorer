@@ -13,7 +13,10 @@ namespace Universe
         private float radius;
 
         [SerializeField]
-        private int[] highLightIndex;
+        private int[] highlightIndex;
+
+        [SerializeField]
+        private int[] highlightTri;
 
         [SerializeField]
         private bool gizmoTris;
@@ -35,8 +38,21 @@ namespace Universe
             for (int i = 0; i < verts.Length; i++)
             {
                 float t = i / (verts.Length - 1f);
+                bool highlight = Highlight(i);
 
-                Color color = Highlight(i) ? new(0, t, 1) : new(t, t, t);
+                Color color;
+
+                if (highlight)
+                {
+                    if (HighlightTri(i))
+                        color = new Color(1, 1, 0);
+                    else
+                        color = new(0, t, 1);
+                }
+                else if (HighlightTri(i))
+                    color = new(0, 1, 0);
+                else
+                    color = new(t, t, t);
 
                 Gizmos.color = color;
 
@@ -45,42 +61,36 @@ namespace Universe
                 vertPoint.y *= scale.y;
                 vertPoint.z *= scale.z;
 
-                Gizmos.DrawSphere(transform.position + vertPoint, radius);
-            }
-
-            if (gizmoTris)
-                Tris(mesh);
-        }
-
-        private void Tris(Mesh mesh)
-        {
-            Vector3[] verts = mesh.vertices;
-            int[] tris = mesh.triangles;
-
-            for (int i = 0; i < tris.Length; i += 3)
-            {
-                float t = (i * 3f) / (tris.Length - 1);
-                Gizmos.color = Color.HSVToRGB(t, .33f, 1);
-
-                Gizmos.DrawLine(verts[tris[i]] + transform.position, verts[tris[i + 1]] + transform.position);
-
-                Gizmos.color = Color.HSVToRGB(t, .66f, 1);
-
-                Gizmos.DrawLine(verts[tris[i + 1]] + transform.position, verts[tris[i + 2]] + transform.position);
-
-                Gizmos.color = Color.HSVToRGB(t, 1, 1);
-
-                Gizmos.DrawLine(verts[tris[i + 2]] + transform.position, verts[tris[i]] + transform.position);
+                Gizmos.DrawSphere(transform.position + vertPoint, Highlight(i) ? radius * 1.25f : radius);
             }
         }
 
         private bool Highlight(int index)
         {
-            if (highLightIndex == null)
+            if (highlightIndex == null)
                 return false;
-            for (int i = 0; i < highLightIndex.Length; i++)
+            for (int i = 0; i < highlightIndex.Length; i++)
             {
-                if (highLightIndex[i] == index)
+                if (highlightIndex[i] == index)
+                    return true;
+            }
+            return false;
+        }
+
+        private bool HighlightTri(int index)
+        {
+            if (highlightTri == null)
+                return false;
+
+            for (int i = 0; i < highlightTri.Length; i++)
+            {
+                int[] triangles = meshFilter.sharedMesh.triangles;
+
+                int index1 = triangles[highlightTri[i] * 3];
+                int index2 = triangles[highlightTri[i] * 3 + 1];
+                int index3 = triangles[highlightTri[i] * 3 + 2];
+
+                if (index == index1 || index == index2 || index == index3)
                     return true;
             }
             return false;

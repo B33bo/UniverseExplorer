@@ -5,7 +5,7 @@ namespace Universe.CelestialBodies.Planets
 {
     public class ToxicPlanet : Planet
     {
-        public override string ObjectFilePos => "Objects/Planet/Toxic";
+        public override string ObjectFilePos => "Planets/Toxic";
 
         public override string PlanetTargetScene => "ToxicPlanet";
 

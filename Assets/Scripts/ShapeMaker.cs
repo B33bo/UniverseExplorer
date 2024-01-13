@@ -1,76 +1,89 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Universe.CelestialBodies;
 
 namespace Universe
 {
     public static class ShapeMaker
     {
-        public static Mesh GetRegularShape(int points, float lengthOfLines, bool UV = false)
+        public static Mesh GetRegularShape(int points, float radius)
         {
-            float AnglePerPoint = 360f / points;
-
-            Vector3 position = Vector3.zero;
-            float currentAngle = 0;
-
             Vector3[] verts = new Vector3[points];
+            Vector2[] UVs = new Vector2[points];
+            int[] tris = new int[(points - 2) * 3];
 
-            for (int i = 1; i < points; i++)
+            for (int i = 0; i < points; i++)
             {
-                currentAngle += AnglePerPoint;
-                float currentAngleRadians = currentAngle * Mathf.Deg2Rad;
+                float theta = Mathf.PI * -2 * i / points;
+                Vector2 position = new(Mathf.Cos(theta), Mathf.Sin(theta));
 
-                Vector2 movement = new Vector3(Mathf.Cos(currentAngleRadians), Mathf.Sin(currentAngleRadians));
-                position += (Vector3)movement * lengthOfLines;
+                UVs[i] = (position + Vector2.one) * .5f;
 
-                verts[points - i - 1] = position;
+                position *= radius;
+                verts[i] = position;
+
+                if (i >= 2)
+                {
+                    int triIndex = (i - 2) * 3;
+                    tris[triIndex] = 0;
+                    tris[triIndex + 1] = i - 1;
+                    tris[triIndex + 2] = i;
+                }
             }
 
-            int[] tris = new int[points * 3];
-            Vector3 bottomLeft = verts[0], topRight = verts[0];
-
-            for (int i = 1; i < verts.Length; i++)
+            return new Mesh()
             {
-                if (verts[i].x < bottomLeft.x)
-                    bottomLeft.x = verts[i].x;
-                else if (verts[i].x > topRight.x)
-                    topRight.x = verts[i].x;
+                vertices = verts,
+                triangles = tris,
+                uv = UVs,
+                name = points + "-gon",
+            };
+        }
 
-                if (verts[i].y < bottomLeft.y)
-                    bottomLeft.y = verts[i].y;
-                else if (verts[i].y > topRight.y)
-                    topRight.y = verts[i].y;
+        public static Mesh GetStar(int points, float lengthOfLines, float pointiness)
+        {
+            Vector3[] verts = new Vector3[2 * points];
+            Vector2[] UVs = new Vector2[2 * points];
+            int[] tris = new int[(2 * points - 2) * 3];
 
-                if (i == 1)
-                    continue;
-                int triIndex = i * 3;
-                tris[triIndex] = 0;
-                tris[triIndex + 1] = i - 1;
-                tris[triIndex + 2] = i;
-            }
-
+            float correction = Mathf.PI * 2f / verts.Length + (Mathf.PI * .5f);
             for (int i = 0; i < verts.Length; i++)
-                verts[i] -= (topRight - bottomLeft) / 2 + bottomLeft;
-
-            Vector2[] UVs = new Vector2[verts.Length];
-
-            if (UV)
             {
-                for (int i = 0; i < verts.Length; i++)
-                    UVs[i] = (verts[i].normalized + Vector3.one) * .5f;
+                float theta = Mathf.PI * 2 * -i / verts.Length + correction;
+                Vector2 position = new(Mathf.Cos(theta), Mathf.Sin(theta));
+
+                UVs[i] = (position + Vector2.one) * .5f;
+
+                position *= lengthOfLines;
+                bool spike = i % 2 == 1;
+
+                if (spike)
+                    position *= pointiness;
+
+                verts[i] = position;
+
+                if (i < points)
+                {
+                    int triIndex = i * 3;
+                    tris[triIndex] = 2 * i;
+                    tris[triIndex + 1] = (2 * i + 1) % verts.Length;
+                    tris[triIndex + 2] = (2 * i + 2) % verts.Length;
+                }
+                else if (i < verts.Length - 2)
+                {
+                    int triIndex = i * 3;
+                    tris[triIndex] = 0;
+                    tris[triIndex + 1] = (i - points + 1) * 2;
+                    tris[triIndex + 2] = (i - points + 1) * 2 + 2;
+                }
             }
 
-            Mesh mesh = new()
+            return new Mesh()
             {
-                name = $"regular {points} sided shape",
                 vertices = verts,
                 triangles = tris,
                 uv = UVs,
             };
-
-            return mesh;
         }
 
         public static Mesh SubdividedRectangle(Vector2 scale, int subdivisions)
@@ -250,7 +263,7 @@ namespace Universe
             }
 
             mesh.vertices = newVerts;
-            mesh.triangles = tris;//GetRegularShape(newVerts.Length, 1).triangles;
+            mesh.triangles = tris;
 
             return mesh;
         }
@@ -283,40 +296,37 @@ namespace Universe
             return result;
         }
 
-        public static List<(Vector2, Vector2)> GetRandomWebLines(System.Random rand)
+        public static TreeNode GetRandomWebLines(System.Random rand)
         {
-            // Start from the middle and draw 4 lines from the center to random points
-            // from each of those lines, draw 2 lines originating from any point on the line and ending at the middle
+            WebTreeNode root = new();
+            root.StartTree(Vector2.zero, 2, rand);
+            return root;
+        }
 
-            const int BaseLines = 4;
-            List<(Vector2, Vector2)> lines = new();
-
-            for (int i = 0; i < BaseLines; i++)
+        private class WebTreeNode : TreeNode
+        {
+            protected override float GetRotation()
             {
-                float rotation = i * (360f / BaseLines) + RandomNum.GetFloat(5, rand);
-
-                //This was a bug, Mathf.Rad2Deg should be Mathf.Deg2Rad but doing that makes it look too normal, I prefer the chaotic sprawl of the bug
-                float rotationRad = rotation * Mathf.Rad2Deg;
-
-                Vector2 end = new Vector2(Mathf.Cos(rotationRad), Mathf.Sin(rotationRad)) / 2;
-                lines.Add((Vector2.zero, end));
-
-                lines.Add(GetBranch(end, rotation + 15));
-                lines.Add(GetBranch(end, rotation - 15));
+                return RandomNum.GetFloat(0, Mathf.PI * 2, random);
             }
 
-            return lines;
-
-            (Vector2, Vector2) GetBranch(Vector2 parentBranchEnd, float rotation)
+            protected override float GetLength()
             {
-                float DistanceFromOrigin = RandomNum.GetFloat(1, rand);
-                Vector2 startPos = Vector2.Lerp(Vector2.zero, parentBranchEnd, DistanceFromOrigin);
+                return float.NaN;
+            }
 
-                Vector2 direction = new(Mathf.Cos(rotation * Mathf.Deg2Rad), Mathf.Sin(rotation * Mathf.Deg2Rad));
-                Vector2 endPos = startPos + direction;
+            protected override int GetBranchCount()
+            {
+                if (Parent == null)
+                    return 4;
+                return 2;
+            }
 
-                endPos = endPos.normalized / 2;
-                return (startPos, endPos);
+            protected override Vector2 GetEndPoint(Vector2 movement)
+            {
+                Vector2 endPoint = new(Mathf.Cos(rotation), Mathf.Sin(rotation));
+                length = float.NaN;
+                return endPoint;
             }
         }
     }

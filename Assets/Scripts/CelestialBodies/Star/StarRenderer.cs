@@ -36,11 +36,10 @@ namespace Universe.CelestialBodies.Planets
                 Target.SetSeed(seed.Value);
             Target.Create(pos);
 
-            Scale = GetFairSizeCurve((Target as Star).trueRadius, 4f, 1.2f) * Vector3.one;
+            Scale = Vector2.one * (float)star.trueRadius;
             star.OnInspected += ColorChanged;
             ColorChanged(null);
 
-            transform.localScale = Scale;
             LowResScale = Scale.x * 10;
 
             SolarSystemSpawner.sun = Target as Star;
@@ -69,6 +68,8 @@ namespace Universe.CelestialBodies.Planets
 
         public override void OnUpdate()
         {
+            if (IsLowRes && !GlobalTime.IsImportantFrame) 
+                return;
             transform.rotation = GlobalTime.Rotation;
         }
     }

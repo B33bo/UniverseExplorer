@@ -68,7 +68,7 @@ namespace Universe.CelestialBodies
 
         private void LoadPolygon(int index, Ore ore)
         {
-            Mesh mesh = ShapeMaker.GetRegularShape(5, 1, true);
+            Mesh mesh = ShapeMaker.GetRegularShape(5, 1);
             Vector3[] verts = mesh.vertices;
 
             for (int i = 0; i < verts.Length; i++)

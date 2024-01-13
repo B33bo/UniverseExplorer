@@ -421,10 +421,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 597146459557941002}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
   ionName: H
   text: {fileID: 597146460646439125}
@@ -1068,10 +1067,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 597146459863430878}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
   ionName: C
   text: {fileID: 597146459548525006}
@@ -1453,10 +1451,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 597146460183757577}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
 --- !u!1 &597146460206233039
 GameObject:
@@ -1879,10 +1876,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 597146460908120976}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
   ionName: H
   text: {fileID: 597146459689172063}
@@ -2022,10 +2018,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 597146461039246066}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
   ionName: H
   text: {fileID: 597146459858400247}
@@ -2165,10 +2160,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 597146461260664320}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
   ionName: H
   text: {fileID: 597146459594073374}

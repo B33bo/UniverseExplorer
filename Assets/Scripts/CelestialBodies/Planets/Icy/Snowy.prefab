@@ -37,6 +37,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6274852281940903194, guid: 95ed3fe99ae711043ae580c6e6cbf1f8, type: 3}
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: SurfacePrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 1751560871750818371, guid: 3beb79b90ce0b8643a8ee67ab8c16a35, type: 3}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: SurfacePrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 1751560871750818371, guid: 3beb79b90ce0b8643a8ee67ab8c16a35, type: 3}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfaceWeights.Array.data[0]
       value: 100
       objectReference: {fileID: 0}
@@ -58,7 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: SurfaceWeights.Array.data[5]
-      value: 5
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
+      propertyPath: SurfaceWeights.Array.data[6]
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2904659521917431192, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: m_RootOrder
@@ -110,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8bf16d68d247d3146be8561f53cd5605, type: 2}
     - target: {fileID: 2904659521917431196, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
       propertyPath: m_Name
-      value: Quad
+      value: Snowy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

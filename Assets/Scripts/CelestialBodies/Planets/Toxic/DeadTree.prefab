@@ -324,8 +324,8 @@ Transform:
   m_GameObject: {fileID: 948190393438492882}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 2.4028, z: 0}
+  m_LocalScale: {x: 0.5, y: 5.1945, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 948190394192674033}
@@ -1167,10 +1167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 2046470686851265913}
+  IsDestroyed: 0
   cameraLerpSize: 4
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
   lowLevelBranches:
   - {fileID: 948190393286804252}

@@ -129,10 +129,16 @@ namespace Universe
             double current = 0;
             do
             {
-                current += random.NextDouble();
+                current += 1;
             } while (random.NextDouble() >= changeChance);
 
             return current * direction;
+        }
+
+        public static double GetInfiniteDoubleAgain(double normality, Random random)
+        {
+            double x = random.NextDouble();
+            return Math.Pow(x, normality) / (x);
         }
 
         public static double CurveAt(double x, double coefficient, double pwrBase)

@@ -11,55 +11,62 @@ namespace Universe.CelestialBodies.Planets.Molten
 
         public override bool Circular => false;
 
+        public const int MaxDepth = 4;
         public Node tree;
-        public int MaxDepth = 5;
-        public float initOffset = 270;
-        public float angle = 60;
 
         public override void Create(Vector2 pos)
         {
             Position = pos;
 
-            tree = new Node()
-            {
-                angleOffset = RandomNum.GetFloat(-angle, angle, RandomNumberGenerator) + initOffset,
-                length = RandomNum.GetFloat(5, RandomNumberGenerator),
-                depth = 0,
-                branches = new Node[2],
-            };
+            tree = new Node();
 
-            SpawnNodes(tree);
+            tree.StartTree(Vector2.zero, MaxDepth, RandomNumberGenerator);
         }
 
-        private void SpawnNodes(Node node)
+        public class Node : TreeNode
         {
-            if (node.depth >= MaxDepth)
-                return;
-
-            for (int i = 0; i < node.branches.Length; i++)
+            protected override float GetLength()
             {
-                Node newNode = new()
-                {
-                    angleOffset = RandomNum.GetFloat(-angle, angle, RandomNumberGenerator) + initOffset,
-                    length = RandomNum.GetFloat(10, RandomNumberGenerator),
-                    depth = node.depth + 1,
-                    branches = new Node[2],
-                };
-
-                if (node.depth + 1 >= MaxDepth)
-                    newNode.branches = Array.Empty<Node>();
-
-                node.branches[i] = newNode;
-                SpawnNodes(newNode);
+                if (Parent == null)
+                    return RandomNum.GetFloat(12, random);
+                return RandomNum.GetFloat(8, random);
             }
-        }
 
-        public class Node
-        {
-            public Node[] branches;
-            public float angleOffset;
-            public float length;
-            public int depth;
+            protected override int GetBranchCount()
+            {
+                return 2;
+            }
+
+            protected override float GetRotation()
+            {
+                if (Parent == null)
+                    return Mathf.PI * 1.5f;
+
+                float radius = 60 * Mathf.Deg2Rad;
+
+                return Parent.rotation + RandomNum.GetFloat(-radius, radius, random);
+            }
+
+            protected override float GetWidth()
+            {
+                return .2f * ((depth + 1) / (MaxDepth + 1f));
+            }
+
+            public (float, float) GetMaxXMinY()
+            {
+                float maxX = Mathf.Abs(endPoint.x);
+                float minY = endPoint.y;
+
+                for (int i = 0; i < Branches.Length; i++)
+                {
+                    (float currentMaxX, float currentMinY) = (Branches[i] as Node).GetMaxXMinY();
+                    if (currentMaxX > maxX)
+                        maxX = currentMaxX;
+                    if (currentMinY < minY)
+                        minY = currentMinY;
+                }
+                return (maxX, minY);
+            }
         }
     }
 }

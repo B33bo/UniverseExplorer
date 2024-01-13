@@ -10,29 +10,17 @@ namespace Universe
         [SerializeField]
         private AudioSource audioSource;
 
-        private List<LineRenderer> lines = new();
         private float spawnTime;
+        private Material material;
         public Color color;
-
-        protected override void OnAddPosition(Vector3 pos, LineRenderer line)
-        {
-            lines.Add(line);
-        }
 
         public override void OnUpdate()
         {
             float alpha = Mathf.Clamp01(1 - (Time.time - spawnTime));
+            Color newColor = color;
+            newColor.a = alpha;
 
-            for (int i = 0; i < lines.Count; i++)
-            {
-                Color start = color;
-                start.a = alpha;
-                lines[i].startColor = start;
-
-                Color end = color;
-                end.a = alpha;
-                lines[i].endColor = end;
-            }
+            material.color = newColor;
             lavaLight.intensity = alpha;
         }
 
@@ -45,6 +33,8 @@ namespace Universe
             audioSource.pitch = RandomNum.GetFloat(-.75f, 1.5f, Target.RandomNumberGenerator);
             audioSource.Play();
 
+            material = meshRenderer.material;
+            material.color = color;
             lavaLight.color = color;
         }
     }

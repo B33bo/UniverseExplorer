@@ -6,26 +6,16 @@ namespace Universe
     public abstract class CelestialBodyRenderer : MonoBehaviour
     {
         public CelestialBody Target { get; set; }
+        public Vector2 Scale { get => transform.localScale; set => transform.localScale = value; }
 
         public bool CameraFocus = true;
 
         public Transform cameraLerpTarget;
-        public float cameraLerpSize = 1;
-        public bool cameraLerpMultiplyBySize = true;
-        public bool scaleLerp = true;
         public bool IsDestroyed;
+        public float cameraLerpSize;
+        public bool cameraLerpMultiplyBySize;
         public bool IsLowRes { get; private set; }
         public float LowResScale = float.NaN;
-
-        public Vector2 Scale { get; set; }
-
-        private void Awake()
-        {
-            Scale = transform.localScale;
-
-            if (scaleLerp)
-                transform.localScale = Vector3.zero;
-        }
 
         private void Update()
         {
@@ -35,24 +25,14 @@ namespace Universe
             if (Target is null)
             {
                 Spawn(Vector3.zero, 0);
+                name = Target.Name;
                 return;
             }
 
             ToggleHiddenIfShowing();
 
             transform.localPosition = Target.Position;
-            if (scaleLerp)
-            {
-                if (IsLowRes)
-                {
-                    transform.localScale = Scale;
-                    scaleLerp = false;
-                }
-                else
-                    transform.localScale = Vector2.Lerp(transform.localScale, Scale, Time.deltaTime * 3);
-            }
 
-            name = Target.Name;
             OnUpdate();
         }
 

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using Universe.Inspector;
 
@@ -12,7 +13,7 @@ namespace Universe.CelestialBodies.Planets
         public override string TypeString => "Star";
         private static float totalPlanetWeights;
 
-        private static readonly PlanetRenderer[] PlanetPrefabs = Resources.LoadAll<PlanetRenderer>("Objects/Planet");
+        private static readonly PlanetRenderer[] PlanetPrefabs = GetPlanetRenderers();
         public const double MinMass = 1.5912E+29, MaxMass = 2.9835E+32;
         public const double MinSize = 1_000_000, MaxSize = 10_000_000;
         public static string[] StarNames = null;
@@ -27,6 +28,11 @@ namespace Universe.CelestialBodies.Planets
 
         [InspectableVar("Temperature", Params = new object[] { 1000, 40_000 })]
         public double Temperature;
+
+        private static PlanetRenderer[] GetPlanetRenderers()
+        {
+            return ObjectPaths.Instance.objects.Where(x => x.Object is PlanetRenderer).Select(x => x.Object as PlanetRenderer).ToArray();
+        }
 
         public override void Create(Vector2 position)
         {
@@ -54,10 +60,11 @@ namespace Universe.CelestialBodies.Planets
                 nameLengthBonus = 1;
 
             int nameLength = (int)(RandomNum.Get(1, 3, RandomNumberGenerator) * nameLengthBonus);
+            trueRadius = 5 * RandomNum.GetInfiniteDoubleAgain(.5,RandomNumberGenerator);
             Name = RandomNum.GetWord(nameLength, RandomNumberGenerator);
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
 
-            trueRadius = RandomNum.CurveAt(RandomNum.GetInfiniteDouble(0.4, RandomNumberGenerator), 4, 1.2) * 3;
+            // RandomNum.CurveAt(RandomNum.GetInfiniteDouble(0.4, RandomNumberGenerator), 4, 1.2) * 3;
             Radius = trueRadius * 1_000_000;
             Temperature = RandomNum.Get(1000, 20000, RandomNumberGenerator);
 

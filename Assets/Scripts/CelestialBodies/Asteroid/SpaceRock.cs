@@ -8,7 +8,7 @@ namespace Universe.CelestialBodies.Planets
 
         public override bool Circular => false;
 
-        public override string ObjectFilePos => "Objects/Asteroid";
+        public override string ObjectFilePos => "Asteroid";
 
         public override string TravelTarget => PlanetTargetScene;
 

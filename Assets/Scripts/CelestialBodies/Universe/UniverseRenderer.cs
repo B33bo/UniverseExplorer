@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Universe.CelestialBodies
@@ -17,6 +18,8 @@ namespace Universe.CelestialBodies
         [SerializeField]
         private GameObject lightObject;
 
+        private static Dictionary<int, Mesh> meshesOfShapes = new();
+
         public override void Spawn(Vector2 position, int? seed)
         {
             Target = new Universe();
@@ -30,9 +33,10 @@ namespace Universe.CelestialBodies
                 Size = 2.5f;
             Scale = Size * Vector2.one;
 
-            StartCoroutine(LoadSprites());
+            int res = Mathf.Abs(Target.Seed % 14) + 4;
+            StartCoroutine(LoadSprite(res, res));
 
-            meshFilter.mesh = ShapeMaker.GetRegularShape((Target as Universe).Points, 5f / (Target as Universe).Points, true);
+            meshFilter.mesh = GetMesh();
             meshRenderer.material.SetFloat("_SpeedX", RandomNum.GetFloat(.6f, Target.RandomNumberGenerator) - .3f);
             meshRenderer.material.SetFloat("_SpeedY", RandomNum.GetFloat(.6f, Target.RandomNumberGenerator) - .3f);
             meshRenderer.material.SetFloat("_Multiplier", RandomNum.GetFloat(.75f, Target.RandomNumberGenerator));
@@ -47,6 +51,16 @@ namespace Universe.CelestialBodies
             LowResScale = 50;
         }
 
+        private Mesh GetMesh()
+        {
+            int points = (Target as Universe).Points;
+
+            if (!meshesOfShapes.ContainsKey(points))
+                meshesOfShapes.Add(points, ShapeMaker.GetRegularShape(points, 5f / points));
+
+            return meshesOfShapes[points];
+        }
+
         protected override void LowRes()
         {
             lightObject.SetActive(false);
@@ -59,24 +73,17 @@ namespace Universe.CelestialBodies
 
         private IEnumerator LoadSprite(int width, int height)
         {
-            Vector2 halfScale = new Vector2(width, height) * .5f;
             Texture2D texture = new Texture2D(width, height);
-            int circleRadiusSquared = (width * width) / 4;
 
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    Vector2 normalizedIterator = new Vector2(j - halfScale.x, i - halfScale.y);
-
                     float R = RandomNum.GetFloat(1, Target.RandomNumberGenerator);
                     float G = RandomNum.GetFloat(1, Target.RandomNumberGenerator);
                     float B = RandomNum.GetFloat(1, Target.RandomNumberGenerator);
 
-                    if (normalizedIterator.sqrMagnitude < circleRadiusSquared)
-                        texture.SetPixel(i, j, new Color(R, G, B));
-                    else
-                        texture.SetPixel(i, j, new Color(0, 0, 0, 0));
+                    texture.SetPixel(i, j, new Color(R, G, B));
                 }
                 yield return new WaitForEndOfFrame();
             }
@@ -84,15 +91,6 @@ namespace Universe.CelestialBodies
             texture.filterMode = FilterMode.Point;
             texture.Apply();
             meshRenderer.material.mainTexture = texture;
-        }
-
-        private IEnumerator LoadSprites()
-        {
-            for (int i = 4; i <= 64; i *= 2)
-            {
-                yield return LoadSprite(i, i);
-                yield return new WaitForEndOfFrame();
-            }
         }
     }
 }

@@ -97,7 +97,7 @@ namespace Universe
         {
             System.Random rand = planet.RandomNumberGenerator;
 
-            var newPlanet = Instantiate(Resources.Load<CelestialBodyRenderer>(planet.ObjectFilePos), day);
+            var newPlanet = Instantiate(ObjectPaths.Instance.GetCelestialBody(planet.ObjectFilePos), day);
             newPlanet.Spawn(new Vector2(RandomNum.GetFloat(-10f, 10, rand), RandomNum.GetFloat(-10, 10, rand)), moon.planet.Seed);
             Destroy(newPlanet.GetComponent<Collider2D>());
 

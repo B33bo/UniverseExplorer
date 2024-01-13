@@ -175,7 +175,6 @@ MonoBehaviour:
   weights: []
   randomOffset: 1
   extraPadding: 3
-  biomeManager: {fileID: 0}
   layers:
   - Noises:
     - NoiseType: 1
@@ -188,6 +187,7 @@ MonoBehaviour:
       Smootheness: 0.01
       Magnitude: 7
       CanBeNegative: 0
+    biomeManager: {fileID: 0}
     Renderer: {fileID: 6531835044903168418, guid: b95d0612d4a56244998902a8541a82b8, type: 3}
     Offset: 5.04
     MinimumHeight: 25
@@ -200,6 +200,7 @@ MonoBehaviour:
       Smootheness: 0.05
       Magnitude: 6
       CanBeNegative: 0
+    biomeManager: {fileID: 0}
     Renderer: {fileID: 2637230523456564494, guid: 1e494d48cd6d5424d92fee400d4cc210, type: 3}
     Offset: 5.04
     MinimumHeight: 20
@@ -217,6 +218,7 @@ MonoBehaviour:
       Smootheness: 0.01
       Magnitude: 7
       CanBeNegative: 0
+    biomeManager: {fileID: 0}
     Renderer: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
     Offset: 5.04
     MinimumHeight: 25
@@ -234,6 +236,7 @@ MonoBehaviour:
       Smootheness: 0.01
       Magnitude: 7
       CanBeNegative: 0
+    biomeManager: {fileID: 0}
     Renderer: {fileID: 2904659521917431191, guid: f2ba0429d99413941b4b7908f6123c3b, type: 3}
     Offset: 5.04
     MinimumHeight: 25

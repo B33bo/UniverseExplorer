@@ -51,11 +51,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 222219182022447501}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 0
-  IsDestroyed: 0
-  LowResScale: NaN
+  LowResScale: 500
   spriteRenderer: {fileID: 222219182022447498}
   worleyNoise: {fileID: 222219182825356820}
   starLight: {fileID: 4383131347263012850}

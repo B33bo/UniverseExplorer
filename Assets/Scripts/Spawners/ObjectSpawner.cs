@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace Universe
         public override CelestialBodyRenderer SpawnAt(CelestialBodyRenderer prefab, Vector2 position, int? seed)
         {
             var result = base.SpawnAt(prefab, position, seed);
-            if (detectStars && result.TryGetComponent(out StarRenderer starRenderer))
+            if (detectStars && result != null && result.TryGetComponent(out StarRenderer starRenderer))
                 starsLoaded.Add(starRenderer.Target as Star);
             return result;
         }
@@ -53,7 +54,7 @@ namespace Universe
         public override GameObject[] SpawnAt(Vector2 position)
         {
             var result = base.SpawnAt(position);
-            if (result.Length == 0)
+            if (result == null || result.Length == 0)
                 return result;
 
             if (detectStars && result[0].TryGetComponent(out StarRenderer starRenderer))

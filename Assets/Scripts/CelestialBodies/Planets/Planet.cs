@@ -26,13 +26,13 @@ namespace Universe.CelestialBodies.Planets
 
             for (int i = 0; i < moons.Length; i++)
             {
-                MoonRenderer newMoon = Object.Instantiate(Resources.Load<MoonRenderer>("Objects/Moon"), transform);
+                MoonRenderer newMoon = Object.Instantiate((MoonRenderer)ObjectPaths.Instance.GetCelestialBody("Planets/Moon"), transform);
                 newMoon.Spawn(Vector2.zero, RandomNumberGenerator.Next());
                 moons[i] = newMoon;
                 (moons[i].Target as Moon).planet = this;
                 newMoon.Scale /= (float)sun.trueRadius;
 
-                float distance = (float)RandomNum.Get(1, 2, newMoon.Target.RandomNumberGenerator);
+                float distance = RandomNum.GetFloat(1, 2, newMoon.Target.RandomNumberGenerator);
                 float rotation = RandomNum.GetFloat(0, 2 * Mathf.PI, newMoon.Target.RandomNumberGenerator);
 
                 newMoon.Target.Position = new Vector3(Mathf.Cos(rotation), Mathf.Sin(rotation)) * distance;

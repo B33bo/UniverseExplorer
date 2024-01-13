@@ -7,7 +7,7 @@ namespace Universe.CelestialBodies.Planets
         public const float MinScale = 1000, MaxScale = 12000;
         public const double MinMass = 3e24, MaxMass = 4e26;
 
-        public override string ObjectFilePos => "Objects/Planet/RockyPlanet";
+        public override string ObjectFilePos => "Planets/Rocky";
         public override bool Circular => true;
         public override string TypeString => "Rocky Planet";
 

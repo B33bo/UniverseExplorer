@@ -7,7 +7,7 @@ namespace Universe.CelestialBodies.Planets
         public const double MinScale = 1000 * Measurement.Km, MaxScale = 10000 * Measurement.Km;
         public const double Density = 2.09 * (Measurement.g / (Measurement.cm * Measurement.cm));
 
-        public override string ObjectFilePos => "Objects/Planet/Opal";
+        public override string ObjectFilePos => "Planets/Opal";
 
         public override string PlanetTargetScene => "OpalPlanet";
 

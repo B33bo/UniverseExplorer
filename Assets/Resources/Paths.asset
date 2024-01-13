@@ -177,3 +177,5 @@ MonoBehaviour:
     Object: {fileID: 7453179742243823550, guid: 755d605fa5eb1ee4dae126fa460e51b4, type: 3}
   - Path: Planets/Moon
     Object: {fileID: 2695697951722026239, guid: a00c67710593f8f4cabe608d5a5aee58, type: 3}
+  - Path: Planets/Ice/ChristmasTree
+    Object: {fileID: 4221288369075095535, guid: 0770373e50cce5c40a71bd3b72623756, type: 3}

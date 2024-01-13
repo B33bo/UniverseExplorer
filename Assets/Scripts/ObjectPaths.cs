@@ -1,11 +1,22 @@
 using System;
+using System.Linq;
 using UnityEngine;
+using static Universe.ObjectPaths;
 
 namespace Universe
 {
     [CreateAssetMenu(fileName = "Paths", menuName = "Universe/ObjectPaths")]
     public class ObjectPaths : ScriptableObject
     {
+        private static ObjectPaths _instance;
+        public static ObjectPaths Instance { get
+            {
+                if (_instance == null)
+                    _instance = Resources.Load<ObjectPaths>("Paths");
+                return _instance;
+            }
+        }
+
         public ObjectInfo<CelestialBodyRenderer>[] objects;
 
         public CelestialBodyRenderer GetCelestialBody(string path)

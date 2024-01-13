@@ -1,3 +1,18 @@
+1.3.4 - 2024/01/13
+- Additions
+	- Christmas trees and Christmas Biomes
+- Changes
+	- Universe renderers are shapes
+- Performance
+	- Objects that use random shapes are cached so they don't have to regenerate a new mesh
+	- Improved algorithm for generating regular shapes. Only needs one loop instead of 3
+- Removals
+	- Removed objects scale animation when loaded
+- Dev
+	- Objects aren't stored in the resources folder anymore. They are referenced with a scriptable object
+	- Tree object for making trees. Renders it as well with an algorithm without needing a bunch of line renderers.
+	- Added a test
+
 1.3.3 - 2023/12/26
 - Additions
 	- Water colors for every planet (for rain & oceans)
@@ -25,5 +40,5 @@
 	- Silver & Copper, ores are now randomly generated for every planet.
 	- Load command
 - Dev
-	- "Mesh Checked" script to add if you ever need to see the verticies of a mesh. Wrote it to check smth with aurora, has no effect on gameplay
+	- "Mesh Checker" script to add if you ever need to see the verticies of a mesh. Wrote it to check smth with aurora, has no effect on gameplay
 	- Added changelog

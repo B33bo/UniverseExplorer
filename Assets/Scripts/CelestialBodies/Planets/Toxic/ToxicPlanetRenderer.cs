@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Universe.Inspector;
@@ -9,7 +8,10 @@ namespace Universe.CelestialBodies.Planets
     public class ToxicPlanetRenderer : PlanetRenderer
     {
         [SerializeField]
-        private LineRenderer[] goo;
+        private MeshFilter meshFilter;
+
+        [SerializeField]
+        private MeshRenderer meshRenderer;
 
         public override Type PlanetType => typeof(ToxicPlanet);
 
@@ -26,16 +28,10 @@ namespace Universe.CelestialBodies.Planets
             toxicPlanet.OnInspected += ColorReset;
             toxicPlanet.Create(pos);
 
-            List<(Vector2, Vector2)> lines = ShapeMaker.GetRandomWebLines(Target.RandomNumberGenerator);
-
-            for (int i = 0; i < lines.Count; i++)
-            {
-                LineRenderer lineRenderer = goo[i];
-                lineRenderer.SetPosition(0, lines[i].Item1);
-                lineRenderer.SetPosition(1, lines[i].Item2);
-                lineRenderer.startColor = toxicPlanet.ToxicColor;
-                lineRenderer.endColor = toxicPlanet.ToxicColor;
-            }
+            var tree = ShapeMaker.GetRandomWebLines(Target.RandomNumberGenerator);
+            Mesh mesh = TreeNodeMeshDrawer.GenerateMesh(tree);
+            meshFilter.mesh = mesh;
+            meshRenderer.material.color = toxicPlanet.ToxicColor;
         }
 
         private void ColorReset(Variable v)
@@ -43,27 +39,8 @@ namespace Universe.CelestialBodies.Planets
             if (v.VariableName == "Type")
                 (Target as ToxicPlanet).RefreshColor();
             Color c = (Target as ToxicPlanet).ToxicColor;
-            for (int i = 0; i < goo.Length; i++)
-            {
-                goo[i].startColor = c;
-                goo[i].endColor = c;
-            }
-        }
 
-        protected override void HighRes()
-        {
-            base.HighRes();
-            for (int i = 0; i < goo.Length; i++)
-                goo[i].enabled = true;
-        }
-
-        protected override void LowRes()
-        {
-            if (SceneManager.GetActiveScene().name != "Galaxy")
-                return;
-            base.LowRes();
-            for (int i = 0; i < goo.Length; i++)
-                goo[i].enabled = false;
+            meshRenderer.material.color = c;
         }
     }
 }

@@ -52,7 +52,7 @@ Shader "Custom/ColorShift"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float time = (_Time * _Speed) + _Offset + i.uv.x;
+                float time = (_Time * _Speed) + _Offset + i.uv.y;
                 time %= 1;
                 if (time < 0) time += 1;
 

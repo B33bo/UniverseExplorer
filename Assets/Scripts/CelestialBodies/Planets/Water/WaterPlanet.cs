@@ -13,7 +13,7 @@ namespace Universe.CelestialBodies.Planets
 
         public override bool Circular => true;
 
-        public override string ObjectFilePos => "Objects/Planet/WaterPlanet";
+        public override string ObjectFilePos => "Planets/Water";
 
         public override void Create(Vector2 pos)
         {

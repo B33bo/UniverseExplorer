@@ -58,7 +58,7 @@ namespace Universe.CelestialBodies
             {
                 if (value)
                 {
-                    colors = Resources.Load<GradientContainer>("RainbowGradient").gradient;
+                    colors = Resources.Load<GradientContainer>("Gradients/RainbowGradient").gradient;
                     return;
                 }
 
@@ -84,7 +84,7 @@ namespace Universe.CelestialBodies
 
             if (isRainbow)
             {
-                colors = Resources.Load<GradientContainer>("RainbowGradient").gradient;
+                colors = Resources.Load<GradientContainer>("Gradients/RainbowGradient").gradient;
             }
             else
             {

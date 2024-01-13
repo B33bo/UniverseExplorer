@@ -7,11 +7,11 @@ namespace Universe.CelestialBodies.Planets
         public const double MinScale = 100 * Measurement.Km, MaxScale = 6371 * Measurement.Km;
         public const double Density = 7874;
 
-        public override string ObjectFilePos => "Planet/Iron";
+        public override string ObjectFilePos => "Planets/Metal";
 
         public override string PlanetTargetScene => "IronPlanet";
 
-        public override string TypeString => "Iron Planet";
+        public override string TypeString => "Metal Planet";
 
         public override void Create(Vector2 pos)
         {

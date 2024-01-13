@@ -6,9 +6,6 @@ namespace Universe.CelestialBodies.Planets.Molten
     public class LavaForkRenderer : CelestialBodyRenderer
     {
         [SerializeField]
-        protected LineRenderer line;
-
-        [SerializeField]
         private ParticleSystem particles;
 
         [SerializeField]
@@ -16,6 +13,10 @@ namespace Universe.CelestialBodies.Planets.Molten
 
         [SerializeField]
         protected Light2D lavaLight;
+
+        [SerializeField]
+        private MeshFilter meshFilter;
+        protected MeshRenderer meshRenderer;
 
         private float minY = float.PositiveInfinity;
         private float maxX = 0;
@@ -29,11 +30,14 @@ namespace Universe.CelestialBodies.Planets.Molten
 
             Target.Create(pos);
 
+            meshRenderer = meshFilter.GetComponent<MeshRenderer>();
+            meshRenderer.material.SetFloat("_Offset", RandomNum.GetFloat(1, Target.RandomNumberGenerator));
+
             if (UseColorHighlights)
             {
-                line.material.SetColor("_ColorA", ColorHighlights.Instance.primary);
-                line.material.SetColor("_ColorB", ColorHighlights.Instance.secondary);
-                line.material.SetColor("_ColorC", ColorHighlights.Instance.tertiary);
+                meshRenderer.material.SetColor("_ColorA", ColorHighlights.Instance.primary);
+                meshRenderer.material.SetColor("_ColorB", ColorHighlights.Instance.secondary);
+                meshRenderer.material.SetColor("_ColorC", ColorHighlights.Instance.tertiary);
 
                 if (particles)
                 {
@@ -46,8 +50,6 @@ namespace Universe.CelestialBodies.Planets.Molten
 
             LoadLines();
             LoadLightPath();
-
-            Destroy(line.gameObject);
         }
 
         private void LoadLightPath()
@@ -73,41 +75,11 @@ namespace Universe.CelestialBodies.Planets.Molten
         private void LoadLines()
         {
             LavaFork lavaFork = Target as LavaFork;
-            LoadTree(lavaFork.tree, Vector2.zero);
+            meshFilter.mesh = TreeNodeMeshDrawer.GenerateMesh(lavaFork.tree, TreeNodeMeshDrawer.UVMode.DepthBased);
+
+            (maxX, minY) = lavaFork.tree.GetMaxXMinY();
         }
 
         protected virtual void OnAddPosition(Vector3 pos, LineRenderer line) { }
-
-        private void LoadTree(LavaFork.Node node, Vector2 startPos)
-        {
-            Vector2 change = new(Mathf.Cos(node.angleOffset * Mathf.Deg2Rad), Mathf.Sin(node.angleOffset * Mathf.Deg2Rad));
-            change *= node.length;
-
-            Vector2 endPos = startPos + change;
-            LineRenderer newLine = Instantiate(line, transform);
-            newLine.SetPosition(0, startPos);
-            newLine.SetPosition(1, endPos);
-            newLine.startWidth = .4f / (node.depth + 1);
-            newLine.endWidth = newLine.startWidth;
-
-            if (endPos.y < minY)
-                minY = endPos.y;
-
-            if (Mathf.Abs(endPos.x) > maxX)
-                maxX = Mathf.Abs(endPos.x);
-            if (Mathf.Abs(startPos.x) > maxX)
-                maxX = Mathf.Abs(startPos.x);
-
-            OnAddPosition(endPos, newLine);
-
-            if (node.branches == null || node.branches.Length == 0)
-            {
-                newLine.numCapVertices = 3;
-                return;
-            }
-
-            for (int i = 0; i < node.branches.Length; i++)
-                LoadTree(node.branches[i], endPos);
-        }
     }
 }

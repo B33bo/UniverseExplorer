@@ -21,6 +21,7 @@ namespace Universe.CelestialBodies
         public override string TypeString { get => "Universe"; }
         public UniverseInfo universeInfo;
         public int Points;
+        public bool Star;
 
         public override void Create(Vector2 position)
         {

@@ -1,22 +1,21 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Universe.CelestialBodies.Planets
 {
     public class MoltenPlanetRenderer : PlanetRenderer
     {
-        private List<(Vector2, Vector2)> lines;
-
-        [SerializeField]
-        private LineRenderer[] lineRenderers;
-
         private bool LerpDirection;
         private float LerpAmount;
 
         [SerializeField]
         private Color lerpStart, lerpEnd;
+
+        [SerializeField]
+        private MeshFilter meshFilter;
+
+        [SerializeField]
+        private MeshRenderer meshRenderer;
 
         public override Type PlanetType => typeof(MoltenPlanet);
 
@@ -29,14 +28,9 @@ namespace Universe.CelestialBodies.Planets
 
         private void GenerateLines()
         {
-            lines = ShapeMaker.GetRandomWebLines(Target.RandomNumberGenerator);
-
-            for (int i = 0; i < lines.Count; i++)
-            {
-                LineRenderer lineRenderer = lineRenderers[i];
-                lineRenderer.SetPosition(0, lines[i].Item1);
-                lineRenderer.SetPosition(1, lines[i].Item2);
-            }
+            var tree = ShapeMaker.GetRandomWebLines(Target.RandomNumberGenerator);
+            Mesh mesh = TreeNodeMeshDrawer.GenerateMesh(tree, TreeNodeMeshDrawer.UVMode.DepthBased);
+            meshFilter.mesh = mesh;
         }
 
         public override void OnUpdate()
@@ -48,28 +42,8 @@ namespace Universe.CelestialBodies.Planets
             if (LerpAmount > 1 || LerpAmount < 0)
                 LerpDirection = !LerpDirection;
 
-            for (int i = 0; i < lineRenderers.Length; i++)
-            {
-                Color newColor = Color.Lerp(lerpStart, lerpEnd, LerpAmount);
-                lineRenderers[i].startColor = newColor;
-                lineRenderers[i].endColor = newColor;
-            }
-        }
-
-        protected override void HighRes()
-        {
-            base.HighRes();
-            for (int i = 0; i < lineRenderers.Length; i++)
-                lineRenderers[i].enabled = true;
-        }
-
-        protected override void LowRes()
-        {
-            if (SceneManager.GetActiveScene().name != "Galaxy")
-                return;
-            base.LowRes();
-            for (int i = 0; i < lineRenderers.Length; i++)
-                lineRenderers[i].enabled = false;
+            //Color newColor = Color.Lerp(lerpStart, lerpEnd, LerpAmount);
+            //meshRenderer.material.color = newColor;
         }
     }
 }

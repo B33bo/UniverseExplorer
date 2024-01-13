@@ -51,6 +51,7 @@ namespace Universe
                 return _rotation;
             }
         }
+        public static bool IsImportantFrame => UnityEngine.Time.frameCount % 4 == 0;
 
         public static float Time => TimeOfInit + UnityEngine.Time.time;
 
@@ -76,7 +77,7 @@ namespace Universe
         public static void MaybeInvokeImportantUpdate()
         {
             timeSinceImportantUpdate += UnityEngine.Time.deltaTime;
-            if (UnityEngine.Time.frameCount % 4 != 0)
+            if (!IsImportantFrame)
                 return;
             OnImportantUpdate?.Invoke(timeSinceImportantUpdate);
             timeSinceImportantUpdate = 0;

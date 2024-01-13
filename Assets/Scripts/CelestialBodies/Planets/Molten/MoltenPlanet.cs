@@ -6,7 +6,7 @@ namespace Universe.CelestialBodies.Planets
     {
         public const double MinScale = 100 * Measurement.Km, MaxScale = 6371 * Measurement.Km;
         public const double MinMass = 3e22 * Measurement.Kg, MaxMass = 4e24 * Measurement.Kg;
-        public override string ObjectFilePos => "Objects/Planet/MoltenPlanet";
+        public override string ObjectFilePos => "Planets/Molten";
 
         public override string TypeString => "Molten Planet";
 

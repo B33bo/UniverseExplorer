@@ -4880,11 +4880,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 0}
+  IsDestroyed: 0
   cameraLerpSize: 5
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 0
-  IsDestroyed: 0
-  LowResScale: NaN
+  LowResScale: 400
   glowOrb: {fileID: 21300000, guid: 74b0a9100c13c124f9881d4d8acd6213, type: 3}
   particles: {fileID: 7805019358584353462}
   audioSources:

@@ -13,7 +13,7 @@ namespace Universe
 
         public override bool Circular => true;
 
-        public override string ObjectFilePos => "Objects/Planet/Moon";
+        public override string ObjectFilePos => "Planets/Moon";
 
         public override string PlanetTargetScene => "RockyPlanet";
 

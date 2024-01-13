@@ -15,7 +15,7 @@ namespace Universe.CelestialBodies.Planets
 
         public override bool Circular => true;
 
-        public override string ObjectFilePos => "Objects/Planet/TerrestrialPlanet";
+        public override string ObjectFilePos => "Planets/Terrestrial";
 
         [InspectableVar("Water Level", Params = new object[] { 0, 1 })]
         public float waterLevel;

@@ -115,6 +115,8 @@ namespace Universe
                 return Array.Empty<GameObject>();
 
             var newObject = SpawnAt(target, position, positionSeed);
+            if (newObject == null)
+                return null;
 
             float CellSizeRadius = CellSize / 2;
 
@@ -128,6 +130,8 @@ namespace Universe
         public virtual CelestialBodyRenderer SpawnAt(CelestialBodyRenderer prefab, Vector2 position, int? seed)
         {
             if (prefab is null)
+                return null;
+            if (CameraControl.Instance.MyCamera.orthographicSize > prefab.LowResScale)
                 return null;
 
             CelestialBodyRenderer newObject = Instantiate(prefab, position, Quaternion.identity);

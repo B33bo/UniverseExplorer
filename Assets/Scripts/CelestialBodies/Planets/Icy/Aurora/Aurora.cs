@@ -74,7 +74,7 @@ namespace Universe.CelestialBodies
 
         private Color GetColor()
         {
-            Gradient gradient = Resources.Load<GradientContainer>("AuroraColor").gradient;
+            Gradient gradient = Resources.Load<GradientContainer>("Gradients/AuroraColor").gradient;
             return gradient.Evaluate((float)RandomNumberGenerator.NextDouble());
         }
 
