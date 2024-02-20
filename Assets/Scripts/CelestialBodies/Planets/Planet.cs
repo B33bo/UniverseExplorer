@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Reflection;
+using UnityEngine;
+using Universe.Animals;
 
 namespace Universe.CelestialBodies.Planets
 {
@@ -12,6 +14,7 @@ namespace Universe.CelestialBodies.Planets
         public Star sun;
         public float age = -1;
         public Color waterColor = new(.15f, .002f, 1);
+        public (AnimalSpecies, string)[] Animals;
 
         public string GenerateName()
         {
@@ -37,6 +40,31 @@ namespace Universe.CelestialBodies.Planets
 
                 newMoon.Target.Position = new Vector3(Mathf.Cos(rotation), Mathf.Sin(rotation)) * distance;
             }
+        }
+
+        public void LoadAnimals()
+        {
+            LoadAnimals(5);
+        }
+
+        public virtual void LoadAnimals(int count)
+        {
+            Animals = new (AnimalSpecies, string)[count];
+            for (int i = 0; i < Animals.Length; i++)
+            {
+                Animals[i] = GetRandomSpecies();
+            }
+        }
+
+        public virtual (AnimalSpecies, string) GetRandomSpecies()
+        {
+            int index = ObjectPaths.Instance.GetRandomAnimal(RandomNumberGenerator);
+            var animalInfo = ObjectPaths.Instance.animals[index];
+            var animalType = animalInfo.Object.GetType().GetCustomAttribute<AnimalAttribute>().SpeciesType;
+
+            AnimalSpecies species = System.Activator.CreateInstance(animalType) as AnimalSpecies;
+            species.Create(new System.Random(RandomNumberGenerator.Next()));
+            return (species, animalInfo.Path);
         }
 
         public override string GetBonusTypes()

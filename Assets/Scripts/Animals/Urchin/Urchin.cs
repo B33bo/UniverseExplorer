@@ -1,9 +1,9 @@
 using UnityEngine;
 using Universe.Animals;
 
-namespace Universe
+namespace Universe.AnimalsOld
 {
-    public class Urchin : Animal
+    public class Urchin : AnimalOld
     {
         public override string TypeString => "Urchin";
 
@@ -13,7 +13,7 @@ namespace Universe
         private bool isInverted;
         public float size;
 
-        public override void CreateAnimal(Animal speciesPrefab)
+        public override void CreateAnimal(AnimalOld speciesPrefab)
         {
             if (!(speciesPrefab is Urchin urchin))
                 return;

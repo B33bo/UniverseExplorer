@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 293a7ab45e8b21c45b09dd7b662b3ad3, type: 2}
+  - {fileID: 2100000, guid: 97fc09002c4ec8c4089758541ba8d89a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,10 +157,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 3634336453302287956}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 0
-  IsDestroyed: 0
   LowResScale: NaN
   AutoDestroy: 1
   leftWingPattern: {fileID: 3634336452974683867}
@@ -339,7 +338,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 293a7ab45e8b21c45b09dd7b662b3ad3, type: 2}
+  - {fileID: 2100000, guid: 97fc09002c4ec8c4089758541ba8d89a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

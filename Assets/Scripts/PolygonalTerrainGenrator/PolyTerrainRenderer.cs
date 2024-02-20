@@ -31,13 +31,24 @@ namespace Universe.Terrain
         private bool stretchUVs;
 
         [SerializeField]
-        private bool spawnWalkingAnimals, spawnAnimalsInside;
+        [Range(0, 2)] 
+        private float animalSpawnChance;
+
+        [SerializeField]
+        private AnimalSpawnerType animalSpawnerType;
+
+        [SerializeField]
+        private EdgeCollider2D collision;
 
         private PolyTerrain previous;
         private PolyTerrainLayer layer;
 
         private readonly List<CelestialBodyRenderer> spawned = new();
-        private readonly List<AnimalRenderer> animalsSpawned = new();
+
+        private void SpawnAnimalAtPoint(float x, float y)
+        {
+            AnimalSpawner.GetSpawner(animalSpawnerType).Spawn(x, y);
+        }
 
         public override void Spawn(Vector2 pos, int? seed)
         {
@@ -86,44 +97,6 @@ namespace Universe.Terrain
             return RandomNum.GetIndexFromWeights(weights, rand);
         }
 
-        protected virtual AnimalSpawner GetWalkingAnimals() => AnimalSpawner.WalkingAnimals;
-        protected virtual AnimalSpawner GetInsideAnimals() => AnimalSpawner.InsideAnimals;
-
-        private void SpawnAnimalAtPoint(float x, PolyTerrain poly)
-        {
-            float targetY = poly.HeightAt(x);
-            Vector2 pos = new(x, targetY);
-            pos += (Vector2)Target.Position;
-            int seed = pos.HashPos(poly.ObjectSeed);
-
-            var walkingAnimals = GetWalkingAnimals();
-            var insideAnimals = GetInsideAnimals();
-
-            if (walkingAnimals && spawnWalkingAnimals)
-                SpawnAnimalAt(walkingAnimals, pos, seed);
-
-            if (!insideAnimals || !spawnAnimalsInside)
-                return;
-
-            var rand = new System.Random(seed);
-            RandomNum.Init(rand);
-            float randomY = RandomNum.GetFloat(targetY, rand);
-
-            pos.y = randomY + Target.Position.y;
-            SpawnAnimalAt(insideAnimals, pos, seed);
-        }
-
-        private void SpawnAnimalAt(AnimalSpawner animal, Vector2 pos, int seed)
-        {
-            var newAnimal = animal.SpawnAnimalAt(pos, seed);
-
-            if (newAnimal)
-            {
-                newAnimal.AutoDestroy = false;
-                animalsSpawned.Add(newAnimal);
-            }
-        }
-
         private void SpawnObjectsInside()
         {
             PolyTerrain poly = Target as PolyTerrain;
@@ -156,7 +129,6 @@ namespace Universe.Terrain
 
             for (int x = 0; x < PolyTerrain.RealWidth; x++)
             {
-                SpawnAnimalAtPoint(x, poly);
                 float targetY = poly.HeightAt(x);
 
                 // spawn inside objects
@@ -174,6 +146,9 @@ namespace Universe.Terrain
                     Vector2 position = new(x, targetY);
                     SpawnObject(position, SurfacePrefabs[objectIndex], rand.Next());
                 }
+
+                if (Random.value < animalSpawnChance / PolyTerrain.RealWidth)
+                    SpawnAnimalAtPoint(x + Target.Position.x, targetY + Target.Position.y);
             }
         }
 
@@ -204,6 +179,8 @@ namespace Universe.Terrain
                 meshFilter.mesh = CreateMesh(null, 0);
             else
                 meshFilter.mesh = CreateMesh(previous.points, previous.height);
+
+            collision.points = (Target as PolyTerrain).points;
         }
 
         private Mesh CreateMesh(Vector2[] previousPoints, float bottomDecrease)
@@ -269,13 +246,6 @@ namespace Universe.Terrain
                 if (spawned[i].IsDestroyed)
                     continue;
                 Destroy(spawned[i].gameObject);
-            }
-
-            for (int i = 0; i < animalsSpawned.Count; i++)
-            {
-                if (animalsSpawned[i].IsDestroyed)
-                    continue;
-                Destroy(animalsSpawned[i].gameObject);
             }
         }
     }

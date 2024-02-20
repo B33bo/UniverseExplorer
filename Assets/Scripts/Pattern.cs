@@ -7,6 +7,7 @@ namespace Universe
         public Color Primary, Secondary, Tertiary;
         public Type patternType;
         public float rotation;
+        public Vector2 scale, offset;
         public short id;
 
         public enum Type
@@ -78,6 +79,8 @@ namespace Universe
         {
             return a.patternType == b.patternType &&
                 a.rotation == b.rotation &&
+                a.offset == b.offset &&
+                a.scale == b.scale &&
                 a.Primary == b.Primary &&
                 a.Secondary == b.Secondary &&
                 a.Tertiary == b.Tertiary;
@@ -93,6 +96,22 @@ namespace Universe
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public void LoadMaterial(Material patternMaterial)
+        {
+            if (scale == Vector2.zero)
+                scale = Vector2.one;
+
+            patternMaterial.SetFloat("_TextureRotate", rotation);
+            patternMaterial.SetVector("_TextureOffset", offset);
+            patternMaterial.SetVector("_TextureStretch", scale);
+
+            patternMaterial.SetColor("_Red", Primary);
+            patternMaterial.SetColor("_Green", Secondary);
+            patternMaterial.SetColor("_Blue", Tertiary);
+
+            patternMaterial.SetTexture("_Pattern", Resources.Load<Texture>("Patterns/" + patternType.ToString()));
         }
     }
 }

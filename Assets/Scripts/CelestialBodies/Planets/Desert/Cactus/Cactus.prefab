@@ -302,10 +302,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 374477399542410549}
+  IsDestroyed: 0
   cameraLerpSize: 2
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 0
-  IsDestroyed: 0
   LowResScale: NaN
   leftarm: {fileID: 374477398382754788}
   rightarm: {fileID: 374477398893623714}

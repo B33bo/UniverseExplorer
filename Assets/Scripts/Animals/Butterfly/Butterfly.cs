@@ -1,19 +1,19 @@
 using UnityEngine;
 
-namespace Universe.Animals
+namespace Universe.AnimalsOld
 {
-    public class Butterfly : Animal
+    public class Butterfly : AnimalOld
     {
         public override string DataPath => "Animals/Butterfly";
 
         public override string TypeString => "Butterfly";
 
-        public Pattern leftWingPattern;  // darn Commies
-        public Pattern rightWingPattern; // darn Nazis
+        public Pattern leftWingPattern;
+        public Pattern rightWingPattern;
         public float size;
         public float speed;
 
-        public override void CreateAnimal(Animal speciesPrefab)
+        public override void CreateAnimal(AnimalOld speciesPrefab)
         {
             if (speciesPrefab is not Butterfly butterfly)
                 return;

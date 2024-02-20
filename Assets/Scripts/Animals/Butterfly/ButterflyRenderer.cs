@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Universe.Animals
+namespace Universe.AnimalsOld
 {
     public class ButterflyRenderer : AnimalRenderer
     {
@@ -22,7 +22,7 @@ namespace Universe.Animals
         private const float unpushRadius = .1f;
         private const float dangerZone = 4f;
 
-        public override void Spawn(Vector2 position, int? seed, Animal species)
+        public override void Spawn(Vector2 position, int? seed, AnimalOld species)
         {
             startPos = position;
             Butterfly butterfly = new Butterfly();

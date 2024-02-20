@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Universe.Animals
+namespace Universe.AnimalsOld
 {
     public abstract class AnimalRenderer : CelestialBodyRenderer
     {
@@ -23,7 +23,7 @@ namespace Universe.Animals
             OnUpdate();
         }
 
-        public abstract void Spawn(Vector2 position, int? seed, Animal species);
+        public abstract void Spawn(Vector2 position, int? seed, AnimalOld species);
 
         protected override void Destroyed()
         {

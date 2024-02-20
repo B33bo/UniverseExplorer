@@ -9,6 +9,7 @@ namespace Universe
     public abstract class Spawner : MonoBehaviour
     {
         public static int MaxCells = 10000;
+        public static Spawner Instance { get; private set; }
         public float CellSize = 2;
 
         public bool registerSceneLoad = true;
@@ -25,6 +26,11 @@ namespace Universe
 
         [SerializeField]
         private float extraPadding = 3;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private IEnumerator Start()
         {
@@ -58,7 +64,7 @@ namespace Universe
             Destroyed();
         }
 
-        private Vector2 positionOfLastReload = new Vector2(200, 200);
+        private Vector2 positionOfLastReload = new(200, 200);
         public virtual void ReloadCells(Rect cameraRect)
         {
             if ((cameraRect.position - positionOfLastReload).sqrMagnitude < CellSize * CellSize)
@@ -140,15 +146,25 @@ namespace Universe
             return newObject;
         }
 
+        public virtual Vector2 GetTopLeft(Rect cameraBounds)
+        {
+            return new(cameraBounds.xMin - CellSize * extraPadding, cameraBounds.yMax + CellSize * extraPadding);
+        }
+
+        public virtual Vector2 GetBottomRight(Rect cameraBounds)
+        {
+            return new(cameraBounds.xMin - CellSize * extraPadding, cameraBounds.yMax + CellSize * extraPadding);
+        }
+
         public virtual List<Vector2> CellsOnScreen(Rect cameraBounds)
         {
-            Vector2 topLeft = new Vector2(cameraBounds.xMin - CellSize * extraPadding, cameraBounds.yMax + CellSize * extraPadding);
-            Vector2 bottomRight = new Vector2(cameraBounds.xMax + CellSize * extraPadding, cameraBounds.yMin - CellSize * extraPadding);
+            Vector2 topLeft = GetTopLeft(cameraBounds);
+            Vector2 bottomRight = GetBottomRight(cameraBounds);
 
             topLeft.x -= topLeft.x % CellSize;
             bottomRight.y -= bottomRight.y % CellSize;
 
-            List<Vector2> value = new List<Vector2>();
+            List<Vector2> value = new();
 
             float previousX = float.NaN;
             for (float x = topLeft.x; x < bottomRight.x; x += CellSize)
@@ -178,7 +194,7 @@ namespace Universe
             Vector2 bottomRight = Vector2.one * radius;
             float radiusSqrd = radius * radius;
 
-            List<Vector2> value = new List<Vector2>();
+            List<Vector2> value = new();
 
             for (float x = topLeft.x; x < bottomRight.x; x += CellSize)
             {

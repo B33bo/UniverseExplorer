@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using Universe.Animals;
+using Universe.AnimalsOld;
 
 namespace Universe.CelestialBodies.Planets.Grass
 {

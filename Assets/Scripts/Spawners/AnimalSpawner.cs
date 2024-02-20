@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Universe.Animals
+namespace Universe.AnimalsOld
 {
     public class AnimalSpawner : MonoBehaviour
     {
@@ -23,7 +23,7 @@ namespace Universe.Animals
         [SerializeField]
         private bool IsInside = true;
 
-        public static Animal[] Animals;
+        public static AnimalOld[] Animals;
         private static string[] AnimalRendererTypes;
 
         private void Awake()
@@ -38,14 +38,14 @@ namespace Universe.Animals
                 weightTotal += weights[i];
 
             System.Random rand = new System.Random(BodyManager.GetSeed());
-            Animals = new Animal[RandomNum.Get(AnimalCountBounds.x, AnimalCountBounds.y, rand)];
+            Animals = new AnimalOld[RandomNum.Get(AnimalCountBounds.x, AnimalCountBounds.y, rand)];
             AnimalRendererTypes = new string[Animals.Length];
 
             for (int i = 0; i < Animals.Length; i++)
             {
                 int index = RandomNum.GetIndexFromWeights(weights, rand);
 
-                Animal newAnimal = (Animal)Activator.CreateInstance(animalPrefabs[index].AnimalType);
+                AnimalOld newAnimal = (AnimalOld)Activator.CreateInstance(animalPrefabs[index].AnimalType);
                 newAnimal.SetSeed(rand.Next());
                 newAnimal.CreateSpecies();
 

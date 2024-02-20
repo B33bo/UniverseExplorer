@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Universe.Animals
+namespace Universe.AnimalsOld
 {
-    public abstract class Animal : CelestialBody
+    public abstract class AnimalOld : CelestialBody
     {
         public override string TravelTarget => string.Empty;
         public abstract string DataPath { get; }
@@ -15,6 +15,6 @@ namespace Universe.Animals
         }
 
         public abstract void CreateSpecies();
-        public abstract void CreateAnimal(Animal speciesPrefab);
+        public abstract void CreateAnimal(AnimalOld speciesPrefab);
     }
 }

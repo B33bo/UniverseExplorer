@@ -1,7 +1,6 @@
 using System;
-using System.Linq;
 using UnityEngine;
-using static Universe.ObjectPaths;
+using Universe.Animals;
 
 namespace Universe
 {
@@ -18,6 +17,26 @@ namespace Universe
         }
 
         public ObjectInfo<CelestialBodyRenderer>[] objects;
+        public ObjectInfo<Animal>[] animals;
+        private float animalSpawnChanceTotalFrequency;
+
+        public int GetRandomAnimal(System.Random rand)
+        {
+            if (animalSpawnChanceTotalFrequency == 0)
+            {
+                for (int i = 0; i < animals.Length; i++)
+                    animalSpawnChanceTotalFrequency += animals[i].Object.SpawnChance;
+            }
+
+            float targetFrequency = RandomNum.GetFloat(animalSpawnChanceTotalFrequency, rand);
+
+            for (int i = 0; i < animals.Length; i++)
+            {
+                targetFrequency -= animals[i].Object.SpawnChance;
+                if (targetFrequency < 0) return i;
+            }
+            return -1;
+        }
 
         public CelestialBodyRenderer GetCelestialBody(string path)
         {
@@ -26,6 +45,17 @@ namespace Universe
             {
                 if (objects[i].Path.ToLower() == path)
                     return objects[i].Object;
+            }
+            return null;
+        }
+
+        public Animal GetAnimal(string path)
+        {
+            path = path.ToLower();
+            for (int i = 0; i < animals.Length; i++)
+            {
+                if (animals[i].Path.ToLower() == path)
+                    return animals[i].Object;
             }
             return null;
         }

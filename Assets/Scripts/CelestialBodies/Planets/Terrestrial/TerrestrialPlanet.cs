@@ -49,6 +49,7 @@ namespace Universe.CelestialBodies.Planets
             Name = GenerateName();
             Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
             waterLevel = RandomNum.GetFloat(.5f, RandomNumberGenerator);
+            LoadAnimals();
         }
     }
 }

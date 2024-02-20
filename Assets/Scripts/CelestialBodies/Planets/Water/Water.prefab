@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3303654127176490551}
   - component: {fileID: 6025636752684517954}
   - component: {fileID: 7422411059406861177}
+  - component: {fileID: 2165427176036951532}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b285df99f903b6b42b95158cad17ba1a, type: 2}
+  - {fileID: 2100000, guid: f3bbab03a52e55242a3f7c65946372f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,10 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 0}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
   meshFilter: {fileID: 3303654127176490551}
   meshRenderer: {fileID: 6025636752684517954}
@@ -115,3 +115,45 @@ MonoBehaviour:
   stretchUVs: 0
   spawnWalkingAnimals: 0
   spawnAnimalsInside: 1
+  collision: {fileID: 2165427176036951532}
+--- !u!68 &2165427176036951532
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255758882408506669}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

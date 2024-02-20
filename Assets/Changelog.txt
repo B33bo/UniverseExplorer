@@ -1,3 +1,11 @@
+1.4.0 - 2024/02/20
+- Additions
+	- Animal system
+	- Dog animal
+	- Patterns can have scale and offset
+- Fixes
+	- Waves don't dissapear when you look above them
+
 1.3.4 - 2024/01/13
 - Additions
 	- Christmas trees and Christmas Biomes

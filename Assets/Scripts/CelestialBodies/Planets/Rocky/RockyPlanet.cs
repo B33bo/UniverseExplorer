@@ -40,6 +40,8 @@ namespace Universe.CelestialBodies.Planets
                 Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
                 RockColor = new ColorHSV(13 / 360f, RandomNum.GetFloat(1, RandomNumberGenerator), .5f);
             }
+
+            LoadAnimals();
         }
     }
 }

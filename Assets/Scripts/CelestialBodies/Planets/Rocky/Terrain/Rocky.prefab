@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5459109787577413988}
   - component: {fileID: 4038372494222001348}
   - component: {fileID: 8856529874158000919}
+  - component: {fileID: -3154327131101186894}
   m_Layer: 0
   m_Name: Rocky
   m_TagString: Untagged
@@ -98,10 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CameraFocus: 1
   cameraLerpTarget: {fileID: 0}
+  IsDestroyed: 0
   cameraLerpSize: 1
   cameraLerpMultiplyBySize: 1
-  scaleLerp: 1
-  IsDestroyed: 0
   LowResScale: NaN
   meshFilter: {fileID: 5459109787577413988}
   meshRenderer: {fileID: 4038372494222001348}
@@ -117,3 +117,45 @@ MonoBehaviour:
   stretchUVs: 0
   spawnWalkingAnimals: 0
   spawnAnimalsInside: 0
+  collision: {fileID: -3154327131101186894}
+--- !u!68 &-3154327131101186894
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3111270132773140673}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

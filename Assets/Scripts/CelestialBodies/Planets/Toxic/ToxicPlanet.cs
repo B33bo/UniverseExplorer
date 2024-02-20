@@ -29,6 +29,7 @@ namespace Universe.CelestialBodies.Planets
             Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
             Mass = RandomNum.Get(3e22 * Measurement.Kg, 4e24 * Measurement.Kg, RandomNumberGenerator);
             waterColor = ToxicColor;
+            LoadAnimals();
         }
 
         public void RefreshColor()

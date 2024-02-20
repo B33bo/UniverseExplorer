@@ -59,6 +59,24 @@ namespace Universe.Terrain
             CameraControl.Instance.OnPositionUpdate -= UpdateBottomFloor;
         }
 
+        public override Vector2 GetTopLeft(Rect cameraBounds)
+        {
+            float xMin = CameraControl.Instance.CameraBounds.xMin;
+            xMin = Mathf.Floor(xMin / PolyTerrain.RealWidth) * PolyTerrain.RealWidth;
+            xMin -= PolyTerrain.RealWidth * paddding;
+
+            return new Vector2(xMin, 0);
+        }
+
+        public override Vector2 GetBottomRight(Rect cameraBounds)
+        {
+            float xMax = CameraControl.Instance.CameraBounds.xMax;
+            xMax = Mathf.Ceil(xMax / PolyTerrain.RealWidth) * PolyTerrain.RealWidth;
+            xMax += PolyTerrain.RealWidth * paddding;
+
+            return new Vector2(xMax, 0);
+        }
+
         public override void GenerateNewCells(List<Vector2> cellsOnScreen)
         {
             float xMin = CameraControl.Instance.CameraBounds.xMin;

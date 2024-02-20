@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Universe.Animals
+namespace Universe.AnimalsOld
 {
     public class UrchinRenderer : AnimalRenderer
     {
@@ -14,7 +14,7 @@ namespace Universe.Animals
 
         private Vector2 initPos;
 
-        public override void Spawn(Vector2 position, int? seed, Animal species)
+        public override void Spawn(Vector2 position, int? seed, AnimalOld species)
         {
             Urchin urchin = new Urchin();
 

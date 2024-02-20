@@ -31,6 +31,8 @@ namespace Universe.CelestialBodies.Planets
                 Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
                 Mass = RandomNum.Get(MinMass, MaxMass, RandomNumberGenerator);
             }
+
+            LoadAnimals();
         }
     }
 }

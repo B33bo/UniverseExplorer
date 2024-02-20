@@ -14,6 +14,7 @@ namespace Universe.CelestialBodies.Planets
         {
             Position = pos;
             Name = GenerateName();
+            LoadAnimals(0);
         }
     }
 }

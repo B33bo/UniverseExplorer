@@ -55,7 +55,7 @@ PrefabInstance:
     - target: {fileID: 6025636752684517954, guid: 63495325274bbb645abcbeb0d24ddf1f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0d9abafb8c8ce7c40aaeef00a6aa424f, type: 2}
+      objectReference: {fileID: 2100000, guid: d50351e7a06909a4f9a58c8541fdd696, type: 2}
     - target: {fileID: 7422411059406861177, guid: 63495325274bbb645abcbeb0d24ddf1f, type: 3}
       propertyPath: spawnAnimalsInside
       value: 0

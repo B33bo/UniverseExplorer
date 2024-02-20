@@ -18,6 +18,7 @@ namespace Universe.CelestialBodies.Planets.Desert
             Radius = RandomNum.Get(minRadius, maxRadius, RandomNumberGenerator);
             Mass = Radius * Radius * 11; // hehe
             waterColor = RandomNum.GetColor(RandomNumberGenerator);
+            LoadAnimals();
         }
     }
 }

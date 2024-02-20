@@ -36,6 +36,11 @@ namespace Universe
         {
             base.Spawn(pos, seed, previous, layer);
             mesh = meshFilter.mesh;
+
+            Bounds bounds = mesh.bounds;
+            bounds.max += new Vector3(0, 5);
+            mesh.bounds = bounds;
+
             originalPos = mesh.vertices[0].y;
 
             if (!preLoadedWaveLengths)
@@ -69,13 +74,6 @@ namespace Universe
                 verts[i].y = SumOfSines(Target.Position.x + verts[i].x) + originalPos;
             }
             mesh.vertices = verts;
-
-            if (DayNightSystem.Instance)
-            {
-                Color c = color * DayNightSystem.LightIntensity;
-                c.a = 1;
-                meshRenderer.material.color = c;
-            }
         }
 
         private float Sin(float x, float waveLength, float peak, float time)

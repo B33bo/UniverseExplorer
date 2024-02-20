@@ -179,3 +179,6 @@ MonoBehaviour:
     Object: {fileID: 2695697951722026239, guid: a00c67710593f8f4cabe608d5a5aee58, type: 3}
   - Path: Planets/Ice/ChristmasTree
     Object: {fileID: 4221288369075095535, guid: 0770373e50cce5c40a71bd3b72623756, type: 3}
+  animals:
+  - Path: Tilly
+    Object: {fileID: 2927651898711716335, guid: ff92bbf46dfaed646a32fb9325c13511, type: 3}

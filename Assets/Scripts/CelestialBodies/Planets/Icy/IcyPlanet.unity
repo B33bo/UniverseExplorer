@@ -3859,7 +3859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: FreezeTime
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2459771645717361285, guid: 6ec762ba6f6f1f54ba0f97cb592a8188, type: 3}
       propertyPath: dayColor.a

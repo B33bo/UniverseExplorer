@@ -1,0 +1,413 @@
+fileFormatVersion: 2
+guid: 5651c8d78fc0f6445a8f7e45d5eaab6f
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1000
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 2
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Torso
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 551
+        width: 1088
+        height: 439
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 472, y: 209.5}
+        - {x: 189, y: 219.5}
+        - {x: -330, y: 219.5}
+        - {x: -515, y: 112.5}
+        - {x: -544, y: 58.5}
+        - {x: -544, y: -136.5}
+        - {x: -482, y: -219.5}
+        - {x: 372, y: -219.5}
+        - {x: 541, y: -92.5}
+        - {x: 541, y: 136.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9cc2581c81dfc84dbfee1958c48c6b2
+      internalID: 1060060618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tail
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 702
+        width: 267
+        height: 119
+      alignment: 9
+      pivot: {x: 0.9865174, y: 0.41288435}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -67.5, y: 59.5}
+        - {x: -132.5, y: 29.5}
+        - {x: -131.5, y: -39.5}
+        - {x: -17.5, y: -41.5}
+        - {x: 74.5, y: -58.5}
+        - {x: 131.5, y: -57.5}
+        - {x: 133.5, y: 31.5}
+        - {x: 85.5, y: 48.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 983992e1e25763241b5d187ee5854e91
+      internalID: 1978721160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpperLeg
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 347
+        width: 221
+        height: 204
+      alignment: 9
+      pivot: {x: 0.53626055, y: 0.9377166}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -86.5, y: 102}
+        - {x: -110.5, y: 23}
+        - {x: -110.5, y: -89}
+        - {x: -105.5, y: -102}
+        - {x: -23.5, y: -102}
+        - {x: 103.5, y: 37}
+        - {x: 104.5, y: 102}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e9655b0b4934104ebc001310f985dc8
+      internalID: -1448601334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knee
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 264
+        width: 109
+        height: 129
+      alignment: 9
+      pivot: {x: 0.023517855, y: 0.4910529}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -48.5, y: 64.5}
+        - {x: -54.5, y: 53.5}
+        - {x: -54.5, y: -64.5}
+        - {x: 51.5, y: -64.5}
+        - {x: 54.5, y: -53.5}
+        - {x: 54.5, y: 51.5}
+        - {x: 21.5, y: 64.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8725b56d1c91aeb4596c5b0705baaea1
+      internalID: -1437691776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neck
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 168
+        width: 223
+        height: 290
+      alignment: 9
+      pivot: {x: 0.10466681, y: 0.29514858}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -57.5, y: 145}
+        - {x: -111.5, y: 101}
+        - {x: -111.5, y: -77}
+        - {x: -100.5, y: -128}
+        - {x: -33.5, y: -144}
+        - {x: 105.5, y: -144}
+        - {x: 111.5, y: -117}
+        - {x: 111.5, y: 38}
+        - {x: 41.5, y: 145}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70a69199b9205144d8fcf00a9234a2f6
+      internalID: -1521239872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Head
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 187
+        width: 298
+        height: 309
+      alignment: 9
+      pivot: {x: 0.012005492, y: 0.4178279}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 149, y: -26.5}
+        - {x: 149, y: 154.5}
+        - {x: -74, y: 154.5}
+        - {x: -149, y: 71.5}
+        - {x: -149, y: -74.5}
+        - {x: -112, y: -123.5}
+        - {x: -65, y: -154.5}
+        - {x: 38, y: -154.5}
+        - {x: 116, y: -140.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 255316766bc164e4eb0eafae5cc5419a
+      internalID: 749581551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nose
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 207
+        width: 278
+        height: 200
+      alignment: 9
+      pivot: {x: 0.16622233, y: 0.6314126}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -52, y: 100}
+        - {x: -139, y: -12}
+        - {x: -139, y: -71}
+        - {x: -117, y: -100}
+        - {x: 68, y: -100}
+        - {x: 139, y: -33}
+        - {x: 139, y: 43}
+        - {x: -8, y: 100}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c621d761414ad1044bfed39cdbf73541
+      internalID: -762814351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LowerLeg
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 110
+        width: 128
+        height: 211
+      alignment: 9
+      pivot: {x: 0.6082012, y: 0.9813498}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -33, y: 105.5}
+        - {x: -64, y: 81.5}
+        - {x: -64, y: -98.5}
+        - {x: -36, y: -105.5}
+        - {x: 26, y: -105.5}
+        - {x: 64, y: -66.5}
+        - {x: 64, y: 105.5}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 730b2154ee3f94c4cb4febb495b59825
+      internalID: 1142824544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Paw
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 18
+        width: 172
+        height: 114
+      alignment: 9
+      pivot: {x: 0.05713006, y: 0.8239707}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19, y: 57}
+        - {x: -82, y: 57}
+        - {x: -86, y: 41}
+        - {x: -86, y: 1}
+        - {x: -57, y: -33}
+        - {x: -1, y: -57}
+        - {x: 71, y: -57}
+        - {x: 86, y: -46}
+        - {x: 86, y: -1}
+        - {x: 76, y: 26}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe0be2b405454dd478a83ea18866a307
+      internalID: -1761317224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Head: 749581551
+      Knee: -1437691776
+      LowerLeg: 1142824544
+      Neck: -1521239872
+      Nose: -762814351
+      Paw: -1761317224
+      Tail: 1978721160
+      Torso: 1060060618
+      UpperLeg: -1448601334
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

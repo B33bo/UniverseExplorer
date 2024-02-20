@@ -20,6 +20,7 @@ namespace Universe.CelestialBodies.Planets
             Radius = RandomNum.Get(MinScale, MaxScale, RandomNumberGenerator);
             Mass = Radius * Radius * 3.14 * Density;
             waterColor = Color.HSVToRGB(RandomNum.GetFloat(1, RandomNumberGenerator), .2f, 1);
+            LoadAnimals();
         }
     }
 }

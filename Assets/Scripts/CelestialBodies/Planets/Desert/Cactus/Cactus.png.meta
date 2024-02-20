@@ -78,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -145,10 +145,10 @@ TextureImporter:
       name: Cactus_0
       rect:
         serializedVersion: 2
-        x: 128
-        y: 268
-        width: 90
-        height: 223
+        x: 59
+        y: 154
+        width: 91
+        height: 211
       alignment: 9
       pivot: {x: 1.002241, y: 0.18821476}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,9 +166,9 @@ TextureImporter:
       name: Cactus_1
       rect:
         serializedVersion: 2
-        x: 219
-        y: 24
-        width: 74
+        x: 217
+        y: 22
+        width: 78
         height: 467
       alignment: 7
       pivot: {x: 0.5, y: 0}
